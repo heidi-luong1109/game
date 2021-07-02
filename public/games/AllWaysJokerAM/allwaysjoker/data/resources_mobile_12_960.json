@@ -1,0 +1,641 @@
+{
+	"resources": [	
+		{
+			"id": "load",
+			"url": "/allwaysjoker/images/960_540/load.jpg",
+			"type": 1
+		},
+		{
+			"id": "load_interface",
+			"url": "/allwaysjoker/images/960_540/load_2.json",
+			"type": 1
+		},
+		{
+			"id": "load_font",
+			"url": "/allwaysjoker/images/960_540/load_font_2.fnt",
+			"type": 1
+		},
+		{
+			"id": "banner",
+			"url": "/allwaysjoker/images/960_540/banner_2.json",
+			"type": 2
+		},
+		{
+			"id": "m_bgr",
+			"url": "/allwaysjoker/images/960_540/m_bgr.jpg",
+			"type": 2
+		},
+		{
+			"id": "f_bgr",
+			"url": "/allwaysjoker/images/960_540/f_bgr.jpg",
+			"type": 2
+		},
+		{
+			"id": "interface_mobile",
+			"url": "/allwaysjoker/images/960_540/interface_mobile_5.json",
+			"type": 2
+		},
+		{
+			"id": "freespin_interface_mobile",
+			"url": "/allwaysjoker/images/960_540/freespin_interface_mobile_4.json",
+			"type": 2
+		},
+		{
+			"id": "symbols",
+			"url": "/allwaysjoker/images/960_540/symbols_3.json",
+			"type": 2
+		},
+		{
+			"id": "animations1",
+			"url": "/allwaysjoker/images/960_540/animations1_2.json",
+			"type": 8
+		},
+		{
+			"id": "animations2",
+			"url": "/allwaysjoker/images/960_540/animations2_2.json",
+			"type": 8
+		},
+		{
+			"id": "gamble",
+			"url": "/allwaysjoker/images/960_540/gamble_3.json",
+			"type": 2
+		},
+		{
+			"id": "help1",
+			"url": "/allwaysjoker/images/960_540/help1_2.json",
+			"type": 2
+		},
+		{
+			"id": "help2",
+			"url": "/allwaysjoker/images/960_540/help2_2.json",
+			"type": 2
+		},
+		{
+			"id": "wins",
+			"url": "/slot/images/960_540/wins_2.json",
+			"type": 2
+		},
+		{
+			"id": "gamble_interface",
+			"url": "/gamble/images/960_540/gamble_interface_2.json",
+			"type": 2
+		},
+		{
+			"id": "system",
+			"url": "/core/images/960_540/system_mobile_7.json",
+			"type": 2
+		},
+		{
+			"id": "jackpots",
+			"url": "/core/images/960_540/jackpots_5.json",
+			"type": 2
+		},
+		{
+			"id": "jp_font",
+			"url": "/core/images/960_540/jp_font.fnt",
+			"type": 7
+		},	
+		{
+			"id": "jp_font_value",
+			"url": "/core/images/960_540/jp_font_value_2.fnt",
+			"type": 7
+		},	
+		{
+			"id": "jp_font_small",
+			"url": "/core/images/960_540/jp_font_small_4.fnt",
+			"type": 7
+		},			
+		{
+			"id": "ui_font",
+			"url": "/core/images/960_540/ui_font_5.fnt",
+			"type": 7
+		},
+		{
+			"id": "win_font",
+			"url": "/allwaysjoker/images/960_540/win_font.fnt",
+			"type": 7
+		},
+		{
+			"id": "paytable_font",
+			"url": "/allwaysjoker/images/960_540/paytable_font_2.fnt",
+			"type": 7
+		},
+		{
+			"id": "counter_font",
+			"url": "/allwaysjoker/images/960_540/counter_font.fnt",
+			"type": 7
+		},
+		{
+			"id": "value_font",
+			"url": "/allwaysjoker/images/960_540/value_font.fnt",
+			"type": 7
+		},
+		{
+			"id": "silence",
+			"url": "/core/sounds/silence",
+			"loop": false,
+			"volume": 1,
+			"type": 3
+		},
+		{
+			"id": "start",
+			"url": "/allwaysjoker/sounds/start",
+			"loop": false,
+			"volume": 0.5,
+			"type": 4
+		},
+		{
+			"id": "freespin_melody",
+			"url": "/allwaysjoker/sounds/freespin_melody",
+			"loop": true,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "freespin_end",
+			"url": "/slot/sounds/freespin_end",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},		
+		{
+			"id": "freespin_init",
+			"url": "/allwaysjoker/sounds/freespin_init_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "freespin_add_10",
+			"url": "/slot/sounds/freespin_add_10_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "freespin_add_15",
+			"url": "/slot/sounds/freespin_add_15_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "freespin_add_25",
+			"url": "/slot/sounds/freespin_add_25_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "spin",
+			"url": "/slot/sounds/spin",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "stop_1",
+			"url": "/slot/sounds/stop",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "stop_2",
+			"url": "/slot/sounds/stop",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "stop_bonus_1",
+			"url": "/allwaysjoker/sounds/stop_bonus_1_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "stop_bonus_2",
+			"url": "/allwaysjoker/sounds/stop_bonus_2_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "stop_bonus_3",
+			"url": "/allwaysjoker/sounds/stop_bonus_3_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "stop_bonus_4",
+			"url": "/allwaysjoker/sounds/stop_bonus_4_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "stop_bonus_5",
+			"url": "/allwaysjoker/sounds/stop_bonus_5_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "count_up_0",
+			"url": "/allwaysjoker/sounds/count_up_11_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "count_up_1",
+			"url": "/allwaysjoker/sounds/count_up_12_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "count_up_2",
+			"url": "/allwaysjoker/sounds/count_up_13_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "count_up_end",
+			"url": "/slot/sounds/count_up_end_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "winline",
+			"url": "/slot/sounds/winline_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "collect",
+			"url": "/slot/sounds/collect_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "collect_end",
+			"url": "/slot/sounds/collect_end_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "collect_freeround",
+			"url": "/slot/sounds/collect_freeround_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "collect_freeround_end",
+			"url": "/slot/sounds/collect_freeround_end_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "audio_on",
+			"url": "/core/sounds/audio_on_2",
+			"loop": false,
+			"volume": 0.6,
+			"type": 4
+		},
+		{
+			"id": "button",
+			"url": "/core/sounds/button_mobile",
+			"loop": false,
+			"volume": 0.6,
+			"type": 4
+		},
+		{
+			"id": "autoplay_on",
+			"url": "/core/sounds/autoplay_on",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "autoplay_off",
+			"url": "/core/sounds/autoplay_off",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "jackpot",
+			"url": "/core/sounds/jackpot_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "gamble_1",
+			"url": "/gamble/sounds/mix",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "gamble_2",
+			"url": "/gamble/sounds/mix",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "gamble_win_1",
+			"url": "/gamble/sounds/win_1",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "gamble_win_2",
+			"url": "/gamble/sounds/win_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "gamble_win_3",
+			"url": "/gamble/sounds/win_3",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "mega_win",
+			"url": "/slot/sounds/mega_win_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "big_win",
+			"url": "/slot/sounds/big_win_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "nice_win",
+			"url": "/slot/sounds/nice_win_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "win_0",
+			"url": "/allwaysjoker/sounds/win_0_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "win_1",
+			"url": "/allwaysjoker/sounds/win_1_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "win_2",
+			"url": "/allwaysjoker/sounds/win_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "win_3",
+			"url": "/allwaysjoker/sounds/win_3",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "win_4",
+			"url": "/allwaysjoker/sounds/win_4",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "win_5",
+			"url": "/allwaysjoker/sounds/win_5",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "win_6",
+			"url": "/allwaysjoker/sounds/win_6_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "multiplier",
+			"url": "/allwaysjoker/sounds/multiplier_2",
+			"loop": false,
+			"volume": 1,
+			"type": 4
+		},
+		{
+			"id": "bg",
+			"url": "/allwaysjoker/data/bg_5.json",
+			"type": 0
+		},
+		{
+			"id": "zh",
+			"url": "/allwaysjoker/data/zh_5.json",
+			"type": 0
+		},
+		{
+			"id": "cs",
+			"url": "/allwaysjoker/data/cs_5.json",
+			"type": 0
+		},
+		{
+			"id": "de",
+			"url": "/allwaysjoker/data/de_5.json",
+			"type": 0
+		},
+		{
+			"id": "et",
+			"url": "/allwaysjoker/data/et_5.json",
+			"type": 0
+		},
+		{
+			"id": "en",
+			"url": "/allwaysjoker/data/en_5.json",
+			"type": 0
+		},
+		{
+			"id": "es",
+			"url": "/allwaysjoker/data/es_5.json",
+			"type": 0
+		},
+		{
+			"id": "fr",
+			"url": "/allwaysjoker/data/fr_5.json",
+			"type": 0
+		},	
+		{
+			"id": "ka",
+			"url": "/allwaysjoker/data/ka_5.json",
+			"type": 0
+		},		
+		{
+			"id": "el",
+			"url": "/allwaysjoker/data/el_5.json",
+			"type": 0
+		},		
+		{
+			"id": "hr",
+			"url": "/allwaysjoker/data/hr_5.json",
+			"type": 0
+		},
+		{
+			"id": "hu",
+			"url": "/allwaysjoker/data/hu_5.json",
+			"type": 0
+		},
+		{
+			"id": "it",
+			"url": "/allwaysjoker/data/it_5.json",
+			"type": 0
+		},
+		{
+			"id": "pt",
+			"url": "/allwaysjoker/data/pt_5.json",
+			"type": 0
+		},
+		{
+			"id": "ro",
+			"url": "/allwaysjoker/data/ro_5.json",
+			"type": 0
+		},
+		{
+			"id": "ru",
+			"url": "/allwaysjoker/data/ru_5.json",
+			"type": 0
+		},
+		{
+			"id": "sv",
+			"url": "/allwaysjoker/data/sv_5.json",
+			"type": 0
+		},
+		{
+			"id": "tr",
+			"url": "/allwaysjoker/data/tr_5.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_bg",
+			"url": "/allwaysjoker/data/gamerules_bg.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_zh",
+			"url": "/allwaysjoker/data/gamerules_zh.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_cs",
+			"url": "/allwaysjoker/data/gamerules_cs.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_de",
+			"url": "/allwaysjoker/data/gamerules_de.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_et",
+			"url": "/allwaysjoker/data/gamerules_et.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_en",
+			"url": "/allwaysjoker/data/gamerules_en.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_es",
+			"url": "/allwaysjoker/data/gamerules_es.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_fr",
+			"url": "/allwaysjoker/data/gamerules_fr.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_ka",
+			"url": "/allwaysjoker/data/gamerules_ka.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_el",
+			"url": "/allwaysjoker/data/gamerules_el.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_hr",
+			"url": "/allwaysjoker/data/gamerules_hr.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_hu",
+			"url": "/allwaysjoker/data/gamerules_hu.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_it",
+			"url": "/allwaysjoker/data/gamerules_it.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_pt",
+			"url": "/allwaysjoker/data/gamerules_pt.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_ro",
+			"url": "/allwaysjoker/data/gamerules_ro.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_ru",
+			"url": "/allwaysjoker/data/gamerules_ru.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_sv",
+			"url": "/allwaysjoker/data/gamerules_sv.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules_tr",
+			"url": "/allwaysjoker/data/gamerules_tr.json",
+			"type": 0
+		},
+		{
+			"id": "gamerules",
+			"url": "/allwaysjoker/data/gamerules_smartphone.json",
+			"type": 6
+		}
+	]
+}

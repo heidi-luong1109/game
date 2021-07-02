@@ -1,0 +1,137 @@
+{"frames": {
+
+"counter_font":
+{
+	"frame": {"x":489,"y":706,"w":502,"h":68},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":502,"h":68},
+	"sourceSize": {"w":502,"h":68}
+},
+"f_banner":
+{
+	"frame": {"x":2,"y":2,"w":722,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":722,"h":300},
+	"sourceSize": {"w":722,"h":300}
+},
+"f_banner_retrigger":
+{
+	"frame": {"x":2,"y":706,"w":485,"h":210},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":485,"h":210},
+	"sourceSize": {"w":485,"h":210}
+},
+"f_btn":
+{
+	"frame": {"x":848,"y":124,"w":90,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":90},
+	"sourceSize": {"w":90,"h":90}
+},
+"f_btn_big":
+{
+	"frame": {"x":726,"y":2,"w":120,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+	"sourceSize": {"w":120,"h":120}
+},
+"f_btn_big_highlight":
+{
+	"frame": {"x":848,"y":2,"w":120,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+	"sourceSize": {"w":120,"h":120}
+},
+"f_btn_big_pressed":
+{
+	"frame": {"x":726,"y":124,"w":120,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+	"sourceSize": {"w":120,"h":120}
+},
+"f_btn_highlight":
+{
+	"frame": {"x":848,"y":216,"w":90,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":90},
+	"sourceSize": {"w":90,"h":90}
+},
+"f_btn_pressed":
+{
+	"frame": {"x":726,"y":246,"w":90,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":90},
+	"sourceSize": {"w":90,"h":90}
+},
+"f_btn_small":
+{
+	"frame": {"x":818,"y":308,"w":60,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
+	"sourceSize": {"w":60,"h":60}
+},
+"f_btn_small_highlight":
+{
+	"frame": {"x":924,"y":400,"w":60,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
+	"sourceSize": {"w":60,"h":60}
+},
+"f_btn_small_pressed":
+{
+	"frame": {"x":924,"y":462,"w":60,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
+	"sourceSize": {"w":60,"h":60}
+},
+"f_info_game":
+{
+	"frame": {"x":2,"y":918,"w":467,"h":62},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":467,"h":62},
+	"sourceSize": {"w":467,"h":62}
+},
+"f_lpanel":
+{
+	"frame": {"x":970,"y":2,"w":42,"h":396},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":396},
+	"sourceSize": {"w":42,"h":396}
+},
+"f_rpanel":
+{
+	"frame": {"x":880,"y":308,"w":42,"h":396},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":396},
+	"sourceSize": {"w":42,"h":396}
+},
+"text_all_scatter":
+{
+	"frame": {"x":940,"y":124,"w":25,"h":268},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":268},
+	"sourceSize": {"w":25,"h":268}
+}},
+"meta": {
+	"version": "1.0",
+	"image": "freespin_interface_mobile_4.png",
+	"size": {"w":1024,"h":1024},
+	"scale": "1"
+}
+}

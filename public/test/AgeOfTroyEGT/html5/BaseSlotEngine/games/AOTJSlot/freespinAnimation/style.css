@@ -1,0 +1,186 @@
+#FreespinAnimation
+{
+	z-index: 900;
+}
+
+#FreespinAnimation .startView
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/en/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .startView.it
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/it/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .startView.bg
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/bg/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .startView.ru
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/ru/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .startView.nl
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/nl/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .startView.fr
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/fr/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .startView.mk
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/mk/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+#FreespinAnimation .startView.es
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/es/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .startView.ro
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/ro/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+#FreespinAnimation .startView.pt
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/pt/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+#FreespinAnimation .startView.da
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/da/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+#FreespinAnimation .startView.hu
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/hu/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+#FreespinAnimation .startView.sv
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/sv/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+#FreespinAnimation .startView.de
+{
+
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/de/pressStart.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+
+#FreespinAnimation .doorAnimation
+{
+	width: 1280px;
+	height: 720px;
+	/*background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/sp_bgr.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;*/
+	/*opacity: 0;*/
+}
+
+#FreespinAnimation .introAnimation
+{
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+    /*background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/sp_bgr.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;*/
+}
+
+
+#FreespinAnimation .introAnimation.bg
+{
+	/*background-image: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/bg/intro.jpg?v=1.5.0.r|23-07-2019|08:23:48');*/
+}
+
+#FreespinAnimation .retriggerAnimation
+{
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/sp_bgr.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+
+#FreespinAnimation .retriggerAnimation.bg
+{
+	background-image: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/bg/retrigger.jpg?v=1.5.0.r|23-07-2019|08:23:48');
+}
+
+#FreespinAnimation .outroAnimation
+{
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	background: url('BaseSlotEngine/games/AOTJSlot/freespinAnimation/images/sp_bgr.jpg?v=1.5.0.r|23-07-2019|08:23:48') no-repeat 0 0;
+}
+#FreespinAnimation .totalTextFiled
+{
+	font-size: 110px;
+	color: #ffe630;
+	width: 100%;
+	text-align: center;
+	text-shadow: #000000 0em 0em 0.2em,#000000 0em 0em 0.2em;
+	font-weight: bold;
+}
+#FreespinAnimation .winCurrencyTotal
+{
+	font-size: 55px;
+
+}
+
+#FreespinAnimation .introAnimationText
+{
+	width: 100%;
+	text-align: center;
+}
+#FreespinAnimation .retriggerAnimationText
+{
+	width: 100%;
+	text-align: center;
+}
+#FreespinAnimation .outroAnimationText
+{
+	width: 100%;
+	text-align: center;
+}
+#FreespinAnimation .outroAnimationText.Android
+{
+	line-height: 130px;
+}
+
+#FreespinAnimation .congratulations
+{
+	font-size: 108px;
+	color: #fdd003;
+	font-weight: bold;
+	text-shadow: #b2041d 0px 0px 10px,#b2041d 0px 0px 10px,#b2041d 0px 0px 10px,black 0px 0px 6px,black 0px 0px 6px,black 0px 0px 6px,black 0px 0px 6px,black 0px 0px 6px;
+}
+#FreespinAnimation .congratulations.small
+{
+	font-size: 69px;
+}
+#FreespinAnimation .green
+{
+	font-size: 106px;
+	font-weight: bold;
+	color: #4c8212;
+	text-shadow: rgb(255, 255, 13) 0px 0px 3px,rgb(255, 255, 13) 0px 0px 3px,rgb(226, 255, 13) 0px 0px 0px,black 0em 0em 8px,black 0em 0em 8px,black 0px 0px 8px;
+
+}
+#FreespinAnimation .toatalWin
+{
+	font-size: 147px;
+	text-shadow: #000000 0px 0px 3px,#000000 0px 0px 3px,#000000 0px 0px 3px,black 0px 0px 6px,black 0px 0px 6px,black 0px 0px 6px;
+	color: #ffe630;
+	font-weight: bold;
+}

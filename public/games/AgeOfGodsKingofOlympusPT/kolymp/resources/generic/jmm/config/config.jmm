@@ -1,0 +1,234 @@
+{
+    "config": {
+        "game_code": "zeus",
+        "server_type": "casino",
+        "free_spins_bonus_supported": true,
+        "show_paytable_as_scene": true,
+        "allow_debug": "false",
+        "turbo_mode_supported": true,
+        "turbo_suggestion_enabled" : false,
+        "hide_animated_symbols": true,
+        "fixed_lines":true,
+        "jackpot_supported": true,
+        "age_of_gods_jackpot_supported": true,
+        "coin_sizes": [1, 2, 4, 10, 20, 40],
+        "win_ranges":["<=1*tb", "<=2*tb", "<=10*tb", "<=40*tb"],
+        "display_height": 3,
+        "display_width": 5,
+
+        "demo_max_win": 10000000,
+
+        "supported_languages": ["bg", "ch", "cs", "da", "de", "el", "en", "et", "es-mx", "es", "fi", "fr", "hr", "it", "ja", "ko", "ms", "nl", "no", "pl", "ro", "ru", "pt", "sk", "sv", "th", "zh-cn"],
+
+        "reels": [
+            {"type": "general",   "symbols": [9, 9, 2, 8, 8, 3, 6, 6, 4, 4, 8, 8, 0, 7, 7, 1, 9, 9, 2, 8, 8, 3, 9, 9, 5, 5, 9, 9, 3, 7, 7, 4, 4, 6, 6, 3, 9, 9, 7, 7, 0, 8, 8, 5, 5, 10, 6, 6, 7, 7, 10, 6, 6]},
+            {"type": "general",   "symbols": [8, 8, 0, 6, 6, 3, 9, 9, 1, 7, 7, 2, 6, 6, 10, 9, 9, 4, 4, 8, 8, 1, 9, 9, 5, 5, 0, 8, 8, 2, 7, 7, 5, 5, 9, 9, 10, 8, 8, 4, 4, 6, 6, 3, 7, 7, 5, 5, 8, 8, 3, 9, 9, 2, 7, 7, 3]},
+            {"type": "general",   "symbols": [5, 5, 7, 7, 0, 9, 9, 3, 6, 6, 1, 8, 8, 10, 9, 9, 2, 7, 7, 4, 4, 8, 8, 0, 6, 6, 5, 5, 9, 9, 3, 8, 8, 4, 4, 7, 7, 2, 6, 6, 5, 5, 9, 9, 1, 8, 8, 2]},
+            {"type": "general",   "symbols": [9, 9, 3, 7, 7, 0, 6, 6, 5, 5, 8, 8, 1, 7, 7, 4, 4, 9, 9, 2, 6, 6, 5, 5, 0, 9, 9, 3, 8, 8, 4, 4, 7, 7, 1, 6, 6, 5, 5, 9, 9, 3, 8, 8, 10, 7, 7, 4, 4, 3, 8, 8, 2, 9, 9, 2, 8, 8, 10 ]},
+            {"type": "general",   "symbols": [4, 4, 9, 9, 3, 7, 7, 2, 8, 8, 5, 5, 6, 6, 1, 9, 9, 0, 7, 7, 4, 4, 0, 8, 8, 2, 9, 9, 5, 5, 8, 8, 3, 6, 6, 2, 7, 7, 4, 4, 9, 9, 3, 8, 8, 5, 5, 6, 6, 1, 9, 9, 3, 7, 7, 10, 8, 8]},
+
+            {"type": "free_spin", "symbols": [9, 9, 2, 8, 8, 3, 6, 6, 4, 4, 9, 9, 0, 7, 7, 8, 8, 1, 9, 9, 2, 8, 8, 3, 9, 9, 5, 5, 9, 9, 3, 7, 7, 4, 4, 6, 6, 1, 9, 9, 7, 7, 5, 5, 8, 8, 10, 6, 6, 7, 7, 10, 6, 6]},
+            {"type": "free_spin", "symbols": [8, 8, 0, 6, 6, 3, 9, 9, 1, 7, 7, 6, 6, 10, 9, 9, 4, 4, 8, 8, 1, 9, 9, 5, 5, 8, 8, 2, 7, 7, 5, 5, 9, 9, 10, 8, 8, 4, 4, 6, 6, 2, 7, 7, 5, 5, 8, 8, 3, 9, 9, 2, 7, 7, 3]},
+            {"type": "free_spin", "symbols": [5, 5, 7, 7, 9, 9, 6, 6, 3, 8, 8, 2, 9, 9, 1, 7, 7, 4, 4, 8, 8, 6, 6, 5, 5, 9, 9, 3, 8, 8, 4, 4, 7, 7, 2, 6, 6, 10, 5, 5, 9, 9, 2]},
+            {"type": "free_spin", "symbols": [9, 9, 3, 7, 7, 0, 6, 6, 5, 5, 8, 8, 1, 7, 7, 4, 4, 9, 9, 2, 6, 6, 5, 5, 9, 9, 3, 8, 8, 4, 4, 7, 7, 1, 6, 6, 5, 5, 9, 9, 3, 8, 8, 10, 7, 7, 4, 4, 3, 8, 8, 2, 9, 9, 2, 8, 8]},
+            {"type": "free_spin", "symbols": [4, 4, 9, 9, 3, 7, 7, 2, 8, 8, 5, 5, 6, 6, 1, 9, 9, 0, 7, 7, 4, 4, 8, 8, 2, 9, 9, 5, 5, 8, 8, 3, 6, 6, 2, 7, 7, 4, 4, 9, 9, 3, 8, 8, 5, 5, 6, 6, 1, 9, 9, 3, 7, 7, 10, 8, 8]}
+        ],
+        "symbols.wildId": 0,
+        "features": {
+            "regular": {
+                "type": "reels-spin",
+                "auto-spin": false,
+                "reels-set": "general",
+                "reels-config": "default",
+                "free": false,
+                "single-game-feature": false
+            },
+            "autoplay": {
+                "type": "reels-spin",
+                "free": false,
+                "single-game-feature": false,
+                "skip-outro": true
+            },
+            "free-spins": {
+                "type": "free-spins",
+                "feature": "free-spins",
+                "symbol": 10,
+                "retrigger": false,
+                "spins-count": 10,
+                "reels-set": "free_spin",
+                "win-multiplier": 2
+            },
+            "fsb": {
+                "type": "reels-spin",
+                "auto-spin": false,
+                "single-game-feature": false
+            }
+        },
+        "lines": [
+            {"id": "L01", "definition": [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]], "color": "#d9d100"},
+            {"id": "L02", "definition": [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]], "color": "#2f35ad"},
+            {"id": "L03", "definition": [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]], "color": "#c93130"},
+            {"id": "L04", "definition": [[0, 0], [1, 1], [2, 2], [3, 1], [4, 0]], "color": "#762cff"},
+            {"id": "L05", "definition": [[0, 2], [1, 1], [2, 0], [3, 1], [4, 2]], "color": "#a58e58"},
+            {"id": "L06", "definition": [[0, 0], [1, 0], [2, 1], [3, 0], [4, 0]], "color": "#b45cfe"},
+            {"id": "L07", "definition": [[0, 2], [1, 2], [2, 1], [3, 2], [4, 2]], "color": "#692204"},
+            {"id": "L08", "definition": [[0, 1], [1, 0], [2, 0], [3, 0], [4, 1]], "color": "#60c76b"},
+            {"id": "L09", "definition": [[0, 1], [1, 2], [2, 2], [3, 2], [4, 1]], "color": "#65ec61"},
+            {"id": "L10", "definition": [[0, 1], [1, 0], [2, 1], [3, 0], [4, 1]], "color": "#fd7e53"},
+            {"id": "L11", "definition": [[0, 1], [1, 2], [2, 1], [3, 2], [4, 1]], "color": "#e5a718"},
+            {"id": "L12", "definition": [[0, 0], [1, 1], [2, 0], [3, 1], [4, 0]], "color": "#980fd1"},
+            {"id": "L13", "definition": [[0, 2], [1, 1], [2, 2], [3, 1], [4, 2]], "color": "#e171bb"},
+            {"id": "L14", "definition": [[0, 1], [1, 1], [2, 0], [3, 1], [4, 1]], "color": "#6f7d3f"},
+            {"id": "L15", "definition": [[0, 1], [1, 1], [2, 2], [3, 1], [4, 1]], "color": "#76b737"},
+            {"id": "L16", "definition": [[0, 0], [1, 1], [2, 1], [3, 1], [4, 0]], "color": "#6db1ba"},
+            {"id": "L17", "definition": [[0, 2], [1, 1], [2, 1], [3, 1], [4, 2]], "color": "#fd7696"},
+            {"id": "L18", "definition": [[0, 0], [1, 1], [2, 2], [3, 2], [4, 2]], "color": "#beaa51"},
+            {"id": "L19", "definition": [[0, 2], [1, 1], [2, 0], [3, 0], [4, 0]], "color": "#841a86"},
+            {"id": "L20", "definition": [[0, 0], [1, 2], [2, 0], [3, 2], [4, 0]], "color": "#3471b0"},
+            {"id": "L21", "definition": [[0, 2], [1, 0], [2, 2], [3, 0], [4, 2]], "color": "#a12324"},
+            {"id": "L22", "definition": [[0, 1], [1, 0], [2, 2], [3, 0], [4, 1]], "color": "#63f5c8"},
+            {"id": "L23", "definition": [[0, 1], [1, 2], [2, 0], [3, 2], [4, 1]], "color": "#a9f263"},
+            {"id": "L24", "definition": [[0, 0], [1, 0], [2, 1], [3, 2], [4, 2]], "color": "#1f0be6"},
+            {"id": "L25", "definition": [[0, 2], [1, 2], [2, 1], [3, 0], [4, 0]], "color": "#d836fb"}
+        ],
+        "symbols": [
+            {"id": 0, "slice": "slice_wild", "order": 1},
+            {"id": 1, "slice": "slice_pegasus"},
+            {"id": 2, "slice": "slice_eagle"},
+            {"id": 3, "slice": "slice_ship"},
+            {"id": 4, "slice": "slice_harp"},
+            {"id": 5, "slice": "slice_vase"},
+            {"id": 6, "slice": "slice_A"},
+            {"id": 7, "slice": "slice_K"},
+            {"id": 8, "slice": "slice_Q"},
+            {"id": 9, "slice": "slice_J"},
+            {"id": 10, "slice": "slice_scatter"}
+        ],
+        "paytable":[
+            {"symbol": 0, "quantity": 5, "multiplier": 3000},
+            {"symbol": 0, "quantity": 4, "multiplier": 1000},
+            {"symbol": 0, "quantity": 3, "multiplier": 100},
+            {"symbol": 0, "quantity": 2, "multiplier": 10},
+
+            {"symbol": 1, "quantity": 5, "multiplier": 1000},
+            {"symbol": 1, "quantity": 4, "multiplier": 500},
+            {"symbol": 1, "quantity": 3, "multiplier": 75},
+
+            {"symbol": 2, "quantity": 5, "multiplier": 600},
+            {"symbol": 2, "quantity": 4, "multiplier": 300},
+            {"symbol": 2, "quantity": 3, "multiplier": 50},
+
+            {"symbol": 3, "quantity": 5, "multiplier": 400},
+            {"symbol": 3, "quantity": 4, "multiplier": 200},
+            {"symbol": 3, "quantity": 3, "multiplier": 50},
+
+            {"symbol": 4, "quantity": 5, "multiplier": 200},
+            {"symbol": 4, "quantity": 4, "multiplier": 100},
+            {"symbol": 4, "quantity": 3, "multiplier": 25},
+
+            {"symbol": 5, "quantity": 5, "multiplier": 150},
+            {"symbol": 5, "quantity": 4, "multiplier": 75},
+            {"symbol": 5, "quantity": 3, "multiplier": 15},
+
+            {"symbol": 6, "quantity": 5, "multiplier": 100},
+            {"symbol": 6, "quantity": 4, "multiplier": 50},
+            {"symbol": 6, "quantity": 3, "multiplier": 10},
+
+            {"symbol": 7, "quantity": 5, "multiplier": 75},
+            {"symbol": 7, "quantity": 4, "multiplier": 30},
+            {"symbol": 7, "quantity": 3, "multiplier": 10},
+
+            {"symbol": 8, "quantity": 5, "multiplier": 50},
+            {"symbol": 8, "quantity": 4, "multiplier": 25},
+            {"symbol": 8, "quantity": 3, "multiplier": 7},
+
+            {"symbol": 9, "quantity": 5, "multiplier": 30},
+            {"symbol": 9, "quantity": 4, "multiplier": 15},
+            {"symbol": 9, "quantity": 3, "multiplier": 5},
+
+            {"symbol": 10, "quantity": 2, "multiplier": 1,  "rule": "display"},
+            {"symbol": 10, "quantity": 3, "multiplier": 3,  "rule": "display"},
+            {"symbol": 10, "quantity": 4, "multiplier": 10, "rule": "display"},
+            {"symbol": 10, "quantity": 5, "multiplier": 100,"rule": "display"}
+        ],
+        "reels.rotation.default": {
+            "first_reel_duration": 475,
+            "next_reel_stop_delay": 375,
+            "tilt_duration":[200, 200],
+            "blurring_level": 1
+        },
+        "reels.rotation": [
+            {"id": "default", "@P": "config/reels.rotation.default", "anticipation" : {"duration": 4000, "start_speed": 3, "end_speed": 5, "acc_duration": 100}},
+            {"id": "turbo", "@P": "config/reels.rotation.default",
+                "next_reel_stop_delay": 120,
+                "tilt_duration": [0, 0],
+                "tilt_size": [0, 0]
+            }
+        ],
+        "symbol_animations": [
+            {"symbol": 0,  "win": {"id": "anim.symbol.wild_win", "front": true}, "substitute": {"id": "anim.symbol.wild_sub", "front": true}},
+            {"symbol": 1,  "win": "anim.symbol.pegasus"},
+            {"symbol": 2,  "win": "anim.symbol.eagle"},
+            {"symbol": 3,  "win": "anim.symbol.ship"},
+            {"symbol": 4,  "win": "anim.symbol.harp"},
+            {"symbol": 5,  "win": "anim.symbol.vase"},
+            {"symbol": 6,  "win": "anim.symbol.A"},
+            {"symbol": 7,  "win": "anim.symbol.K"},
+            {"symbol": 8,  "win": "anim.symbol.Q"},
+            {"symbol": 9,  "win": "anim.symbol.J"},
+            {"symbol": 10,  "reel_stop": {"id": "anim.symbol.scatter.stop", "front": true,"hide_symbol": true},"win": {"id": "anim.symbol.scatter.win", "front": true}, "feature": {"id": "anim.symbol.scatter.trigger", "front": true}}
+        ],
+        "spec_symbol_combinations": [
+            {"symbol": 10, "quantity": 3}
+        ],
+        "anticipation": [
+            {"symbol": 10, "win_count": 3, "reels": [0,1,2,3,4]}
+        ],
+        "sound": {
+            "win_sounds": {
+                "regular": ["win.lvl.1a", "win.lvl.1b", "win.lvl.2", "win.lvl.3", "win.lvl.4"],
+                "free_spins" : ["win.lvl.1a", "win.lvl.1b", "win.lvl.2", "win.lvl.3", "win.lvl.4"],
+                "turbo": "win.lvl.1a"
+            },
+            "reels_spin_sounds": ["reel_spin_sound"],
+            "reels_stop_sounds": [
+                {"symbol": -1, "sound": ["reel_stop"]},
+                {"symbol": 10, "sound": ["special_reel_stop1", "special_reel_stop2", "special_reel_stop3", "special_reel_stop4", "special_reel_stop5"], "win_count": 2}
+            ],
+            "symbol_sounds": [
+                {"symbol": 10, "spec_sound": "fg_triggered"}
+            ]
+        },
+        "default-display-symbols": [10, 6, 6, 8, 8, 3, 7, 0, 9, 1, 7, 7, 8, 8, 2],
+        "animations": {
+            "win_panel.levels": [
+                {"id": "0",  "animation.show": "win_1.show"},
+                {"id": "1",  "animation.show": "win_1.show"},
+                {"id": "2",  "animation.show": "win_2.show", "animation.hide": "win_2.hide", "animation.cancel": "win_2.hide"},
+                {"id": "3",  "animation.show": "win_3.show", "animation.hide": "win_3.hide", "animation.cancel": "win_3.hide"},
+                {"id": "4",  "animation.show": "win_4.show", "animation.hide": "win_4.hide", "animation.cancel": "win_4.hide"}
+            ],
+            "win_panel.skip_by_click": true,
+            "symbol_frame": {
+                "rectangles": [
+                    {"symbol": 0, "insets": "-30% 0"}
+                ]
+            }
+        },
+        "promo_messages": {
+            "animations": {
+                "custom": {
+                    "logo": {
+                        "show_toggle": "promo_msg.show_scale",
+                        "hide_toggle": {"type": "set-props", "visible": false},
+                        "show_event":  {"type": "set-props", "visible": true},
+                        "hide_event":  {"type": "set-props", "visible": false}
+                    },
+                    "regular": {
+                        "hide_toggle": {"type": "set-props", "visible": false}
+                    }
+                }
+            }
+        }
+    }
+}

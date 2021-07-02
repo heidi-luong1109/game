@@ -1,0 +1,18 @@
+{
+    "resources": {
+        "images": {
+            "btn.continue": {"url": "../../translations/images/slot/common/continue_btn_en.png"},
+
+            "autoplay.stop": {"url": "../../translations/images/slot/common/autoplay/autolay_stop_en.png"},
+
+            "bc.bet_max": {"url": "../../translations/images/slot/common/bet_options/bet_max_en.png"},
+            "fsb.buttons": {"url": "../../translations/images/slot/common/bet_options/fsb_buttons_en.png"},
+
+            "fsb.info_box": {"url": "../../translations/images/slot/common/fsb/fsb_info_box_en.png"},
+
+            "rb.spin.back": {"url": "../../translations/images/slot/common/round_buttons/spin_back_en.png"},
+            "rb.spin.back.fsb": {"url": "../../translations/images/slot/common/round_buttons/spin_back_fsb_en.png"},
+            "rb.spin.back.turbo": {"url": "../../translations/images/slot/common/round_buttons/spin_back_turbo_en.png"}
+        }
+    }
+}

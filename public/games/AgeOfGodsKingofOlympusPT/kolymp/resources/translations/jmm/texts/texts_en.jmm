@@ -1,0 +1,12 @@
+{
+  "resources": {
+    "texts": {
+      "auto_spins_select": "{0}",
+      "WIN": "WIN",
+      "25lines": "25",
+      "free_games_win_lable": "FREE GAMES\nWIN",
+      "loading_title": "Loading Game...",
+      "loading_complete": "COMPLETE"
+    }
+  }
+}

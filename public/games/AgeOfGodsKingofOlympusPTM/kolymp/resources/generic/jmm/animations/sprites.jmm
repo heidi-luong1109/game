@@ -1,0 +1,31 @@
+{
+  "ui": {
+    "anim.symbol.A"        : {"type": "symbolWinAnimation", "bg": "royal.A.bg", "glintsA": "royal.A.glints_A", "glintsB": "royal.A.glints_B", "glow": "royal.A.glow", "regular": "royal.A.regular"},
+    "anim.symbol.J"        : {"type": "symbolWinAnimation", "bg": "royal.J.bg", "glintsA": "royal.J.glints_A", "glintsB": "royal.J.glints_B", "glow": "royal.J.glow", "regular": "royal.J.regular"},
+    "anim.symbol.K"        : {"type": "symbolWinAnimation", "bg": "royal.K.bg", "glintsA": "royal.K.glints_A", "glintsB": "royal.K.glints_B", "glow": "royal.K.glow", "regular": "royal.K.regular"},
+    "anim.symbol.Q"        : {"type": "symbolWinAnimation", "bg": "royal.Q.bg", "glintsA": "royal.Q.glints_A", "glintsB": "royal.Q.glints_B", "glow": "royal.Q.glow", "regular": "royal.Q.regular"},
+    "anim.symbol.harp"     : {"type": "symbolWinAnimation", "bg": "harp.bg",    "glintsA": "harp.glints_A",    "glintsB": "harp.glints_B",    "glow": "harp.glow",    "regular": "harp.regular"},
+    "anim.symbol.poterry"  : {"type": "symbolWinAnimation", "bg": "poterry.bg", "glintsA": "poterry.glints_A", "glintsB": "poterry.glints_B", "glow": "poterry.glow", "regular": "poterry.regular"},
+    "slice_eagle_sprite"   : {"type": "sprite.new",   "slices": ["eagle.sprite.1", "eagle.sprite.2", "eagle.sprite.3", "eagle.sprite.4.1", "eagle.sprite.4.2", "eagle.sprite.4.3"],      "frame.size": [283, 215],  "frame.insets": "35 -5 5 75", "script":"[1:700]*(0>100%)"},
+    "anim.symbol.eagle"    : {"type": "customSymbolScaleAnimation", "sprite": "slice_eagle_sprite", "scale": "slice_eagle_scale"},
+    "slice_pegasus_sprite" : {"type": "sprite.new",   "slices": ["pegasus.sprite.1", "pegasus.sprite.2", "pegasus.sprite.3", "pegasus.sprite.4"],    "frame.size": [314, 259],  "frame.insets": "65 100 29.5 20", "script":"[1:700]*(0>100%)"},
+    "anim.symbol.pegasus"  : {"type": "customSymbolScaleAnimation", "sprite": "slice_pegasus_sprite", "scale": "slice_pegasus_scale"},
+    "anim.symbol.ship"     : {"type": "shipScaleAnimation", "slice": "slice_ship_scale", "scale": "slice_ship_scale"},
+    "bg.symbol.eagle"      : {"type": "backgroundAnimation", "wild": false, "alpha": "slice_eagle_alpha", "back": "slice_eagle_back"},
+    "bg.symbol.pegasus"    : {"type": "backgroundAnimation", "wild": false, "alpha": "slice_pegasus_alpha", "back": "slice_pegasus_back"},
+    "bg.symbol.ship"       : {"type": "backgroundAnimation", "wild": false, "alpha": "slice_ship_alpha", "back": "slice_ship_back"},
+    "bg.symbol.wild"       : {"type": "backgroundAnimation", "wild": true, "alpha": "slice_wild_alpha", "back": "slice_wild_back", "fgAlpha": "slice_wild_alpha_fg", "fgBack": "slice_wild_back_fg"},
+    "slice_scatter_sprite" : {"type": "sprite.new",   "slices": "scatter.sprite",    "frame.size": [190, 230],  "frame.insets": "68 0 10 0", "script":"[~:1000]*(0>100%)"},
+    "slice_wild_sprite"    : {"type": "sprite.new",   "slices": "wild.lightning",    "frame.size": [268, 336],  "frame.insets": "98 30.0 83 40", "orientation":"hor", "script":"[~:1000]*(0>100%)"},
+    "slice_wild_sprite_fg" : {"type": "sprite.new",   "slices": "wild.lightning.fg", "frame.size": [268, 336],  "frame.insets": "97 30 80 38.5", "orientation":"hor", "script":"[~:1000]*(0>100%)"},
+    "anim.5oak.lightning"  : {"type": "sprite.new",   "slices": ["5oak.lightning.1", "5oak.lightning.2", "5oak.lightning.3", "5oak.lightning.4", "5oak.lightning.5"], "frame.size": [1096, 374], "frame.insets": "30 0 30 0", "duration": 250},
+    "anim.5oak.alpha"      : {"type": "zeus5OAK",     "5OAKImage": "5oak", "5OAKImageAlpha": "5oak.alpha"},
+    "scatter.stop"         : {"type": "scatterStopAnimation",  "alphaImage": "slice_scatter_alpha", "backImage": "slice_scatter_back"},
+    "anim.symbol.scale"    : {"type": "symbol-scale", "from":1, "to":1.3, "duration":250},
+    "ship_scale_animation" : {"type": "symbol-scale", "slice": "slice_ship_scale", "from": 1, "to": 1.1, "duration": 1400},
+    "wild.intro"           : {"id": "wild.intro", "type": "sprite.new", "frame.size": [275, 317], "slices":["wild.intro.loop"], "script": "[~:1200]*(0>100%)", "opacity": 1, "ratio": 0.873015873015873},
+    "wild.shoot.start"     : {"id":"wild.shoot.start", "group":"wild.shooting", "type": "sprite.new", "frame.size": [1081, 848], "slices":["wild.shoot.1", "wild.shoot.2", "wild.shoot.3", "wild.shoot.4", "wild.shoot.5", "wild.shoot.6", "wild.shoot.7"], "script": "[1:1750]*(0>100%)"},
+    "wild.shoot.end"       : {"id":"wild.shoot.end", "group":"wild.shooting", "type": "sprite.new", "frame.size": [1081, 848], "slices":["wild.shoot.8", "wild.shoot.9", "wild.shoot.10"], "script": "[1:750]*(0>100%)"},
+    "rain.loop"            : {"id":"rain.loop", "type": "sprite.new", "frame.size": [288, 512], "frame.repeat":"repeat", "slices": "fg.rain.loop", "script": "[~:300]*(0>100%)"}
+  }
+}

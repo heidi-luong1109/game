@@ -1,0 +1,84 @@
+{
+    "resources": {
+        "formats": {
+            "debug.lbl": {"font": "Arial", "color": "#fff", "size": 18}
+        }
+    },
+
+    "ui": {
+        "debug.lbl.title": {"type": "label", "text-fit": [true, true], "format": "debug.lbl", "alignment": "center-left"},
+        "debug.lbl.row": {"@P": "ui/debug.lbl.title"},
+
+        "debug.list": {"type": "vbox", "bias": "hor", "size-max": [10000, 10000], "size-min": [1, 1], "size": [1, 1]},
+        "debug.row": {"type": "anchor", "layout": {"relative": true}, "props": {"vbox.growratio": 15}, "ratio": 15, "bias": "hor", "size-max": [10000, 10000], "size-min": [1, 1], "size": [1, 1]},
+        "debug.row.title": {"@P": "ui/debug.row", "background": "#288C22", "content": [
+            {"#ID": "toggle", "@P": "ui/slide-switcher", "props": {"anchor.fit": "7 88 7 1"}},
+            {"#ID": "txt", "@P": "ui/debug.lbl.title", "props": {"anchor.fit": "7 1 7 14"}}
+        ]},
+        "debug.row.input": {"@P": "ui/debug.row", "content": [
+            {"#ID": "txt", "@P": "ui/debug.lbl.row", "props": {"anchor.fit": "7 32 7 1"}},
+            {"#ID": "input", "type": "textfield", "background": "#b39a5e", "alignment": "center-left", "padding": "2 5", "props": {"anchor.fit": "4 1 4 70"}}
+        ]},
+        "debug.row.spinner": {"@P": "ui/debug.row", "content": [
+            {"#ID": "txt", "@P": "ui/debug.lbl.row", "props": {"anchor.fit": "7 32 7 1"}},
+            {"#ID": "spinner", "type": "spinner-input", "props": {"anchor.fit": "4 1 4 70"}, 
+                "background": "#b39a5e", "buttons-background": "#897648", "input-background": "#b39a5e", "margin": 5,
+                "step": 1, "min": 0, "max": 9999999
+            }
+        ]},
+        "debug.row.toggle": {"@P": "ui/debug.row", "content": [
+            {"#ID": "txt", "@P": "ui/debug.lbl.row", "props": {"anchor.fit": "7 32 7 1"}},
+            {"#ID": "toggle", "@P": "ui/slide-switcher", "props": {"anchor.fit": "4 19 4 70"}}
+        ]},
+        "debug.close": {"@P": "ui/debug.row", "props": {"vbox.growratio": "${15/1.5}"}, "ratio": "${15/1.5}", "content": [
+            {"group": "closeBtns", "type": "button", "text": "Close",  "props": {"anchor.fit": "20 0 20 80"}, "background": "#fff"}
+        ]}
+    },
+
+    "scenes": {
+        "debug-config": {"content": [
+            {"type": "stack", "layout": {"alignment": "top-center"}, "props": {"anchor.fit": 0}, "background": "#B0000", "content": [
+                {"type": "anchor", "ratio": 1.2, "content": [
+                    {"type": "anchor", "props": {"anchor.fit": "50 0 90 0"}, "content": [
+                        {"id": "mainpanel", "@P": "ui/debug.list", "ratio": "${15/24}", "props": {"anchor.fit": "null 0"}, "content": [
+                            {"@P": "ui/debug.close"},
+                            {"@P": {"#ID": "ui/debug.row.title", "toggle": {"id": "switchReelsCfgBtn"}, "txt": {"text": "debug.reels_config"}}},
+                            {"@P": "ui/debug.list", "props": {"vbox.growratio": "${15/14}"}, "ratio": "${15/15}", "background": "#1F1F1C", "content": [
+                                {"@P": "ui/debug.row", "content": [
+                                    {"@P": "ui/debug.lbl.row", "props": {"anchor.fit": "7 60 7 1"}, "text": "debug.blurring_level"},
+                                    {"id": "blurring_label", "@P": "ui/debug.lbl.row", "props": {"anchor.fit": "7 49 7 41"}, "alignment": "center-right"},
+                                    {"id": "blurring_level", "type": "sliderbar", "layout": {"type": "anchor", "relative": true}, "props": {"anchor.fit": "35 2 35 55"},
+                                        "slice": "autoplay.progress", "background": "autoplay.bg",
+                                        "slider": {"background": "autoplay.slider", "props": {"anchor.fit": "-100 0 -100 0"}, "ratio": 1}, "slider-insets": "0 20 0 20"}
+                                ]},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.reels_speed"}, "spinner": {"id": "reelsSpeed"}}},
+                                {"@P": {"#ID": "ui/debug.row.input", "txt": {"text": "debug.reels_directions"}, "input": {"id": "reelsDirections"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.first_reel_duration"}, "spinner": {"id": "firstReelDuration"}}},
+                                {"@P": {"#ID": "ui/debug.row.input", "txt": {"text": "debug.next_reel_start_delay"}, "input": {"id": "nextReelStartDelay"}}},
+                                {"@P": {"#ID": "ui/debug.row.input", "txt": {"text": "debug.next_reel_stop_delay"}, "input": {"id": "nextReelStopDelay"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.start_tilt_delay"}, "spinner": {"id": "startTiltDelay"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.start_tilt_duration"}, "spinner": {"id": "startTiltDuration"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.end_tilt_duration"}, "spinner": {"id": "endTiltDuration"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.start_tilt_size"}, "spinner": {"id": "startTiltSize", "step": 0.01, "max": 1}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.end_tilt_size"}, "spinner": {"id": "endTiltSize", "step": 0.01, "max": 1}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.anticipation_start_speed"}, "spinner": {"id": "anticipationStartSpeed"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.anticipation_end_speed"}, "spinner": {"id": "anticipationEndSpeed"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.anticipation_acc_duration"}, "spinner": {"id": "anticipationAccDuration"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.anticipation_time"}, "spinner": {"id": "anticipationTime"}}}
+                            ]},
+                            {"@P": "ui/debug.row"},
+                            {"@P": {"#ID": "ui/debug.row.title", "toggle": {"id": "switchAnimationsCfgBtn"}, "txt": {"text": "debug.animation_config"}}},
+                            {"@P": "ui/debug.list", "props": {"vbox.growratio": "${15/4}"}, "ratio": "${15/4}", "background": "#1F1F1C", "content": [
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.first_line_toggle_duration"}, "spinner": {"id": "lfgFirstToggle"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.second_line_toggle_duration"}, "spinner": {"id": "lfgSecondToggle"}}},
+                                {"@P": {"#ID": "ui/debug.row.spinner", "txt": {"text": "debug.free_game_line_toggle_duration"}, "spinner": {"id": "lfdFreeGame"}}},
+                                {"@P": {"#ID": "ui/debug.row.toggle", "txt": {"text": "debug.match_toggle_duration_to_win"}, "toggle": {"id": "match"}}}
+                            ]},
+                            {"@P": "ui/debug.close"}
+                        ]}
+                    ]}
+                ]}
+            ]}
+        ]}
+    }
+}

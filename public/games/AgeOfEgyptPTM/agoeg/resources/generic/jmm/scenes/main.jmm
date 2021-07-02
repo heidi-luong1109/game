@@ -1,0 +1,188 @@
+{
+    "ui" : {
+        "coins": { "type": "sprite.particles",
+            "texture": {"frame.size": [194, 194], "frames": [
+                {"id": "coin_05"},
+                {"id": "coin_04"},
+                {"id": "coin_03"},
+                {"id": "coin_02"},
+                {"id": "coin_01"}
+            ]},
+
+            "lifetime": 2000,
+            "birthrate": 17,
+            "count": 120,
+            "texture-size": [55, 55],
+            "x-range": [-70, 70],
+            "y-range": [-200, 0],
+            "angle-range": [30, 150],
+            "speed-range": [0.5, 2],
+            "rotation-range": [-45, 45],
+            "scale-range": [0.75, 1.25],
+            "gravity": [0, 0.25],
+            "influencers": [
+                {"type": "scale",        "active" : false},
+                {"type": "rotate",       "active": true, "from": 0, "step": 3},
+                {"type": "transparency", "active": false},
+                {"type": "resistance",   "active": false}
+            ]
+        },
+        "centred_image" : {"type": "image", "props": {"anchor.relative": true, "anchor.alignment": "center", "anchor.fit": "-50 50 50 -50"}},
+
+        "red_label":{ "visible": false,  "@P": "ui/label.def", "format": "font_red"},
+
+        "mega_win_proto":  {"layout": {"type": "anchor", "relative": true}, "type": "composite-animation", "opacity": 0, "group": "megaWinAnimations"},
+        "mega_win_scarab":  {"@P": "ui/mega_win_proto", "animation": "mega_scarab", "content": [
+            {"slice": "mega_win_scarab",  "type": "image", "props": {"anchor.relative": true, "anchor.alignment": "center", "anchor.fit": "0 50 0 -50"}}
+        ]},
+        "mega_win_flower_l":{"@P": "ui/mega_win_proto", "animation": "mega_flower_l", "content": [
+            {"slice": "mega_win_flower_l", "type": "image", "props": {"anchor.relative": true, "anchor.alignment": "center-right", "anchor.fit": "-50 100 50 -100"}}
+        ]},
+        "mega_win_flower_r":{"@P": "ui/mega_win_proto", "animation": "mega_flower_r", "content": [
+            {"slice": "mega_win_flower_r", "type": "image", "props": {"anchor.relative": true, "anchor.alignment": "center-left", "anchor.fit": "-50 0 50 0"}}
+        ]},
+
+        "bottom-panel": {"content": [
+            {"id": "_middle_container", "content": [
+                {"id" : "messages", "content" : {
+                    "#base" : {"panels" : {
+                        "win_more" : {"@P": "ui/bp.msg", "text": "win_more_free_games"}
+                    }}
+                }},
+                {"id": "win_panel", "content": {
+                    "#base": {"id": "_wrapper","content": [
+                        {"id": "big", "content": [
+                            {"@P": "ui/mega_win_scarab",   "props": {"anchor.alignment": "top-center",   "anchor.fit": "74 -50 -60 50"  }},
+                            {"@P": "ui/mega_win_flower_l", "props": {"anchor.alignment": "center-right", "anchor.fit": "44 77 -46 1.2"  }},
+                            {"@P": "ui/mega_win_flower_r", "props": {"anchor.alignment": "center-left",  "anchor.fit": "44 -20 -46 98.8"  }}
+                        ]}
+                    ]}
+                }}
+            ]}
+        ]},
+        "msg.head":  {"@P": "ui/label.def", "visible": false, "format": "massage_box_head"},
+        "msg.text":  {"@P": "ui/label.def", "visible": false, "format": "massage_box_titles"},
+        "msg.value": {"@P": "ui/label.def", "visible": false, "format": "font_red"},
+
+        "big-win-celebration": {"id": "big_win_celebration_container", "content": [
+                {"id": "_wrapper", "content": [
+                    {"id": "big_win_celebration", "visible": false, "frame": [1, 1], "length":1}
+                ]}
+            ]}
+    },
+
+    "scenes": {
+        "main-scene":{"layout":{"type": "anchor", "relative": true, "alignment":"center"},"content": [
+            {"type": "stack", "props": { "anchor.fit": "0"},"content": [
+                {"type": "image", "props":{"stack.fillout": true}, "@O": {
+                    "landscape": {"slice": "background_l"},
+                    "portrait":  {"slice": "background_p"}}
+                },
+                {"type": "image", "props":{"stack.fillout": true}, "visible":false, "group": "freeSpinsElements", "@O": {
+                    "landscape": {"slice": "fg_background_l"},
+                    "portrait":  {"slice": "fg_background_p"}}
+                }
+            ]},
+
+            {"@P": "ui/game-container", "props": { "anchor.fit": "0"  },"layout":{"alignment":"center"}, "content": [
+                {"@P": "ui/reelset",   "@O": {
+                    "landscape": { "props": { "anchor.fit": "11 5 1 5", "anchor.alignment": "center"}},
+                    "portrait": { "props": { "anchor.fit": "26 0.5", "anchor.alignment": "bottom-center"} }
+                }}
+            ]},
+
+            {"id": "fullScreenPanel", "type": "anchor", "props": {"anchor.fit": 0}, "layout": {"relative": true, "aligment": "center"}, "visible": false, "background": "#80000", "content": [
+
+                {"id": "messageBox", "type": "anchor", "layout": {"relative": true}, "background":"message_box_bg", "ratio":[918, 543], "@O": {
+                    "landscape": {"props": {"anchor.alignment": "center", "anchor.fit": "7.5 5"}},
+                    "portrait":  {"props": {"anchor.alignment": "center", "anchor.fit": "26 1.5 38 1.5"}}
+                }, "content": [
+                    {"@P": "ui/msg.head", "text": "you_win",        "group": "moreFreeSpinsIntro", "props": {"anchor.fit": "16 10 63 10"}},
+                    {"type": "panel", "layout": {"type": "chbox"},  "group": "moreFreeSpinsIntro", "props": {"anchor.fit": "48 10 42 10"}, "content": [
+                        {"id": "spacer", "type": "panel", "ratio": 0.3},
+                        {"type": "anchor", "ratio": 2.05, "layout": {"relative": true}, "content": [
+                            {"@P": "ui/msg.value","text": "10",    "props": { "anchor.fit": "-37 0 -14 0", "anchor.alignment": "center"  },  "group": "moreFreeSpinsIntro"}
+                        ]},
+                        {"@P": "ui/msg.text", "text": "more_free_games",        "group": "moreFreeSpinsIntro"}
+                    ]},
+                    {"type": "panel", "layout": {"type": "chbox"}, "group": "moreFreeSpinsIntro", "props": {"anchor.fit": "65 10 25 10"}, "content": [
+                        {"@P": "ui/msg.text", "text": "with",                "group": "moreFreeSpinsIntro"},
+                        {"type": "anchor", "ratio": 2.1, "layout": {"relative": true}, "content": [
+                            {"@P": "ui/msg.value","text": "x3",     "props": { "anchor.fit": "-37 0 -14 0", "anchor.alignment": "center" }, "group": "moreFreeSpinsIntro", "alignment": "center"}
+                        ]},
+                        {"@P": "ui/msg.text", "text": "multiplier_case_1",     "group": "moreFreeSpinsIntro"}
+                    ]},
+
+                    {"@P": "ui/msg.text", "text": "welcome_to_fg", "group": "introFreeSpins", "props": {"anchor.fit": "16 10 63 10"}},
+                    {"type": "panel", "layout": {"type": "chbox"}, "group": "introFreeSpins", "props": {"anchor.fit": "48 10 42 10"}, "content": [
+                        {"@P": "ui/msg.text", "text": "you_win",            "group": "introFreeSpins"},
+                        {"type": "anchor", "ratio": 2.05, "layout": {"relative": true}, "content": [
+                            {"@P": "ui/msg.value","text": "10",    "props": { "anchor.fit": "-37 0 -14 0", "anchor.alignment": "center"  },  "group": "introFreeSpins"}
+                        ]},
+                        {"@P": "ui/msg.text", "text": "free_games",         "group": "introFreeSpins"}
+                    ]},
+                    {"type": "panel", "layout": {"type": "chbox"}, "group": "introFreeSpins", "props": {"anchor.fit": "65 10 25 10"}, "content": [
+                        {"@P": "ui/msg.text", "text": "with",  "alignment": "right",           "group": "introFreeSpins"},
+                        {"type": "anchor", "ratio": 2.1, "layout": {"relative": true}, "content": [
+                            {"@P": "ui/msg.value","text": "x3",     "props": { "anchor.fit": "-37 0 -14 0", "anchor.alignment": "center" }, "group": "introFreeSpins", "alignment": "center"}
+                        ]},
+                        {"@P": "ui/msg.text", "text": "multiplier_case_1",  "group": "introFreeSpins"}
+                    ]},
+
+                    {"@P": "ui/msg.head", "text": "congratulations!",      "group": "outroFreeSpins", "props": {"anchor.fit": "11 10 79 10"}},
+                    {"@P": "ui/msg.text", "text": "game_win",              "group": "outroFreeSpins", "props": {"anchor.fit": "25 56 65 6"}},
+                    {"id": "outroFreeSpinsGameWin", "@P": "ui/red_label",  "group": "outroFreeSpins", "props": {"anchor.fit": "36 57 50 10"}},
+                    {"@P": "ui/msg.text", "text": "feature_win",           "group": "outroFreeSpins", "props": {"anchor.fit": "25 7 65 50.5"}},
+                    {"id": "outroFreeSpinsFeatureWin","@P": "ui/red_label","group": "outroFreeSpins", "props": {"anchor.fit": "36 10 50 50.5"}},
+                    {"@P": "ui/msg.text", "text": "total_win",             "group": "outroFreeSpins", "props": {"anchor.fit": "52 10 37 10"}},
+                    {"id": "outroFreeSpinsTotalWin", "@P": "ui/red_label", "group": "outroFreeSpins", "props": {"anchor.fit": "64 10 17 10"}},
+
+                    {"@P": "ui/msg.text",  "text": "bonus_win",        "group": "outroBonus", "props": {"anchor.fit": "19 10 64 10"}},
+                    {"@P": "ui/red_label", "id": "outroBonusTotalWin", "group": "outroBonus", "props": {"anchor.fit": "46 10 28 10"}},
+
+                    {"id": "mbCloseButton", "type": "ibutton", "slice": "button_continue", "ratio": [257,  55],"@O": {
+                        "landscape": { "props": {"anchor.alignment": "center", "anchor.fit": "83 20 7 20"}  },
+                        "portrait": { "props": {"anchor.alignment": "center", "anchor.fit": "84 20 0 20"}  }}}
+                ]}
+            ]},
+
+            {"@P": "ui/controls", "content": [
+                {"id": "win_animations_reel_panel", "props": { "anchor.fit": "0"  }, "type": "panel", "layout": {"type": "anchor", "relative": true, "alignment":"center"}, "content": [
+                    {"@P": "ui/game-container", "content": [
+                        {"type": "anchor", "layout": {"relative": true}, "ratio": [763, 442],   "@O": {
+                            "landscape": { "props": { "anchor.fit": "11 5 1 5", "anchor.alignment": "center"}},
+                            "portrait": { "props": { "anchor.fit": "26 0.5", "anchor.alignment": "bottom-center"} }
+                        }, "content":[
+                            {"type": "stack",  "id": "coins_panel","layout": {"relative": true}, "props": {"anchor.fit": "95 49 4 49", "anchor.alignment": "bottom-center"}, "content": [
+                                {"id": "big_win_coins",  "@P": "ui/coins"},
+                                {"id": "mega_win_coins", "@P": "ui/coins", "count": 300, "birthrate": 5}
+                            ]},
+
+                            {"@P": "ui/mega_win_proto", "id": "bigWinCont", "group": "bigWinAnimations", "animation": "big.win", "props": {"anchor.fit": "25 -32 41 49.2"}, "content": [
+                                {"slice": "big_win",  "@P": "ui/centred_image"}
+                            ]},
+
+                            {"@P": "ui/mega_win_proto", "animation": "big.win", "props": {"anchor.fit": "25 -32 41 49.2"}, "content": [
+                                {"slice": "mega_win",  "@P": "ui/centred_image"}
+                            ]}
+                        ]}
+                    ]}
+                ]}
+            ]},
+
+            { "id": "webView", "type": "webview", "props": {"anchor.fit": 0}, "visible":false}
+        ]},
+
+        "paytable-scene": {"@O": {"landscape": {"background": "background_l"}, "portrait": {"background": "background_p"}}, "snap": false, "content": [
+            {"@P": {"#ID": "ui/paytable", "panel": {"ratio": "auto", "@O": {
+                    "landscape": { "props": { "anchor.fit": "null 45" } },
+                    "portrait":  { "props": { "anchor.fit": "null 50 null 68" } }
+                }}, "container": {"content": [
+                    {"type": "image", "slice": "paytable1"},
+                    {"type": "image", "slice": "paytable2"},
+                    {"type": "image", "slice": "paytable3"}
+                ]}
+            }}
+        ]}
+    }
+}

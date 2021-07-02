@@ -1,0 +1,13 @@
+{
+  "resources" : {
+    "texts" : {
+      "marvel_wait_time_1" : "Please wait {0} seconds",
+      "aog_you_won" : "YOU WON THE",
+      "aog_autoplay_in" : "THE GAME WILL AUTOPLAY IN:",
+      "aog_match_3symbols" : "MATCH 3 SYMBOLS TO WIN A JACKPOT!",
+      "marvel_start_time_1" : "The game will start in {0} seconds",
+      "jackpot" : "JACKPOT",
+      "marvel_demo_message": "Not available"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "resources": {
+        "formats": {
+            "sb"         : {"font": "MyriadProBold", "style": "bold", "color": "#FFFFFF", "stroke": {"color": "#000000"}},
+            "fg_outro"   : {"font": "MyriadProBold", "style": "bold", "color": "#fff47b", "align": "center", "stroke": {"color": "#e701af","thickness": 2}, "shadow": {"color": "#061160", "offset":[0, 5, 5, 0]}, "size": 60},
+            "fg_text"    : {"font": "Adonais", "style": "bold", "color": "#ffffff",  "align": "center", "shadow": {"color": "#333333"}},
+            "bet.title.p": {"font": "Arial", "size": 28, "style": "bold", "color": "#000000"},
+            "fg_ticker"  : {"font": "Arial", "style": "bold", "color": "#ffd200",  "align": "center", "stroke": {"color": "#062d70", "thickness": 1.3}},
+            "ticker"     : {"font": "Arial", "style": "bold", "color": "#ffdd77",  "align": "center", "shadow": {"color": "#6a0958"}}
+        }
+    }
+}

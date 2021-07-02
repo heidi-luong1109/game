@@ -1,0 +1,17 @@
+{"frames": {
+
+"hlp_wintable":
+{
+	"frame": {"x":2,"y":2,"w":820,"h":392},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":27,"w":820,"h":392},
+	"sourceSize": {"w":820,"h":470}
+}},
+"meta": {
+	"version": "1.0",
+	"image": "help1_2.png",
+	"size": {"w":1024,"h":512},
+	"scale": "1"
+}
+}

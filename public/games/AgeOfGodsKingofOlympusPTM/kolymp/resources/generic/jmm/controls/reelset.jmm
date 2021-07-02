@@ -1,0 +1,63 @@
+{
+    "ui": {
+
+        "reel.sprite.place": {"type": "anchor", "layout": {"relative": true}, "snap": false, "content": [
+            {"type": "anchor", "props": {"anchor.fit": "0 0 66.66 0"}},
+            {"type": "anchor", "props": {"anchor.fit": "33.3 0 33.3 0"}},
+            {"type": "anchor", "props": {"anchor.fit": "66.66 0 0 0"}}
+        ]},
+
+        "reel.mask": {"type": "stack", "group": "masks", "opacity": 0, "background": "#000000"},
+
+        "reel.mask.place": {"type": "anchor", "layout": {"relative": true}, "snap": false, "content": [
+            {"@P": "ui/reel.mask", "props": {"anchor.fit": "0 0 66.66 0"}},
+            {"@P": "ui/reel.mask", "props": {"anchor.fit": "33.33 0 33.33 0"}},
+            {"@P": "ui/reel.mask", "props": {"anchor.fit": "66.66 0 0 0"}}
+        ]},
+
+        "reel.anticipation": {"type": "sprite.new", "group": "anticipationBorders", "slices": ["anticipation_1", "anticipation_2", "anticipation_3"], "frame.size": [290, 557], "frame.insets": "52 48 52 48", "script":"[~:250]*(0>100%)", "visible": false},
+
+        "reel": {"type": "stack", "content": [
+            {"#ID": "reel", "type": "reel", "group": "reels", "bias": "ver"},
+            {"@P":"ui/reel.sprite.place", "group": "spritePlace"},
+            {"@P": "ui/reel.mask.place", "group": "maskSpritePlace"}
+        ]},
+
+        "reelFront": {"@P": "ui/reel.sprite.place", "group": "frontSpritePlace"},
+
+        "reelset": {"type": "anchor", "layout": {"relative": true, "alignment": "center"}, "@P": "ui/anchor.all", "content": [
+            {"id": "reels.bg", "group": "reels.elements", "type": "panel", "background": "reels_bg", "@P": "ui/anchor.all"},
+            {"@P": "ui/reel", "props": {"anchor.fit":"0 80 0 0"}},
+            {"@P": "ui/reel", "props": {"anchor.fit":"0 60 0 20"}},
+            {"@P": "ui/reel", "props": {"anchor.fit":"0 40 0 40"}},
+            {"@P": "ui/reel", "props": {"anchor.fit":"0 20 0 60"}},
+            {"@P": "ui/reel", "props": {"anchor.fit":"0 0 0 80"}},
+            {"id": "reels.frame", "group": "reels.elements", "type": "stack", "background": "reels_frame_back", "@P": "ui/anchor.all"},
+            {"id": "reels.frame", "group": "reels.elements", "type": "stack", "background": "reels_frame", "@P": "ui/anchor.all"},
+            {"@P": "ui/anticipationPlace", "props": {"anchor.fit":"0"}},
+            {"id":"reels.darkener", "type": "panel", "background": "reels_darkener", "@P": "ui/anchor.all", "opacity": 0}
+        ]},
+
+        "reelsetFront": {"type": "anchor", "layout": {"relative": true, "alignment": "center"},"content": [
+            {"@P": "ui/reelFront", "props": {"anchor.fit":"0 80 0 0 "}},
+            {"@P": "ui/reelFront", "props": {"anchor.fit":"0 60 0 20"}},
+            {"@P": "ui/reelFront", "props": {"anchor.fit":"0 40 0 40"}},
+            {"@P": "ui/reelFront", "props": {"anchor.fit":"0 20 0 60"}},
+            {"@P": "ui/reelFront", "props": {"anchor.fit":"0 0 0 80 "}}
+        ]},
+
+        "anticipationPlace": {"type": "anchor", "layout": {"relative": true}, "content": [
+            {"@P":"ui/reel.anticipation", "props": {"anchor.fit": "0 80 0 0"}},
+            {"@P":"ui/reel.anticipation", "props": {"anchor.fit": "0 60 0 20"}},
+            {"@P":"ui/reel.anticipation", "props": {"anchor.fit": "0 40 0 40"}},
+            {"@P":"ui/reel.anticipation", "props": {"anchor.fit": "0 20 0 60"}},
+            {"@P":"ui/reel.anticipation", "props": {"anchor.fit": "0 0 0 80"}}
+        ]},
+
+        "reels": {"id": "reelset", "type": "anchor" , "layout": {"relative": true},  "content": [
+            {"@P": "ui/reelset"},
+            {"@P": "ui/wild_extra", "props": {"anchor.fit": "21.20 38.75 21.65 38.60"}},
+            {"id": "winlines", "type": "winlines", "@P": "ui/anchor.all"}
+        ]}
+    }
+}

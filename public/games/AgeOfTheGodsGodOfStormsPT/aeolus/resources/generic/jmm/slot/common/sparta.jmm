@@ -1,0 +1,100 @@
+{
+    "config": {
+        "swoosh_animation.delay": 100,
+        
+        "animations": {
+            "animate_all_symbols": false,
+            "symbol_frame.disabled": true,
+            
+            "reels_overlay_color": "#BF000"
+        },
+        "tween_keys": {}
+    },
+
+    "resources": {
+        "formats": {
+            "line_win": {"font": "general", "color": "#F6C111", "style": "bold", "text-pad": 20, "stroke": {"color": "#000", "thickness": 1}, "shadow": {"color": "#BF000", "offset": [0, 4]}, "size": 70}
+        },
+
+        "animations": {
+            "win_symbol": {"type": "set", "mode": "serial", "content": [
+                {"type": "set-props", "visible": true},
+                {"type": "opacity", "from": 0, "to": 1, "duration": 400},
+                {"type": "delay", "duration": 450},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 400}
+            ]},
+
+            "total_win_symbol": {"type": "set", "mode": "serial", "content": [
+                {"type": "opacity", "from": 0, "to": 1, "duration": 300},
+                {"type": "delay", "duration": 1350},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 300}
+            ]},
+
+            "line_symbol": {"type": "set", "mode": "serial", "content": [
+                {"type": "set-props", "visible": true},
+                {"type": "opacity", "from": 0, "to": 0.30, "duration": 400},
+                {"type": "delay", "duration": 450},
+                {"type": "opacity", "from": 0.30, "to": 0, "duration": 400}
+            ]},
+            
+            "win_amount_text": {"type": "set", "mode": "serial", "content": [
+                {"type": "set-props", "visible": true},
+                {"type": "opacity", "to": 1, "duration": 0},
+                {"type": "scale", "from.x": 0, "from.y": 0, "to.x": 1.4, "to.y": 1.4, "pivot.x": "50%", "pivot.y": "50%", "duration": 225},
+                {"type": "scale", "from.x": 1.4, "from.y": 1.4, "to.x": 1, "to.y": 1, "pivot.x": "50%", "pivot.y": "50%", "duration": 225},
+                {"type": "delay", "duration": 600},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 200}
+            ]},
+
+            "total_win_amount_text": {"type": "set", "mode": "serial", "content": [
+                {"type": "set-props", "visible": true, "xform": "identity"},
+                {"type": "opacity", "to": 1, "duration": 0},
+                {"type": "scale", "from.x": 0, "from.y": 0, "to.x": 1.6, "to.y": 1.6, "pivot.x":"50%", "pivot.y":"50%", "duration": 210},
+                {"type": "set-props", "xform": "identity"},
+                {"type": "scale", "from.x": 1.6, "from.y": 1.6, "to.x": 0.7, "to.y": 0.7, "pivot.x":"50%", "pivot.y":"50%", "duration": 210},
+                {"type": "set-props", "xform": "identity"},
+                {"type": "scale", "from.x": 0.7, "from.y": 0.7, "to.x": 1, "to.y": 1, "pivot.x":"50%", "pivot.y":"50%", "duration": 210},
+                {"type": "set-props", "xform": "identity"},
+                {"type": "delay", "duration": 1150},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 200}
+            ]},
+            
+            "anticipation_animation": {"type": "set", "mode": "serial", "content": [
+                {"type": "opacity", "to": 1, "duration": 300},
+                {"type": "delay", "duration": 2000},
+                {"type": "opacity", "to": 0, "duration": 850}
+            ]},
+            
+            "free_games_trigger": {"type": "set", "mode": "serial", "content": [
+                {"type": "opacity", "from": 0, "to": 1, "duration": 500},
+                {"type": "delay", "duration": 1250},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 500}
+            ]}
+        }
+    },
+
+    "ui": {
+        "line.win": {"id": "line_win",
+            "child": {"type": "anchor", "layout": {"relative": true}, "props": {"anchor.fit": "6.6 1.5"}, "animation": "win_amount_text", "visible": false, "content": [
+                {"id": "text", "@P": "ui/label.def", "format": "line_win", "text-pad": "2 7 0 2", "props": {"anchor.fit": "20 -5 10 -5"}}
+            ]},
+            "content": [
+	            {"id": "line_win_panel", "size": [1.1, 0.87], "content": [
+	                {"id": "_container", "visible": false, "managed": false}
+	            ]}
+            ]
+        },
+
+        "total_win.label": {"id": "total_win.label", "@P": "ui/label.def", "props": {"anchor.relative": true, "anchor.fit": "40 10"}, "format": "line_win", "animation": "total_win_amount_text", "visible": false},
+
+        "sparta_splash_screen" : {"id":"sparta_splash_screen", "type": "anchor", "layout": {"relative": true}, "props":{"anchor.fit": 0}, "visible": false, "propagative": false, "content": [
+            {"#ID": "splash_continue_btn",   "id": "splash_continue_btn",   "type": "ibutton"},
+            {"#ID": "splash_checkbox",       "id": "splash_checkbox",       "type": "itoggle"},
+            {"#ID": "do_not_show_again_msg", "id": "do_not_show_again_msg", "type": "label"}
+        ]},
+
+        "controls": {"content": [
+            {"@P": "ui/total_win.label"}
+        ]}
+    }
+}

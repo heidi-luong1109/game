@@ -1,0 +1,16 @@
+{
+    "game_code": "aeolus",
+    "title": "Age of the Gods: God of Storms",
+    "fsbActive": true,
+    "jackpotEnable": true,
+    "desktopGame": true,
+	"flashPlayerRequired": false,
+    "supportedOrientation": {
+        "portrait": false
+    },
+    "loadingScreenConfig": {
+        "enabled": true,
+        "logoImageUrl": "../aeolus/resources/generic/images/loading/logo.png",
+        "backgroundImageUrl": "../aeolus/resources/generic/images/loading/background.png"
+    }
+}

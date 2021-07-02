@@ -1,0 +1,120 @@
+{
+    "ui": {
+        "label.jackpot": {"@P": "ui/label.def", "format": "jackpot_labels", "text": "empty"},
+        "anchor.relative": {"type": "anchor", "layout": {"relative": true}},
+        "background_container": {"type": "stack", "layout": {"fillout": true}, "props": {"anchor.fit": 0}},
+
+        "win.glow": {"type": "image", "props": {"anchor.fit" : "0 -10 4 -10", "anchor.alignment": "center"}, "opacity": 0},
+
+        "big-win-celebration": {"content": [
+            {"id": "_wrapper", "visible": false}
+        ]},
+
+        "line.win": {"id": "line_win", "type": "line-win", "managed": false,
+            "child": {"type": "anchor", "layout": {"relative": true}, "props": {"anchor.fit": "6.6 1.5"}, "animation": "win_amount_text", "background": "line_win.glow", "visible": false, "content": [
+                {"id": "text", "@P": "ui/label.def", "format": "line_win", "props": {"anchor.fit": "1.5 1 13.5 1"}}
+            ]},
+            "content": [
+                {"id": "line_win_panel", "type": "anchor", "layout": {"relative": true}, "size": [1.1, 0.87], "content": [
+                    {"id": "_container", "visible": false, "managed": false, "type": "anchor", "layout": {"relative": true}, "props": {"anchor.fit": "6.6 1.5"}, "background": "#000", "content": [
+                        {"id": "text", "@P": "ui/label.def", "format": "line_win", "props": {"anchor.fit": "-3 0 -3 0"}}
+                    ]}
+                ]}
+        ]}
+    },
+
+    "scenes": {
+        "main-scene":{"content": [
+            {"@P": "ui/background_container", "content": [
+                {"id": "regular_bg", "type": "image", "slice": "background"},
+                {"id": "feature_bg", "type": "image", "slice": "bg_feature", "opacity": 0},
+
+                {"id": "rain", "@P": "ui/rain", "opacity": 0},
+
+                {"@P": "ui/anchor.relative", "id": "lightning_panel", "animation": "feature_lightning", "ratio": [1024, 576], "content": [
+                    {"id": "lightning", "type": "panel", "props": {"anchor.fit": 0}, "background": "#fff", "opacity": 0},
+
+                    {"@P": "ui/flag.sprite", "id": "flag", "props": {"anchor.fit": "37 1.15 50 94.85"}},
+                    {"@P": "ui/feature_flag.sprite", "id": "feature_flag", "props": {"anchor.fit": "35.5 -3.5 45 95.2"}, "opacity": 0},
+
+                    {"@P": "ui/sea_shimmer.sprite", "id": "water", "props": {"anchor.fit": "52.5 10 10 67"}, "animation": "sea_shimmer"}
+                ]}
+            ]},
+
+            {"@P": "ui/messages", "visible": false},
+
+            {"@P": "ui/game-container", "content": [
+                {"@P": "ui/flying_bird.sprite", "id": "flying_birds", "ratio": [958, 404], "props": {"anchor.fit": "0 0 0 40", "anchor.alignment": "center-right"}, "visible": false},
+
+                {"@P": "ui/anchor.relative", "props": {"anchor.fit": 0, "anchor.alignment": "center"}, "ratio": 2.007, "content": [
+                    {"@P":"ui/reels.panel", "props": {"anchor.fit": "12 0 1 0", "anchor.alignment": "center"}},
+
+                    {"type": "image", "slice": "logo", "ratio": [270, 58], "props": {"anchor.fit": "2 39 0 39.5"}},
+
+                    {"id": "marvelPanel", "type": "panel", "ratio": [779, 79], "background": "jackpot_tickers", "snap": false,
+                            "layout": {"type": "anchor", "relative": true}, "props": {"anchor.fit": "0 -0.7 87.9 0", "anchor.alignment": "center"}, "content": [
+                        {"@P": "ui/label.jackpot", "id": "power_jackpot.label",          "props": {"anchor.fit": "48 13.2 19 70.8"}},
+                        {"@P": "ui/label.jackpot", "id": "extra_power_jackpot.label",    "props": {"anchor.fit": "48 70.2 19 13.3"}},
+                        {"@P": "ui/label.jackpot", "id": "super_power_jackpot.label",    "props": {"anchor.fit": "12.5 10.6 51 66.7"}},
+                        {"@P": "ui/label.jackpot", "id": "ultimate_power_jackpot.label", "props": {"anchor.fit": "12.5 66.2 51 13.6"}}
+                    ]},
+
+                    {"@P": "ui/total_win.label", "format": "total_win", "props": {"anchor.fit": "31 3.7 39 2.3"}, "background": "total_win.glow"},
+
+                    {"@P": "ui/wind_animation", "id": "wind", "animation": "wind_blowing", "props": {"anchor.fit": "3.5 7 26.5 25"}, "visible": false},
+
+                    {"type": "vport", "layout": {"base": [300, 300]}, "size": [300, 300], "props": {"anchor.fit": "21 2 0 76"}, "content": [
+                        {"@P": "ui/lightning_bolt", "id": "lightning_bolt", "size": [250, 341], "pos": [70, -150], "visible": false},
+                        {"id": "head_sprite_group", "type": "sprites-group", "size": [300, 300], "opacity": 0, "animation": "head_idle_translate", "content": [
+                            {"id": "idle", "@P": "ui/head_idle"},
+                            {"id": "blow", "@P": "ui/head_blow"}
+                        ]},
+
+                        {"id": "multiplier_sprite_group", "type": "sprites-group", "size": [240, 219], "pos": [55, 230], "opacity": 0, "content": [
+                            {"id": "multiplier_0", "@P": "ui/multiplier_1x", "visible": false},
+                            {"id": "multiplier_1", "@P": "ui/multiplier_2x", "visible": false},
+                            {"id": "multiplier_2", "@P": "ui/multiplier_3x", "visible": false},
+                            {"id": "multiplier_3", "@P": "ui/multiplier_5x", "visible": false}
+                        ]}
+                    ]}
+                ]},
+
+                {"@P": "ui/win.glow", "id": "big_win.glow",  "slice": "big_win.glow"},
+                {"@P": "ui/win.glow", "id": "mega_win.glow", "slice": "mega_win.glow"}
+            ]},
+
+            {"id": "big-win-wrapper", "type": "anchor", "layout": {"relative": true, "alignment": "center"}, "props": {"anchor.fit": 0}, "content":[
+                {"id": "big_win.glow",  "@P": "ui/win.glow", "slice": "big_win.glow"},
+                {"id": "mega_win.glow", "@P": "ui/win.glow", "slice": "mega_win.glow"},
+                {"id": "big_win",  "type": "image", "props": {"anchor.fit" : "35 21 44 21"}, "slice": "big_win",  "opacity": 0},
+                {"id": "mega_win", "type": "image", "props": {"anchor.fit" : "35 13 44 13"}, "slice": "mega_win", "opacity": 0},
+                {"id": "coin", "@P": "ui/coins.sprite", "props": {"anchor.fit": "24 -1 0 1", "anchor.alignment": "bottom-center"}, "animation": "coin_fountain", "opacity": 0},
+                {"id": "twinkles", "@P": "ui/twinkles", "props": {"anchor.alignment": "bottom-center", "anchor.fit": "13 0 17 0"}, "animation": "twinkles", "opacity": 0 }
+            ]},
+
+            { "id": "webView", "type": "webview", "props": {"anchor.fit" : 0}, "visible" : false},
+
+            {"id": "splash_screen", "type": "splash-screen", "animation.hide": "splash_screen.disappearing", "propagative": false, "visible": false,
+                    "layout": {"type": "anchor", "relative": true, "alignment": "center"}, "props": {"anchor.fit": 0}, "content": [
+                {"@P": "ui/background_container", "content": [
+                    {"type": "image", "slice": "splash_bg"}
+                ]},
+
+                {"type": "vport", "layout": {"base": [650, 576]}, "size": [650, 576], "props": {"anchor.fit": 0}, "snap": false, "content": [
+                    {"type": "image", "slice": "black_backing", "size": [546, 296], "pos": [52, 266]},
+                    {"type": "image", "slice": "logo",          "size": [622, 135], "pos": [14, 20]},
+                    {"type": "image", "slice": "aeolus",        "size": [600, 277], "pos": [90, 145]},
+
+                    {"@P": "ui/label.def", "format": "splash.text_1", "text": "splash.head",      "size": [550, 47], "pos": [50, 370]},
+                    {"@P": "ui/label.def", "format": "aeolus.yellow", "text": "splash.text",      "size": [550, 49], "pos": [50, 412]},
+                    {"@P": "ui/label.def", "format": "splash.text_1", "text": "splash.check_box", "size": [189, 27], "pos": [230, 536]},
+
+                    {"id": "btn.close", "type": "ibutton", "size": [193, 60], "pos": [228.5, 470], "slice": "continue_button", "text-fit": true, "cursor": "hand"},
+                    {"id": "show_again.toggle", "type": "itoggle", "size": [62, 40], "pos": [430, 528], "slice": "checkbox_off", "slice.selected": "checkbox_on", "cursor": "hand"}
+                ]}
+            ]},
+            {"@P": "ui/fsb-info-popup"},
+            {"@P": "ui/confirm-dialog"}
+        ]}
+    }
+}

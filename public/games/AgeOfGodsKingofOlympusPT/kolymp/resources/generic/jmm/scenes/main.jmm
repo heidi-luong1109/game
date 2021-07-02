@@ -1,0 +1,131 @@
+{
+    "ui": {
+        "wild_shoot": {"type": "stack","id": "wild.shooting.set", "layout": {"alignment": "center"}, "content": [
+            {"@P": "ui/wild.shoot.start",   "visible": false},
+            {"@P": "ui/wild.shoot.midle",   "visible": false},
+            {"@P": "ui/wild.shoot.end",     "visible": false},
+            {"@P": "ui/wild.shoot.multiplier", "visible": false}
+        ]},
+        "gc-dt.def_symbol": {"type": "symbol-image", "layout": {"type": "stack" }, "animation": "gc-dt.def_symbol_animation", "content": [
+            {"id": "symbol.image", "ratio": 1.22, "type": "image"}
+        ]},
+        "head_jackpot": {"id": "head", "type": "anchor", "layout": {"relative": true}, "content": [
+            {"group": "regularGameElements", "type": "anchor", "layout": {"relative": true}, "props": {"anchor.fit": "2 -9 2 73"}, "background": "super_power", "content": [
+                {"id": "super_power_jackpot.label","group": "powerLabels",  "alignment": "baseline-center", "format": "ticker", "text": "empty", "props": {"anchor.fit": "13 39 48 12"}, "@P": "ui/label.def"},
+                {"id": "power_jackpot.label","group": "powerLabels",  "alignment": "baseline-center", "format": "ticker", "text": "empty", "props": {"anchor.fit": "51 42 16 19"}, "@P": "ui/label.def"}
+            ]},
+            {"group": "regularGameElements","type": "anchor", "layout": {"relative": true}, "props": {"anchor.fit": "2 71 2 -8"}, "background": "ultimate_power", "content": [
+                {"id": "ultimate_power_jackpot.label","group": "powerLabels",  "alignment": "center", "format": "ticker", "text": "empty", "props": {"anchor.fit": "15 12 46 39"}, "@P": "ui/label.def"},
+                {"id": "extra_power_jackpot.label", "group": "powerLabels",    "alignment": "center", "format": "ticker", "text": "empty", "props": {"anchor.fit": "55 22 16 37"}, "@P": "ui/label.def"}
+            ]}
+        ]},
+        "free_spins.outro": {"id": "free_spins.outro", "type": "outro-message", "animation.hide": "hide_fg_outro",
+            "@S": {"outro_state.single": {"animation.show": "show_fg_outro.single"}, "outro_state.group": {"animation.show": "show_fg_outro"}}, "@P": {"#ID": "ui/message_box_outro", "content": {
+            "@S": {"outro_state.single": {"background": "fg_outro_no_win"}, "outro_state.group": {"background": "fg_outro"}}, "content": [
+                {"id": "win.game", "@P": "ui/label.def", "format": "fg_outro", "props": {"anchor.fit": "33 54 52 11"},
+                    "@S": {"outro_state.single": {"visible": false}, "outro_state.group": {"visible": true}}},
+                {"id": "win.feature", "@P": "ui/label.def", "format": "fg_outro", "props": {"anchor.fit": "33 9 52 49"},
+                    "@S": {"outro_state.single": {"visible": false}, "outro_state.group": {"visible": true}}},
+                {"id": "win.total", "@P": "ui/label.def", "format": "fg_outro",
+                    "@S": {"outro_state.single": {"props": {"anchor.fit": "45 10 22 10"}}, "outro_state.group": {"props": {"anchor.fit": "59 10 16 10"}}}},
+                {"type": "stack", "props": {"anchor.alignment": "center", "anchor.fit": "80.0 38 2.0 38"}, "content": [
+                    {"id": "btn.close", "@P": "ui/bb.bet_btn", "slice": "btn.continue", "animation": "continue_button", "shortcut": "space"}
+                ]}
+            ]
+        }}},
+        "head": {"id": "head", "type": "anchor", "layout": {"relative": true}, "content": [
+            {"type": "stack", "layout": {"alignment": "bottom-center"}, "props": {"anchor.fit": "0"}, "content": [
+                {"@P": "ui/promo_msg_panel", "@S": {"regular": {"visible": true}, "free-spins": {"visible": false}}, "panels": {
+                    "logo": {"@P": "ui/promo_msg_logo", "background": "logo",    "props": {"anchor.fit": "-24 27 16 23"}},
+                    "toggle_1": {"@P": "ui/promo_msg", "background": "promo.1","ratio":[428, 96],  "props": {"anchor.fit": "-17 33 33 33"}},
+                    "toggle_2": {"@P": "ui/promo_msg", "background": "promo.2","ratio":[349, 83],  "props": {"anchor.fit": "-11 34 39 34"}},
+                    "toggle_3": {"@P": "ui/promo_msg", "background": "promo.3","ratio":[406, 89],  "props": {"anchor.fit": "-11 36 39 36"}},
+                    "toggle_4": {"@P": "ui/promo_msg", "background": "promo.4","ratio":[352, 82],  "props": {"anchor.fit": "-11 36 33 36"}}
+                }, "toggleQueue": {
+                    "regular": ["logo", "toggle_1", "logo", "toggle_2", "logo", "toggle_3", "logo", "toggle_4"]
+                }}
+            ]},
+            {"group": "freeSpinsElements","type": "anchor", "layout": {"relative": true},"props": {"anchor.fit": "8 75.0 45.0 8.5"}, "visible": false, "content": [
+                {"id": "freeSpinsMultiplierLabel", "text": "multiplier_label", "format": "fg_text", "props": {"anchor.fit": "13.0 -2.0 42.5 -2.0"}, "@P": "ui/label.def"},
+                {"id": "freeSpinsMultiplier", "alignment": "baseline-center", "format": "fg_ticker", "props": {"anchor.fit": "45.0 0.0 1.0 0.0"}, "@P": "ui/label.def"}
+            ]},
+            {"group": "freeSpinsElements",  "type": "anchor", "layout": {"relative": true}, "props": {"anchor.fit": "8 11 45.0 73.5"}, "visible": false, "content": [
+                {"id": "freeSpinsCurrentWinLabel", "format": "fg_text","props": {"anchor.fit": "13.0 -22.0 42.5 -22.0"}, "text": "free_games_win", "@P": "ui/label.def"},
+                {"id": "freeSpinsCurrentWin", "text": "empty", "alignment": "center", "text-fit": [true, true], "format": "fg_ticker", "props": {"anchor.fit": "45.0 -20.0 1.0 -20.0"}, "@P": "ui/label.def"}
+            ]},
+            {"@P": "ui/fg"}
+        ]},
+        "fg": {"id": "fg", "group": "freeSpinsElements", "visible": false, "type": "anchor", "ratio": 7, "layout": {"relative": true}, "props": {"anchor.alignment": "top-center","anchor.fit": "8 4 42.5 0"}, "content": [
+             {"id": "fg.counter","type": "anchor", "layout": {"relative": true}, "props": {"anchor.alignment": "center"},  "props": {"anchor.fit": "11 80 7 2"},"content": [
+                 {"group": "fs.count",  "props": {"anchor.fit": "0 42 0 0", "anchor.alignment": "center"}, "type": "image"},
+                 {"group": "fs.count", "props": {"anchor.fit": "0 0 0 42", "anchor.alignment": "center"}, "type": "image"}
+             ]},
+             {"id": "logo.freegames", "type": "stack",  "props": {"anchor.fit": "0 3 0 22"},     "background": "fg_logo1"},
+             {"id": "logo.freegame",  "type": "stack",  "props": {"anchor.fit": "0 6.5 0 18.5"}, "background": "fg_logo2", "visible": false}
+         ]},
+
+        "message_box_outro": {"type": "custom-message", "layout": {"type": "stack"}, "props": {"anchor.fit": "4.0 8 1.2 7.6"}, "visible": false,  "animation.hide": "hide_message_box", "content": [
+            {"#ID": "content", "type": "anchor", "layout": {"relative": true}}
+        ]},
+        "round-buttons": {"type": "panel", "props": {"anchor.relative": true}, "content": [
+            {"id": "turbo.container.p", "type": "vport", "layout": {"base": [147, 204]}, "props": {"anchor.fit": "0 9.38 50 67.65"}, "visible": false, "managed": false, "content": [
+                {"@P": "ui/label.def", "format": "bet.title.p", "text": "turbo", "pos": [0, 134], "size": [147, 21]}
+            ]}
+        ]}
+    },
+    "scenes": {
+        "main-scene": {"layout": {"relative": true}, "content": [
+            {"type": "stack", "layout": {"fillout": true}, "@P": "ui/anchor.all", "content": [
+                {"type": "image","slice": "background"},
+                {"id": "fg_background", "type": "image", "group": "freeSpinsElements","slice": "fg_background", "visible": false},
+                {"id": "fg_bg_lightning", "type": "image", "group": "freeSpinsElements","animation": "fg_bg_lightning", "slice": "fg_bg_lightening", "opacity": 0},
+                {"@P": "ui/rain.loop", "group": "freeSpinsElements", "visible": false}
+            ]},
+            {"id": "fullScreenPanelBg", "opacity": 0, "type": "anchor", "@P": "ui/anchor.all", "layout": {"relative": true}, "background": "#80000"},
+            {"id": "game.container","@P": "ui/game-container", "content": [
+                {"id": "anchor.game.container", "type": "anchor", "layout": {"relative": true}, "props": {"anchor.fit": "0 5 15 5", "anchor.alignment": "center"},"ratio": 1.8963,   "content": [
+                    {"id": "reelset", "@P": "ui/reelset", "props": {"anchor.fit": "18 8.5 4 8.5"}},
+                    {"@P": "ui/head","props": {"anchor.fit": "3 0 70.5 0"}},
+                    {"@P": "ui/head_jackpot","props": {"anchor.fit": "3 10 81.5 10"}},
+                    {"@P": "ui/reelsetFront","props": {"anchor.fit": "18 8.5 4 8.5"}},
+                    {"id": "free_spins.intro", "show-duration": 6500,"animation.hide": "hide_fg_intro","animation.show": "show_fg_intro","type": "custom-message", "layout": {"type": "stack"}, "props": {"anchor.fit": "3 8 1.2 7.6"},  "animation.hide": "hide_message_box", "content": [
+                        {"background": "fg.intro.bg","id": "fg.intro","opacity": 0, "type": "anchor", "layout": {"relative": true}, "content": [
+                            {"type": "image","id": "fg.cloud.intro",  "slice": "fg.intro.cloud_1","props": {"anchor.fit": "30 30 15 30"}},
+                            {"type": "image","id": "fg.intro.light", "opacity": 0.3, "slice": "fg.intro.light", "props": {"anchor.fit": "35 3 -35 3"}},
+                            {"type": "image", "slice": "fg.intro.text", "props": {"anchor.fit": "0"}}
+                        ]},
+                        {"type": "anchor", "layout": {"alignment": "center","relative": true},   "content": [
+                            {"@P": "ui/wild.intro","id": "anim.fg.intro.stars", "animation": "intro.start.fg","opacity": 0, "props": {"anchor.fit": "29.6 36.55 14.3 35.85"}}
+                        ]}
+                    ]},
+                    {"@P": "ui/free_spins.outro","props": {"anchor.fit": "3 8 1.2 7.6"}},
+                    {"@P": "ui/wild_shoot", "props": {"anchor.fit": "-10.2 13.4 -27.3 -5.9"}},
+                    {"@P": "ui/sb.right", "props": {"anchor.fit": "19.0 2.6 5.5 91"}},
+                    {"@P": "ui/sb.left", "props": {"anchor.fit": "19.0 91 5.5 2.6"}},
+                    {"type": "anchor", "layout": {"relative": true},"props": {"anchor.fit": "18 5 4 5"}, "group": "fiveOAKAnimations", "animation": "5oak", "visible": false,"content": [
+                        {"@P": "ui/5oak.lightning", "props": {"anchor.fit": "5 -55 5 5"}},
+                        {"id": "5oak_back",  "type": "image", "slice": "5oak.alpha","props": {"anchor.fit": "38 8 2 8"}, "animation": "5oak_scale"},
+                        {"id": "5oak_front", "type": "image", "slice": "5oak",      "props": {"anchor.fit": "38 8 2 8"}, "animation": "5oak_set"}
+                    ]},
+                    {"type": "vport","props": {"anchor.fit": "0"},"layout": {"base": [1024, 620]},"content":[
+                        {"@P": "ui/messages",  "pos": [131, 604],   "size": [911, 16]},
+                        {"@P": "ui/bottom-bar","pos": [28, 610],   "size": [1124, 112]},
+                        {"@P": "ui/fsb-bar",   "pos": [-325, 619], "size": [1807, 223]}
+                    ]}
+                ]}
+            ]},
+            {"@P": "ui/confirm-dialog"},
+            {"@P": "ui/fsb-info-popup"},
+            {"id": "webView", "type": "webview", "@P": "ui/anchor.all", "visible": false}
+        ]},
+        "loading-scene": {"layout": {"type": "stack"},  "content": [
+            {"type": "image", "slice": "loading.bg"},
+            {"type": "vport", "layout": {"base":[1024, 768]},"size": [1024, 768],"content": [
+                {"id": "loading.title", "@P": "ui/label.def", "pos": [426, 738], "size": [172, 14], "format": "loading.title", "text": "loading_title"},
+                {"type": "stack", "background": "loading.bar_bg", "pos": [426, 755], "size": [172, 5]},
+                {"id": "progress", "type": "progress-bar", "slice": "loading.progress", "pos": [423, 751], "size": [178, 14], "layout": {"type": "anchor", "relative": true, "alignment": "center"},
+                    "indicator": {"type": "panel", "background": "loading.indicator", "ratio": [55, 105], "bias": "ver", "props": {"anchor.fit": 0}}}
+            ]}
+        ]}
+    }
+}

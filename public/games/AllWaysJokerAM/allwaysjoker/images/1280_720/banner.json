@@ -1,0 +1,25 @@
+{"frames": {
+
+"banner_info_1":
+{
+	"frame": {"x":2,"y":448,"w":1176,"h":410},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":11,"w":1176,"h":410},
+	"sourceSize": {"w":1280,"h":480}
+},
+"banner_info_2":
+{
+	"frame": {"x":2,"y":2,"w":1106,"h":442},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":36,"w":1106,"h":442},
+	"sourceSize": {"w":1280,"h":480}
+}},
+"meta": {
+	"version": "1.0",
+	"image": "banner.png",
+	"size": {"w":1180,"h":860},
+	"scale": "1"
+}
+}

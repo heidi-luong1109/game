@@ -1,0 +1,27 @@
+<font>
+  <info face="paytable_font" size="22" bold="1" italic="0" charset="" unicode="" stretchH="100" smooth="1" aa="1" padding="2,2,2,2" spacing="0,0" outline="0"/>
+  <common lineHeight="25" base="16" scaleW="202" scaleH="26" pages="1" packed="0"/>
+  <pages>
+    <page id="0" file="paytable_font"/>
+  </pages>
+  <chars count="14">
+    <char id="48" x="2" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="49" x="19" y="2" width="11" height="20" xoffset="1" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="50" x="32" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="51" x="49" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="52" x="66" y="2" width="16" height="20" xoffset="-1" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="53" x="84" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="54" x="101" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="55" x="118" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="56" x="135" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="57" x="152" y="2" width="15" height="20" xoffset="0" yoffset="0" xadvance="12" page="0" chnl="15"/>
+    <char id="32" x="169" y="18" width="0" height="0" xoffset="0" yoffset="17" xadvance="6" page="0" chnl="15"/>
+    <char id="44" x="171" y="14" width="8" height="11" xoffset="0" yoffset="13" xadvance="6" page="0" chnl="15"/>
+    <char id="46" x="181" y="14" width="7" height="7" xoffset="1" yoffset="13" xadvance="6" page="0" chnl="15"/>
+    <char id="45" x="190" y="10" width="10" height="7" xoffset="0" yoffset="9" xadvance="7" page="0" chnl="15"/>
+    <char id="32" x="0" y="0" width="0" height="0" xoffset="0" yoffset="9" xadvance="6" page="0" chnl="15"/>
+  </chars>
+  <kernings count="1">
+    <kerning first="49" second="49" amount="-1"/>
+  </kernings>
+</font>

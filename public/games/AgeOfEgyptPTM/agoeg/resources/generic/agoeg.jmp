@@ -1,0 +1,36 @@
+{
+    "modules": {
+        "default": {
+            "window":{
+                "pos": "center",
+                "size": [1136, 640]
+            },
+            "jmms": [
+                "slot/common/media.jmm",
+                "slot/common/controls.jmm",
+                "slot/common/debug_config.jmm",
+                "formats.jmm",
+                "config/config.jmm",
+                "images/images.jmm",
+                "images/symbol_animations_animations.jmm",
+                "images/symbol_animations_slices.jmm",
+                "images/egypt_bonus_elements.jmm",
+                "media.jmm",
+                "controls/reelset.jmm",
+                "controls/side-buttons.jmm",
+                "scenes/bonus.jmm",
+                "scenes/main.jmm"
+            ],
+
+            "localizedBrandedJmms": [
+                "../../translations/jmm/slot/common/controls_en.jmm",
+                "../../translations/jmm/slot/common/texts/texts_en.jmm",
+                "../../translations/jmm/texts/texts_en.jmm",
+                "../../translations/jmm/images/images_en.jmm"
+            ],
+            "tablet": [
+                "slot/common/controls_tablet.jmm"
+            ]
+        }
+    }
+}

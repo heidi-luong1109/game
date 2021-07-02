@@ -1,0 +1,657 @@
+{
+    "config": {
+        "marvel_jackpot": {
+            "update_interval": 1000,
+
+            "power_jackpot": 5000,
+            "extra_power_jackpot": 50000,
+            "super_power_jackpot": 500000,
+            "ultimate_power_jackpot": 10000000,
+
+            "power_delta": 1,
+            "extra_power_delta": 6,
+            "super_power_delta": 14,
+            "ultimate_power_delta": 27,
+
+            "show_demo_message": true,
+            "demo_message": "marvel_demo_message"
+        }
+    },
+    "resources": {
+        "audio": {
+            "pools": {
+                "aog_main"         : {"url": {"audio/mpeg": "ageofgods/AgeOfGods_JP_NGM2desktop_soundpack_9.06.16.mp3", "audio/ogg": "ageofgods/AgeOfGods_JP_NGM2desktop_soundpack_9.06.16.ogg"}, "polyphony": 5, "preload": "ageofgods-scene"},
+                "aog_loading"      : {"url": {"audio/mpeg": "ageofgods/AgeOfGods_JP_NGM2desktop_soundpack_9.06.16.mp3", "audio/ogg": "ageofgods/AgeOfGods_JP_NGM2desktop_soundpack_9.06.16.ogg"}, "polyphony": 3, "preload.deferred": "ageofgods-loading-scene"},
+                "aog_additional"   : {"url": {"audio/mpeg": "ageofgods/AgeOfGods_JP_NGM2desktop_soundpack_9.06.16.mp3", "audio/ogg": "ageofgods/AgeOfGods_JP_NGM2desktop_soundpack_9.06.16.ogg"}, "polyphony": 4, "preload": "ageofgods-scene"}
+            },
+
+            "sounds": {
+                "aog_ambient"          : {"frame": [9112, 15660], "pool": "aog_additional", "mono": "ignore"},
+                "aog_ambient_short"    : {"frame": [9112, 15660], "pool": "aog_additional", "mono": "ignore"},
+                "aog_timer"            : {"frame": [37046, 235],  "pool": "aog_additional", "mono": "ignore"},
+
+                "aog_loading_screen"   : {"frame": [2000, 4140],  "pool": "aog_loading", "mono": "force"},
+                "aog_loading_short"    : {"frame": [2000, 4140],  "pool": "aog_loading", "mono": "force"},
+                "aog_screen_transition": {"frame": [6440, 2372],  "pool": "aog_loading", "mono": "force"},
+                "aog_coin_select"      : {"frame": [25072, 1468], "pool": "aog_main", "mono": "force"},
+                "aog_coin_fly"         : {"frame": [26840, 2208], "pool": "aog_main", "mono": "skip"},
+                "aog_power_1"          : {"frame": [29348, 1905], "pool": "aog_main", "mono": "force"},
+                "aog_power_2"          : {"frame": [31554, 1906], "pool": "aog_main", "mono": "force"},
+                "aog_power_3"          : {"frame": [33760, 2986], "pool": "aog_main", "mono": "force"},
+                "aog_win_bell"         : {"frame": [37382, 6039], "pool": "aog_main", "mono": "ignore"},
+                "aog_win_sound"        : {"frame": [43721, 8779], "pool": "aog_main", "mono": "force"}
+            }
+        },
+
+        "images": {
+            "aog.logo":              {"url": "ageofgods/loading/logo2.png",       "preload": "ageofgods-loading-scene"},
+            "aog.intro_bg":          {"url": "ageofgods/loading/bg_intro-msg.jpg","preload": "ageofgods-loading-scene"},
+            "aog.progress_bar_bg":   {"url": "ageofgods/loading/bar.png",         "preload": "ageofgods-loading-scene"},
+            "aog.multi_level_msg":   {"url": "../../translations/images/ageofgods/multi_level/multi-level-msg_${lang}.png", "preload": "ageofgods-loading-scene"},
+            "aog.countdown_msg":     {"url": "../../translations/images/ageofgods/countdown_msg/countdown_msg_${lang}.png", "preload": "ageofgods-loading-scene"},
+            "aog.info_text":         {"url": "../../translations/images/ageofgods/info_text/info-text_${lang}.png",         "preload": "ageofgods-scene"},
+            "aog.wait_msg":          {"url": "../../translations/images/ageofgods/wait_msg/wait_msg_${lang}.png",           "preload": "ageofgods-loading-scene"},
+            "aog.progress_bar":      {"url": "ageofgods/loading/bar_stroke.png","preload": "ageofgods-loading-scene"},
+
+            "aog.bg":                {"url": "ageofgods/bg.jpg",           "preload": "ageofgods-scene"},
+            "aog.olimp.1":           {"url": "ageofgods/bg_jackpot_01.png","preload": "ageofgods-scene"},
+            "aog.olimp.2":           {"url": "ageofgods/bg_jackpot_02.png","preload": "ageofgods-scene"},
+            "aog.olimp.4":           {"url": "ageofgods/bg_jackpot_04.png","preload": "ageofgods-scene"},
+
+            "animations":            {"url": "ageofgods/animations.png",      "preload": "ageofgods-scene"},
+            "icons_black":           {"url": "ageofgods/icons_black.png",     "preload": "ageofgods-scene"},
+
+            "aog.coin":              {"url": "ageofgods/coin.png",            "preload": "ageofgods-scene"},
+            "aog.separators":        {"url": "ageofgods/golden-gate.png",     "preload": "ageofgods-scene"},
+            "aog.msg_box":           {"url": "ageofgods/info-text-bar.png",   "preload": "ageofgods-scene"},
+            "aog.jp_panel_ultimate": {"url": "ageofgods/ultimate_power.png",  "preload": "ageofgods-scene"},
+            "aog.jp_panel_super":    {"url": "ageofgods/super_power.png",     "preload": "ageofgods-scene"},
+            "aog.jp_panel_extra":    {"url": "ageofgods/extra_power-min.png", "preload": "ageofgods-scene"},
+            "aog.jp_panel_power":    {"url": "ageofgods/power-min.png",       "preload": "ageofgods-scene"},
+
+            "aog.powers_bg":         {"url": "ageofgods/powers.jpg",          "preload": "ageofgods-scene"},
+            "aog.powers_bg_brown":   {"url": "ageofgods/powers_brown.png",    "preload": "ageofgods-scene"},
+            "aog.powers_bg_black":   {"url": "ageofgods/powers_black.png",    "preload": "ageofgods-scene"},
+            "aog.jp_panel_points":   {"url": "ageofgods/jp_panel_points.png", "preload": "ageofgods-scene"},
+
+            "aog.win_bg_power":          {"url": "ageofgods/win/msg_power_bg.png",  "preload.deferred": "ageofgods-scene"},
+            "aog.win_bg_extra_power":    {"url": "ageofgods/win/extra_bg.png",      "preload.deferred": "ageofgods-scene"},
+            "aog.win_bg_super_power":    {"url": "ageofgods/win/super_bg.png",      "preload.deferred": "ageofgods-scene"},
+            "aog.win_bg_ultimate_power": {"url": "ageofgods/win/ultra_bg.png",      "preload.deferred": "ageofgods-scene"},
+            "aog.msg_powers":            {"url": "../../translations/images/ageofgods/msg/msg_${lang}.png",           "preload": "ageofgods-scene"},
+
+            "aog.power_light_sweep": {"url": "ageofgods/power_light_sweep.png",     "preload": "ageofgods-scene"},
+
+            "aog.close_btn"      : {"url": "../../translations/images/ageofgods/continue_btn_${lang}.png", "preload": "ageofgods-scene"},
+            "aog.congratulations": {"url": "../../translations/images/ageofgods/congrat_msg_${lang}.png",  "preload": "ageofgods-scene"},
+            "font_bitmap":   {"url": "font.png",  "preload": "ageofgods-scene"},
+            "font_bitmap_1": {"url": "font1.png", "preload": "ageofgods-scene"}
+        },
+
+        "slices": {
+            "aog.coin_anim_00":       {"image": "animations", "size": [106, 98],  "pos": [1, 1]},
+            "aog.coin_anim_01":       {"image": "animations", "size": [97, 99],   "pos": [109, 1]},
+            "aog.coin_anim_02":       {"image": "animations", "size": [69, 103],  "pos": [208, 1]},
+            "aog.coin_anim_03":       {"image": "animations", "size": [24, 106],  "pos": [279, 1]},
+            "aog.coin_anim_04":       {"image": "animations", "size": [41, 106],  "pos": [305, 1]},
+            "aog.coin_anim_05":       {"image": "animations", "size": [81, 103],  "pos": [348, 1]},
+            "aog.coin_anim_06":       {"image": "animations", "size": [104, 100], "pos": [431, 1]},
+            "aog.coin_anim_07":       {"image": "animations", "size": [103, 103], "pos": [537, 1]},
+            "aog.coin_anim_08":       {"image": "animations", "size": [90, 114],  "pos": [642, 1]},
+            "aog.coin_anim_09":       {"image": "animations", "size": [50, 120],  "pos": [734, 1]},
+            "aog.coin_anim_10":       {"image": "animations", "size": [20, 120],  "pos": [786, 1]},
+            "aog.coin_anim_11":       {"image": "animations", "size": [70, 117],  "pos": [808, 1]},
+            "aog.coin_anim_12":       {"image": "animations", "size": [98, 106],  "pos": [880, 1]},
+            "aog.splash_00":          {"image": "animations", "size": [160, 172], "pos": [2263, 5071]},
+            "aog.splash_01":          {"image": "animations", "size": [247, 261], "pos": [2425, 5071]},
+            "aog.splash_02":          {"image": "animations", "size": [316, 319], "pos": [2674, 5071]},
+            "aog.splash_03":          {"image": "animations", "size": [357, 361], "pos": [2992, 5071]},
+            "aog.splash_04":          {"image": "animations", "size": [381, 391], "pos": [3351, 5071]},
+            "aog.splash_05":          {"image": "animations", "size": [401, 407], "pos": [1, 5464]},
+            "aog.splash_06":          {"image": "animations", "size": [404, 397], "pos": [404, 5464]},
+            "aog.splash_07":          {"image": "animations", "size": [413, 425], "pos": [810, 5464]},
+            "aog.splash_08":          {"image": "animations", "size": [415, 429], "pos": [1225, 5464]},
+            "aog.splash_09":          {"image": "animations", "size": [405, 430], "pos": [1642, 5464]},
+            "aog.splash_10":          {"image": "animations", "size": [404, 426], "pos": [2049, 5464]},
+            "aog.splash_11":          {"image": "animations", "size": [394, 404], "pos": [2455, 5464]},
+            "aog.stars_win_flock_00": {"image": "animations", "size": [312, 312], "pos": [1747, 1279]},
+            "aog.stars_win_flock_01": {"image": "animations", "size": [412, 420], "pos": [2061, 1279]},
+            "aog.stars_win_flock_02": {"image": "animations", "size": [494, 506], "pos": [2475, 1279]},
+            "aog.stars_win_flock_03": {"image": "animations", "size": [559, 574], "pos": [2971, 1279]},
+            "aog.stars_win_flock_04": {"image": "animations", "size": [611, 633], "pos": [1, 1855]},
+            "aog.stars_win_flock_05": {"image": "animations", "size": [652, 679], "pos": [614, 1855]},
+            "aog.stars_win_flock_06": {"image": "animations", "size": [685, 717], "pos": [1268, 1855]},
+            "aog.stars_win_flock_07": {"image": "animations", "size": [711, 747], "pos": [1955, 1855]},
+            "aog.stars_win_flock_08": {"image": "animations", "size": [732, 764], "pos": [2668, 1855]},
+            "aog.stars_win_flock_09": {"image": "animations", "size": [748, 770], "pos": [1, 2621]},
+            "aog.stars_win_flock_10": {"image": "animations", "size": [755, 776], "pos": [751, 2621]},
+            "aog.stars_win_flock_11": {"image": "animations", "size": [751, 781], "pos": [1508, 2621]},
+            "aog.stars_win_flock_12": {"image": "animations", "size": [743, 784], "pos": [2261, 2621]},
+            "aog.stars_win_flock_13": {"image": "animations", "size": [735, 781], "pos": [3006, 2621]},
+            "aog.stars_win_flock_14": {"image": "animations", "size": [730, 772], "pos": [1, 3407]},
+            "aog.stars_win_flock_15": {"image": "animations", "size": [677, 761], "pos": [733, 3407]},
+            "aog.stars_win_flock_16": {"image": "animations", "size": [627, 759], "pos": [1412, 3407]},
+            "aog.stars_win_flock_17": {"image": "animations", "size": [615, 715], "pos": [2041, 3407]},
+            "aog.win_shine_back_00":  {"image": "animations", "size": [428, 280], "pos": [1378, 1]},
+            "aog.win_shine_back_01":  {"image": "animations", "size": [429, 280], "pos": [1808, 1]},
+            "aog.win_shine_back_02":  {"image": "animations", "size": [431, 280], "pos": [2239, 1]},
+            "aog.win_shine_back_03":  {"image": "animations", "size": [431, 280], "pos": [2672, 1]},
+            "aog.win_shine_back_04":  {"image": "animations", "size": [431, 280], "pos": [3105, 1]},
+            "aog.win_shine_back_05":  {"image": "animations", "size": [431, 280], "pos": [1, 283]},
+            "aog.win_shine_back_06":  {"image": "animations", "size": [431, 280], "pos": [434, 283]},
+            "aog.win_shine_back_07":  {"image": "animations", "size": [423, 280], "pos": [867, 283]},
+            "aog.win_shine_back_08":  {"image": "animations", "size": [423, 280], "pos": [1292, 283]},
+            "aog.win_shine_back_09":  {"image": "animations", "size": [423, 279], "pos": [1717, 283]},
+            "aog.win_shine_back_10":  {"image": "animations", "size": [423, 273], "pos": [2142, 283]},
+            "aog.win_shine_back_11":  {"image": "animations", "size": [420, 269], "pos": [2567, 283]},
+            "aog.win_shine_back_12":  {"image": "animations", "size": [420, 269], "pos": [2989, 283]},
+            "aog.win_shine_back_13":  {"image": "animations", "size": [396, 277], "pos": [3411, 283]},
+            "aog.win_shine_back_14":  {"image": "animations", "size": [419, 280], "pos": [1, 565]},
+            "aog.win_shine_back_15":  {"image": "animations", "size": [422, 283], "pos": [422, 565]},
+            "aog.win_shine_back_16":  {"image": "animations", "size": [424, 286], "pos": [846, 565]},
+            "aog.win_shine_back_17":  {"image": "animations", "size": [424, 287], "pos": [1272, 565]},
+            "aog.win_shine_back_18":  {"image": "animations", "size": [416, 273], "pos": [1698, 565]},
+            "aog.win_shine_back_19":  {"image": "animations", "size": [416, 273], "pos": [2116, 565]},
+            "aog.win_shine_back_20":  {"image": "animations", "size": [420, 274], "pos": [2534, 565]},
+            "aog.win_shine_back_21":  {"image": "animations", "size": [424, 299], "pos": [2956, 565]},
+            "aog.win_shine_front_00": {"image": "animations", "size": [31, 30],   "pos": [3382, 565]},
+            "aog.win_shine_front_01": {"image": "animations", "size": [30, 30],   "pos": [3415, 565]},
+            "aog.win_shine_front_02": {"image": "animations", "size": [257, 92],  "pos": [3447, 565]},
+            "aog.win_shine_front_03": {"image": "animations", "size": [275, 110], "pos": [1, 866]},
+            "aog.win_shine_front_04": {"image": "animations", "size": [285, 134], "pos": [278, 866]},
+            "aog.win_shine_front_05": {"image": "animations", "size": [315, 152], "pos": [565, 866]},
+            "aog.win_shine_front_06": {"image": "animations", "size": [339, 165], "pos": [882, 866]},
+            "aog.win_shine_front_07": {"image": "animations", "size": [354, 173], "pos": [1223, 866]},
+            "aog.win_shine_front_08": {"image": "animations", "size": [365, 179], "pos": [1579, 866]},
+            "aog.win_shine_front_09": {"image": "animations", "size": [374, 188], "pos": [1946, 866]},
+            "aog.win_shine_front_10": {"image": "animations", "size": [379, 193], "pos": [2322, 866]},
+            "aog.win_shine_front_11": {"image": "animations", "size": [383, 198], "pos": [2703, 866]},
+            "aog.win_shine_front_12": {"image": "animations", "size": [387, 202], "pos": [3088, 866]},
+            "aog.win_shine_front_13": {"image": "animations", "size": [388, 203], "pos": [3477, 866]},
+            "aog.win_shine_front_14": {"image": "animations", "size": [372, 206], "pos": [1, 1071]},
+            "aog.win_shine_front_15": {"image": "animations", "size": [376, 206], "pos": [375, 1071]},
+            "aog.win_shine_front_16": {"image": "animations", "size": [379, 191], "pos": [753, 1071]},
+            "aog.win_shine_front_17": {"image": "animations", "size": [364, 184], "pos": [1134, 1071]},
+            "aog.win_shine_front_18": {"image": "animations", "size": [369, 184], "pos": [1500, 1071]},
+            "aog.win_shine_front_19": {"image": "animations", "size": [373, 152], "pos": [1871, 1071]},
+            "aog.win_shine_front_20": {"image": "animations", "size": [375, 153], "pos": [2246, 1071]},
+            "aog.win_shine_front_21": {"image": "animations", "size": [378, 150], "pos": [2623, 1071]},
+            "aog.win_shine_front_22": {"image": "animations", "size": [379, 152], "pos": [3003, 1071]},
+            "aog.win_shine_front_23": {"image": "animations", "size": [379, 152], "pos": [3384, 1071]},
+            "aog.win_shine_front_24": {"image": "animations", "size": [90, 90], "pos": [3765, 1071]},
+            "aog.win_shine_front_25": {"image": "animations", "size": [91, 91], "pos": [3857, 1071]},
+            "aog.win_shine_front_26": {"image": "animations", "size": [91, 90], "pos": [1, 1279]},
+
+            "aog.high_power":          {"image": "animations", "size": [209, 204], "pos": [2052, 5071], "insets": " -9 -12  -9 -13"},
+            "aog.high_extra_power":    {"image": "animations", "size": [206, 204], "pos": [1170, 1],    "insets": " -9 -14  -9 -14"},
+            "aog.high_super_power":    {"image": "animations", "size": [207, 204], "pos": [3045, 5464], "insets": " -9 -13  -9 -14"},
+            "aog.high_ultimate_power": {"image": "animations", "size": [219, 204], "pos": [3470, 5464], "insets": " -9  -8  -9  -7"},
+
+            "aog.reg_power:regular":           {"image": "animations", "size": [192, 185], "pos": [1858, 5071], "insets": "-18 -21 -19 -21"},
+            "aog.reg_extra_power:regular":     {"image": "animations", "size": [188, 185], "pos": [980, 1],     "insets": "-18 -23 -19 -23"},
+            "aog.reg_super_power:regular" :    {"image": "animations", "size": [192, 185], "pos": [2851, 5464], "insets": "-18 -21 -19 -21"},
+            "aog.reg_ultimate_power:regular":  {"image": "animations", "size": [214, 185], "pos": [3254, 5464], "insets": "-18 -10 -19 -10"},
+
+            "aog.reg_power:brown":           {"image": "icons_black", "size": [192, 185], "pos": ["${217+12.5}", "${2*202+8.5}"], "insets": "-18 -21 -19 -21"},
+            "aog.reg_extra_power:brown":     {"image": "icons_black", "size": [188, 185], "pos": ["${217+14.5}", "${3*202+8.5}"], "insets": "-18 -23 -19 -23"},
+            "aog.reg_super_power:brown" :    {"image": "icons_black", "size": [192, 185], "pos": ["${217+12.5}", "${1*202+8.5}"], "insets": "-18 -21 -19 -21"},
+            "aog.reg_ultimate_power:brown":  {"image": "icons_black", "size": [214, 185], "pos": ["${217+1.5}",  "${0*202+8.5}"], "insets": "-18 -10 -19 -10"},
+
+            "aog.reg_power:black":           {"image": "icons_black", "size": [192, 185], "pos": [12.5, "${2*202+8.5}"], "insets": "-18 -21 -19 -21"},
+            "aog.reg_extra_power:black":     {"image": "icons_black", "size": [188, 185], "pos": [14.5, "${3*202+8.5}"], "insets": "-18 -23 -19 -23"},
+            "aog.reg_super_power:black" :    {"image": "icons_black", "size": [192, 185], "pos": [12.5, "${1*202+8.5}"], "insets": "-18 -21 -19 -21"},
+            "aog.reg_ultimate_power:black":  {"image": "icons_black", "size": [214, 185], "pos": [1.5,  "${0*202+8.5}"], "insets": "-18 -10 -19 -10"},
+
+            "aog.logo":            {"image": "aog.logo",            "size": [737,271]},
+            "aog.intro_bg":        {"image": "aog.intro_bg",        "size": [1600, 878]},
+            "aog.multi_level_msg": {"image": "aog.multi_level_msg", "size": [792, 84]},
+            "aog.countdown_msg":   {"image": "aog.countdown_msg",   "size": [716, 24]},
+            "aog.wait_msg":        {"image": "aog.wait_msg",        "size": [716, 24]},
+            "aog.progress_bar_bg": {"image": "aog.progress_bar_bg", "size": [461, 47], "insets": "11 13 12 10"},
+            "aog.progress_bar":    {"image": "aog.progress_bar",    "size": [426, 24], "pos": [0, 23]},
+
+            "aog.bg":      {"image": "aog.bg",      "size": [1600, 878]},
+            "aog.olimp.2": {"image": "aog.olimp.2", "size": [1600, 878]},
+            "aog.olimp.1": {"image": "aog.olimp.1", "size": [1272, 878]},
+            "aog.olimp.4": {"image": "aog.olimp.4", "size": [1600, 800]},
+
+            "aog.msg_box":    {"image": "aog.msg_box",   "size": [677, 123], "insets":"23 23 25 24"},
+            "aog.separators": {"image": "aog.separators","size": [588, 404]},
+
+            "aog.powers_bg:regular": {"image": "aog.powers_bg",       "size": [117, 100]},
+            "aog.powers_bg:brown":   {"image": "aog.powers_bg_brown", "size": [117, 100]},
+            "aog.powers_bg:black":   {"image": "aog.powers_bg_black", "size": [117, 100]},
+
+            "aog.jp_panel_ultimate": {"image": "aog.jp_panel_ultimate",	"size": [314, 160]},
+            "aog.jp_panel_super":    {"image": "aog.jp_panel_super",  	"size": [314, 160]},
+            "aog.jp_panel_extra":    {"image": "aog.jp_panel_extra",  	"size": [314, 160]},
+            "aog.jp_panel_power":    {"image": "aog.jp_panel_power",	"size": [314, 160]},
+
+            "aog.jp_panel_high_ultimate": {"image": "aog.jp_panel_ultimate", "size": [314, 160], "pos":[0, 160]},
+            "aog.jp_panel_high_super":    {"image": "aog.jp_panel_super",    "size": [314, 160], "pos":[0, 160]},
+            "aog.jp_panel_high_extra":    {"image": "aog.jp_panel_extra",    "size": [314, 160], "pos":[0, 160]},
+            "aog.jp_panel_high_power":    {"image": "aog.jp_panel_power",    "size": [314, 160], "pos":[0, 160]},
+
+            "aog.jp_point_ultimate": {"image": "aog.jp_panel_points", "size": [27, 26], "pos": [0,0]},
+            "aog.jp_point_super":    {"image": "aog.jp_panel_points", "size": [24, 26], "pos": [27,0], "insets": "0 -2 0 -1"},
+            "aog.jp_point_extra":    {"image": "aog.jp_panel_points", "size": [27, 26], "pos": [52,0]},
+            "aog.jp_point_power":    {"image": "aog.jp_panel_points", "size": [25, 26], "pos": [79,0], "insets": "0 -1 0 -1"},
+
+
+            "aog.power_light_sweep": {"image": "aog.power_light_sweep", "size":[117, 1000]},
+
+
+            "aog.win_bg_extra_power":    {"image": "aog.win_bg_extra_power",    "size": [588, 405]},
+            "aog.win_bg_power":          {"image": "aog.win_bg_power",          "size": [588, 405]},
+            "aog.win_bg_super_power":    {"image": "aog.win_bg_super_power",    "size": [588, 405]},
+            "aog.win_bg_ultimate_power": {"image": "aog.win_bg_ultimate_power", "size": [588, 405]},
+
+            "aog.msg_you_won":        {"image": "aog.msg_powers", "size": [580, 31],  "pos": [0, 0],   "insets": "0 150 8 150"},
+            "aog.msg_jackpot":        {"image": "aog.msg_powers", "size": [580, 56],  "pos": [0, 31],  "insets": "0 80 8 80"},
+            "aog.msg_extra_power":    {"image": "aog.msg_powers", "size": [580, 194], "pos": [0, 87],  "insets": "-20 0 -18 0"},
+            "aog.msg_power":          {"image": "aog.msg_powers", "size": [580, 161], "pos": [0, 281], "insets": "-37 0 -34 0"},
+            "aog.msg_super_power":    {"image": "aog.msg_powers", "size": [580, 179], "pos": [0, 442], "insets": "-12 0 -41 0"},
+            "aog.msg_ultimate_power": {"image": "aog.msg_powers", "size": [580, 226], "pos": [0, 621], "insets": "-3 0 -3 0"},
+
+            "aog.coin":         {"image": "aog.coin", "size": [110, 107], "pos": [0, "${107*0}"], "insets": "4 0 4 0"},
+            "aog.coin:hovered": {"image": "aog.coin", "size": [110, 107], "pos": [0, "${107*1}"], "insets": "4 0 4 0"},
+            "aog.coin:pressed": {"image": "aog.coin", "size": [110, 107], "pos": [0, "${107*2}"], "insets": "4 0 4 0"},
+
+            "aog.info_msg": {"image": "aog.info_text", "size": [677, 123], "insets":"23 23 25 24"},
+
+            "aog.close_btn"          : {"image":"aog.close_btn", "size": [151, 52], "pos": [0,52]},
+            "aog.close_btn:hovered"  : {"image":"aog.close_btn", "size": [151, 52], "pos": [0,0]},
+            "aog.close_btn.highlight": {"image":"aog.close_btn", "size": [151, 52], "pos": [0,0]},
+            "aog.close_btn:pressed"  : {"image":"aog.close_btn", "size": [151, 52], "pos": [0,104]},
+
+            "aog.congrat_msg": {"image": "aog.congratulations", "size": [679, 124]}
+
+        },
+        "animations": {
+            "aog.loading_appear_anim": {"type": "opacity", "from": 0, "to": 1, "duration": 100},
+            "aog.loading_hide_anim":   {"type": "opacity", "from": 1, "to": 0, "duration": 800},
+
+            "aog.coin_scale": {"type":"scale", "delta.x": "-70%", "delta.y":"-70%", "duration":"400"},
+
+            "aog.jp_bar_popup.winEX": {"type": "scale", "duration":200, "delta.x": "15%", "delta.y": "15%", "pivot.x": "50%", "pivot.y": "50%", "interpolator": "ease.out"},
+            "aog.jp_bar_popup.win": {"type": "set", "mode": "parallel", "duration": 200, "content": [
+                {"type": "resize", "delta.x": "14%",  "delta.y": "14%", "duration": "100%"},
+                {"type": "move",   "delta.x": "-5%",  "delta.y": "-5%", "duration": "100%"}
+            ]},
+            "aog.jp_bar_popup.start": {"type": "set", "mode": "parallel", "duration": 0, "content": [
+                {"type": "resize", "delta.x": "-14%", "delta.y": "-14%", "duration": "100%"},
+                {"type": "move",   "delta.x": "5%",   "delta.y": "5%",   "duration": "100%"}
+            ]},
+            "aog.jp_bar_popup": {"type":"set", "mode": "serial", "duration":400, "content":[
+                {"type": "scale", "delta.x": "15%",  "delta.y": "15%",  "duration": "80%", "pivot.x": "50%", "pivot.y": "50%", "interpolator": "ease.out"},
+                {"type": "scale", "delta.x": "-15%", "delta.y": "-15%", "duration": "20%", "pivot.x": "50%", "pivot.y": "50%"}
+            ]},
+
+            "aog.jp_bar_opacity": {"type": "set", "mode": "serial", "duration": 400, "content":[
+                {"type": "opacity", "duration": "80%", "from": 0, "to": 1, "interpolator": "ease.out"},
+                {"type": "opacity", "duration": "20%", "from": 1, "to": 0}
+            ]},
+
+            "aog.win_panel_popup" : {"type": "scale", "delta.x": "30%", "delta.y": "30%", "pivot.x": "50%", "pivot.y": "50%", "duration": 400, "interpolator": "cycle.1"},
+            "aog.win_panel_opacity": {"type": "opacity", "from": 0, "to": 1, "duration": 333},
+
+            "aog.win_icon_opacity": {"type":"set", "mode":"serial", "duration":2000, "content":[
+                {"type": "opacity", "duration": "80%", "from": 0, "to": 1, "interpolator": "cycle.2"},
+                {"type": "opacity", "duration": "20%", "from": 0, "to": 1}
+            ]},
+
+            "aog.congratulations_popup": {"type": "scale", "duration": 800, "delta.x": "20%", "delta.y": "20%", "pivot.x": "50%", "pivot.y": "50%", "interpolator": "cycle.1"},
+
+            "aog.win_icon_scale": {"type": "set", "mode": "serial", "duration":2000, "content":[
+                {"type": "scale", "duration": "80%", "delta.x": "45%",  "delta.y": "45%",  "pivot.x": "50%", "pivot.y": "50%", "interpolator": "cycle.2"},
+                {"type": "scale", "duration": "20%", "delta.x": "100%", "delta.y": "100%", "pivot.x": "50%", "pivot.y": "50%"}
+            ]},
+
+            "aog.continue_btn": {"type": "set", "repeat": -1, "duration": 1200, "content": [
+                {"type": "set-config", "config": {"slice": "aog.close_btn"}},
+                {"type": "delay", "duration": 200},
+                {"type": "set-config", "config": {"slice": "aog.close_btn.highlight"}},
+                {"type": "delay", "duration": 200}
+            ]},
+
+            "aog.unpicked": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "coin",       "content": [{"type": "set-props", "visible": false}]},
+                {"type": "set-widget", "lookup": "icon_black", "content": [{"type": "set-props", "visible": true}]},
+                {"type": "set-widget", "lookup": "bg",         "content": [{"type": "set-config", "config": {"state": "black"}}]}
+            ]},
+            "aog.reset": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "coin", "content": [{"type": "set-props", "visible": true}]},
+                {"type": "set-widget", "lookup": "bg",   "content": [{"type": "set-config", "config": {"state": "regular"}}]}
+            ]}
+        },
+
+        "fonts": {
+            "Adonais_regular": "Adonais_new.ttf",
+            "MyriadPro": "MyriadPro-BoldCond.otf",
+            "MyriadProNumbers": {
+                "type": "user",
+                "url": "font.fnt"
+            }
+        },
+
+        "formats": {
+            "aog_msg_yellow"    : {"font": "Adonais_regular",  "color": "#ffde00", "size": 22, "stroke": {"color": "#000000", "thickness": 1}, "shadow": {"color": "#000000", "offset": [1, 3]}},
+            "aog_jp_amount"     : {"font": "MyriadProNumbers", "color": "#fde382", "size": 28, "stroke": {"color": "#000000", "thickness": 1}, "shadow": {"color": "#5c1b08", "offset": [2, 2]}},
+            "aog_win_jp_amount" : {"font": "MyriadProNumbers", "color": "#f9d373", "size": 98, "stroke": {"color": "#000000", "thickness": 1}, "shadow": {"color": "#202020", "offset": [2, 3]}},
+
+            "aog_start_time": {"font": "Arial",           "color": "#ffffff", "size": 16},
+            "aog_msg_white" : {"font": "Adonais_regular", "color": "#ffffff", "size": 24, "stroke": {"color": "#000000", "thickness": 1}},
+            "aog_win_msg"   : {"font": "Adonais_regular", "color": "#ffdc6a", "size": 34, "stroke": {"color": "#000000", "thickness": 2}}
+        }
+    },
+
+    "ui": {
+        "aog.coin_anim": {
+            "type": "sprite.new",
+            "frame.size": [120, 120],
+            "script":"[~:600]*(0>12)",
+            "frame.insets": "7 -4 12 4",
+            "frames": [
+                {"id": "aog.coin_anim_00", "offset": [7, 11]},
+                {"id": "aog.coin_anim_01", "offset": [19, 12]},
+                {"id": "aog.coin_anim_02", "offset": [37, 11]},
+                {"id": "aog.coin_anim_03", "offset": [57, 10]},
+                {"id": "aog.coin_anim_04", "offset": [41, 10]},
+                {"id": "aog.coin_anim_05", "offset": [20, 11]},
+                {"id": "aog.coin_anim_06", "offset": [13, 11]},
+                {"id": "aog.coin_anim_07", "offset": [17, 7]},
+                {"id": "aog.coin_anim_08", "offset": [30, 1]},
+                {"id": "aog.coin_anim_09", "offset": [46, 0]},
+                {"id": "aog.coin_anim_10", "offset": [49, 0]},
+                {"id": "aog.coin_anim_11", "offset": [17, 0]},
+                {"id": "aog.coin_anim_12", "offset": [4, 5]}
+            ]
+        },
+        "aog.splash": {
+            "type": "sprite.new",
+            "frame.size": [512, 512],
+            "script":"[1:400]*(0>11)",
+            "frames": [
+                {"id": "aog.splash_00", "offset": [171, 166]},
+                {"id": "aog.splash_01", "offset": [130, 128]},
+                {"id": "aog.splash_02", "offset": [99, 103]},
+                {"id": "aog.splash_03", "offset": [76, 83]},
+                {"id": "aog.splash_04", "offset": [64, 67]},
+                {"id": "aog.splash_05", "offset": [58, 59]},
+                {"id": "aog.splash_06", "offset": [60, 55]},
+                {"id": "aog.splash_07", "offset": [60, 49]},
+                {"id": "aog.splash_08", "offset": [55, 48]},
+                {"id": "aog.splash_09", "offset": [65, 46]},
+                {"id": "aog.splash_10", "offset": [67, 48]},
+                {"id": "aog.splash_11", "offset": [70, 53]}
+            ]
+        },
+        "aog.point_splash": {"@P": "ui/aog.splash", "frame.insets": "230"},
+        "aog.panel_splash": {"@P": "ui/aog.splash", "frame.insets": "150"},
+        "aog.stars_win_flock": {
+            "type": "sprite.new",
+            "frame.size": [785, 810],
+            "script":"[1:333]*(0>17)",
+            "frame.insets": "170",
+            "frames": [
+                {"id": "aog.stars_win_flock_00", "offset": [214, 222]},
+                {"id": "aog.stars_win_flock_01", "offset": [164, 168]},
+                {"id": "aog.stars_win_flock_02", "offset": [125, 125]},
+                {"id": "aog.stars_win_flock_03", "offset": [94, 92]},
+                {"id": "aog.stars_win_flock_04", "offset": [70, 62]},
+                {"id": "aog.stars_win_flock_05", "offset": [51, 39]},
+                {"id": "aog.stars_win_flock_06", "offset": [37, 21]},
+                {"id": "aog.stars_win_flock_07", "offset": [25, 7]},
+                {"id": "aog.stars_win_flock_08", "offset": [16, 3]},
+                {"id": "aog.stars_win_flock_09", "offset": [10, 8]},
+                {"id": "aog.stars_win_flock_10", "offset": [7, 12]},
+                {"id": "aog.stars_win_flock_11", "offset": [11, 15]},
+                {"id": "aog.stars_win_flock_12", "offset": [20, 19]},
+                {"id": "aog.stars_win_flock_13", "offset": [22, 24]},
+                {"id": "aog.stars_win_flock_14", "offset": [28, 31]},
+                {"id": "aog.stars_win_flock_15", "offset": [77, 42]},
+                {"id": "aog.stars_win_flock_16", "offset": [100, 40]},
+                {"id": "aog.stars_win_flock_17", "offset": [114, 80]}
+            ]
+        },
+        "aog.win_shine_back": {
+            "type": "sprite.new",
+            "frame.size": [429, 288],
+            "script":"[~:800]*(0>21)",
+            "frames": [
+                {"id": "aog.win_shine_back_00", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_01", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_02", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_03", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_04", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_05", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_06", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_07", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_08", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_09", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_10", "offset": [0, 10]},
+                {"id": "aog.win_shine_back_11", "offset": [2, 14]},
+                {"id": "aog.win_shine_back_12", "offset": [2, 14]},
+                {"id": "aog.win_shine_back_13", "offset": [28, 4]},
+                {"id": "aog.win_shine_back_14", "offset": [7,  2]},
+                {"id": "aog.win_shine_back_15", "offset": [4,  1]},
+                {"id": "aog.win_shine_back_16", "offset": [3,  0]},
+                {"id": "aog.win_shine_back_17", "offset": [3,  0]},
+                {"id": "aog.win_shine_back_18", "offset": [3, 15]},
+                {"id": "aog.win_shine_back_19", "offset": [3, 15]},
+                {"id": "aog.win_shine_back_20", "offset": [3, 14]},
+                {"id": "aog.win_shine_back_21", "offset": [2, 13]}
+            ]
+        },
+        "aog.win_shine_front": {
+            "type": "sprite.new",
+            "frame.size": [386, 205],
+            "script":"[1:800]*(0>26)",
+            "frame.insets": "-50 -94",
+            "frames": [
+                {"id": "aog.win_shine_front_00", "offset": [282,85]},
+                {"id": "aog.win_shine_front_01", "offset": [282,85]},
+                {"id": "aog.win_shine_front_02", "offset": [77, 45]},
+                {"id": "aog.win_shine_front_03", "offset": [77, 45]},
+                {"id": "aog.win_shine_front_04", "offset": [78, 32]},
+                {"id": "aog.win_shine_front_05", "offset": [56, 22]},
+                {"id": "aog.win_shine_front_06", "offset": [38, 15]},
+                {"id": "aog.win_shine_front_07", "offset": [27, 11]},
+                {"id": "aog.win_shine_front_08", "offset": [19,  8]},
+                {"id": "aog.win_shine_front_09", "offset": [13,  5]},
+                {"id": "aog.win_shine_front_10", "offset": [9,   4]},
+                {"id": "aog.win_shine_front_11", "offset": [6,   2]},
+                {"id": "aog.win_shine_front_12", "offset": [3,   1]},
+                {"id": "aog.win_shine_front_13", "offset": [2,   1]},
+                {"id": "aog.win_shine_front_14", "offset": [1,   0]},
+                {"id": "aog.win_shine_front_15", "offset": [0,   1]},
+                {"id": "aog.win_shine_front_16", "offset": [0,  16]},
+                {"id": "aog.win_shine_front_17", "offset": [17, 24]},
+                {"id": "aog.win_shine_front_18", "offset": [14, 23]},
+                {"id": "aog.win_shine_front_19", "offset": [11, 23]},
+                {"id": "aog.win_shine_front_20", "offset": [9,  23]},
+                {"id": "aog.win_shine_front_21", "offset": [7,  28]},
+                {"id": "aog.win_shine_front_22", "offset": [6,  27]},
+                {"id": "aog.win_shine_front_23", "offset": [6,  28]},
+                {"id": "aog.win_shine_front_24", "offset": [5,  90]},
+                {"id": "aog.win_shine_front_25", "offset": [5,  90]},
+                {"id": "aog.win_shine_front_26", "offset": [5,  90]}
+            ]
+        },
+
+        "aog.power_light_sweep": {"type": "sprite.new", "slices": "aog.power_light_sweep", "frame.size": [117, 100], "script": "[1:300]*(0>9)"},
+
+
+        "aog.win_icon": {"type": "stack", "animation": "aog.win_icon_scale", "ratio": 1.06, "size": [117, 100], "content":[
+            {"#ID": "regular",     "type":"image"},
+            {"#ID": "highlighted", "type":"image", "animation": "aog.win_icon_opacity", "opacity": 0, "id": "highlighted"}
+        ]},
+
+        "aog.win_icon_power"         : {"@P": {"#ID":"ui/aog.win_icon", "regular": {"slice": "aog.reg_power:regular"},          "highlighted": {"slice": "aog.high_power"}}},
+        "aog.win_icon_extra_power"   : {"@P": {"#ID":"ui/aog.win_icon", "regular": {"slice": "aog.reg_extra_power:regular"},    "highlighted": {"slice": "aog.high_extra_power"}}},
+        "aog.win_icon_super_power"   : {"@P": {"#ID":"ui/aog.win_icon", "regular": {"slice": "aog.reg_super_power:regular"},    "highlighted": {"slice": "aog.high_super_power"}}},
+        "aog.win_icon_ultimate_power": {"@P": {"#ID":"ui/aog.win_icon", "regular": {"slice": "aog.reg_ultimate_power:regular"}, "highlighted": {"slice": "aog.high_ultimate_power"}}},
+
+        "aog.ultimate_power": {"type": "image", "slice": "aog.reg_ultimate_power"},
+        "aog.power"         : {"type": "image", "slice": "aog.reg_power"},
+        "aog.super_power"   : {"type": "image", "slice": "aog.reg_super_power"},
+        "aog.extra_power"   : {"type": "image", "slice": "aog.reg_extra_power"},
+
+        "aog.msg_box": {"id":"aog.msg_box", "type": "vport", "background": "aog.msg_box","size": [630, 75], "pos": [363, 682], "content":[
+            {"id": "aog_info_msg", "type": "image", "slice": "aog.info_msg", "size": [630, 75]},
+            {"id": "aog_time_left_container", "type": "anchor",  "size" : [40, 30], "pos": [440,32], "content":[
+                {"id": "aog_time_left", "@P": "ui/label.def", "format": "aog_msg_yellow", "alignment": "top-left", "text": "XX:XX", "props": {"anchor.fit": 0}}
+            ]},
+            {"id": "aog_congratulations", "type": "image", "slice": "aog.congrat_msg", "size": [450, 88], "pos": [85, -2], "animation": "aog.congratulations_popup", "visible": false}
+        ]},
+
+        "aog_start_time.id": {"id": "aog_start_time", "@P": "ui/label.def", "format": "aog_msg_yellow", "pos": [553, -1], "size": [44, 32]},
+        "aog_wait_time.id" : {"id": "aog_wait_time", "@P": "ui/label.def", "format": "aog_msg_yellow", "pos": [370, 3], "size": [38, 26]},
+
+        "aog.coin_cell": {"type": "stack", "size": [117, 100], "group": "coin_cells", "content":[
+            {"id": "bg", "type": "multistate", "state": "regular", "layout": {"type": "stack"}, "content": {
+                "regular": {"type": "image", "slice": "aog.powers_bg:regular"},
+                "brown":   {"type": "image", "slice": "aog.powers_bg:brown"},
+                "black":   {"type": "image", "slice": "aog.powers_bg:black"}
+            }},
+            {"group": "coins", "id": "coin", "type": "ibutton", "slice": "aog.coin", "cursor": "hand"},
+            {"id": "light_sweep", "@P": "ui/aog.power_light_sweep"}
+        ]},
+
+        "aog.base_select_area": {"type": "vport", "layout": {"base": [585, 400]}, "props": {"anchor.fit": 0}, "ratio": 1.4625},
+        "aog.coin_select_area": {"@P": "ui/aog.base_select_area", "content":[
+            {"@P": "ui/aog.coin_cell", "pos": [0,  0]},
+            {"@P": "ui/aog.coin_cell", "pos": [117,0]},
+            {"@P": "ui/aog.coin_cell", "pos": [234,0]},
+            {"@P": "ui/aog.coin_cell", "pos": [351,0]},
+            {"@P": "ui/aog.coin_cell", "pos": [468,0]},
+
+            {"@P": "ui/aog.coin_cell", "pos": [0,  100]},
+            {"@P": "ui/aog.coin_cell", "pos": [117,100]},
+            {"@P": "ui/aog.coin_cell", "pos": [234,100]},
+            {"@P": "ui/aog.coin_cell", "pos": [351,100]},
+            {"@P": "ui/aog.coin_cell", "pos": [468,100]},
+
+            {"@P": "ui/aog.coin_cell", "pos":[0,  200]},
+            {"@P": "ui/aog.coin_cell", "pos":[117,200]},
+            {"@P": "ui/aog.coin_cell", "pos":[234,200]},
+            {"@P": "ui/aog.coin_cell", "pos":[351,200]},
+            {"@P": "ui/aog.coin_cell", "pos":[468,200]},
+
+            {"@P": "ui/aog.coin_cell", "pos":[0,  300]},
+            {"@P": "ui/aog.coin_cell", "pos":[117,300]},
+            {"@P": "ui/aog.coin_cell", "pos":[234,300]},
+            {"@P": "ui/aog.coin_cell", "pos":[351,300]},
+            {"@P": "ui/aog.coin_cell", "pos":[468,300]},
+
+            {"type": "image", "slice": "aog.separators", "size":[585, 400]}
+        ]},
+
+        "aog.jackpot_bar_high": {"id": "highlighted", "type": "image", "animation": "aog.jp_bar_opacity", "opacity": 0, "props": {"anchor.fit":0}},
+        "aog.jackpot_bar": {"group": "jackpot_bar", "type": "anchor", "animation": "aog.jp_bar_popup", "layout": {"relative": true}, "content":[
+            {"id": "bar_splash", "@P": "ui/aog.panel_splash", "props": {"anchor.fit": "20 25 -20 25"}, "visible":false}
+        ]},
+        "aog.jp_point": {"visible": false, "type": "stack", "ratio": 1.04, "group": "jp_bar_point", "content": [
+            {"id": "point_splash", "@P": "ui/aog.point_splash"}
+        ]},
+
+        "aog.win_panel": {"id":"aog_win_panel", "type": "anchor", "layout": {"relative": true, "alignment":"center"}, "props": {"anchor.fit":0}, "animation": "aog.win_panel_opacity", "content": [
+            {"type": "image", "group": "win_elements", "ratio": 10, "props": {"anchor.fit": "8 3 85 3"}, "slice": "aog.msg_you_won"},
+
+            {"id": "win_shine_back", "@P": "ui/aog.win_shine_back",  "props": {"anchor.fit": "7 13 32 13"}},
+            {"id": "aog_win_msg_container", "group": "win_elements", "props": {"anchor.fit": "6 3 19 3"}, "type": "stack", "layout": {"alignment": "top-center"}, "content": [
+                {"id": "jackpot_win_msg", "type":"panel", "ratio": 2.5},
+                {"id": "win_shine_front", "@P": "ui/aog.win_shine_front"}
+            ]},
+            {"type": "image", "group": "win_elements",  "props": {"anchor.fit": "46 3 39.5 3"}, "slice": "aog.msg_jackpot"},
+            {"id": "aog_total_win", "group": "win_elements", "props": {"anchor.fit": "65 2 16 2"}, "@P": "ui/label.def", "format": "aog_win_jp_amount", "text": "--"},
+
+            {"type": "stack", "props": {"anchor.fit":"86 0 2 0"}, "ratio": 2.9, "content": [
+                {"id": "aog_close_btn", "type": "ibutton", "slice": "aog.close_btn", "cursor": "hand", "shortcut": "space", "animation": "aog.continue_btn", "disabled": true}
+            ]}
+        ]}
+    },
+
+    "scenes": {
+        "ageofgods-loading-scene": {"animation": "aog.loading_hide_anim", "content": [
+            {"type": "stack", "props": {"anchor.fit": 0}, "content": [
+                {"id": "background", "type": "image", "animation":"aog.loading_appear_anim", "slice": "aog.intro_bg", "props": {"stack.fillout": true}, "opacity":0},
+                {"id": "load_container", "visible": false, "type": "vport", "layout": {"base": [1600, 878]}, "content": [
+                    {"type": "image", "slice": "aog.logo", "pos": [525, 273], "size": [550, 202]},
+                    {"type": "image", "slice": "aog.multi_level_msg", "pos": [525, 484], "size": [550, 58]},
+                    {"id": "aog_loading_progress", "type": "progress", "bar-background": "aog.progress_bar", "background": "aog.progress_bar_bg", "pos": [583, 577], "size": [438, 24]},
+
+                    {"id": "intro_msg", "type": "multistate", "state": "game", "layout": {"type": "vport"}, "size": [716, 26], "pos": [442, 644], "content": {
+                        "game": {"type": "vport", "size": [716, 26], "content": [
+                            {"type": "image", "slice": "aog.countdown_msg", "pos": [0, 1], "size": [716, 24]},
+                            {"@P": "ui/aog_start_time.id"}
+                        ]},
+                        "skip": {"type": "vport", "size": [716, 26], "content": [
+                            {"type": "image", "slice": "aog.wait_msg", "pos": [0, 1], "size": [716, 24]},
+                            {"@P": "ui/aog_wait_time.id"}
+                        ]}
+                    }}
+                ]}
+            ]}
+        ]},
+
+        "ageofgods-scene": {"layout": {"relative": true}, "content": [
+
+            {"type": "stack", "layout": {"fillout": true}, "props": {"anchor.fit": 0}, "content": [
+                {"type": "image", "slice": "aog.bg"}
+            ]},
+
+            {"type": "vport", "layout": {"base": [1600, 878]}, "props": {"anchor.fit": "-10 -20 -10 -20", "anchor.alignment": "center"}, "content": [
+
+                {"type": "anchor", "layout": {"relative": true}, "size": [588, 405], "pos": [384, 269], "content":[
+                    {"@P": "ui/aog.coin_select_area"},
+                    {"@P": "ui/aog.base_select_area", "id": "power_animation_container"},
+                    {"@P": "ui/aog.win_panel"},
+                    {"@P": "ui/aog.stars_win_flock", "id": "win_panel_firework", "props": {"anchor.fit":"0 15"}, "visible": false}
+                ]},
+
+                {"type": "image", "slice": "aog.olimp.2", "size": [1600, 878], "pos": [0, 0]},
+                {"type": "image", "slice": "aog.olimp.1", "size": [1272, 878], "pos": [-1272, 0]},
+                {"type": "image", "slice": "aog.olimp.4", "size": [1600, 800], "pos": [0, 878]},
+
+                {"@P": "ui/aog.msg_box"},
+
+                {"@P": "ui/aog.jackpot_bar", "background": "aog.jp_panel_ultimate", "layout": {"base": [314, 160]}, "size": [314, 160], "pos": [1042, 170], "content": [
+                    {"@P": "ui/aog.jackpot_bar_high", "slice": "aog.jp_panel_high_ultimate"},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_ultimate", "props": {"anchor.fit": "75 0 6.2 34.5"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_ultimate", "props": {"anchor.fit": "75 0 6.2 45.5"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_ultimate", "props": {"anchor.fit": "75 0 6.2 56"}},
+                    {"id": "aog_label_ultimate_power", "@P": "ui/label.def", "format": "aog_jp_amount", "text": "--", "props": {"anchor.fit": "49 17 29.5 18"}}
+                ]},
+
+                {"@P": "ui/aog.jackpot_bar", "background": "aog.jp_panel_super", "layout": {"base": [314, 160]}, "size": [314, 160], "pos": [1040, 321], "content": [
+                    {"@P": "ui/aog.jackpot_bar_high", "slice": "aog.jp_panel_high_super"},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_super", "props": {"anchor.fit": "78 0 5 36.5"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_super", "props": {"anchor.fit": "78 0 5 46.5"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_super", "props": {"anchor.fit": "78 0 5 57"}},
+                    {"id": "aog_label_super_power", "@P": "ui/label.def", "format": "aog_jp_amount", "text": "--", "props": {"anchor.fit": "53 17.5 27.5 21"}}
+                ]},
+
+                {"@P": "ui/aog.jackpot_bar", "background": "aog.jp_panel_extra","layout": {"base": [314, 160]}, "size": [314, 160], "pos": [1040, 458], "content": [
+                    {"@P": "ui/aog.jackpot_bar_high", "slice": "aog.jp_panel_high_extra"},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_extra", "props": {"anchor.fit": "73 0 9.5 37.5"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_extra", "props": {"anchor.fit": "73 0 9.5 46.5"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_extra", "props": {"anchor.fit": "73 0 9.5 56"}},
+                    {"id": "aog_label_extra_power", "@P": "ui/label.def", "format": "aog_jp_amount", "text": "--", "props": {"anchor.fit": "52 21 31 24"}}
+                ]},
+
+                {"@P": "ui/aog.jackpot_bar", "background": "aog.jp_panel_power", "layout": {"base": [314, 160]}, "size": [314, 160], "pos": [1042, 575], "content": [
+                    {"@P": "ui/aog.jackpot_bar_high", "slice": "aog.jp_panel_high_power"},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_power", "props": {"anchor.fit": "67 0 17.5 38.5"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_power", "props": {"anchor.fit": "67 0 17.5 47"}},
+                    {"@P": "ui/aog.jp_point", "background": "aog.jp_point_power", "props": {"anchor.fit": "67 0 17.5 56"}},
+                    {"id": "aog_label_power", "@P": "ui/label.def", "format": "aog_jp_amount", "text": "--", "props": {"anchor.fit": "47 22 37 25.5"}}
+                ]}
+            ]},
+
+            {"type": "anchor", "props": {"anchor.fit": "0 -40 -20 0"}, "layout": {"relative": true}, "ratio": 1.82232 , "content": [
+                {"id": "coin_anim_cont", "type": "stack", "props": {"anchor.fit":"0 92.6875 88.61 0"}, "ratio": 1.17}
+            ]}
+        ]}
+    }
+}

@@ -1,0 +1,67 @@
+/*1024x671 1024x672*/
+@media (width: 1024px) AND (min-height: 671px) AND (max-height: 672px) AND (orientation : landscape),
+(width: 1024px) AND (min-height: 690px) AND (max-height: 694px) AND (orientation : landscape) {
+    .menuControlButton {
+        top: 10px !important;
+        width: 74px !important;
+        height: 51px !important;
+        background-size: 74px 51px !important;
+    }
+
+    .fsbPanel {
+        top: 10px !important;
+    }
+}
+
+/*960x536*/
+@media (width: 960px) AND (max-height: 536px) AND (orientation : landscape) {
+    #bottom_panel_bg {
+        height: 32px !important;
+        background-size: 960px 32px !important;
+    }
+}
+
+/*960x640*/
+@media (width: 960px) AND (height: 640px) AND (orientation : landscape) {
+    #bottom_panel_bg {
+        height: 32px !important;
+        background-size: 960px 32px !important;
+    }
+}
+
+@media (orientation: landscape) AND (max-height: 480px) {
+    .cp-rotating {
+        top: -216px !important;
+    }
+}
+
+/* Game mode long messages */
+@media (orientation: portrait) AND (max-width: 650px) {
+    .gameMode.gameModeLong {
+        font-size: 16px;
+        padding-top: 5px;
+        padding-left: 3px;
+    }
+}
+
+/* Main menu icons shift to be lower top active zone */
+
+#pnlMainMenuWrapper {
+    top: 80px;
+}
+
+@media (max-width: 700px) {
+
+    .pnlSpainRegulationClock {
+        margin-right: -15px;
+    }
+
+    .pnlSpainRegulationMeters > div {
+        margin: 0 0 0 2px;
+    }
+
+}
+
+.debug-folder {
+    max-height: 70%;
+}

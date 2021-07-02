@@ -1,0 +1,10 @@
+{
+    "resources": {
+        "images": {
+            "localized": {"url": "../../translations/images/localized_en.png"},
+            "paytable1": {"url": "../../translations/images/paytable/paytable1_en.png"},
+            "paytable2": {"url": "../../translations/images/paytable/paytable2_en.png"},
+            "paytable3": {"url": "../../translations/images/paytable/paytable3_en.png"}
+        }
+    }
+}

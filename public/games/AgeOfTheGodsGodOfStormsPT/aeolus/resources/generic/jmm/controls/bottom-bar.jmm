@@ -1,0 +1,113 @@
+{
+    "resources": {
+        "animations": {
+            "autoplay-selector.show": {"type": "set", "content": [
+                {"type": "set-props", "visible": true},
+                {"type": "slide-abs", "duration": 500, "interpolator": "ease.out", "dir": "up", "mode": "show"},
+                {"type": "set-props", "disabled": false}
+            ]},
+            "autoplay-selector.hide": {"type": "set", "content": [
+                {"type": "set-props", "disabled": true},
+                {"type": "slide-abs", "duration": 500, "interpolator": "ease.out", "dir": "down", "mode": "hide"},
+                {"type": "set-props", "visible": false}
+            ]}
+        }
+    },
+
+    "ui": {
+        "bb.button": {"type": "ibutton", "cursor": "hand"},
+        "bb.container": {"type": "panel", "layout": {"type": "anchor", "relative": true, "alignment": "center"}},
+
+        "bottom-bar": {"id": "bottom_bar", "type": "bottom-bar", "layout": {"type": "vport", "base": [1018, 229]}, "size": [1018, 229], "background": "backpanel", "content": [
+            {"id": "info.container", "type": "stack", "size": [123, 83], "pos": [58, 92], "content": [
+                {"id": "info.btn", "@P": "ui/bb.button", "slice": "info.box"}
+            ]},
+
+            {"id": "lines.container", "type": "vport", "layout": {"base": [88, 81]}, "size": [88, 81], "pos": [184, 92], "content": [
+                {"type": "image", "slice": "lines.display", "size": [88, 40], "pos": [1, 0]},
+                {"id": "lines.value", "@P": "ui/label.def", "size": [80, 32], "format": "aeolus.yellow", "pos": [4, 9]},
+                {"id": "lines.minus", "@P": "ui/bb.button", "size": [41, 40], "pos": [1.5, 43],  "slice": "lines.minus"},
+                {"id": "lines.plus",  "@P": "ui/bb.button", "size": [41, 40], "pos": [45.5, 43], "slice": "lines.plus"}
+            ]},
+
+            {"id": "coin_size.container", "type": "vport", "layout": {"base": [128, 81]}, "size": [128, 81], "pos": [274, 92], "content": [
+                {"type": "image", "slice": "lineBet.display", "size": [126, 41], "pos": [1, 0]},
+                {"id": "coin_size.value", "@P": "ui/label.def", "size": [120, 32], "format": "aeolus.yellow", "pos": [4, 9]},
+                {"id": "coin_size.minus", "@P": "ui/bb.button", "size": [61, 40], "pos": [1, 43],  "slice": "coins.minus"},
+                {"id": "coin_size.plus",  "@P": "ui/bb.button", "size": [61, 40], "pos": [66, 43], "slice": "coins.plus"}
+            ]},
+
+            {"id": "win-panel-wrapper", "type": "vport", "layout": {"base": [215, 85]}, "size": [215, 85], "pos": [403.5, 91], "content": [
+                {"id": "win_panel", "type": "desktop-win-panel", "layout": {"type": "vport", "base": [215, 85]}, "size": [215, 85], "background": "win.display", "content": [
+                    {"id": "win.value", "@P": "ui/label.def", "format": "aeolus.yellow", "size": [176, 93], "pos": [18.3, 4]}
+                ]}
+            ]},
+
+            {"id": "total_bet.wrapper", "type": "vport", "layout": {"base": [128, 41]}, "size": [128, 41], "pos": [620, 92], "background": "totalBet.display", "content": [
+                {"id": "total_bet.value", "@P": "ui/label.def", "format": "aeolus.yellow", "size": [120, 32], "pos": [4, 9]}
+            ]},
+
+            {"id": "auto_play.container", "@P": "ui/bb.container", "type": "multistate", "state": "regular", "pos": [620, 75], "size": [128, 98], "content": {
+                "regular": {"id": "auto_play.btn", "type": "autoplay-selector", "@P": "ui/bb.container", "values": [99, 50, 25, 10, -1], "props": {"anchor.fit": 0},
+                    "list": {"layout": {"base": [128, 0]}, "props": {"anchor.alignment": "bottom-center", "anchor.fit": "null 0 100 0"}, "bias": "hor", "padding": "5", "background": "autoplay_bg"},
+                    "item": {"@P": "ui/anchor.relative", "ratio": 3.25, "content": [
+                        {"id": "btn", "@P": "ui/bb.button", "slice": "autoplay.10", "props": {"anchor.fit": "0"}}
+                    ]},
+                    "content": [
+                        {"id": "autoplay.btn", "@P": "ui/bb.button", "ratio": 3.25, "props": {"anchor.fit": "60 0 -2 0"}, "slice": "autoplay"},
+                        {"id": "hit-mask", "type": "panel", "ratio": 3.25, "props": {"anchor.fit": "60 0 -2 0"}}
+                    ]
+                },
+                "autoplay": {"id": "auto_play_stop.btn", "type": "vport", "layout": {"base": [128, 39]}, "props": {"anchor.fit": "60 0 -5 0"}, "content": [
+                    {"id": "autoplay.btn", "@P": "ui/bb.button", "slice": "autoplay_btn", "size": [128, 39]},
+                    {"id": "autoplay.spins_left", "@P": "ui/label.def", "format": "aeolus.yellow", "size": [118, 27], "pos": [4, 6]}
+                ]}
+            }},
+
+            {"id": "buttons.wrapper", "type": "vport", "pos": [750, 90], "layout": {"base": [212, 83]}, "size": [212, 83], "content": [
+                {"id": "turbo.container", "type": "stack", "size": [88, 83], "pos": [0, 0], "content": [
+                    {"id": "turbo", "type": "toggle-panel", "layout": {"type": "stack"}, "content": {
+                        "on":  {"id": "_turbo.on", "type": "stack", "content": [{"id": "turbo.on", "@P": "ui/bb.button", "slice": "turbo_on"}]},
+                        "off": {"id": "_turbo.off","type": "stack", "content": [{"id": "turbo.off","@P": "ui/bb.button", "slice": "turbo_off"}]}
+                    }}
+                ]},
+
+                {"id": "buttons.container", "type": "desktop-round-buttons", "layout": {"type": "stack"}, "size": [127, 85], "pos": [91, -1], "content": [
+                    {"id": "spin",  "@P": "ui/bb.button", "slice": "spin_button",  "shortcut": "space"},
+                    {"id": "start", "@P": "ui/bb.button", "slice": "start_button", "shortcut": "space"},
+                    {"id": "stop",  "@P": "ui/bb.button", "slice": "stop_button",  "shortcut": "space"}
+                ]}
+            ]}
+        ], "configs": {
+            "no_autoplay_no_turbo": {"content": [
+                {"id": "buttons.wrapper", "type": "vport", "layout": {"base": [212, 83]}, "size": [212, 83], "pos": [750, 90], "content": [
+                    {"id": "buttons.container", "type": "desktop-round-buttons", "layout": {"type": "stack"}, "size": [203, 81], "pos": [2, 1], "content": [
+                        {"id": "spin",  "@P": "ui/bb.button", "slice": "spin_button.large",  "shortcut": "space"},
+                        {"id": "start", "@P": "ui/bb.button", "slice": "start_button.large", "shortcut": "space"},
+                        {"id": "stop",  "@P": "ui/bb.button", "slice": "stop_button.large",  "shortcut": "space"}
+                    ]}
+                ]},
+
+                {"id": "total_bet.wrapper", "background": "totalBet.large", "layout": {"base": [128, 82]}, "size": [128, 82], "content": [
+                    {"id": "total_bet.value", "size": [120, 47], "pos": [4, 18]}
+                ]}
+            ]},
+
+            "no_turbo_mode": {"content": [
+                {"id": "buttons.wrapper", "type": "vport", "layout": {"base": [212, 83]}, "size": [212, 83], "pos": [750, 90], "content": [
+                    {"id": "buttons.container", "type": "desktop-round-buttons", "layout": {"type": "stack"}, "size": [203, 81], "pos": [2, 1], "content": [
+                        {"id": "spin",  "@P": "ui/bb.button", "slice": "spin_button.large",  "shortcut": "space"},
+                        {"id": "start", "@P": "ui/bb.button", "slice": "start_button.large", "shortcut": "space"},
+                        {"id": "stop",  "@P": "ui/bb.button", "slice": "stop_button.large",  "shortcut": "space"}
+                    ]}
+                ]}
+            ]},
+
+            "no_autoplay": {"content": [
+                {"id": "total_bet.wrapper", "background": "totalBet.large", "layout": {"base": [128, 82]}, "size": [128, 82], "content": [
+                    {"id": "total_bet.value", "size": [120, 47], "pos": [4, 18]}
+                ]}
+            ]}
+        }}
+    }
+}

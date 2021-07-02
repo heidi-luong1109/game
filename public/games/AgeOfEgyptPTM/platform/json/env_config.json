@@ -1,0 +1,20 @@
+{
+  "socketConnection": {
+    "isSecure": true,
+    "host": "oapi.noblepoker.com",
+    "port": 443
+  },
+  "loginParameters": {
+    "casinoName": "lasvegas"
+  },
+  "skin": "lasvegas",
+  "FeNetwork": {
+    "host": "frontend.noblepoker.com:443",
+    "connectionSettings": {
+      "isSecure": true
+    }
+  },
+  "pasApi": {
+    "enabled": false
+  }
+}

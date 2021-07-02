@@ -1,0 +1,89 @@
+{
+    "ui" : {
+        "sparkle"      : {"group": "sparkles", "@P": "ui/bonus_prize_explosion_sprite", "visible": false, "size": [257, 257]},
+        "scoreLabels"  : {"@P": "ui/red_label", "group": "scoreLabels", "@O": {
+            "landscape": { "size": [180, 67] },
+            "portrait" : { "size": [190, 67] }}
+        },
+
+        "prize_pos" : {"type": "anchor", "size": [143, 270], "layout": {"relative": true}},
+        "prize" : {"type": "ibutton","group": "prizes", "cursor": "hand", "props": { "anchor.fit": "0"}},
+        "glow_prize" : {"type":"image", "opacity": 0,  "group":"glow_prizes", "props": { "anchor.fit": "0"}}
+    },
+
+    "scenes": {
+        "bonus-scene": {"layout":{"type": "stack"}, "content": [
+            { "type": "anchor", "layout": {"relative": true}, "@O": {
+                "landscape": {"ratio": [1136, 640],  "background": "bonus_background_l"},
+                "portrait":  {"ratio": [640, 1136],  "background": "bonus_background_p"}
+                }, "content": [
+                    {"type": "vport", "ratio": 1.775, "size": [1136, 640], "layout":{"base": [1136, 640]}, "@O": {
+                        "landscape": {"props": {"anchor.fit": "0" }},
+                        "portrait":  {"props": {"anchor.fit": "15.49 -42.9 0 -34.5"} }
+                        }, "content": [
+                            {"type": "panel", "group": "instruction_group",  "layout": {"type": "chbox"}, "@O":{"landscape":{"pos":[131, 47], "size":[846, 48]}, "portrait":{"pos":[222, 47], "size":[640, 55]}}, "content": [
+                                {"@P": "ui/label.def",  "text": "pick", "format": "bonus_text"},
+                                {"type": "anchor", "ratio": 1.5, "layout": {"relative": true}, "content": [
+                                    {"id": "gifts_left_value", "@P": "ui/label.def", "format": "font_red",  "props": { "anchor.fit": "-37 0 -14 0", "anchor.alignment": "center" }}
+                                ]},
+                                {"@P": "ui/label.def", "id": "artifacts_to_win", "text": "artifacts_to_win", "format": "bonus_text"}
+                            ]},
+
+                            { "@P": "ui/label.def", "id": "current_win_title", "visible": false, "@O":{"landscape":{"pos": [300, 132], "size": [500, 48]}, "portrait":{"pos": [292, 132], "size": [500, 55]}}, "format": "bonus_text",  "text": "bonus_win"},
+                            { "@P": "ui/red_label", "id": "current_win_value", "visible": false, "@O":{"landscape":{"pos": [300, 171]}, "portrait":{"pos": [292, 171]}}, "size": [500, 110]},
+
+                            {"@P": "ui/prize_pos", "@O": { "landscape": {"pos": [206, 253]}, "portrait":  { "pos":[461, 507] }}, "content": [
+                                {"@P": "ui/prize", "slice": "bonus_prize_1", "mask": {"slice": "bonus_prize_1", "hitcolor": "#0000", "invert": true}},
+                                {"@P": "ui/glow_prize", "slice": "bonus_prize_1:hovered"}
+                            ]},
+                            {"@P": "ui/prize_pos", "@O": { "landscape": {"pos": [419, 256]}, "portrait":  { "pos":[281, 256] }}, "content": [
+                                {"@P": "ui/prize", "slice": "bonus_prize_2", "mask": {"slice": "bonus_prize_2", "hitcolor": "#0000", "invert": true}},
+                                {"@P": "ui/glow_prize", "slice": "bonus_prize_2:hovered"}
+                            ]},
+                            {"@P": "ui/prize_pos", "@O": { "landscape": {"pos": [633, 256]}, "portrait":  { "pos":[642, 256] }}, "content": [
+                                {"@P": "ui/prize", "slice": "bonus_prize_3", "mask": {"slice": "bonus_prize_3", "hitcolor": "#0000", "invert": true}},
+                                {"@P": "ui/glow_prize", "slice": "bonus_prize_3:hovered"}
+                            ]},
+                            {"@P": "ui/prize_pos", "@O": { "landscape": {"pos": [312, 331]}, "portrait":  { "pos":[362, 408] }}, "content": [
+                                {"@P": "ui/prize", "slice": "bonus_prize_4", "mask": {"slice": "bonus_prize_4", "hitcolor": "#0000", "invert": true}},
+                                {"@P": "ui/glow_prize", "slice": "bonus_prize_4:hovered"}
+                            ]},
+                            {"@P": "ui/prize_pos", "@O": { "landscape": {"pos": [526, 331]}, "portrait":  { "pos":[462, 257] }}, "content": [
+                                {"@P": "ui/prize", "slice": "bonus_prize_5", "mask": {"slice": "bonus_prize_5", "hitcolor": "#0000", "invert": true}},
+                                {"@P": "ui/glow_prize", "slice": "bonus_prize_5:hovered"}
+                            ]},
+                            {"@P": "ui/prize_pos", "@O": { "landscape": {"pos": [739, 325]}, "portrait":  { "pos":[561, 400] }}, "content": [
+                                {"@P": "ui/prize", "slice": "bonus_prize_6", "mask": {"slice": "bonus_prize_6", "hitcolor": "#0000", "invert": true}},
+                                {"@P": "ui/glow_prize", "slice": "bonus_prize_6:hovered"}
+                            ]},
+
+                            {"@P": "ui/scoreLabels", "@O": {"landscape": { "pos":[187, 347] }, "portrait": { "pos":[ 429, 633] }}},
+                            {"@P": "ui/scoreLabels", "@O": {"landscape": { "pos":[400, 347] }, "portrait": { "pos":[ 242, 350] }}},
+                            {"@P": "ui/scoreLabels", "@O": {"landscape": { "pos":[616, 347] }, "portrait": { "pos":[ 629, 350] }}},
+                            {"@P": "ui/scoreLabels", "@O": {"landscape": { "pos":[287, 474] }, "portrait": { "pos":[ 331, 491] }}},
+                            {"@P": "ui/scoreLabels", "@O": {"landscape": { "pos":[500, 474] }, "portrait": { "pos":[ 436, 350] }}},
+                            {"@P": "ui/scoreLabels", "@O": {"landscape": { "pos":[718, 474] }, "portrait": { "pos":[ 538, 491] }}},
+
+                            {"@P": "ui/sparkle", "@O": {"landscape": { "pos":[149, 253] }, "portrait": { "pos":[404, 528] }}},
+                            {"@P": "ui/sparkle", "@O": {"landscape": { "pos":[362, 256] }, "portrait": { "pos":[233, 263] }}},
+                            {"@P": "ui/sparkle", "@O": {"landscape": { "pos":[576, 256] }, "portrait": { "pos":[596, 263] }}},
+                            {"@P": "ui/sparkle", "@O": {"landscape": { "pos":[255, 385] }, "portrait": { "pos":[308, 402] }}},
+                            {"@P": "ui/sparkle", "@O": {"landscape": { "pos":[469, 385] }, "portrait": { "pos":[413, 263] }}},
+                            {"@P": "ui/sparkle", "@O": {"landscape": { "pos":[682, 379] }, "portrait": { "pos":[512, 402] }}}
+                ]},
+                {"@P": "ui/bonus.balance"}
+            ]}
+        ]}
+    },
+
+    "resources": {
+        "animations": {
+            "sparkles.animation": {"type": "sprite", "from": 0, "to": "100%", "duration": 800, "repeat": 1},
+            "bonus_glow_prize": {"type": "set", "duration": 840, "content": [
+                {"type": "opacity", "from": 0, "to":1, "repeat":1,"duration": 320},
+                {"type": "delay",  "repeat":1,"duration": 200},
+                {"type": "opacity", "from": 1, "to":0, "repeat":1,"duration": 320}
+            ]}
+        }
+    }
+}

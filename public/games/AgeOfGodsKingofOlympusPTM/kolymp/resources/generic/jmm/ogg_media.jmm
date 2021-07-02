@@ -1,0 +1,10 @@
+{
+    "resources": {
+        "audio":{
+            "pools":{
+                "music": {"url": "AOG_Zeus_mobile_soundpack_16.03.16.ogg"},
+                "sfx":   {"url": "AOG_Zeus_mobile_soundpack_16.03.16.ogg"}
+            }
+        }
+    }
+}

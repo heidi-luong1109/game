@@ -1,0 +1,47 @@
+{
+    "modules": {
+        "default": {
+            "window":{
+                "pos": "center",
+                "size": [1136, 640]
+            },
+            "jmms": [
+                "slot/common/media.jmm",
+                "slot/common/desktop-controls.jmm",
+                "slot/common/desktop-messages.jmm",
+                "slot/common/desktop-dialog.jmm",
+                "slot/common/desktop-fsb-bar.jmm",
+                "slot/common/debug_config.jmm",
+                "slot/common/sparta.jmm",
+
+                "ageofgods/desktop-ageofgods.jmm",
+                "config/config.jmm",
+                "config/sequences.jmm",
+                "images/images.jmm",
+                "images/bottom-bar-images.jmm",
+                "controls/reelset.jmm",
+                "controls/bottom-bar.jmm",
+                "controls/side-buttons.jmm",
+                "media.jmm",
+                "animations.jmm",
+                "sprites.jmm",
+                "scenes/main.jmm",
+                "scenes/paytable.jmm",
+                "formats.jmm"
+            ],
+            "localizedBrandedJmms": [
+                "../../translations/jmm/slot/common/texts/texts_en.jmm",
+                "../../translations/jmm/slot/common/texts/dt_texts_en.jmm",
+                "../../translations/jmm/texts/texts_en.jmm",
+				"../../translations/jmm/config/config_en.jmm",
+                "../../translations/jmm/ageofgods/texts/texts_en.jmm",
+                "../../translations/jmm/ageofgods/scenes/desktop-ageofgods_en.jmm",
+                "../../translations/jmm/images/images_en.jmm"
+            ],
+			"branding": [
+                "slot/common/branding/brand.jmm",
+                "slot/common/branding/desktop-brand.jmm"
+            ]
+        }
+    }
+}

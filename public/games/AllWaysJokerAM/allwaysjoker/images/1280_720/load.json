@@ -1,0 +1,41 @@
+{"frames": {
+
+"banner_font":
+{
+	"frame": {"x":2,"y":550,"w":647,"h":95},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":647,"h":95},
+	"sourceSize": {"w":647,"h":95}
+},
+"banner_info_0":
+{
+	"frame": {"x":2,"y":2,"w":1280,"h":480},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":480},
+	"sourceSize": {"w":1280,"h":480}
+},
+"info":
+{
+	"frame": {"x":2,"y":486,"w":1280,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":60},
+	"sourceSize": {"w":1280,"h":60}
+},
+"product":
+{
+	"frame": {"x":653,"y":550,"w":320,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":320,"h":100},
+	"sourceSize": {"w":320,"h":100}
+}},
+"meta": {
+	"version": "1.0",
+	"image": "load.png",
+	"size": {"w":1284,"h":652},
+	"scale": "1"
+}
+}

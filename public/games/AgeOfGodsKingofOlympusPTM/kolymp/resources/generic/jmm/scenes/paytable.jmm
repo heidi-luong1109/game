@@ -1,0 +1,11 @@
+{
+    "scenes": {
+        "paytable-scene": {"type": "anchor", "snap": false, "background": "paytable_bg", "content": [
+            {"@P": {"#ID": "ui/paytable", "panel": {"ratio": 0.2173746651358592}, "container": {"content": [
+                {"type": "image", "slice": "paytable1"},
+                {"type": "image", "slice": "paytable2"},
+                {"type": "image", "slice": "paytable3"}
+            ]}}}
+        ]}
+    }
+}

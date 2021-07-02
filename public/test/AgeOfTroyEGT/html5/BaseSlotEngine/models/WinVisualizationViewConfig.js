@@ -1,0 +1,1 @@
+function WinVisualizationViewConfig(a,b,c,d,e,f,g,h,k,l,m,n,p,q,r){this.reels=a;this.lines=b;this.scatters=c;this.wildIndex=d;this.smallImages=e;this.denomination=f;this.currency=g;this.currencyType=h;this.diamondBitmapData=k;this.lineText=l;this.linesViewConfig=m;this.lineGame=n;this.comboColors=p;this.multiplierImages=q;this.noCoins=r};

@@ -1,0 +1,44 @@
+{
+    "ui": {
+        "reel.sprite.place": {"type": "anchor", "layout": {"relative": true}, "snap": false, "content": [
+            {"type": "anchor", "props": {"anchor.fit": "0 0 66.66 0"}},
+            {"type": "anchor", "props": {"anchor.fit": "33.3 0 33.3 0"}},
+            {"type": "anchor", "props": {"anchor.fit": "66.66 0 0 0"}}
+        ]},
+        "reel.anticipation": {"@P": "ui/anticipation_borders", "group": "anticipationBorders", "visible": false},
+        "reel": {"type": "stack","content": [
+            {"#ID": "reel","ratio": 0.399581589958159,  "type": "reel", "group": "reels", "bias": "ver"},
+            {"@P": "ui/reel.sprite.place", "group": "spritePlace"},
+            {"type": "stack", "group": "masks", "opacity": 0, "background": "mask"}
+        ]},
+        "reelFront": {"@P": "ui/reel.sprite.place", "group": "frontSpritePlace"},
+        "reelset": {"type": "vport", "id": "reelset", "layout": {"base":[963, 478]},"size": [963, 478], "content": [
+            {"type": "vport",  "pos":[0,0],"layout": {"base":[963, 478]},"size": [963, 478],  "background": "reels_bg"},
+            {"@P": "ui/reel",  "pos":[0,0],  "size":[191,478]},
+            {"@P": "ui/reel",  "pos":[193,0],"size":[191,478]},
+            {"@P": "ui/reel",  "pos":[386,0],"size":[191,478]},
+            {"@P": "ui/reel",  "pos":[579,0],"size":[191,478]},
+            {"@P": "ui/reel",  "pos":[772,0],"size":[191,478]},
+            {"type": "vport", "pos":[0,0],"layout": {"base":[963, 478]}, "background": "reels_frame"},
+            {"@P": "ui/anticipationPlace","pos":[0,0],"layout": {"base":[963, 478]},"size": [963, 478]},
+            {"id": "reels_overlay", "type": "vport", "pos":[0,0],"layout": {"base":[963, 478]},"size": [963, 478], "background": "reels_darker",  "animation": "fadeOut", "opacity": 0},
+            {"id": "winlines", "type": "winlines","pos":[0,0],"layout": {"base":[963, 478]},"size": [963, 478]},
+            {"id": "frozen.wild", "group": "freeSpinsElements", "@P": "ui/wild.intro", "visible": false,"pos":[342,92],"layout": {"base":[276, 312]},"size": [276, 312]}
+        ]},
+        "reelsetFront": {"type": "vport", "layout": {"base":[963, 478]},"size": [963, 478],"content": [
+            {"@P": "ui/reelFront","pos":[0,0],  "size":[191,478]},
+            {"@P": "ui/reelFront","pos":[193,0],"size":[191,478]},
+            {"@P": "ui/reelFront","pos":[386,0],"size":[191,478]},
+            {"@P": "ui/reelFront","pos":[579,0],"size":[191,478]},
+            {"@P": "ui/reelFront","pos":[772,0],"size":[191,478]},
+            {"@P": "ui/reelFront","pos":[384,400],"size":[197,100]}
+        ]},
+        "anticipationPlace": {"type": "anchor", "layout": {"relative": true}, "content": [
+            {"@P": "ui/reel.anticipation", "props": {"anchor.fit": "0 80 0 0"}},
+            {"@P": "ui/reel.anticipation", "props": {"anchor.fit": "0 60 0 20"}},
+            {"@P": "ui/reel.anticipation", "props": {"anchor.fit": "0 40 0 40"}},
+            {"@P": "ui/reel.anticipation", "props": {"anchor.fit": "0 20 0 60"}},
+            {"@P": "ui/reel.anticipation", "props": {"anchor.fit": "0 0 0 80"}}
+        ]}
+    }
+}

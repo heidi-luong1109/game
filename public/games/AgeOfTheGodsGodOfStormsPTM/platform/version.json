@@ -1,0 +1,14 @@
+{
+    "buildInfo": {
+        "version": "19.1.0.13",
+        "timestamp": "2019-02-12 11:31:22",
+        "brand": "Playtech",
+        "env": "dev",
+        "svn": {
+            "revision": "410269",
+            "path": "tags/release/platform/19.1.0.13/platform-html"
+        },
+        "ogwCoreVersion" : "18.11.2.1",
+        "ogwCasinoVersion" : "18.11.2.1"
+    }
+}

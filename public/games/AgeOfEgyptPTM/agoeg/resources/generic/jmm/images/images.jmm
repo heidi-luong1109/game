@@ -1,0 +1,203 @@
+{
+    "resources": {
+        "images": {
+            "background_l":              {"url": "background_l.jpg",                          "preload": "main-scene"},
+            "background_p":              {"url": "background_p.jpg",                          "preload": "main-scene"},
+            "egypt_main_game_elements":  {"url": "egypt_main_game_elements.png",              "preload": "main-scene"},
+
+            "symbols_animations_0":      {"url": "symbols/animation/symbols_animations_0.png", "preload.deferred": "main-scene"},
+            "symbols_animations_1":      {"url": "symbols/animation/symbols_animations_1.png", "preload.deferred": "main-scene"},
+            "symbols_animations_2":      {"url": "symbols/animation/symbols_animations_2.png", "preload.deferred": "main-scene"},
+            "symbols_animations_3":      {"url": "symbols/animation/symbols_animations_3.png", "preload.deferred": "main-scene"},
+            "symbols_animations_4":      {"url": "symbols/animation/symbols_animations_4.png", "preload.deferred": "main-scene"},
+            "symbols_animations_5":      {"url": "symbols/animation/symbols_animations_5.png", "preload.deferred": "main-scene"},
+
+            "symbols_blurred":           {"url": "symbols/symbols_blurred.png", "preload": "main-scene"},
+
+            "anticipation":              {"url": "anticipation.png",                          "preload.deferred": "main-scene"},
+            "fg_numbers":                {"url": "../fonts/fg_numbers.png",                   "preload.deferred": "main-scene", "preload": "free-games"},
+            "fg_background_l":           {"url": "free_games/fg_background_l.jpg",            "preload.deferred": "main-scene", "preload": "free-games"},
+            "fg_background_p":           {"url": "free_games/fg_background_p.jpg",            "preload.deferred": "main-scene", "preload": "free-games"},
+
+            "message_box":               {"url": "message_box.png",                           "preload.deferred": "main-scene", "preload": "bonus-scene,free-games"},
+            "font":                      {"url": "../fonts/font.png",                         "preload.deferred": "main-scene", "preload": "bonus-scene,free-games"},
+            "font_dimmed":               {"url": "../fonts/font_dimmed.png",                  "preload.deferred": "main-scene", "preload": "bonus-scene,free-games"},
+            "localized":                                                                     {"preload.deferred": "main-scene", "preload": "bonus-scene,free-games"},
+
+            "bonus_background_l":        {"url": "bonus/bonus_background_l.jpg",              "preload.deferred": "main-scene", "preload": "bonus-scene"},
+            "bonus_background_p":        {"url": "bonus/bonus_background_p.jpg",              "preload.deferred": "main-scene", "preload": "bonus-scene"},
+            "bonus_elements":            {"url": "bonus/bonus_elements.png",                  "preload.deferred": "main-scene", "preload": "bonus-scene"},
+
+            "paytable1":                                                                     {"preload.deferred": "main-scene", "preload": "paytable-scene"},
+            "paytable2":                                                                     {"preload.deferred": "main-scene", "preload": "paytable-scene"},
+            "paytable3":                                                                     {"preload.deferred": "main-scene", "preload": "paytable-scene"}
+
+        },
+
+
+        "slices": {
+            "background_l":    {"image": "background_l",     "size": [909, 512]},
+            "background_p":    {"image": "background_p",     "size": [512, 909]},
+
+            "bonus_background_l":{"image": "bonus_background_l", "size": [909, 512]},
+            "bonus_background_p":{"image": "bonus_background_p", "size": [512, 909]},
+
+            "fg_background_l": {"image": "fg_background_l",  "size": [909, 512]},
+            "fg_background_p": {"image": "fg_background_p",  "size": [512, 909]},
+
+
+            "logo": {"image": "egypt_main_game_elements", "size": [584, 77], "pos": [2, 2]},
+            "sb.win": {"image": "egypt_main_game_elements", "size": [32, 32], "pos": [588, 2]},
+            "reels_bg": {"image": "egypt_main_game_elements", "size": [763, 442], "pos": [2, 81]},
+
+            "reel_slice_wild":      {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [574, 662]},
+            "reel_slice_bird":      {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [2, 662]},
+            "reel_slice_bug":       {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [145, 662]},
+            "reel_slice_eye":       {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [288, 662]},
+            "reel_slice_A":         {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [288, 525]},
+            "reel_slice_K":         {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [574, 525]},
+            "reel_slice_Q":         {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [717, 525]},
+            "reel_slice_J":         {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [431, 525]},
+            "reel_slice_10":        {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [145, 525]},
+            "reel_slice_bonus":     {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [2, 525]},
+            "reel_slice_scatter":   {"image": "egypt_main_game_elements", "size": [141, 135], "pos": [431, 662]},
+
+            "reel_slice_wild:blurred":          {"image": "symbols_blurred", "size": [141, 175], "pos": [288, 2],   "insets":"20 0"},
+            "reel_slice_bird:blurred":          {"image": "symbols_blurred", "size": [141, 224], "pos": [288, 405], "insets":"44 0"},
+            "reel_slice_bug:blurred":           {"image": "symbols_blurred", "size": [141, 224], "pos": [2, 631],   "insets":"44 0"},
+            "reel_slice_eye:blurred":           {"image": "symbols_blurred", "size": [141, 224], "pos": [145, 631], "insets":"44 0"},
+            "reel_slice_A:blurred":             {"image": "symbols_blurred", "size": [141, 224], "pos": [145, 179], "insets":"44 0"},
+            "reel_slice_K:blurred":             {"image": "symbols_blurred", "size": [141, 224], "pos": [2, 405],   "insets":"44 0"},
+            "reel_slice_Q:blurred":             {"image": "symbols_blurred", "size": [141, 224], "pos": [145, 405], "insets":"44 0"},
+            "reel_slice_J:blurred":             {"image": "symbols_blurred", "size": [141, 224], "pos": [288, 179], "insets":"44 0"},
+            "reel_slice_10:blurred":            {"image": "symbols_blurred", "size": [141, 224], "pos": [2, 179],   "insets":"44 0"},
+            "reel_slice_bonus:blurred":         {"image": "symbols_blurred", "size": [141, 175], "pos": [2, 2],     "insets":"20 0"},
+            "reel_slice_scatter:blurred":       {"image": "symbols_blurred", "size": [141, 175], "pos": [145, 2],   "insets":"20 0"},
+
+            "message_box_bg":           {"image": "message_box", "size": [861, 510], "pos": [1, 1]},
+
+            "coin_01":                  {"image": "anticipation", "size": [33, 194], "pos": [380, 478]},
+            "coin_02":                  {"image": "anticipation", "size": [67, 194], "pos": [415, 478]},
+            "coin_03":                  {"image": "anticipation", "size": [126, 194], "pos": [484, 478]},
+            "coin_04":                  {"image": "anticipation", "size": [171, 194], "pos": [612, 478]},
+            "coin_05":                  {"image": "anticipation", "size": [194, 194], "pos": [785, 478]},
+
+            "anticipation_slices": 		{"image": "anticipation", "size": [945, 952], "pos": [1, 1]},
+            "mega_win_scarab": 		    {"image": "anticipation", "size": [240, 89], "pos": [500,700]},
+            "mega_win_flower_l": 		{"image": "anticipation", "size": [96, 147], "pos": [400,700], "flip": "H"},
+            "mega_win_flower_r": 		{"image": "anticipation", "size": [96, 147], "pos": [400,700]},
+
+            "5oak":                     {"image": "localized", "size": [721, 117], "pos": [2, 2]},
+            "big_win":                  {"image": "localized", "size": [535, 141], "pos": [2, 121]},
+            "button_continue":          {"image": "localized", "size": [257, 55], "pos": [261, 264]},
+            "button_continue:hovered":  {"image": "localized", "size": [257, 55], "pos": [520, 264]},
+            "button_continue:pressed":  {"image": "localized", "size": [257, 55], "pos": [2, 264]},
+            "button_continue:disabled": {"image": "localized", "size": [257, 55], "pos": [539, 121]},
+            "slice_free_game":          {"image": "localized", "size": [347, 45], "pos": [2, 321]},
+            "slice_free_games":         {"image": "localized", "size": [347, 45], "pos": [351, 321]},
+            "mega_win":                 {"image": "localized", "size": [712, 147], "pos": [2, 368]},
+
+            "paytable1": {"image": "paytable1", "size": [965, 840], "pos": [30, 0]},
+            "paytable2": {"image": "paytable2", "size": [965, 840], "pos": [30, 0]},
+            "paytable3": {"image": "paytable3", "size": [965, 840], "pos": [30, 0]},
+
+            "num_1":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+69}", 205]},
+            "num_2":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+1}",  239]},
+            "num_3":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+35}", 239]},
+            "num_4":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+69}", 239]},
+            "num_5":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+1}",  273]},
+            "num_6":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+35}", 273]},
+            "num_7":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+69}", 273]},
+            "num_8":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+1}",  307]},
+            "num_9":    {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+35}", 307]},
+            "num_10":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+69}", 307]},
+            "num_11":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+1}",  341]},
+            "num_12":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+35}", 341]},
+            "num_13":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+69}", 341]},
+            "num_14":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+1}",  375]},
+            "num_15":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+35}", 375]},
+            "num_16":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+69}", 375]},
+            "num_17":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+1}",  409]},
+            "num_18":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+35}", 409]},
+            "num_19":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+69}", 409]},
+            "num_20":   {"image": "egypt_main_game_elements",  "size": [32, 32], "pos": ["${860+1}",  443]}
+        },
+
+        "animations": {
+            "big.win":    {"type": "set", "mode": "parallel", "duration": 320,  "content": [
+                {"type": "set", "mode": "serial", "duration": 320,  "content": [
+                    {"type": "scale", "from.x": 0.42, "from.y": 0.42, "to.x":1.05,  "to.y":1.05,   "duration": 160},
+                    {"type": "scale", "from.x": 1.05, "from.y": 1.05, "to.x":1,     "to.y":1,      "duration": 160}
+                ]},
+                {"type": "set", "mode": "serial", "duration": 320, "content": [
+                    {"type": "translate", "from.x": "0%", "from.y": "-50%",  "to.x": "0",  "to.y": "8.33%",   "duration": 160},
+                    {"type": "translate", "from.x": "0%", "from.y": "8.33%", "to.x": "0",  "to.y": "0%",      "duration": 160}
+                ]},
+                {"type": "opacity", "from": 0, "to":1, "duration": 320},
+                {"type": "delay", "duration": 10000}
+            ]},
+
+            "mega_scarab":    {"type": "set", "mode": "parallel", "duration": 320,  "content": [
+                {"type": "set", "mode": "serial", "duration": "100%",  "content": [
+                    {"type": "scale", "from.x": 0.42, "from.y": 0.42, "to.x":1.05,  "to.y":1.05,   "duration": "50%"},
+                    {"type": "scale", "from.x": 1.05, "from.y": 1.05, "to.x":1,     "to.y":1,      "duration": "50%"}
+                ]},
+                {"type": "set", "mode": "serial", "duration": "100%", "content": [
+                    {"type": "translate", "from.x": "0%", "from.y": "-50%",  "to.x": "0",  "to.y": "8.33%",    "duration": "50%"},
+                    {"type": "translate", "from.x": "0%", "from.y": "8.33%", "to.x": "0",  "to.y": "0%",       "duration": "50%"}
+                ]},
+                {"type": "opacity", "from": 0, "to":1,  "duration": "100%"},
+                {"type": "delay", "duration": 10000}
+            ]},
+
+            "mega_flower_r":    {"type": "set", "mode": "parallel", "duration": 320,  "content": [
+                {"type": "set", "mode": "serial", "duration": "100%",  "content": [
+                    {"type": "scale", "from.x": 0.42, "from.y": 0.42, "to.x":1.05,  "to.y":1.05,    "duration": "50%"},
+                    {"type": "scale", "from.x": 1.05, "from.y": 1.05, "to.x":1,     "to.y":1,       "duration": "50%"}
+                ]},
+                {"type": "set", "mode": "serial", "duration": "100%",  "content": [
+                    {"type": "translate", "from.y": "0%", "from.x": "-50%",  "to.y": "0",  "to.x": "8.33%",    "duration": "50%"},
+                    {"type": "translate", "from.y": "0%", "from.x": "8.33%", "to.y": "0",  "to.x": "0%",       "duration": "50%"}
+                ]},
+                {"type": "opacity", "from": 0, "to":1,  "duration": "100%"},
+                {"type": "delay", "duration": 10000}
+            ]},
+            "mega_flower_l":    {"type": "set", "mode": "parallel", "duration": 320,  "content": [
+                {"type": "set", "mode": "serial", "duration": "100%",  "content": [
+                    {"type": "scale", "from.x": 0.42, "from.y": 0.42, "to.x":1.05,  "to.y":1.05,   "duration": "50%"},
+                    {"type": "scale", "from.x": 1.05, "from.y": 1.05, "to.x":1,     "to.y":1,      "duration": "50%"}
+                ]},
+                {"type": "set", "mode": "serial", "duration": "100%",  "content": [
+                    {"type": "translate", "from.y": "0%", "from.x": "50%",  "to.y": "0",  "to.x": "-8.33%",    "duration": "50%"},
+                    {"type": "translate", "from.y": "0%", "from.x": "-8.33%", "to.y": "0",  "to.x": "0%",       "duration": "50%"}
+                ]},
+                {"type": "opacity", "from": 0, "to":1,  "duration": "100%"},
+                {"type": "delay", "duration": 10000}
+            ]},
+
+            "5OAK_fade":    {"type": "set", "mode": "serial", "content": [
+                {"type": "opacity", "from": 0, "to":1, "duration": 0 },
+                {"type": "delay", "duration": 1500},
+                {"type": "opacity", "from": 1, "to":0, "duration": 200},
+                {"type": "delay", "duration": 2000}
+            ]},
+
+            "5OAK":    {"type": "set", "mode": "parallel", "content": [
+                {"type": "set", "mode": "serial", "duration": 1840,  "content": [
+                    {"type": "scale", "from.x": 0.3, "from.y": 0.3, "to.x":1.05,  "to.y":1,   "duration": 280},
+                    {"type": "scale", "from.x": 1.05, "from.y": 1.05, "to.x":1,  "to.y":1,   "duration": 160},
+                    {"type": "delay", "duration": 1200},
+                    {"type": "scale",  "from.x": 1, "from.y": 1, "to.x":1.5,  "to.y":1.5,  "duration": 200}
+                ]},
+                {"type": "set", "mode": "serial", "duration": 1840, "content": [
+                    {"type": "opacity", "from": 0, "to":1, "duration": 280 },
+                    {"type": "delay", "duration": 1360},
+                    {"type": "opacity", "from": 1, "to":0, "duration": 200}
+                ]},
+                {"type": "delay", "duration": 4000}
+            ]},
+
+            "symbol.animation": {"type": "sprite", "from": "0%", "to": "100%", "duration": 2000,"repeat":-1}
+        }
+    }
+}

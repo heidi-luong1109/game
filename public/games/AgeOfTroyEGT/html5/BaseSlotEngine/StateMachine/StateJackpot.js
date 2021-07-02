@@ -1,0 +1,2 @@
+function StateJackpot(a,b){this.spin=function(){throw'Invalid command "spin" in StateJackpot!';};this.gamble=function(){throw'Invalid command "gamble" in StateJackpot!';};this.jackpot=function(){b(StateMachineContext.STATE_WAITING_FOR_JACKPOT_RESULT);a.sendJackpot()};this.collect=function(){throw'Invalid command "collect" in StateJackpot!';};this.setResult=function(){throw'Invalid command "setResult" in StateJackpot!';};this.onResult=function(){throw'Invalid command "onResult" in StateJackpot!';};
+this.getState=function(){return StateMachineContext.STATE_JACKPOT}};

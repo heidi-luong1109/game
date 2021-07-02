@@ -1,0 +1,51 @@
+{
+    "modules": {
+        "default": {
+            "window":{
+                "pos": "center",
+                "size": [1136, 640]
+            },
+            "jmms": [
+                "slot/common/media.jmm",
+                "slot/common/controls.jmm",
+                "slot/common/debug_config.jmm",
+                "ageofgods/ageofgods.jmm",
+                "config/config.jmm",
+                "animations/animations.jmm",
+                "animations/sprites.jmm",
+                "formats.jmm",
+                "images/images.jmm",
+                "media.jmm",
+                "scenes/main.jmm",
+                "scenes/paytable.jmm",
+                "controls/reelset.jmm",
+                "controls/side-buttons.jmm"
+            ],
+
+            "audio.ogg":[
+                "ogg_media.jmm",
+                "ageofgods/ogg_media.jmm"
+            ],
+
+            "localizedBrandedJmms": [
+                "../../translations/jmm/slot/common/controls_en.jmm",
+                "../../translations/jmm/slot/common/texts/texts_en.jmm",
+                "../../translations/jmm/config/config_en.jmm",
+                "../../translations/jmm/texts/texts_en.jmm",
+                "../../translations/jmm/images/images_en.jmm",
+                "../../translations/jmm/scenes/main_en.jmm",
+                "../../translations/jmm/ageofgods/texts/texts_en.jmm",
+                "../../translations/jmm/ageofgods/ageofgods_en.jmm"
+            ],
+            "tablet": [
+                "slot/common/controls_tablet.jmm"
+            ]
+        }
+    },
+
+    "common": {
+        "ui": {
+            "anchor.all": {"props": {"anchor.fit": 0}}
+        }
+    }
+}

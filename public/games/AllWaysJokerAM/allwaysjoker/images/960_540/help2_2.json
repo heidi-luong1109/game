@@ -1,0 +1,33 @@
+{"frames": {
+
+"hlp_bonus":
+{
+	"frame": {"x":2,"y":2,"w":820,"h":390},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":820,"h":390},
+	"sourceSize": {"w":820,"h":470}
+},
+"hlp_lines":
+{
+	"frame": {"x":2,"y":394,"w":820,"h":390},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":820,"h":390},
+	"sourceSize": {"w":820,"h":470}
+},
+"hlp_symbols":
+{
+	"frame": {"x":2,"y":786,"w":820,"h":390},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":28,"w":820,"h":390},
+	"sourceSize": {"w":820,"h":470}
+}},
+"meta": {
+	"version": "1.0",
+	"image": "help2_2.png",
+	"size": {"w":1024,"h":2048},
+	"scale": "1"
+}
+}

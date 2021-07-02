@@ -1,0 +1,8 @@
+{
+    "resources": {
+        "images": {
+            "aog.close_btn" : {"url": "../../translations/images/ageofgods/continue_btn_en.png"},
+            "aog.congratulations": {"url": "../../translations/images/ageofgods/congrat_msg_en.png"}
+        }
+    }
+}

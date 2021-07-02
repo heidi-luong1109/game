@@ -1,0 +1,11 @@
+{
+    "resources": {
+        "texts": {
+            "splash.head": "WILD WIND RESPINS",
+            "splash.text": "Respins with shifting stacked wild symbols\nand an increasing win multiplier!",
+            "splash.check_box": "Do not show this again.",
+            "auto_spins_until_feature": "UNTIL FEATURE",
+            "auto_spins_left": "{0} SPINS LEFT"
+        }
+    }
+}

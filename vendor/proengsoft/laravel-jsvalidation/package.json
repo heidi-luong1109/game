@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "laravel-elixir": "^4.2.1"
+  },
+  "dependencies": {
+    "jquery-validation": "^1.19.1",
+    "php-date-formatter": "^1.3.4",
+    "phpjs": "git://github.com/kvz/locutus.git#v1.3.2"
+  }
+}

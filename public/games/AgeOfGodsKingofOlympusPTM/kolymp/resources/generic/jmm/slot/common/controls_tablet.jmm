@@ -1,0 +1,11 @@
+{
+    "ui": {
+		"confirm-popup": {"content": [{"id": "_container", "@O": {"landscape": {"props": {"anchor.fit": "24 28 30 28"}}, "portrait": {"props": {"anchor.fit": "5 22.4 21 22.4"}}}}]},
+        "bet-controls": {"@O": {"landscape": {"props": {"anchor.fit": "33.7 16 38.6 0", "anchor.alignment": "center-left"}, "ratio": 4.8}, "portrait": {"props": {"anchor.alignment": "top-left"}, "ratio": null}}},
+		"fsb-controls": {"@O": {"landscape": {"props": {"anchor.fit": "33.7 52.8 38.6 0"}}}},
+        "autoplay": {"@O": {"landscape": {"props": {"anchor.fit": "33.7 0 38.6 37.5"}}}},
+        "round-buttons": {"@O": {"landscape": {"props": {"anchor.fit": "35.4 0 40.3 84"}}}},
+        "bottom-panel": {"@O": {"landscape": {"props": {"anchor.fit": "90 0 0 0"}}}},
+        "bonus.balance": {"props": {"anchor.fit": "90.5 60 1 0"}}
+    }
+}

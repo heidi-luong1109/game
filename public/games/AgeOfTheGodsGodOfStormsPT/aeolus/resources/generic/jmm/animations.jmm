@@ -1,0 +1,280 @@
+{
+    "resources": {
+        "animations": {
+            "feature_opacity_show": {"@P": "ui/opacity_max", "duration": 1500},
+            "feature_opacity_hide": {"@P": "ui/opacity_min", "duration": 1500},
+
+            "feature_lightning": {"type": "set", "mode": "parallel", "content": [
+                {"type": "set-widget", "lookup": "lightning", "content": [
+                    {"@P": "ui/opacity_max", "interpolator": "cycle.2", "duration": 400}
+                ]},
+                {"type": "set-widget", "lookup": "../../lightning_bolt", "content": [
+                    {"@P": "ui/visible_true"},
+                    {"@P": "ui/sprite_play", "duration": 600},
+                    {"@P": "ui/visible_false"}
+                ]}
+            ]},
+            "head_idle_translate": {"type": "set", "repeat": -1, "content":[
+                {"@P": "ui/head_idle_part", "to.y": -15, "interpolator": "ease.out"},
+                {"@P": "ui/head_idle_part", "to.y": 0,   "interpolator": "ease.in"},
+                {"@P": "ui/head_idle_part", "to.y": 15,  "interpolator": "ease.out"},
+                {"@P": "ui/head_idle_part", "to.y": 0,   "interpolator": "ease.in"}
+            ]},
+            "to_blow_pos_translate": {"type": "move", "to.y": 0, "duration": 300, "interpolator": "ease.out"},
+
+            "big.win.show": {"type": "set", "content": [
+                {"@P": "ui/big_mega.clear"},
+                {"@P": {"#ID": "ui/big_mega.win.show", "delay": {"duration": 0}, "glow_lookup": {"lookup": "big_win.glow"}, "win_lookup": {"lookup": "big_win"}}}
+            ]},
+            "big.win.hide": {"type": "set", "mode": "parallel", "content": [
+                {"@P": {"#ID": "ui/big_mega.win.hide", "glow_lookup": {"lookup": "big_win.glow"}, "win_lookup": {"lookup": "big_win"}}},
+                {"@P": "ui/win_panel.hide"}
+            ]},
+            "big.win.cancel": {"type": "async", "mode": "parallel", "content": [
+                {"@P": {"#ID": "ui/big_mega.win.hide", "glow_lookup": {"lookup": "big_win.glow"}, "win_lookup": {"lookup": "big_win"}, "glow_disappearing_duration": {"duration": 0}, "label_disappearing_duration": {"duration": 0}}},
+                {"@P": "ui/win_panel.hide"}
+            ]},
+
+            "mega.win.show": {"type": "set", "content": [
+                {"@P": "ui/big_mega.clear"},
+                {"@P": {"#ID": "ui/big_mega.win.show", "delay": {"duration": 500}, "glow_lookup": {"lookup": "big_win.glow"}, "win_lookup": {"lookup": "big_win"}}},
+                {"type": "delay", "duration": 6400},
+                {"type": "set", "mode": "parallel", "content": [
+                    {"@P": {"#ID": "ui/big_mega.win.hide", "glow_lookup": {"lookup": "big_win.glow"}, "win_lookup": {"lookup": "big_win"}}},
+                    {"@P": {"#ID": "ui/big_mega.win.show", "delay": {"duration": 500}, "glow_lookup": {"lookup": "mega_win.glow"}, "win_lookup": {"lookup": "mega_win"}}},
+                    {"type": "set-widget", "lookup": "../../../../../../coin", "content": [
+                        {"type": "tween-animation", "action": "start"}
+                    ]}
+                ]}
+            ]},
+            "mega.win.hide": {"type": "set", "mode": "parallel", "content": [
+                {"@P": {"#ID": "ui/big_mega.win.hide", "glow_lookup": {"lookup": "mega_win.glow"}, "win_lookup": {"lookup": "mega_win"}}},
+                {"@P": "ui/win_panel.hide"},
+                {"@P": "ui/stop_coin_fountain"}
+            ]},
+            "mega.win.cancel": {"type": "async", "mode": "parallel", "content": [
+                {"@P": "resources/animations/big.win.cancel"},
+                {"@P": {"#ID": "ui/big_mega.win.hide", "glow_lookup": {"lookup": "mega_win.glow"}, "win_lookup": {"lookup": "mega_win"}, "glow_disappearing_duration": {"duration": 0}, "label_disappearing_duration": {"duration": 0}}},
+                {"@P": "ui/stop_coin_fountain"}
+            ]},
+
+            "flying_birds": {"type": "set", "content": [
+                {"@P": "ui/visible_true"},
+                {"@P": "ui/sprite_play", "duration": 5000},
+                {"@P": "ui/visible_false"}
+            ]},
+
+            "slide_ship": {"type": "set", "mode": "parallel", "content": [
+                {"type": "slide", "mode": "hide", "dir": "w", "clip.reset": true, "duration": 2000},
+                {"@P": "ui/opacity_min", "duration": 2000}
+            ]},
+
+            "wind_blowing": {"type": "set", "content": [
+                {"type": "sound", "action": "stop", "sound": "wind_breath"},
+                {"type": "sound", "action": "play", "sound": "wind_breath"},
+                {"type": "delay", "duration": 600},
+                {"@P": "ui/visible_true"},
+                {"@P": "ui/sprite_play", "duration": 2000},
+                {"@P": "ui/visible_false"}
+            ]},
+
+            "splash_screen.disappearing": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "btn.close", "content": [
+                    {"type": "set-props", "disabled": true}
+                ]},
+                {"type": "set-widget", "lookup": "show_again.toggle", "content": [
+                    {"type": "set-props", "disabled": true}
+                ]},
+                {"@P": "ui/opacity_min", "duration": 1000}
+            ]},
+
+            "swoosh_win_symbol": {"type": "set", "mode": "serial", "content": [
+                {"type": "set-props", "visible": true},
+                {"type": "opacity", "from": 0, "to": 1, "duration": "37.5%"},
+                {"type": "delay", "duration": "25%"},
+                {"type": "opacity", "from": 1, "to": 0, "duration": "37.5%"}
+            ]},
+
+            "aeolus_win_symbol": {"type": "set", "mode": "parallel", "duration": 1250, "content": [
+                {"@P": "resources/animations/swoosh_win_symbol", "duration": "100%"},
+                {"type": "set-widget", "lookup": "win_border", "content": [
+                    {"@P": "ui/sprite_play", "duration": "100%"}
+                ]}
+            ]},
+
+            "aeolus_line_symbol": {"type": "set", "mode": "serial", "duration": 1250, "content": [
+                {"type": "set-props", "visible": true},
+                {"type": "opacity", "from": 0, "to": 0.30, "duration": "37.5%"},
+                {"type": "delay", "duration": "25%"},
+                {"type": "opacity", "from": 0.30, "to": 0, "duration": "37.5%"}
+            ]},
+
+            "coin_fountain": {"type": "set", "content": [
+                {"type": "delay", "duration": 500},
+                {"type": "set", "mode": "parallel", "content": [
+                    {"@P": "ui/opacity_max", "duration": 500},
+                    {"@P": "ui/sprite_play", "repeat": -1, "duration": 1000}
+                ]}
+            ]},
+
+            "sea_shimmer": {"type": "sprite_uniform", "from": "0%", "to": "100%", "repeat": -1,  "duration": 8000,
+                "start_animation": {"@P": "ui/opacity_max", "duration": 800},
+                "end_animation":   {"@P": "ui/opacity_min", "duration": 800}},
+
+            "twinkles": {"type": "set", "mode": "parallel", "content": [
+                {"@P": "ui/opacity_max", "duration": 500},
+                {"@P": "ui/sprite_play", "repeat": -1, "duration": 3000}
+            ]},
+
+            "gos_total_win_amount_text": {"type": "set", "mode": "serial", "content": [
+                {"type": "set-props", "visible": true, "xform": "identity"},
+                {"type": "opacity", "to": 1, "duration": 0},
+                {"type": "scale", "from.x": 0, "from.y": 0, "to.x": 1.6, "to.y": 1.6, "pivot.x":"50%", "pivot.y":"50%", "duration": 210},
+                {"type": "set-props", "xform": "identity"},
+                {"type": "scale", "from.x": 1.6, "from.y": 1.6, "to.x": 0.7, "to.y": 0.7, "pivot.x":"50%", "pivot.y":"50%", "duration": 210},
+                {"type": "set-props", "xform": "identity"},
+                {"type": "scale", "from.x": 0.7, "from.y": 0.7, "to.x": 1, "to.y": 1, "pivot.x":"50%", "pivot.y":"50%", "duration": 210},
+                {"type": "set-props", "xform": "identity"},
+                {"type": "delay", "duration": 3750},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 200}
+            ]}
+        }
+    },
+
+    "ui": {
+        "visible_true":  {"type": "set-props", "visible": true},
+        "visible_false": {"type": "set-props", "visible": false},
+
+        "opacity_min": {"type": "opacity", "from": 1, "to": 0},
+        "opacity_max": {"type": "opacity", "from": 0, "to": 1},
+
+        "sprite_play": {"type": "sprite_uniform", "from": "0%", "to": "100%"},
+
+        "head_idle_part": {"type": "move", "duration": 1000},
+
+        "scale.central": {"type": "scale", "pivot.x": "50%", "pivot.y": "50%", "xform.before": "identity"},
+
+        "widget.set_opacity": {"type": "set-widget", "content": [
+            {"type": "set-props", "opacity": 0}
+        ]},
+
+        "big_mega.clear": {"type": "set-widget", "lookup": "../../../../../../big-win-wrapper", "mode": "parallel", "content": [
+            {"@P": "ui/widget.set_opacity", "lookup": "big_win.glow"},
+            {"@P": "ui/widget.set_opacity", "lookup": "mega_win.glow"},
+            {"@P": "ui/widget.set_opacity", "lookup": "big_win"},
+            {"@P": "ui/widget.set_opacity", "lookup": "mega_win"},
+
+            {"type": "set-widget", "lookup": "twinkles", "content": [
+                {"type": "set-props", "opacity": 0},
+                {"type": "tween-animation", "action": "stop"}
+            ]},
+            {"type": "set-widget", "lookup": "coin", "content": [
+                {"type": "set-props", "opacity": 0},
+                {"type": "tween-animation", "action": "stop"}
+            ]}
+        ]},
+
+        "big_mega.win.show": {"type": "set-widget", "lookup": "../../../../../../big-win-wrapper", "content": [
+            {"type": "delay", "#ID": "delay"},
+            {"type": "set", "mode": "parallel", "content": [
+                {"type": "set-widget", "mode": "parallel", "lookup": "../win-panel-wrapper", "content": [
+                    {"type": "move", "to.y": "-45", "duration": 500},
+                    {"@P": "ui/scale.central", "to.x" : 1.4, "to.y": 1.4, "duration": 500}
+                ]},
+                {"type": "set-widget", "#ID": "glow_lookup", "content": [
+                    {"type": "opacity", "from": 0, "to": 0.7, "duration": 600}
+                ]},
+                {"type": "set-widget", "#ID": "win_lookup", "content": [
+                    {"type": "set-props", "opacity": 1},
+                    {"@P": "ui/scale.central", "from.x": 0, "from.y": 0, "to.x": 1.2, "to.y": 1.2, "duration": 400},
+                    {"@P": "ui/scale.central", "to.x": 0.85, "to.y": 0.85, "duration": 200},
+                    {"@P": "ui/scale.central", "to.x": 1,    "to.y": 1,    "duration": 100}
+                ]},
+                {"type": "set-widget", "lookup": "twinkles", "content": [
+                    {"type": "tween-animation", "action": "start"}
+                ]}
+            ]}
+        ]},
+
+        "big_mega.win.hide": {"type": "set-widget", "mode": "parallel", "lookup": "../../../../../../big-win-wrapper", "content": [
+            {"type": "set-widget", "#ID": "glow_lookup", "content": [
+                {"@P": "ui/opacity_min", "duration": 600, "#ID": "glow_disappearing_duration"}
+            ]},
+            {"type": "set-widget", "mode": "parallel", "#ID": "win_lookup", "content": [
+                {"@P": "ui/opacity_min", "duration": 600, "#ID": "label_disappearing_duration"}
+            ]},
+            {"type": "set-widget", "lookup": "twinkles", "content": [
+                {"type": "set-props", "opacity": 0},
+                {"type": "tween-animation", "action": "stop"}
+            ]}
+        ]},
+
+        "win_panel.hide": {"type": "set-widget", "mode": "parallel", "lookup": "../../win-panel-wrapper", "content": [
+            {"type": "move", "to.y": 90, "duration": 250},
+            {"@P": "ui/scale.central", "to.x" : 1, "to.y": 1, "duration": 250}
+        ]},
+
+        "stop_coin_fountain": {"type": "set-widget", "lookup": "../../../../../../coin", "content": [
+            {"type": "set-props", "opacity": 0},
+            {"type": "tween-animation", "action": "stop"}
+        ]},
+
+        "symbol.wild_def.win": {"type": "panel", "animation": "swoosh_win_symbol"},
+
+        "symbol.wild.win": {"@P": "ui/anchor.relative", "animation": "aeolus_win_symbol", "content": [
+            {"id": "win_border", "@P": "ui/win_border_2x.sprite", "props": {"#ID": "fit", "anchor.alignment": "center"}, "ratio": null}
+        ]},
+
+        "symbol.wild.top.win": {"@P": {"#ID": "ui/symbol.wild.win", "fit": {"anchor.fit": "0 0 -200 0"}}},
+        "symbol.wild.mid.win": {"@P": {"#ID": "ui/symbol.wild.win", "fit": {"anchor.fit": "-100 0 -100 0"}}},
+        "symbol.wild.bot.win": {"@P": {"#ID": "ui/symbol.wild.win", "fit": {"anchor.fit": "-200 0 0 0"}}},
+
+        "symbol_def.win": {"type": "stack", "animation": "aeolus_win_symbol", "content": [
+            {"id": "win_border", "@P": "ui/win_border.sprite"}
+        ]},
+
+        "symbol_def.no_win": {"type": "panel", "animation": "aeolus_line_symbol"},
+
+        "symbol_0.win": {"@P": "ui/symbol_def.win", "background": "10_lit"},
+        "symbol_1.win": {"@P": "ui/symbol_def.win", "background": "j_lit"},
+        "symbol_2.win": {"@P": "ui/symbol_def.win", "background": "q_lit"},
+        "symbol_3.win": {"@P": "ui/symbol_def.win", "background": "k_lit"},
+        "symbol_4.win": {"@P": "ui/symbol_def.win", "background": "a_lit"},
+        "symbol_5.win": {"@P": "ui/symbol_def.win", "background": "urn_lit"},
+        "symbol_6.win": {"@P": "ui/symbol_def.win", "background": "medallion_lit"},
+        "symbol_7.win": {"@P": "ui/symbol_def.win", "background": "archer_lit"},
+        "symbol_8.win": {"@P": "ui/symbol_def.win", "background": "amazon_lit"},
+        "symbol_9.win": {"@P": "ui/symbol_def.win", "background": "spartan_lit"},
+
+        "symbol_10.win.def": {"@P": "ui/symbol.wild_def.win", "background": "wild_top_lit"},
+        "symbol_11.win.def": {"@P": "ui/symbol.wild_def.win", "background": "wild_mid_lit"},
+
+        "symbol_10.win.top": {"@P": "ui/symbol.wild.top.win", "background": "wild_top_lit"},
+        "symbol_11.win.mid": {"@P": "ui/symbol.wild.mid.win", "background": "wild_mid_lit"},
+        "symbol_12.win.bot": {"@P": "ui/symbol.wild.bot.win", "background": "wild_bot_lit"},
+
+        "symbol_13.win.def": {"@P": "ui/symbol.wild_def.win", "background": "ship_wild_top_lit"},
+        "symbol_14.win.def": {"@P": "ui/symbol.wild_def.win", "background": "ship_wild_mid_lit"},
+
+        "symbol_13.win.top": {"@P": "ui/symbol.wild.top.win", "background": "ship_wild_top_lit"},
+        "symbol_14.win.mid": {"@P": "ui/symbol.wild.mid.win", "background": "ship_wild_mid_lit"},
+        "symbol_15.win.bot": {"@P": "ui/symbol.wild.bot.win", "background": "ship_wild_bot_lit"},
+
+        "symbol_0.no_win":  {"@P": "ui/symbol_def.no_win", "background": "10_dim"},
+        "symbol_1.no_win":  {"@P": "ui/symbol_def.no_win", "background": "j_dim"},
+        "symbol_2.no_win":  {"@P": "ui/symbol_def.no_win", "background": "q_dim"},
+        "symbol_3.no_win":  {"@P": "ui/symbol_def.no_win", "background": "k_dim"},
+        "symbol_4.no_win":  {"@P": "ui/symbol_def.no_win", "background": "a_dim"},
+        "symbol_5.no_win":  {"@P": "ui/symbol_def.no_win", "background": "urn_dim"},
+        "symbol_6.no_win":  {"@P": "ui/symbol_def.no_win", "background": "medallion_dim"},
+        "symbol_7.no_win":  {"@P": "ui/symbol_def.no_win", "background": "archer_dim"},
+        "symbol_8.no_win":  {"@P": "ui/symbol_def.no_win", "background": "amazon_dim"},
+        "symbol_9.no_win":  {"@P": "ui/symbol_def.no_win", "background": "spartan_dim"},
+        "symbol_10.no_win": {"@P": "ui/symbol_def.no_win", "background": "wild_top_dim"},
+        "symbol_11.no_win": {"@P": "ui/symbol_def.no_win", "background": "wild_mid_dim"},
+        "symbol_12.no_win": {"@P": "ui/symbol_def.no_win", "background": "wild_bot_dim"},
+        "symbol_13.no_win": {"@P": "ui/symbol_def.no_win", "background": "ship_wild_top_dim"},
+        "symbol_14.no_win": {"@P": "ui/symbol_def.no_win", "background": "ship_wild_mid_dim"},
+        "symbol_15.no_win": {"@P": "ui/symbol_def.no_win", "background": "ship_wild_bot_dim"}
+    }
+}

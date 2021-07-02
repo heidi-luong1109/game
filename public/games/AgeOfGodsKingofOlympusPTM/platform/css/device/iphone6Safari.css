@@ -1,0 +1,73 @@
+.bottomHeight {
+    height: 60px;
+}
+
+.debug-folder {
+    top: 100px !important;
+}
+
+body {
+    /*height: 10000px;*/
+}
+
+#size-handler{
+    height: 120%;
+}
+
+.playerBalanceGood, .playerBalanceBad {
+    background-position: 0 20px;
+    font-size: 24px;
+    line-height: 54px;
+    height: 54px;
+}
+
+.gameMode {
+    font-size: 22px;
+}
+
+.pnlBottom>div:first-child+div {
+    line-height: 54px;
+}
+
+@media (orientation: landscape) {
+    .bottomHeight {
+        height: 30px;
+    }
+    
+    .ray_bottom_panel table {
+		margin-top: 0;
+	}
+
+    .gameMode {
+        font-size: 18px !important;
+    }
+
+    .pnlBottom>div:first-child+div {
+        line-height: 30px !important;
+    }
+
+    .playerBalanceGood, .playerBalanceBad {
+        background-position: 0 2px;
+        font-size: 18px;
+        height: 28px;
+        line-height: 28px;
+    }
+
+    .clockContainer {
+        display: block;
+    }
+
+    .gameLockScreenPopup.textProperty {
+        font-size: 28px;
+    }
+}
+
+@media (orientation: portrait) {
+    .gameLockScreenPopup.textProperty {
+        font-size: 32px;
+    }
+}
+
+.mobile .es-game-limitation{
+    height: 100%;
+}

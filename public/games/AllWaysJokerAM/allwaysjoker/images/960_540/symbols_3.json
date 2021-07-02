@@ -1,0 +1,193 @@
+{"frames": {
+
+"gsym_0":
+{
+	"frame": {"x":302,"y":132,"w":147,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":147,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_1":
+{
+	"frame": {"x":152,"y":261,"w":147,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":147,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_2":
+{
+	"frame": {"x":2,"y":2,"w":148,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_3":
+{
+	"frame": {"x":2,"y":511,"w":136,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":136,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_4":
+{
+	"frame": {"x":301,"y":262,"w":139,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":139,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_5":
+{
+	"frame": {"x":152,"y":2,"w":148,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_6":
+{
+	"frame": {"x":148,"y":391,"w":139,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":139,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_7":
+{
+	"frame": {"x":152,"y":132,"w":148,"h":127},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":127},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_8":
+{
+	"frame": {"x":302,"y":2,"w":148,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_9":
+{
+	"frame": {"x":2,"y":262,"w":146,"h":121},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":24,"y":3,"w":146,"h":121},
+	"sourceSize": {"w":194,"h":128}
+},
+"gsym_10":
+{
+	"frame": {"x":2,"y":385,"w":144,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":144,"h":124},
+	"sourceSize": {"w":148,"h":128}
+},
+"gsym_overlay":
+{
+	"frame": {"x":2,"y":132,"w":148,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":128},
+	"sourceSize": {"w":148,"h":128}
+},
+"sym_0_small":
+{
+	"frame": {"x":452,"y":2,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_1_small":
+{
+	"frame": {"x":488,"y":2,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_2_small":
+{
+	"frame": {"x":452,"y":20,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_3_small":
+{
+	"frame": {"x":470,"y":20,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_4_small":
+{
+	"frame": {"x":488,"y":20,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_5_small":
+{
+	"frame": {"x":452,"y":38,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_6_small":
+{
+	"frame": {"x":470,"y":38,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_7_small":
+{
+	"frame": {"x":488,"y":38,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_8_small":
+{
+	"frame": {"x":452,"y":56,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_9_small":
+{
+	"frame": {"x":470,"y":56,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"sym_10_small":
+{
+	"frame": {"x":470,"y":2,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+}},
+"meta": {
+	"version": "1.0",
+	"image": "symbols_3.png",
+	"size": {"w":512,"h":1024},
+	"scale": "1"
+}
+}

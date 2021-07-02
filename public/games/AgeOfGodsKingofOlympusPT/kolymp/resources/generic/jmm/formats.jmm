@@ -1,0 +1,28 @@
+{
+    "resources": {
+        "formats": {
+            "sb":            {"font": "MyriadProBold", "style": "bold", "color": "#FFFFFF", "stroke": {"color": "#000000"}},
+            "fg_outro":      {"font": "Arial", "style": "bold", "color": "#fffff7", "align": "center", "stroke": {"color": "#ebb64f","thickness": 2}, "shadow": {"color": "#061160", "offset":[0, 5, 5, 0]}, "size": 60},
+            "fg_text":       {"font": "Adonais", "color": "#ffffff",  "align": "center", "shadow": {"color": "#1c4c70"}},
+            "WIN":           {"font": "Adonais",  "style": "bold", "color": "#ffffff",  "align": "center"},
+            "paytable.pager":{"font": "Adonais",  "style": "bold", "color": "#ffffff", "size": 28, "align": "center"},
+            "spins":         {"font": "MyriadProBold", "color": "#eddbbc", "stroke": {"color": "#183499", "thickness": 1.4}},
+            "spins:disabled":{"font": "MyriadProBold", "color": "#7f7866", "stroke": {"color": "#011051", "thickness": 1.4}},
+            "spins:pressed": {"font": "MyriadProBold", "color": "#feeac8", "stroke": {"color": "#000181", "thickness": 1.4}},
+            "spins:hovered": {"font": "MyriadProBold", "color": "#feeac9", "stroke": {"color": "#0C28A0", "thickness": 1.4}},
+            "bp.field.value":{"font": "ArialMonospace", "style": "bold", "color": "#ffffff",  "align": "center"},
+            "bet.title.p":   {"font": "Arial", "size": 28, "style": "bold", "color": "#000000"},
+            "fg_ticker":     {"font": "ArialMonospace", "style": "bold", "size": 40, "color": "#ffcf0e",  "align": "center", "stroke": {"color": "#062d70", "thickness": 2}},
+            "ticker":        {"font": "Arial", "style": "bold", "color": "#ffdd77",  "align": "center", "shadow": {"color": "#6a0958"}},
+            "info.text":     {"font": "Arial","style": "bold","color": "#38457d", "size": 26},
+            "fg.info.text":  {"font": "Arial", "color": "#DDA0DD", "size": 26, "stroke": {"color": "#0906b7", "thickness": 1}},
+            "pager":         {"font": "Arial", "color": "#ffffff", "size": 28},
+            "loading.title": {"font": "Arial", "style": "bold", "size": 16, "color": "#FFF", "stroke": {"color": "#10000", "thickness": 1}}
+        },
+        "fonts": {
+            "Adonais":       {"type": "system", "url": "Adonais_regular.ttf"},
+            "MyriadProBold": {"type": "system", "url": "MyriadPro-BoldCond.otf"},
+            "ArialMonospace":{"type": "system", "url": "Arial_mono_reg.ttf"}
+        }
+    }
+}

@@ -1,0 +1,89 @@
+{"frames": {
+
+"big_0":
+{
+	"frame": {"x":1146,"y":2,"w":630,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":630,"h":260},
+	"sourceSize": {"w":630,"h":260}
+},
+"big_1":
+{
+	"frame": {"x":861,"y":530,"w":780,"h":256},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":780,"h":256},
+	"sourceSize": {"w":780,"h":260}
+},
+"big_light_0":
+{
+	"frame": {"x":1146,"y":266,"w":630,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":630,"h":260},
+	"sourceSize": {"w":630,"h":260}
+},
+"big_light_1":
+{
+	"frame": {"x":861,"y":790,"w":780,"h":256},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":780,"h":256},
+	"sourceSize": {"w":780,"h":260}
+},
+"mega_0":
+{
+	"frame": {"x":2,"y":2,"w":1140,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1140,"h":260},
+	"sourceSize": {"w":1140,"h":260}
+},
+"mega_1":
+{
+	"frame": {"x":2,"y":794,"w":780,"h":256},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":780,"h":256},
+	"sourceSize": {"w":780,"h":260}
+},
+"mega_light_0":
+{
+	"frame": {"x":2,"y":266,"w":1140,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1140,"h":260},
+	"sourceSize": {"w":1140,"h":260}
+},
+"mega_light_1":
+{
+	"frame": {"x":786,"y":1050,"w":780,"h":256},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":780,"h":256},
+	"sourceSize": {"w":780,"h":260}
+},
+"nice_0":
+{
+	"frame": {"x":2,"y":530,"w":855,"h":260},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":855,"h":260},
+	"sourceSize": {"w":855,"h":260}
+},
+"nice_1":
+{
+	"frame": {"x":2,"y":1054,"w":780,"h":256},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":780,"h":256},
+	"sourceSize": {"w":780,"h":260}
+}},
+"meta": {
+	"version": "1.0",
+	"image": "wins.png",
+	"size": {"w":1778,"h":1312},
+	"scale": "1"
+}
+}

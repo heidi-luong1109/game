@@ -1,0 +1,57 @@
+{
+    "modules": {
+        "default": {
+            "window":{
+                "pos": "center",
+                "size": [1136, 640]
+            },
+            "jmms": [
+                "slot/common/media.jmm",
+                "/slot/common/desktop-controls.jmm",
+                "/slot/common/desktop-messages.jmm",
+                "/slot/common/desktop-dialog.jmm",
+                "/slot/common/desktop-fsb-bar.jmm",
+                "/slot/common/engine-settings.jmm",
+                "/slot/common/debug_config.jmm",
+                "ageofgods/desktop-ageofgods.jmm",
+
+                "config/config.jmm",
+                "animations/animations.jmm",
+                "animations/sprites.jmm",
+                "formats.jmm",
+                "images/images.jmm",
+                "media.jmm",
+
+                "bottom-bar.jmm",
+                "scenes/main.jmm",
+                "scenes/paytable.jmm",
+                "controls/reelset.jmm",
+
+                "controls/side-buttons.jmm"
+            ],
+
+            "localizedBrandedJmms": [
+                "../../translations/jmm/slot/common/texts/texts_en.jmm",
+                "../../translations/jmm/slot/common/texts/dt_texts_en.jmm",
+                "../../translations/jmm/config/config_en.jmm",
+                "../../translations/jmm/texts/texts_en.jmm",
+                "../../translations/jmm/images/images_en.jmm",
+                "../../translations/jmm/scenes/main_en.jmm",
+                "../../translations/jmm/ageofgods/scenes/desktop-ageofgods_en.jmm",
+                "../../translations/jmm/ageofgods/texts/texts_en.jmm",
+                "../../translations/jmm/bottom-bar_en.jmm",
+                "../../translations/jmm/formats_en.jmm"
+            ],
+			"branding": [
+                "slot/common/branding/brand.jmm",
+                "slot/common/branding/desktop-brand.jmm"
+            ]
+        }
+    },
+
+    "common": {
+        "ui": {
+            "anchor.all": {"props": {"anchor.fit": 0}}
+        }
+    }
+}

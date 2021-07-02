@@ -1,0 +1,11 @@
+{
+  "resources" : {
+    "texts" : {
+      "artifacts_to_win" : "ARTIFACTS TO WIN",
+      "artifact_to_win" : "ARTIFACT TO WIN",
+      "pick" : " PICK",
+      "bonus_win" : "BONUS WIN:",
+      "welcome_to_fg" :"WELCOME TO\n THE ROYAL TREASURY!"
+    }
+  }
+}

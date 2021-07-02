@@ -1,0 +1,114 @@
+{
+  "brandShortName": "lasvegas",
+  "features": {
+    "inGameLobby": {
+      "categories": [
+        {
+          "categoryName": "lobbyInGame.categoryName.slots",
+          "gamesIds": [
+            "ashjid",
+            "ashneo",
+            "furf",
+            "zeus",
+            "mrcb",
+            "lm",
+            "aogs",
+            "hk",
+            "ro_g",
+            "mfrt",
+            "ftsis",
+            "donq",
+            "whk"
+          ]
+        }
+      ]
+    }
+  },
+  "enabledRegulation": "UK",
+  "customRegulations": {
+    "UK": {
+      "regulations": {
+        "ukRegulationEnabled": false
+      }
+    }
+  },
+  "mainMenuItems": [
+    {
+      "id": "deposit",
+      "orderIndex": 20
+    },
+    {
+      "id": "sound",
+      "orderIndex": 80
+    },
+    {
+      "id": "support",
+      "orderIndex": 40
+    },
+    {
+      "id": "mainHand",
+      "orderIndex": 50
+    },
+    {
+      "id": "paytable",
+      "orderIndex": 60
+    },
+    {
+      "id": "help",
+      "orderIndex": 70
+    },
+    {
+      "id": "transactions",
+      "enabledInMode": {
+        "online_Real": false
+      }
+    },
+    {
+      "id": "withdraw",
+      "enabledInMode": {
+        "online_Real": false
+      }
+    },
+    {
+      "id": "logout",
+      "enabledInMode": {
+        "online_Real": false,
+        "online_Demo": false
+      }
+    },
+    {
+      "id": "settings",
+      "enabledInMode": {
+        "offline": false,
+        "online_Real": false,
+        "online_Demo": false
+      }
+    },
+    {
+      "id": "chat",
+      "enabledInMode": {
+        "offline": false,
+        "online_Real": false,
+        "online_Demo": false
+      }
+    },
+    {
+      "id": "depositLimit",
+      "enabledInMode": {
+        "online_Real": false
+      }
+    },
+    {
+      "id": "share",
+      "enabledInMode": {
+        "online_Real": false
+      }
+    },
+    {
+      "id": "compPoints",
+      "enabledInMode": {
+        "online_Real": false
+      }
+    }
+  ]
+}

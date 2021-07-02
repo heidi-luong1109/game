@@ -1,0 +1,13 @@
+{
+    "resources": {
+        "images": {
+            "atlas_locale_1" : {"url": "../../translations/images/atlases/atlas_localization_1_en.png"},
+            "atlas_locale_2" : {"url": "../../translations/images/atlases/atlas_localization_2_en.png"},
+            "atlas_locale_3" : {"url": "../../translations/images/atlases/atlas_localization_3_en.png"},
+            "atlas_locale_4" : {"url": "../../translations/images/atlases/atlas_localization_4_en.png"},
+            "paytable1"      : {"url": "../../translations/images/paytable/paytable1_en.png"},
+            "paytable2"      : {"url": "../../translations/images/paytable/paytable2_en.png"},
+            "paytable3"      : {"url": "../../translations/images/paytable/paytable3_en.png"}
+        }
+    }
+}

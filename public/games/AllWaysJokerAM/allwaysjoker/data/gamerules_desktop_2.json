@@ -1,0 +1,881 @@
+{
+	"children":
+	[
+		{
+			"id": "gamerules_header",
+			"parent_id": "gamerules_div",
+			"type": "h1"
+		},
+		{
+			"id": "gamerules_div_game",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_game_header",
+			"parent_id": "gamerules_div_game",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_game_p",
+			"parent_id": "gamerules_div_game",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_game_ul",
+			"parent_id": "gamerules_div_game",
+			"type": "ul",
+			"children":
+			[
+				{
+					"id": "game_info",
+					"type": "li"
+				},
+				{
+					"id": "game_fixed_ways",
+					"type": "li"
+				},
+				{
+					"id": "game_win_direction",
+					"type": "li"
+				},			
+				{
+					"id": "game_symbol_multiplier",
+					"type": "li"
+				},
+				{
+					"id": "game_symbol_multiplier_list",
+					"type": "ul"
+				},
+				{
+					"id": "game_symbol_multiplier_appear",
+					"type": "li"
+				},
+				{
+					"id": "game_symbol_scatter",
+					"type": "li"
+				},
+				{
+					"id": "game_values_currency",
+					"type": "li"
+				},
+				{
+					"id": "game_values_paytable_bet",
+					"type": "li"
+				},
+				{
+					"id": "game_payouts_paytable",
+					"type": "li"
+				},
+				{
+					"id": "game_max_win",
+					"type": "li"
+				},
+				{
+					"id": "game_no_max_win",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "game_symbol_multiplier_ul",
+			"parent_id": "game_symbol_multiplier_list",
+			"type": "ul",
+			"style":"list-style-type: circle; padding-left: 2.0em;",
+			"children":
+			[
+				{
+					"id": "game_symbol_multiplier_1",
+					"type": "li"
+				},
+				{
+					"id": "game_symbol_multiplier_2",
+					"type": "li"
+				},
+				{
+					"id": "game_symbol_multiplier_3",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "gamerules_div_bonus",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_bonus_header",
+			"parent_id": "gamerules_div_bonus",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_bonus_p",
+			"parent_id": "gamerules_div_bonus",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_bonus_ul",
+			"parent_id": "gamerules_div_bonus",
+			"type": "ul",
+			"children":
+			[
+				{
+					"id": "bonus_trigger",
+					"type": "li"
+				},
+				{
+					"id": "bonus_trigger_list",
+					"type": "ul"
+				},
+				{
+					"id": "bonus_all_scatter",
+					"type": "li"
+				},
+				{
+					"id": "bonus_bet",
+					"type": "li"
+				},
+				{
+					"id": "bonus_win",
+					"type": "li"
+				},
+				{
+					"id": "bonus_end",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "bonus_trigger_ul",
+			"parent_id": "bonus_trigger_list",
+			"type": "ul",
+			"style":"list-style-type: circle; padding-left: 2.0em;",
+			"children":
+			[
+				{
+					"id": "bonus_trigger_5",
+					"type": "li"
+				},
+				{
+					"id": "bonus_trigger_4",
+					"type": "li"
+				},
+				{
+					"id": "bonus_trigger_3",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "gamerules_div_gamble",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_gamble_header",
+			"parent_id": "gamerules_div_gamble",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_gamble_p",
+			"parent_id": "gamerules_div_gamble",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_gamble_ul",
+			"parent_id": "gamerules_div_gamble",
+			"type": "ul",
+			"children":
+			[
+				{
+					"id": "gamble_info",
+					"type": "li"
+				},
+				{
+					"id": "gamble_max",
+					"type": "li"
+				},
+				{
+					"id": "gamble_autocollect",
+					"type": "li"
+				},
+				{
+					"id": "gamble_collect",
+					"type": "li"
+				},
+				{
+					"id": "gamble_half",
+					"type": "li"
+				},
+				{
+					"id": "gamble_color",
+					"type": "li"
+				},
+				{
+					"id": "gamble_suit",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "gamerules_div_gameplay",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_gameplay_header",
+			"parent_id": "gamerules_div_gameplay",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_gameplay_p",
+			"parent_id": "gamerules_div_gameplay",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_gameplay_table",
+			"parent_id": "gamerules_div_gameplay_p",
+			"type": "table",
+			"children":
+			[
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_title",
+							"type": "th"
+						},
+						{
+							"id": "gameplay_explanation_title",
+							"type": "th"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_play",
+							"type": "td",
+							"img": "/gamerules/images/icon_play.png"
+						},
+						{
+							"id": "gameplay_explanation_play_start",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_stop_1",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_stop",
+							"type": "td",
+							"img": "/gamerules/images/icon_stop.png"
+						},
+						{
+							"id": "gameplay_explanation_play_stop",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_stop_2",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_stop_2",
+							"type": "td",
+							"img": "/gamerules/images/icon_stop_2.png"
+						},
+						{
+							"id": "gameplay_explanation_play_stop",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_collect",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_collect",
+							"type": "td",
+							"img": "/gamerules/images/icon_collect.png"
+						},
+						{
+							"id": "gameplay_explanation_play_collect",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_autoplay",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_autoplay",
+							"type": "td",
+							"img": "/gamerules/images/desktop/icon_autoplay.png"
+						},
+						{
+							"id": "gameplay_explanation_autoplay",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_law_autoplay",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_autoplay",
+							"type": "td",
+							"img": "/gamerules/images/icon_autoplay.png"
+						},
+						{
+							"id": "gameplay_explanation_autoplay",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_gamble",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_gamble",
+							"type": "td",
+							"img": "/gamerules/images/icon_gamble.png"
+						},
+						{
+							"id": "gameplay_explanation_gamble",
+							"type": "td"
+						}
+					]
+				},				
+				{
+					"type": "tr",
+					"id": "gameplay_half",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_half",
+							"type": "td",
+							"img": "/gamerules/images/icon_half.png"
+						},
+						{
+							"id": "gameplay_explanation_half",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_maxbet",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_maxbet",
+							"type": "td",
+							"img": "/gamerules/images/desktop/icon_maxbet.png"
+						},
+						{
+							"id": "gameplay_explanation_maxbet",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_inc_bet",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_plus",
+							"type": "td",
+							"img": "/gamerules/images/icon_plus.png"
+						},
+						{
+							"id": "gameplay_explanation_plus_bet",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_inc_lines_bet",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_plus",
+							"type": "td",
+							"img": "/gamerules/images/icon_plus.png"
+						},
+						{
+							"id": "gameplay_explanation_plus_bet_lines",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_dec_bet",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_minus",
+							"type": "td",
+							"img": "/gamerules/images/icon_minus.png"
+						},
+						{
+							"id": "gameplay_explanation_minus_bet",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_dec_lines_bet",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_minus",
+							"type": "td",
+							"img": "/gamerules/images/icon_minus.png"
+						},
+						{
+							"id": "gameplay_explanation_minus_bet_lines",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_exit",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_exit",
+							"type": "td",
+							"img": "/gamerules/images/icon_exit.png"
+						},
+						{
+							"id": "gameplay_explanation_exit",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_help",
+							"type": "td",
+							"img": "/gamerules/images/icon_help.png"
+						},
+						{
+							"id": "gameplay_explanation_help",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_sound",
+					"children": 
+					[
+						{
+							"id": "gamesetting_icon_sound",
+							"type": "td",
+							"img": "/gamerules/images/icon_sound.png"
+						},
+						{
+							"id": "gamesetting_explanation_sound",
+							"type": "td"
+						}
+					]
+				},	
+				{
+					"type": "tr",
+					"id": "gameplay_setting",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_setting",
+							"type": "td",
+							"img": "/gamerules/images/icon_setting.png"
+						},
+						{
+							"id": "gameplay_explanation_setting",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_paytable",
+							"type": "td",
+							"img": "/gamerules/images/icon_paytable.png"
+						},
+						{
+							"id": "gameplay_explanation_paytable",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_gamerules",
+							"type": "td",
+							"img": "/gamerules/images/icon_gamerules.png"
+						},
+						{
+							"id": "gameplay_explanation_gamerules",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_history",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_history",
+							"type": "td",
+							"img": "/gamerules/images/icon_history.png"
+						},
+						{
+							"id": "gameplay_explanation_history",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gameplay_statistic",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_statistic",
+							"type": "td",
+							"img": "/gamerules/images/icon_statistic.png"
+						},
+						{
+							"id": "gameplay_explanation_statistic",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_next",
+							"type": "td",
+							"img": "/gamerules/images/icon_next.png"
+						},
+						{
+							"id": "gameplay_explanation_next",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_prev",
+							"type": "td",
+							"img": "/gamerules/images/icon_prev.png"
+						},
+						{
+							"id": "gameplay_explanation_prev",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gameplay_icon_back",
+							"type": "td",
+							"img": "/gamerules/images/icon_back.png"
+						},
+						{
+							"id": "gameplay_explanation_back",
+							"type": "td"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "gameplay_explanation_spacebar",
+			"parent_id": "gamerules_div_gameplay_p",
+			"type": "h3"
+		},
+		{
+			"id": "gamerules_div_gamesetting",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_gamesetting_header",
+			"parent_id": "gamerules_div_gamesetting",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_gamesetting_p",
+			"parent_id": "gamerules_div_gamesetting",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_gamesetting_table",
+			"parent_id": "gamerules_div_gamesetting_p",
+			"type": "table",
+			"children":
+			[
+				{
+					"type": "tr",
+					"children": 
+					[
+						{
+							"id": "gamesetting_icon_title",
+							"type": "th"
+						},
+						{
+							"id": "gamesetting_explanation_title",
+							"type": "th"
+						}
+					]
+				},					
+				{
+					"type": "tr",
+					"id": "gamesetting_language",
+					"children": 
+					[
+						{
+							"id": "gamesetting_icon_language",
+							"type": "td",
+							"img": "/gamerules/images/icon_language.png"
+						},
+						{
+							"id": "gamesetting_explanation_language",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gamesetting_music",
+					"children": 
+					[
+						{
+							"id": "gamesetting_icon_music",
+							"type": "td",
+							"img": "/gamerules/images/icon_music.png"
+						},
+						{
+							"id": "gamesetting_explanation_music",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gamesetting_fullscreen",
+					"children": 
+					[
+						{
+							"id": "gamesetting_icon_fullscreen",
+							"type": "td",
+							"img": "/gamerules/images/icon_fullscreen.png"
+						},
+						{
+							"id": "gamesetting_explanation_fullscreen",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gamesetting_turbo",
+					"children": 
+					[
+						{
+							"id": "gamesetting_icon_turbo",
+							"type": "td",
+							"img": "/gamerules/images/icon_turbo.png"
+						},
+						{
+							"id": "gamesetting_explanation_turbo",
+							"type": "td"
+						}
+					]
+				},
+				{
+					"type": "tr",
+					"id": "gamesetting_adjustment",
+					"children": 
+					[
+						{
+							"id": "gamesetting_icon_adjustment",
+							"type": "td",
+							"img": "/gamerules/images/icon_adjustment.png"
+						},
+						{
+							"id": "gamesetting_explanation_adjustment",
+							"type": "td"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "gamerules_div_autoplay",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_autoplay_header",
+			"parent_id": "gamerules_div_autoplay",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_autoplay_p",
+			"parent_id": "gamerules_div_autoplay",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_autoplay_ul",
+			"parent_id": "gamerules_div_autoplay",
+			"type": "ul",
+			"children":
+			[
+				{
+					"id": "autoplay_games",
+					"type": "li"
+				},
+				{
+					"id": "autoplay_min_credit",
+					"type": "li"
+				},
+				{
+					"id": "autoplay_max_credit",
+					"type": "li"
+				},
+				{
+					"id": "autoplay_max_win",
+					"type": "li"
+				},
+				{
+					"id": "autoplay_jurisdictions",
+					"type": "li"
+				},
+				{
+					"id": "autoplay_freespin",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "gamerules_div_rtp",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_rtp_header",
+			"parent_id": "gamerules_div_rtp",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_rtp_p",
+			"parent_id": "gamerules_div_rtp",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_rtp_ul",
+			"parent_id": "gamerules_div_rtp",
+			"type": "ul",
+			"children":
+			[
+				{
+					"id": "rtp_game",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "gamerules_div_info",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_info_header",
+			"parent_id": "gamerules_div_info",
+			"type": "h2"
+		},
+		{
+			"id": "gamerules_div_info_p",
+			"parent_id": "gamerules_div_info",
+			"type": "p"
+		},
+		{
+			"id": "gamerules_div_info_ul",
+			"parent_id": "gamerules_div_info",
+			"type": "ul",
+			"children":
+			[				
+				{
+					"id": "info_malfunction",
+					"type": "li"
+				},
+				{
+					"id": "info_gameid",
+					"type": "li"
+				},				
+				{
+					"id": "info_disconnect",
+					"type": "li"
+				}
+			]
+		},
+		{
+			"id": "gamerules_div_version",
+			"parent_id": "gamerules_div",
+			"type": "div"
+		},
+		{
+			"id": "gamerules_version_header",
+			"parent_id": "gamerules_div_version",
+			"type": "h3"
+		},
+		{
+			"id": "gamerules_div_version_p",
+			"parent_id": "gamerules_div_version",
+			"type": "p"
+		}
+	]
+}

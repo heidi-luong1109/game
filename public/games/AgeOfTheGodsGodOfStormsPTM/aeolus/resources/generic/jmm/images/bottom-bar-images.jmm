@@ -1,0 +1,171 @@
+{
+    "resources": {
+        "images": {
+            "bottom_panel": {"url": "../../translations/images/ui/panel_${lang}.png", "preload": "main-scene"},
+
+            "bottom_buttons_1": {"url": "../../translations/images/ui/bottom_buttons_1_${lang}.png", "preload": "main-scene"},
+            "bottom_buttons_2": {"url": "../../translations/images/ui/bottom_buttons_2_${lang}.png", "preload": "main-scene"},
+            "bottom_buttons_4": {"url": "../../translations/images/ui/bottom_buttons_4_${lang}.png", "preload": "main-scene"},
+
+            "autoplay_btn_up":   {"url": "bottombar/AutoplayUp.png",       "preload": "main-scene"},
+            "autoplay_btn_over": {"url": "bottombar/AutoplayOver.png",     "preload": "main-scene"},
+            "autoplay_btn_hit":  {"url": "bottombar/AutoplayHit.png",      "preload": "main-scene"},
+            "autoplay_btn_dis":  {"url": "bottombar/AutoplayDisabled.png", "preload": "main-scene"},
+
+            "autoplay_btns": {"url": "../../translations/images/ui/autoplay/autoplay_${lang}.png", "preload": "main-scene"}
+        },
+
+        "slices": {
+            "autoplay_btn":          {"image": "autoplay_btn_up",   "size": [128, 39]},
+            "autoplay_btn:disabled": {"image": "autoplay_btn_dis",  "size": [128, 39]},
+            "autoplay_btn:hovered":  {"image": "autoplay_btn_over", "size": [128, 39]},
+            "autoplay_btn:pressed":  {"image": "autoplay_btn_hit",  "size": [128, 39]},
+
+            "backpanel": {"image": "bottom_panel", "size": [1018, 229], "pos": [1, 1]},
+
+            "info.box":          {"image": "bottom_panel", "size": [123, 83], "pos": [593, 232]},
+            "info.box:disabled": {"image": "bottom_panel", "size": [123, 83], "pos": [218, 232]},
+            "info.box:hovered":  {"image": "bottom_panel", "size": [123, 83], "pos": [468, 232]},
+            "info.box:pressed":  {"image": "bottom_panel", "size": [123, 83], "pos": [343, 232]},
+
+            "coins.minus":          {"image": "bottom_panel", "size": [61, 40], "pos": [497, 317]},
+            "coins.minus:disabled": {"image": "bottom_panel", "size": [61, 40], "pos": [308, 317]},
+            "coins.minus:hovered":  {"image": "bottom_panel", "size": [61, 40], "pos": [434, 317]},
+            "coins.minus:pressed":  {"image": "bottom_panel", "size": [61, 40], "pos": [371, 317]},
+
+            "coins.plus":          {"image": "bottom_panel", "size": [61, 40], "pos": [718, 275]},
+            "coins.plus:disabled": {"image": "bottom_panel", "size": [61, 40], "pos": [560, 317]},
+            "coins.plus:hovered":  {"image": "bottom_panel", "size": [61, 40], "pos": [686, 317]},
+            "coins.plus:pressed":  {"image": "bottom_panel", "size": [61, 40], "pos": [623, 317]},
+
+            "lines.minus":          {"image": "bottom_panel", "size": [41, 40], "pos": [824, 275]},
+            "lines.minus:disabled": {"image": "bottom_panel", "size": [41, 40], "pos": [749, 317]},
+            "lines.minus:hovered":  {"image": "bottom_panel", "size": [41, 40], "pos": [792, 317]},
+            "lines.minus:pressed":  {"image": "bottom_panel", "size": [41, 40], "pos": [781, 275]},
+
+            "lines.plus":          {"image": "bottom_panel", "size": [41, 40], "pos": [889, 232]},
+            "lines.plus:disabled": {"image": "bottom_panel", "size": [41, 40], "pos": [835, 317]},
+            "lines.plus:hovered":  {"image": "bottom_panel", "size": [41, 40], "pos": [867, 274]},
+            "lines.plus:pressed":  {"image": "bottom_panel", "size": [41, 40], "pos": [846, 232]},
+
+            "win.display":      {"image": "bottom_panel",     "size": [215, 85], "pos": [1, 232]},
+            "lineBet.display":  {"image": "bottom_panel",     "size": [126, 41], "pos": [718, 232]},
+            "lines.display":    {"image": "bottom_panel",     "size": [88, 40], "pos": [218, 317]},
+            "totalBet.display": {"image": "bottom_buttons_1", "size": [128, 41], "pos": [220, 262]},
+
+            "autoplay.-1":          {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 834]},
+            "autoplay.-1:disabled": {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 711]},
+            "autoplay.-1:pressed":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 752]},
+            "autoplay.-1:hovered":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 793]},
+
+            "autoplay.10":          {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 506]},
+            "autoplay.10:disabled": {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 383]},
+            "autoplay.10:pressed":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 424]},
+            "autoplay.10:hovered":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 465]},
+
+            "autoplay.20":          {"image": "autoplay_btns", "size": [128, 39], "pos": [131, 1]},
+            "autoplay.20:disabled": {"image": "autoplay_btns", "size": [128, 39], "pos": [1, 1]},
+            "autoplay.20:hovered":  {"image": "autoplay_btns", "size": [128, 39], "pos": [261, 1]},
+            "autoplay.20:pressed":  {"image": "autoplay_btns", "size": [128, 39], "pos": [1, 42]},
+
+            "autoplay.25":          {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 428]},
+            "autoplay.25:disabled": {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 305]},
+            "autoplay.25:pressed":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 346]},
+            "autoplay.25:hovered":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 387]},
+
+            "autoplay.30":          {"image": "autoplay_btns", "size": [128, 39], "pos": [261, 42]},
+            "autoplay.30:disabled": {"image": "autoplay_btns", "size": [128, 39], "pos": [131, 42]},
+            "autoplay.30:hovered":  {"image": "autoplay_btns", "size": [128, 39], "pos": [1, 83]},
+            "autoplay.30:pressed":  {"image": "autoplay_btns", "size": [128, 39], "pos": [131, 83]},
+
+            "autoplay.40":          {"image": "autoplay_btns", "size": [128, 39], "pos": [1, 124]},
+            "autoplay.40:disabled": {"image": "autoplay_btns", "size": [128, 39], "pos": [261, 83]},
+            "autoplay.40:hovered":  {"image": "autoplay_btns", "size": [128, 39], "pos": [131, 124]},
+            "autoplay.40:pressed":  {"image": "autoplay_btns", "size": [128, 39], "pos": [261, 124]},
+
+            "autoplay.50":          {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 756]},
+            "autoplay.50:disabled": {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 633]},
+            "autoplay.50:pressed":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 674]},
+            "autoplay.50:hovered":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 715]},
+
+            "autoplay.99":          {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 342]},
+            "autoplay.99:disabled": {"image": "bottom_buttons_1", "size": [128, 39], "pos": [220, 797]},
+            "autoplay.99:pressed":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 260]},
+            "autoplay.99:hovered":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 301]},
+
+            "autoplay":          {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 670]},
+            "autoplay:disabled": {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 547]},
+            "autoplay:pressed":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 588]},
+            "autoplay:hovered":  {"image": "bottom_buttons_1", "size": [128, 39], "pos": [350, 629]},
+
+            "autoplay_bg": {"image": "bottom_buttons_1", "size": [138, 243], "pos": [1, 1]},
+
+            "spin_button:disabled": {"image": "bottom_buttons_1", "size": [127, 85], "pos": [270, 1]},
+            "spin_button:pressed":  {"image": "bottom_buttons_1", "size": [127, 85], "pos": [1, 420]},
+            "spin_button:hovered":  {"image": "bottom_buttons_1", "size": [127, 85], "pos": [271, 88]},
+            "spin_button":          {"image": "bottom_buttons_1", "size": [127, 85], "pos": [1, 507]},
+
+            "stop_button:disabled": {"image": "bottom_buttons_1", "size": [127, 85], "pos": [1, 594]},
+            "stop_button:pressed":  {"image": "bottom_buttons_1", "size": [127, 85], "pos": [1, 681]},
+            "stop_button:hovered":  {"image": "bottom_buttons_1", "size": [127, 85], "pos": [1, 768]},
+            "stop_button":          {"image": "bottom_buttons_1", "size": [127, 85], "pos": [140, 175]},
+
+            "start_button:hovered":  {"image": "bottom_buttons_1", "size": [127, 85], "pos": [2, 246]},
+            "start_button:disabled": {"image": "bottom_buttons_1", "size": [127, 85], "pos": [141, 1]},
+            "start_button:pressed":  {"image": "bottom_buttons_1", "size": [127, 85], "pos": [1, 333]},
+            "start_button":          {"image": "bottom_buttons_1", "size": [127, 85], "pos": [141, 88]},
+
+            "turbo_off":          {"image": "bottom_buttons_1", "size": [88, 83], "pos": [270, 175]},
+            "turbo_off:disabled": {"image": "bottom_buttons_1", "size": [88, 83], "pos": [130, 262]},
+            "turbo_off:pressed":  {"image": "bottom_buttons_1", "size": [88, 83], "pos": [130, 347]},
+            "turbo_off:hovered":  {"image": "bottom_buttons_1", "size": [88, 83], "pos": [130, 432]},
+
+            "turbo_on":          {"image": "bottom_buttons_1", "size": [88, 83], "pos": [130, 687]},
+            "turbo_on:disabled": {"image": "bottom_buttons_1", "size": [88, 83], "pos": [130, 517]},
+            "turbo_on:hovered":  {"image": "bottom_buttons_1", "size": [88, 83], "pos": [130, 602]},
+            "turbo_on:pressed":  {"image": "bottom_buttons_1", "size": [88, 83], "pos": [130, 772]},
+
+            "spin_button.large:disabled": {"image": "bottom_buttons_2", "size": [203, 81], "pos": [1, 166]},
+            "spin_button.large:pressed":  {"image": "bottom_buttons_2", "size": [203, 81], "pos": [206, 166]},
+            "spin_button.large:hovered":  {"image": "bottom_buttons_2", "size": [203, 81], "pos": [1, 249]},
+            "spin_button.large":          {"image": "bottom_buttons_2", "size": [203, 81], "pos": [206, 249]},
+
+            "stop_button.large:disabled": {"image": "bottom_buttons_2", "size": [203, 81], "pos": [1, 332]},
+            "stop_button.large:pressed":  {"image": "bottom_buttons_2", "size": [203, 81], "pos": [206, 332]},
+            "stop_button.large:hovered":  {"image": "bottom_buttons_2", "size": [203, 81], "pos": [1, 415]},
+            "stop_button.large":          {"image": "bottom_buttons_2", "size": [203, 81], "pos": [206, 415]},
+
+            "start_button.large:disabled": {"image": "bottom_buttons_2", "size": [203, 81], "pos": [1, 0]},
+            "start_button.large:pressed":  {"image": "bottom_buttons_2", "size": [203, 81], "pos": [206, 0]},
+            "start_button.large:hovered":  {"image": "bottom_buttons_2", "size": [203, 81], "pos": [1, 83]},
+            "start_button.large":          {"image": "bottom_buttons_2", "size": [203, 81], "pos": [206, 83]},
+
+            "turbo_off.large:disabled": {"image": "bottom_buttons_2", "size": [127, 81], "pos": [1, 498]},
+            "turbo_off.large:pressed":  {"image": "bottom_buttons_2", "size": [127, 81], "pos": [130, 498]},
+            "turbo_off.large:hovered":  {"image": "bottom_buttons_2", "size": [127, 81], "pos": [259, 498]},
+            "turbo_off.large":          {"image": "bottom_buttons_2", "size": [127, 81], "pos": [1, 582]},
+
+            "turbo_on.large:disabled": {"image": "bottom_buttons_2", "size": [127, 81], "pos": [130, 581]},
+            "turbo_on.large:pressed":  {"image": "bottom_buttons_2", "size": [127, 81], "pos": [259, 581]},
+            "turbo_on.large:hovered":  {"image": "bottom_buttons_2", "size": [127, 81], "pos": [1, 664]},
+            "turbo_on.large":          {"image": "bottom_buttons_2", "size": [127, 81], "pos": [130, 664]},
+
+            "totalBet.large":          {"image": "bottom_buttons_2", "size": [128, 82], "pos": [264, 664]},
+
+            "spin_button.xlarge":          {"image": "bottom_buttons_4", "size": [342, 81], "pos": [1, 250]},
+            "spin_button.xlarge:disabled": {"image": "bottom_buttons_4", "size": [342, 81], "pos": [1, 333]},
+            "spin_button.xlarge:pressed":  {"image": "bottom_buttons_4", "size": [342, 81], "pos": [1, 416]},
+            "spin_button.xlarge:hovered":  {"image": "bottom_buttons_4", "size": [342, 81], "pos": [345, 84]},
+
+            "stop_button.xlarge":          {"image": "bottom_buttons_4", "size": [342, 81], "pos": [345, 167]},
+            "stop_button.xlarge:disabled": {"image": "bottom_buttons_4", "size": [342, 81], "pos": [345, 250]},
+            "stop_button.xlarge:pressed":  {"image": "bottom_buttons_4", "size": [342, 81], "pos": [345, 333]},
+            "stop_button.xlarge:hovered":  {"image": "bottom_buttons_4", "size": [342, 81], "pos": [345, 416]},
+
+            "start_button.xlarge:disabled": {"image": "bottom_buttons_4", "size": [342, 81], "pos": [345, 1]},
+            "start_button.xlarge:pressed":  {"image": "bottom_buttons_4", "size": [342, 81], "pos": [1, 84]},
+            "start_button.xlarge:hovered":  {"image": "bottom_buttons_4", "size": [342, 81], "pos": [1, 167]},
+            "start_button.xlarge":          {"image": "bottom_buttons_4", "size": [342, 81], "pos": [1, 1]}
+        }
+    }
+}

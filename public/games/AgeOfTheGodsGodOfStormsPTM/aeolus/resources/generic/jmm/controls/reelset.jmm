@@ -1,0 +1,61 @@
+{
+    "ui": {
+        "sprite.places": {"@P": "ui/anchor.relative", "group": "spritePlace", "size": [137, 413], "snap": false, "content": [
+            {"type": "stack", "props": {"anchor.fit": "0 0 66.666 0"}},
+            {"type": "stack", "props": {"anchor.fit": "33.333 0 33.333 0"}},
+            {"type": "stack", "props": {"anchor.fit": "66.666 0 0 0"}}
+        ]},
+
+        "reel": {"type": "reel", "group": "reels", "#ID": "reel_id", "size": [137, 413]},
+
+        "ship": {"type": "vport", "group": "shipContainers", "layout": {"base": [138, 413]}, "size": [138, 413], "animation": "slide_ship", "clipped": true, "content": [
+            {"@P": "ui/ship.sprite", "group": "ships", "size": [137, 475], "pos": [0, -31], "visible": false},
+            {"type": "image", "group": "shipIdles", "size": [137, 482], "pos": [0, -34.5], "slice": "ship_wild_idle", "visible": false}
+        ]},
+
+        "sprite_container": {"type": "vport", "layout": {"base": [740, 413]}, "size": [740, 413], "pos": [-18, 0], "snap": false, "clipped": true},
+
+        "reelset": {"type": "vport", "layout": {"base": [704, 550]}, "size": [704, 550], "snap": false, "content": [
+            {"type": "image", "slice": "reels_frame", "size": [704, 413]},
+
+            {"@P": {"#ID": "ui/reel", "reel_id": {"reel_id": 1}}, "pos": [1, 0]},
+            {"@P": {"#ID": "ui/reel", "reel_id": {"reel_id": 2}}, "pos": [142.5, 0]},
+            {"@P": {"#ID": "ui/reel", "reel_id": {"reel_id": 3}}, "pos": [284.5, 0]},
+            {"@P": {"#ID": "ui/reel", "reel_id": {"reel_id": 4}}, "pos": [426, 0]},
+            {"@P": {"#ID": "ui/reel", "reel_id": {"reel_id": 5}}, "pos": [567.5, 0]},
+
+            {"@P": "ui/sprite_container", "content": [
+                {"@P": "ui/sprite.places", "pos": [19, 0]},
+                {"@P": "ui/sprite.places", "pos": [160.5, 0]},
+                {"@P": "ui/sprite.places", "pos": [302.5, 0]},
+                {"@P": "ui/sprite.places", "pos": [444, 0]},
+                {"@P": "ui/sprite.places", "pos": [585.5, 0]}
+            ]},
+
+            {"@P": "ui/ship", "pos": [1, 0]},
+            {"@P": "ui/ship", "pos": [142.5, 0]},
+            {"@P": "ui/ship", "pos": [284.5, 0]},
+            {"@P": "ui/ship", "pos": [426, 0]},
+
+            {"@P": "ui/sprite_container", "content": [
+                {"@P": "ui/sprite.places", "group": "frontSpritePlace", "pos": [19, 0]},
+                {"@P": "ui/sprite.places", "group": "frontSpritePlace", "pos": [160.5, 0]},
+                {"@P": "ui/sprite.places", "group": "frontSpritePlace", "pos": [302.5, 0]},
+                {"@P": "ui/sprite.places", "group": "frontSpritePlace", "pos": [444, 0]},
+                {"@P": "ui/sprite.places", "group": "frontSpritePlace", "pos": [585.5, 0]}
+            ]},
+
+            {"@P": "ui/sb.left",  "size": [18, 413], "pos": [-19.5, 0]},
+            {"@P": "ui/sb.right", "size": [18, 413], "pos": [707, 0]},
+
+            {"id": "winlines", "type": "winlines", "size": [704, 413]}
+        ]},
+
+        "reels.panel": {"type": "anchor", "layout": {"alignment": "center", "relative": true}, "snap": false, "content": [
+            {"@P": "ui/reelset", "props": {"anchor.fit": 0}},
+            {"@P": "ui/line.win", "props": {"anchor.fit": 0}},
+            { "@P": "ui/bottom-bar", "props": {"anchor.fit": "63.8 14.1 0 14.1"}, "ratio": [890, 200]},
+            {"@P": "ui/fsb-bar",  "props": {"anchor.fit": "75.7 -15 -20 -15"}}
+        ]}
+    }
+}

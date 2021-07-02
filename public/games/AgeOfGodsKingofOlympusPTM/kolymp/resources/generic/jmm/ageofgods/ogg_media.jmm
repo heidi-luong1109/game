@@ -1,0 +1,11 @@
+{
+    "resources": {
+        "audio": {
+            "pools": {
+                "aog_main"      : {"url": "ageofgods/ageofgods_64kbps.ogg"},
+                "aog_additional": {"url": "ageofgods/ageofgods_64kbps.ogg"}
+            }
+        }
+    }
+}
+

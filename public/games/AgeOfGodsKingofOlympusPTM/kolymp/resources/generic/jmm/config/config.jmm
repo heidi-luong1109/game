@@ -1,0 +1,214 @@
+{
+    "config": {
+
+        "game_code": "zeus",
+        "server_type": "casino",
+
+        "free_spins_bonus_supported": true,
+        "show_paytable_as_scene": true,
+        "supported_orientation": "both",
+
+        "allow_debug": "false",
+        "turbo_mode_supported": true,
+        "balance_always_on_top": false,
+        "hide_animated_symbols": true,
+        "fixed_lines":true,
+
+        "jackpot_supported": true,
+        "age_of_gods_jackpot_supported": true,
+
+        "demo_max_win": 10000000,
+
+        "free_spins_trigger": 3,
+        "free_spins_multiplier": 2,
+        "free_spins_count": 10,
+
+        "coin_sizes": [1, 2, 4, 10, 20, 40],
+        "win_ranges":["<=1*tb", "<=2*tb", "<=10*tb", "<=40*tb"],
+
+        "display_height":3,
+        "display_width": 5,
+
+        "reels": [
+            {"type": "general",   "symbols": [9, 9, 2, 8, 8, 3, 6, 6, 4, 4, 8, 8, 0, 7, 7, 1, 9, 9, 2, 8, 8, 3, 9, 9, 5, 5, 9, 9, 3, 7, 7, 4, 4, 6, 6, 3, 9, 9, 7, 7, 0, 8, 8, 5, 5, 10, 6, 6, 7, 7, 10, 6, 6]},
+            {"type": "general",   "symbols": [8, 8, 0, 6, 6, 3, 9, 9, 1, 7, 7, 2, 6, 6, 10, 9, 9, 4, 4, 8, 8, 1, 9, 9, 5, 5, 0, 8, 8, 2, 7, 7, 5, 5, 9, 9, 10, 8, 8, 4, 4, 6, 6, 3, 7, 7, 5, 5, 8, 8, 3, 9, 9, 2, 7, 7, 3]},
+            {"type": "general",   "symbols": [5, 5, 7, 7, 0, 9, 9, 3, 6, 6, 1, 8, 8, 10, 9, 9, 2, 7, 7, 4, 4, 8, 8, 0, 6, 6, 5, 5, 9, 9, 3, 8, 8, 4, 4, 7, 7, 2, 6, 6, 5, 5, 9, 9, 1, 8, 8, 2]},
+            {"type": "general",   "symbols": [9, 9, 3, 7, 7, 0, 6, 6, 5, 5, 8, 8, 1, 7, 7, 4, 4, 9, 9, 2, 6, 6, 5, 5, 0, 9, 9, 3, 8, 8, 4, 4, 7, 7, 1, 6, 6, 5, 5, 9, 9, 3, 8, 8, 10, 7, 7, 4, 4, 3, 8, 8, 2, 9, 9, 2, 8, 8, 10 ]},
+            {"type": "general",   "symbols": [4, 4, 9, 9, 3, 7, 7, 2, 8, 8, 5, 5, 6, 6, 1, 9, 9, 0, 7, 7, 4, 4, 0, 8, 8, 2, 9, 9, 5, 5, 8, 8, 3, 6, 6, 2, 7, 7, 4, 4, 9, 9, 3, 8, 8, 5, 5, 6, 6, 1, 9, 9, 3, 7, 7, 10, 8, 8]},
+
+            {"type": "free_spin", "symbols": [9, 9, 2, 8, 8, 3, 6, 6, 4, 4, 9, 9, 0, 7, 7, 8, 8, 1, 9, 9, 2, 8, 8, 3, 9, 9, 5, 5, 9, 9, 3, 7, 7, 4, 4, 6, 6, 1, 9, 9, 7, 7, 5, 5, 8, 8, 10, 6, 6, 7, 7, 10, 6, 6]},
+            {"type": "free_spin", "symbols": [8, 8, 0, 6, 6, 3, 9, 9, 1, 7, 7, 6, 6, 10, 9, 9, 4, 4, 8, 8, 1, 9, 9, 5, 5, 8, 8, 2, 7, 7, 5, 5, 9, 9, 10, 8, 8, 4, 4, 6, 6, 2, 7, 7, 5, 5, 8, 8, 3, 9, 9, 2, 7, 7, 3]},
+            {"type": "free_spin", "symbols": [5, 5, 7, 7, 9, 9, 6, 6, 3, 8, 8, 2, 9, 9, 1, 7, 7, 4, 4, 8, 8, 6, 6, 5, 5, 9, 9, 3, 8, 8, 4, 4, 7, 7, 2, 6, 6, 10, 5, 5, 9, 9, 2]},
+            {"type": "free_spin", "symbols": [9, 9, 3, 7, 7, 0, 6, 6, 5, 5, 8, 8, 1, 7, 7, 4, 4, 9, 9, 2, 6, 6, 5, 5, 9, 9, 3, 8, 8, 4, 4, 7, 7, 1, 6, 6, 5, 5, 9, 9, 3, 8, 8, 10, 7, 7, 4, 4, 3, 8, 8, 2, 9, 9, 2, 8, 8]},
+            {"type": "free_spin", "symbols": [4, 4, 9, 9, 3, 7, 7, 2, 8, 8, 5, 5, 6, 6, 1, 9, 9, 0, 7, 7, 4, 4, 8, 8, 2, 9, 9, 5, 5, 8, 8, 3, 6, 6, 2, 7, 7, 4, 4, 9, 9, 3, 8, 8, 5, 5, 6, 6, 1, 9, 9, 3, 7, 7, 10, 8, 8]}
+        ],
+
+        "symbols.wildId": 0,
+        "symbols.scatterId": 10,
+
+        "lines": [
+            {"id": "L01", "definition": [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]], "color": "#d9d100"},
+            {"id": "L02", "definition": [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]], "color": "#2f35ad"},
+            {"id": "L03", "definition": [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]], "color": "#c93130"},
+            {"id": "L04", "definition": [[0, 0], [1, 1], [2, 2], [3, 1], [4, 0]], "color": "#762cff"},
+            {"id": "L05", "definition": [[0, 2], [1, 1], [2, 0], [3, 1], [4, 2]], "color": "#a58e58"},
+            {"id": "L06", "definition": [[0, 0], [1, 0], [2, 1], [3, 0], [4, 0]], "color": "#b45cfe"},
+            {"id": "L07", "definition": [[0, 2], [1, 2], [2, 1], [3, 2], [4, 2]], "color": "#692204"},
+            {"id": "L08", "definition": [[0, 1], [1, 0], [2, 0], [3, 0], [4, 1]], "color": "#60c76b"},
+            {"id": "L09", "definition": [[0, 1], [1, 2], [2, 2], [3, 2], [4, 1]], "color": "#65ec61"},
+            {"id": "L10", "definition": [[0, 1], [1, 0], [2, 1], [3, 0], [4, 1]], "color": "#fd7e53"},
+            {"id": "L11", "definition": [[0, 1], [1, 2], [2, 1], [3, 2], [4, 1]], "color": "#e5a718"},
+            {"id": "L12", "definition": [[0, 0], [1, 1], [2, 0], [3, 1], [4, 0]], "color": "#980fd1"},
+            {"id": "L13", "definition": [[0, 2], [1, 1], [2, 2], [3, 1], [4, 2]], "color": "#e171bb"},
+            {"id": "L14", "definition": [[0, 1], [1, 1], [2, 0], [3, 1], [4, 1]], "color": "#6f7d3f"},
+            {"id": "L15", "definition": [[0, 1], [1, 1], [2, 2], [3, 1], [4, 1]], "color": "#76b737"},
+            {"id": "L16", "definition": [[0, 0], [1, 1], [2, 1], [3, 1], [4, 0]], "color": "#6db1ba"},
+            {"id": "L17", "definition": [[0, 2], [1, 1], [2, 1], [3, 1], [4, 2]], "color": "#fd7696"},
+            {"id": "L18", "definition": [[0, 0], [1, 1], [2, 2], [3, 2], [4, 2]], "color": "#beaa51"},
+            {"id": "L19", "definition": [[0, 2], [1, 1], [2, 0], [3, 0], [4, 0]], "color": "#841a86"},
+            {"id": "L20", "definition": [[0, 0], [1, 2], [2, 0], [3, 2], [4, 0]], "color": "#3471b0"},
+            {"id": "L21", "definition": [[0, 2], [1, 0], [2, 2], [3, 0], [4, 2]], "color": "#a12324"},
+            {"id": "L22", "definition": [[0, 1], [1, 0], [2, 2], [3, 0], [4, 1]], "color": "#63f5c8"},
+            {"id": "L23", "definition": [[0, 1], [1, 2], [2, 0], [3, 2], [4, 1]], "color": "#a9f263"},
+            {"id": "L24", "definition": [[0, 0], [1, 0], [2, 1], [3, 2], [4, 2]], "color": "#1f0be6"},
+            {"id": "L25", "definition": [[0, 2], [1, 2], [2, 1], [3, 0], [4, 0]], "color": "#d836fb"}
+        ],
+
+        "symbols": [
+            {"id": 0,  "payout_id": 0,  "sysname": "wild",    "type": "symbol", "slice": "slice_wild", "order": 1},
+            {"id": 1,  "payout_id": 1,  "sysname": "pegasus", "type": "symbol", "slice": "slice_pegasus"},
+            {"id": 2,  "payout_id": 2,  "sysname": "eagle",   "type": "symbol", "slice": "slice_eagle"},
+            {"id": 3,  "payout_id": 3,  "sysname": "ship",    "type": "symbol", "slice": "slice_ship"},
+            {"id": 4,  "payout_id": 4,  "sysname": "harp",    "type": "symbol", "slice": "slice_harp"},
+            {"id": 5,  "payout_id": 5,  "sysname": "vase",    "type": "symbol", "slice": "slice_vase"},
+            {"id": 6,  "payout_id": 6,  "sysname": "A",       "type": "symbol", "slice": "slice_A"},
+            {"id": 7,  "payout_id": 7,  "sysname": "K",       "type": "symbol", "slice": "slice_K"},
+            {"id": 8,  "payout_id": 8,  "sysname": "Q",       "type": "symbol", "slice": "slice_Q"},
+            {"id": 9,  "payout_id": 9,  "sysname": "J",       "type": "symbol", "slice": "slice_J"},
+            {"id": 10, "payout_id": 10, "sysname": "scatter", "type": "symbol", "slice": "slice_scatter"}
+        ],
+
+        "symbol_background_alphas": [
+            {"symbol": 0, "id": "bg.symbol.wild"},
+            {"symbol": 1, "id": "bg.symbol.pegasus"},
+            {"symbol": 2, "id": "bg.symbol.eagle"},
+            {"symbol": 3, "id": "bg.symbol.ship"}
+        ],
+
+        "paytable":[
+            {"symbol": 0, "quantity": 5, "multiplier": 3000},
+            {"symbol": 0, "quantity": 4, "multiplier": 1000},
+            {"symbol": 0, "quantity": 3, "multiplier": 100},
+            {"symbol": 0, "quantity": 2, "multiplier": 10},
+
+            {"symbol": 1, "quantity": 5, "multiplier": 1000},
+            {"symbol": 1, "quantity": 4, "multiplier": 500},
+            {"symbol": 1, "quantity": 3, "multiplier": 75},
+
+            {"symbol": 2, "quantity": 5, "multiplier": 600},
+            {"symbol": 2, "quantity": 4, "multiplier": 300},
+            {"symbol": 2, "quantity": 3, "multiplier": 50},
+
+            {"symbol": 3, "quantity": 5, "multiplier": 400},
+            {"symbol": 3, "quantity": 4, "multiplier": 200},
+            {"symbol": 3, "quantity": 3, "multiplier": 50},
+
+            {"symbol": 4, "quantity": 5, "multiplier": 200},
+            {"symbol": 4, "quantity": 4, "multiplier": 100},
+            {"symbol": 4, "quantity": 3, "multiplier": 25},
+
+            {"symbol": 5, "quantity": 5, "multiplier": 150},
+            {"symbol": 5, "quantity": 4, "multiplier": 75},
+            {"symbol": 5, "quantity": 3, "multiplier": 15},
+
+            {"symbol": 6, "quantity": 5, "multiplier": 100},
+            {"symbol": 6, "quantity": 4, "multiplier": 50},
+            {"symbol": 6, "quantity": 3, "multiplier": 10},
+
+            {"symbol": 7, "quantity": 5, "multiplier": 75},
+            {"symbol": 7, "quantity": 4, "multiplier": 30},
+            {"symbol": 7, "quantity": 3, "multiplier": 10},
+
+            {"symbol": 8, "quantity": 5, "multiplier": 50},
+            {"symbol": 8, "quantity": 4, "multiplier": 25},
+            {"symbol": 8, "quantity": 3, "multiplier": 7},
+
+            {"symbol": 9, "quantity": 5, "multiplier": 30},
+            {"symbol": 9, "quantity": 4, "multiplier": 15},
+            {"symbol": 9, "quantity": 3, "multiplier": 5}
+        ],
+
+        "paytable.scatter": [
+            {"quantity": 2, "multiplier": 1},
+            {"quantity": 3, "multiplier": 3},
+            {"quantity": 4, "multiplier": 10},
+            {"quantity": 5, "multiplier": 100}
+        ],
+
+        "reels.rotation.default": {
+            "first_reel_duration"   : 475,
+            "next_reel_stop_delay"  : 375,
+            "tilt_duration"         : [200, 200],
+            "blurring_level"        : 1
+        },
+
+        "reels.rotation": [
+            {"id": "default", "@P": "config/reels.rotation.default", "anticipation_param" : {"duration": 4000, "start_speed": 3, "end_speed": 5, "acc_duration": 100}},
+            {"id": "turbo", "@P": "config/reels.rotation.default",
+                "next_reel_stop_delay" : 120,
+                "tilt_duration"        : [0, 0],
+                "tilt_size"            : [0, 0]
+            }
+        ],
+
+        "symbol_animations": [
+            {"symbol": 0,  "win": {"id": "wild_symbol_animation", "front": true}, "substitute": {"id": "wild_symbol_animation", "front": true}},
+            {"symbol": 1,  "win": {"id": "anim.symbol.pegasus", "front": true}},
+            {"symbol": 2,  "win": {"id": "anim.symbol.eagle", "front": true}},
+            {"symbol": 3,  "win": {"id": "anim.symbol.ship", "front": true}},
+            {"symbol": 4,  "win": "anim.symbol.harp"},
+            {"symbol": 5,  "win": "anim.symbol.poterry"},
+            {"symbol": 6,  "win": "anim.symbol.A"},
+            {"symbol": 7,  "win": "anim.symbol.K"},
+            {"symbol": 8,  "win": "anim.symbol.Q"},
+            {"symbol": 9,  "win": "anim.symbol.J"},
+            {"symbol": 10, "win": {"id": "slice_scatter_sprite", "front": true}, "feature": {"id": "slice_scatter_sprite", "front": true}, "reel_stop": {"id": "scatter.stop", "front": true}}
+        ],
+
+        "spec_symbol_combinations": [
+            {"symbol": 10, "quantity": 3}
+        ],
+
+        "anticipation": [
+            {"symbol": 10, "win_count": 3, "reels": [1,2,3,4,5]}
+        ],
+
+        "sound": {
+            "win_sounds": {
+                "regular": ["win.lvl.1", "win.lvl.2", "win.lvl.3", "win.lvl.4", "win.lvl.5"],
+                "free_spins" : ["win.lvl.1", "win.lvl.2", "win.lvl.3", "win.lvl.4", "win.lvl.5"],
+                "turbo": "win.lvl.1"
+            },
+
+            "reels_spin_sounds": ["reel_spin_sound"],
+
+            "reels_stop_sounds": [
+                {"symbol": -1, "sound": ["reel_stop"]},
+                {"symbol": 10, "sound": ["special_reel_stop1", "special_reel_stop2", "special_reel_stop3", "special_reel_stop4", "special_reel_stop5"], "win_count": 2}
+            ],
+            "symbol_sounds": [
+                {"symbol": 10, "spec_sound": "fg_triggered", "loop_sound": "fg_pending"}
+            ]
+        },
+
+        "animations": {
+            "big_win_level": 5,
+            "win_panel.big_win_position": "53%",
+            "win_panel.levels": [
+                {"id": "2", "delays": [3475]},
+                {"id": "3", "delays": [3513, 3227]},
+                {"id": "4", "delays": [7033, 6769, 7220]}
+            ]
+        }
+    }
+}

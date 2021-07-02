@@ -1,0 +1,23 @@
+{
+    "resources": {
+        "formats": {
+            "splash.text_1": {"font": "MinionProBold", "color": "#fff", "stroke": {"color": "#000", "thickness": 1}},
+            "aeolus.yellow": {"font": "MinionProBold", "color": "#ebb125", "stroke": {"color": "#000", "thickness": 1}, "size": 32},
+
+            "line_win":  {"font": "line-win"},
+            "total_win": {"font": "total-win"},
+
+            "jackpot_labels": {"font": "Arial", "style": "bold", "color": "#ffdd77", "align": "center", "shadow": {"color": "#6a0958", "spread": 28, "opacity": 75}}
+        },
+        "images": {
+            "line-win":  {"url": "../fonts/line-win.png",  "preload": "main-scene"},
+            "total-win": {"url": "../fonts/total-win.png", "preload": "main-scene"}
+        },
+        "fonts": {
+            "MinionProBold": "MinionPro-Bold.ttf",
+            "MyriadProBold": "MyriadPro-Bold.otf",
+            "line-win":  {"type": "user", "url": "line-win.txt"},
+            "total-win": {"type": "user", "url": "total-win.txt"}
+        }
+    }
+}

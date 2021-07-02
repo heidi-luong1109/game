@@ -1,0 +1,96 @@
+body .cp-sessionDialogBottomPanel{
+    height: 90px;
+}
+
+body.collapsed .cp-sessionDialogBottomPanel{
+    height: 190px;
+}
+
+@media (orientation : portrait) {
+    .cp-setSessionLimitsContentContainer{
+        height: 50%;
+    }
+
+    .cp-sessionDialogBottomPanel{
+        height: 50%;
+    }
+}
+
+@media (max-height: 642px) {
+    .contentPanelMobile {
+        height: 80%;
+    }
+    .subTabButtonMobile {
+        line-height: 60px;
+    }
+    .jackpotContainerMobile {
+        height: 30px;
+    }
+    .gameAdvisorItemBtnMobile {
+        background-size: 128px 128px;
+        width: 128px;
+        height: 128px;
+    }
+    .gamesContent>div {
+        vertical-align: top;
+    }
+}
+
+.bottomHeight {
+    height: 60px;
+}
+
+.ray_bottom_panel td {
+    height: 28px;
+}
+
+.ray_bottom_panel table {
+    margin-top: 15px;
+}
+
+.cp-pnlOrientation {
+    position: absolute;
+}
+
+
+/*
+https://portal-jira.playtech.corp/browse/NGM-84242
+safari sometimes doesn't show elements with display: inline-block style
+*/
+.mainMenuContainer .gwt-PushButton,
+.mainMenuContainer .gwt-ToggleButton {
+    transform: translate3d(0, 0, 1px);
+}
+
+.toaster_notification_container {
+    display: block;
+    opacity: inherit;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+}
+
+.toaster_wrapper {
+    height:130px;
+    position: relative;
+    display:table;
+    background:#313f4f;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -webkit-border-bottom-right-radius: 16px;
+    -webkit-border-bottom-left-radius: 16px;
+    -moz-border-radius-bottomright: 16px;
+    -moz-border-radius-bottomleft: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    -webkit-border-top-right-radius: 16px;
+    -webkit-border-top-left-radius: 16px;
+    -moz-border-radius-topright: 16px;
+    -moz-border-radius-topleft: 16px;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    -webkit-box-shadow: 0px 4px 18px #333333;
+    -moz-box-shadow: 0px 4px 18px #333333;
+    box-shadow: 0px 4px 18px #333333;
+}

@@ -1,0 +1,52 @@
+/* Start GameLoadingView styles */
+.cp-loading-view {
+    background-color: #000000;
+}
+
+.cp-loading-container {
+    background-image: url(../../images/mobile/brand/loading_background.png);
+}
+.cp-loading-vertical-panel {
+    background-image: url(../../images/mobile/brand/loading_background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.cp-loading-brand-big {
+	background-image: url(../../images/mobile/brand/loading_brand_logo.png);
+}
+
+.progressoverlay {
+    background: url(../../images/mobile/brand/progress.png);
+}
+/* End GameLoadingView styles */
+/* Start OrientationView styles */
+
+.cp-pnlOrientationContainer {
+    background-image: url(../../images/mobile/brand/loading_background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+/* End OrientationView styles */
+/* Start BottomPanelView styles */
+.pnlBottom{
+    position: fixed;
+    left:0;
+    right: 0;
+    bottom: 0;
+}
+
+
+.brandLogo{
+    background-image: url(../../images/mobile/brand/bottom_brand_logo.png);
+}
+.bottomHeight{
+    height: 28px;
+}
+/* End BottomPanelView styles */
+
+
+.mainMenuContainer .gwt-PushButton.fundsTransfer {
+    background-position: 30px -1620px;
+}
+

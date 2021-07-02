@@ -1,0 +1,358 @@
+{
+    "resources": {
+        "animations": {
+            "wild.shooting.set": {"type": "set", "content": [
+                 {"type": "set-widget", "lookup": "../reels_overlay", "content": [
+                   {"type": "opacity", "from": 0, "to": 1,   "duration": 300}
+                ]},
+                {"type": "set-widget", "lookup": "wild.shoot.start", "content": [
+                   {"type": "set-props", "visible": true},
+                   {"type": "sound", "action": "play", "sound": "charge_electicity"},
+                   {"type": "sprite", "from": 0, "to": 70, "duration": 1100},
+                   {"type": "set-props", "visible": false}
+                ]},
+                {"type": "set-widget", "lookup": "wild.shoot.midle", "content": [
+                   {"type": "set","mode": "parallel", "content": [
+                     {"type": "set-props", "visible": true},
+                     {"type": "sprite", "from": 0, "to": 4, "duration": 200},
+                     {"type": "sound", "action": "play", "sound": "voice_multiplier"}
+                   ]},
+                   {"type": "set-props", "visible": false},
+                   {"type": "sound", "action": "play", "sound": "lightning_strike"}
+                ]},
+                {"type": "set-widget", "lookup": "wild.shoot.end", "content": [
+                   {"type": "set-props", "visible": true},
+                   {"type": "sprite", "from": 0, "to": 26, "duration": 1500},
+                   {"type": "set-props", "visible": false}
+                ]},
+              {"type": "sound", "action": "play", "sound": "multiplier_increase"}
+           ]},
+            "brighten.multiplier": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "wild.shoot.multiplier", "content": [
+                    {"type": "set-props", "visible": true},
+                    {"type": "sprite", "from": 0, "to": 23, "duration": 1600},
+                    {"type": "set-props", "visible": false}
+                ]},
+              {"type": "set-widget", "lookup": "../reels_overlay", "content": [
+                {"type": "opacity", "from": 1, "to": 0,   "duration": 300}
+              ]}
+            ]},
+            "masks.fade.in": {"type": "opacity", "from": 0, "to": 1, "duration": 200},
+            "masks.fade.out": {"type": "opacity", "from": 1, "to": 0, "duration": 200},
+            "hide_fg_intro": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "fg.intro", "content": [
+                    {"type": "opacity", "from": 1, "to": 0, "duration": 500}
+                ]},
+                {"type": "set-widget", "lookup": "anim.fg.intro.stars", "content": [
+                    {"type": "set-props", "opacity": 0},
+                    {"type": "tween-animation", "action": "stop"}
+                ]}
+            ]},
+            "show_fg_intro": {"type": "set", "content": [
+                 {"type": "set-props", "opacity": 1},
+                 {"type": "set-widget", "lookup": "anim.fg.intro.stars", "content": [
+                     {"type": "set-props", "opacity": 1},
+                     {"type": "tween-animation", "action": "start"}
+                ]},
+                {"type": "set-widget", "lookup": "fg.intro", "content": [
+                    {"type": "opacity", "from": 0, "to": 1, "duration": 500},
+                    {"type": "set-widget", "lookup": "fg.intro.light", "content": [
+                        {"type": "opacity", "from": 0, "to" : 1, "duration": 500},
+                        {"type": "opacity", "from": 1, "to" : 0.3, "duration": 100},
+                        {"type": "opacity", "from": 0.5, "to" : 0.8, "duration": 100},
+                        {"type": "opacity", "from": 0.8, "to" : 0, "duration": 300},
+                        {"type": "opacity", "from": 0, "to" : 1, "duration": 300}
+                    ]},
+                    {"type": "set", "mode": "parallel", "repeat": -1, "content": [
+                        {"type": "set-widget", "lookup": "fg.cloud.intro", "content": [
+                            {"type": "set-config", "config": {"slice": "fg.intro.cloud_1"}},
+                            {"type": "delay", "duration": 300},
+                            {"type": "set-config", "config": {"slice": "fg.intro.cloud_2"}},
+                            {"type": "delay", "duration": 300}
+                        ]},
+                        {"type": "set-widget", "lookup": "fg.intro.light", "content": [
+                            {"type": "opacity", "from": 0.6, "to" : 0.3,"duration": 500},
+                            {"type": "opacity", "from": 0.3, "to" : 0.8,"duration": 500},
+                            {"type": "opacity", "from": 0.8, "to" : 1,"duration": 500}
+                        ]}
+                    ]}
+                ]}
+            ]},
+            "anim.custom.back": {"type": "set-widget","repeat": -1, "lookup": "alpha", "content": [
+                {"type": "opacity",   "from": 0, "to": 1, "duration": 500},
+                {"type": "opacity",   "from": 1, "to": 0, "duration": 500}
+            ]},
+            "symbol_scale": {"type": "set","repeat": -1, "content": [
+                {"type": "scale", "from.x": 1, "from.y": 1, "to.x": 1.2, "to.y": 1.2, "pivot.x": "50%", "pivot.y": "50%","duration": 700, "interpolator": "ease.inout"},
+                {"type": "scale", "from.x": 1.2, "from.y": 1.2, "to.x": 1, "to.y": 1, "pivot.x": "50%", "pivot.y": "50%" ,"duration": 700, "interpolator": "ease.inout"}
+            ]},
+            "symbol_alpha": {"type": "set", "repeat": -1, "content": [
+                {"type": "opacity", "duration": 700, "from": 0, "to": 0.85},
+                {"type": "opacity", "duration": 700, "from": 0.85, "to": 0}
+            ]},
+            "anim.symbol": {"type": "set", "mode": "parallel", "repeat": -1, "content": [
+                {"type": "set-widget", "lookup": "regular", "content": [
+                    {"@P": "resources/animations/symbol_scale" }
+                ]},
+                {"type": "set-widget","mode": "parallel", "lookup": "glow", "content": [
+                    {"@P": "resources/animations/symbol_scale"},
+                    {"@P": "resources/animations/symbol_alpha"}
+                ]},
+                {"type": "set-widget","repeat": -1, "lookup": "glintsA", "content": [
+                    {"type": "opacity", "from": 1, "to": 0, "duration": 700},
+                    {"type": "opacity", "from": 0, "to": 1, "duration": 700}
+                ]},
+                {"type": "set-widget", "lookup": "glintsB", "content": [
+                    {"@P": "resources/animations/symbol_alpha" }
+                ]}
+            ]},
+            "anim.custom.eagle": {"type": "set", "mode": "parallel", "repeat": -1, "content": [
+                {"type": "set", "content": [
+                    {"type": "scale","duration": 800,"pivot.x": "50%", "pivot.y": "50%", "from.x": 1, "from.y": 1, "to.x": 0.9, "to.y": 0.9},
+                    {"type": "scale","duration": 800, "pivot.x": "50%", "pivot.y": "50%", "from.x": 0.9, "from.y": 0.9, "to.x": 1, "to.y": 1}
+                ]},
+                {"type": "set-widget","lookup": "eagle.2", "content": [
+                    {"type": "opacity","duration": 800, "from": 1, "to": 0},
+                    {"type": "opacity","duration": 800, "from": 0, "to": 1}
+                ]},
+                {"type": "set-widget","lookup": "border.eagle", "content": [
+                    {"type": "opacity", "duration": 800, "from": 1, "to": 0},
+                    {"type": "opacity", "duration": 800, "from": 0, "to": 1}
+                ]}
+            ]},
+            "anim.custom.ship": {"type": "set", "mode": "parallel", "repeat": -1, "content": [
+                {"type": "set", "content": [
+                    {"type": "scale","duration": 700, "pivot.x": "50%", "pivot.y": "50%", "from.x": 1.0, "from.y": 1.0, "to.x": 1.1, "to.y": 1.1},
+                    {"type": "scale","duration": 700, "pivot.x": "50%", "pivot.y": "50%", "from.x": 1.1, "from.y": 1.1, "to.x": 1.0, "to.y": 1.0}
+                ]},
+                {"type": "set-widget","lookup": "border.ship", "content": [
+                    {"type": "opacity", "duration": 700, "from": 0, "to": 1},
+                    {"type": "opacity", "duration": 700, "from": 1, "to": 0}
+                ]}
+            ]},
+            "anim.custom.pegasus": {"type": "set", "mode": "parallel", "repeat": -1,   "content": [
+                {"type": "set", "content": [
+                   {"type": "scale","from.x": 1, "from.y": 1, "to.x": 0.93, "to.y": 0.93 ,"duration": 700, "pivot.x": "100%", "pivot.y": "100%"},
+                   {"type": "scale","from.x": 0.93, "from.y": 0.93, "to.x": 1, "to.y": 1 ,"duration": 700, "pivot.x": "100%", "pivot.y": "100%"}
+                ]},
+                {"type": "set-widget","lookup": "pegasus.2", "content": [
+                    {"type": "opacity", "duration": 700, "from": 0, "to": 1},
+                    {"type": "opacity", "duration": 700, "from": 1, "to": 0}
+                ]},
+                {"type": "set-widget","lookup": "border.pegasus", "content": [
+                    {"type": "opacity", "duration": 700, "from": 1, "to": 0},
+                    {"type": "opacity", "duration": 700, "from": 0, "to": 1}
+                ]}
+            ]},
+            "fadeOut": {"type": "opacity", "from": 1, "to": 0, "duration": 500},
+            "anim.symbol.theme": {"type": "set", "content": [
+                {"type": "sprite", "from": 0, "to": 12, "duration": 500},
+                {"type": "sprite", "from": 13, "to": 61, "duration": 2000, "repeat": -1}
+            ]},
+            "anim.symbol.wild.win": {"type": "sprite", "from": 0, "to": 60, "duration": 1400, "repeat": -1},
+            "intro.start.fg": {"type": "sprite", "from": 0, "to": 36, "duration": 2000, "repeat": -1},
+            "anim.symbol.scatter.trigger": {"type": "sprite", "from": 0, "to": 52, "duration": 1900, "repeat": -1},
+            "anim.symbol.scatter.win": {"type": "sprite", "from": 0, "to": 23, "duration": 1800, "repeat": -1},
+            "anim.symbol.scatter.stop": {"type": "set", "content": [
+                {"type": "sprite", "from": 0, "to": 9, "duration": 250},
+                {"type": "sprite", "from": 10, "to": 35, "duration": 1000, "repeat": -1}
+            ]},
+            "composite-animation-group":{"type": "set", "mode": "parallel", "content": [
+                {"type": "set-widget", "lookup": "back","content": [
+                    {"type": "sprite", "from": 0, "to": 19, "duration": 800},
+                    {"type": "sprite", "from": 20, "to": 81, "duration": 2500, "repeat": -1}
+                ]},
+                {"type": "set-widget", "lookup": "front","content": [
+                    {"type": "sprite", "from": 0, "to": 19, "duration": 800},
+                    {"type": "sprite", "from": 20, "to": 81, "duration": 2500, "repeat": -1}
+                ]}
+            ]},
+            "anim.border": {"type": "sprite","repeat": -1, "from": 0, "to": 13, "duration": 250},
+            "fg_bg_lightning": {"type": "set", "repeat": 2, "content": [
+                {"type": "opacity", "from": 0, "to": 1, "duration": 100},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 100},
+                {"type": "delay", "duration": 200},
+                {"type": "opacity", "from": 0, "to": 1, "duration": 100},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 100},
+                {"type": "delay", "duration": 200},
+                {"type": "opacity", "from": 0, "to": 1, "duration": 100},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 100},
+                {"type": "opacity", "from": 0, "to": 1, "duration": 100},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 100}
+            ]},
+            "loading.hide": {"type": "opacity", "from": 1, "to": 0, "duration": 1500},
+            "continue_button": {"type": "set", "repeat": -1, "content": [
+                {"type": "set-config", "config": {"slice": "btn.continue"}},
+                {"type": "delay", "duration": 200},
+                {"type": "set-config", "config": {"slice": "btn.continue.highlight"}},
+                {"type": "delay", "duration": 200}
+            ]},
+            "show_fg_outro.single": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "win.total", "content": [
+                    {"type": "set-props", "visible": false}
+                ]},
+                {"type": "set-props", "disabled": true},
+                {"type": "opacity", "from": 0, "to": 1, "duration": 580},
+                {"type": "sound", "action": "play", "sound": "fg.win", "cycles": 3},
+                {"type": "set-widget", "mode": "parallel", "lookup": "win.total", "content": [
+                    {"type": "set-props", "visible": true},
+                    {"type": "win-tickup", "to": 1, "duration": 3150}
+                ]},
+                {"type": "sound", "action": "stop", "sound": "fg.win"},
+                {"type": "set-props", "disabled": false}
+            ]},
+            "show_fg_outro": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "win.game", "content": [
+                    {"type": "set-props", "visible": false}
+                ]},
+                {"type": "set-widget", "lookup": "win.feature", "content": [
+                    {"type": "set-props", "visible": false}
+                ]},
+                {"type": "set-widget", "lookup": "win.total", "content": [
+                    {"type": "set-props", "visible": false}
+                ]},
+                {"type": "set-props", "disabled": true},
+                {"type": "opacity", "from": 0, "to": 1, "duration": 580},
+                {"type": "sound", "action": "play", "sound": "fg.win", "cycles": 3},
+                {"type": "set-widget", "mode": "parallel", "lookup": "win.game", "content": [
+                    {"type": "set-props", "visible": true},
+                    {"type": "win-tickup", "to": 1, "duration": 1000}
+                ]},
+                {"type": "set-widget", "mode": "parallel", "lookup": "win.feature", "content": [
+                    {"type": "set-props", "visible": true},
+                    {"type": "win-tickup", "to": 1, "duration": 1000}
+                ]},
+                {"type": "set-widget", "mode": "parallel", "lookup": "win.total", "content": [
+                    {"type": "set-props", "visible": true},
+                    {"type": "win-tickup", "to": 1, "duration": 1000}
+                ]},
+                {"type": "sound", "action": "stop", "sound": "fg.win"},
+                {"type": "set-props", "disabled": false}
+            ]},
+            "promo_msg.show_scale": {"type": "set", "content": [
+                {"type": "set-props", "visible": false},
+                {"type": "delay", "duration": 100},
+                {"type": "set-props", "visible": true},
+                {"type": "scale", "from.x": 0, "from.y": 0, "to.x": 1, "to.y": 1, "pivot.x": "50%", "pivot.y": "50%", "duration": 400, "interpolator": "ease.out"},
+                {"type": "set-props", "xform": "identity"}
+            ]},
+            "hide_fg_outro": {"type": "set", "content": [
+                {"type": "sound", "action": "play", "sound": "continue"},
+                {"@P": "resources/animations/hide_message_box"}
+            ]},
+            "hide_message_box": {"type": "set", "content": [
+                {"type": "set-props", "disabled": true},
+                {"type": "opacity", "from": 1, "to": 0, "duration": 1000},
+                {"type": "set-props", "disabled": false}
+            ]},
+            "highlight_payout": {"type": "set", "repeat": -1, "content": [
+                {"type": "set-props", "visible": true},
+                {"type": "delay", "duration": 200},
+                {"type": "set-props", "visible": false},
+                {"type": "delay", "duration": 200}
+            ]},
+            "5oak_scale": {"duration": 5000, "type": "scale", "pivot.x": "50%", "pivot.y": "50%", "from.x": 1, "from.y": 1, "to.x": 1.20, "to.y": 1.20},
+            "5oak_set": {"type": "set", "mode": "parallel", "content": [
+                {"@P": "resources/animations/5oak_scale"},
+                {"type": "set", "repeat": -1, "content": [
+                    {"type": "opacity", "from": 1, "to": 0, "duration": 250},
+                    {"type": "opacity", "from": 0, "to": 1, "duration": 250},
+                    {"type": "delay", "duration": 450},
+                    {"type": "opacity", "from": 1, "to": 0, "duration": 250},
+                    {"type": "opacity", "from": 0, "to": 1, "duration": 250},
+                    {"type": "opacity", "from": 1, "to": 0, "duration": 250},
+                    {"type": "opacity", "from": 0, "to": 1, "duration": 250},
+                    {"type": "delay", "duration": 450}
+                ]}
+            ]},
+            "5oak_sprite": {"type": "sprite", "from": 0, "to": 23, "duration": 1000, "repeat": -1},
+            "5oak": {"type": "set", "mode": "parallel", "content": [
+                {"type": "set-widget", "lookup": "5oak_back","content": [
+                    {"type": "tween-animation", "action": "start"}
+                ]},
+                {"type": "set-widget", "lookup": "5oak_front","content": [
+                    {"type": "tween-animation", "action": "start"}
+                ]},
+                {"type": "set-widget", "lookup": "5aok_lightning","content": [
+                    {"type": "tween-animation", "action": "start"}
+                ]}
+            ]},
+            "big_win_celebration": {"type": "set", "content": [
+                {"type": "set-widget", "lookup": "bigwin.lightning.left", "content": [
+                    {"type": "set-props", "visible": true},
+                    {"type": "sprite", "from": 0, "to": 2, "duration": 100}
+                ]},
+                {"type": "set-widget", "lookup": "big.alpha", "content": [
+                    {"type": "set-widget", "mode": "parallel", "content": [
+                        {"type": "set-props", "opacity": 1},
+                        {"type": "scale", "from.x": 1, "from.y": 1, "to.x": 1.5, "to.y": 1.5,"duration": 100, "pivot.x": "100%", "pivot.y": "100%"}
+                    ]},
+                    {"type": "scale", "from.x": 1.5, "from.y": 1.5, "to.x": 1, "to.y": 1,"duration": 100, "pivot.x": "100%", "pivot.y": "100%"}
+                ]},
+
+                {"type": "set-widget", "lookup": "bigwin.lightning.right", "content": [
+                    {"type": "set-props", "visible": true},
+                    {"type": "sprite", "from": 0, "to": 2, "duration": 100}
+                ]},
+                {"type": "set-widget", "lookup": "win.alpha", "content": [
+                    {"type": "set", "mode": "parallel", "content": [
+                        {"type": "set-props", "opacity": 1},
+                        {"type": "scale", "from.x": 1, "from.y": 1, "to.x": 1.5, "to.y": 1.5,"duration": 100, "pivot.x": "0%", "pivot.y": "100%"}
+                    ]},
+                    {"type": "scale", "from.x": 1.5, "from.y": 1.5, "to.x": 1, "to.y": 1,"duration": 100, "pivot.x": "0%", "pivot.y": "100%"}
+                ]},
+                {"type": "set-widget", "lookup": "bigwin.lightning.left", "content": [
+                    {"type": "set-props", "visible": false}
+                ]},
+                {"type": "set-widget", "lookup": "bigwin.lightning.right", "content": [
+                    {"type": "set-props", "visible": false}
+                ]},
+                {"type": "delay","duration": 300},
+                {"type": "set", "mode": "parallel", "content": [
+                    {"type": "set-widget", "lookup": "particles_animation", "content": [
+                        {"type": "set-config", "config": {"visible": true, "frame.current": 0}},
+                        {"type": "sprite", "from": 0, "to": 70, "duration": 2000},
+                        {"type": "set-props", "visible": false}
+
+                    ]},
+                    {"type": "set-widget", "lookup": "big.alpha", "content": [
+                        {"type": "opacity", "from": 1, "to": 0,"duration": 100}
+                    ]},
+                    {"type": "set-widget", "lookup": "win.alpha", "content": [
+                        {"type": "opacity", "from": 1, "to": 0,"duration": 100}
+                    ]},
+                    {"type": "set-widget", "lookup": "big.light", "content": [
+                        {"type": "set", "mode": "parallel", "content": [
+                            {"type": "opacity", "from": 0, "to": 1,"duration": 100},
+                            {"type": "scale", "from.x": 1, "from.y": 1, "to.x": 1.3, "to.y": 1.3,"duration": 400, "pivot.x": "100%", "pivot.y": "100%","interpolator": "ease.out"}
+                        ]},
+                        {"type": "scale", "from.x": 1.3, "from.y": 1.3, "to.x": 1.15, "to.y": 1.15,"duration": 100, "pivot.x": "100%", "pivot.y": "100%"},
+                        {"type": "scale", "from.x": 1.15, "from.y": 1.15, "to.x": 1, "to.y": 1,"duration": 50, "pivot.x": "100%", "pivot.y": "100%","interpolator": "ease.in"},
+                        {"type": "opacity", "from": 1, "to": 0,"duration": 30}
+                    ]},
+                    {"type": "set-widget", "lookup": "win.light", "content": [
+                        {"type": "set", "mode": "parallel", "content": [
+                            {"type": "opacity", "from": 0, "to": 1,"duration": 100},
+                            {"type": "scale", "from.x": 1, "from.y": 1, "to.x": 1.3, "to.y": 1.3,"duration": 400, "pivot.x": "0%", "pivot.y": "100%","interpolator": "ease.out"}
+                        ]},
+                        {"type": "scale", "from.x": 1.3, "from.y": 1.3, "to.x": 1.15, "to.y": 1.15,"duration": 100, "pivot.x": "0%", "pivot.y": "100%"},
+                        {"type": "scale", "from.x": 1.15, "from.y": 1.15, "to.x": 1, "to.y": 1,"duration": 50, "pivot.x": "0%", "pivot.y": "100%","interpolator": "ease.in"},
+                        {"type": "opacity", "from": 1, "to": 0,"duration": 30}
+                    ]},
+                    {"type": "set-widget", "lookup": "big", "content": [
+                        {"type": "delay","duration": 550},
+                        {"type": "set-props", "opacity": 1}
+                    ]},
+                    {"type": "set-widget", "lookup": "win", "content": [
+                        {"type": "delay","duration": 550},
+                        {"type": "set-props", "opacity": 1}
+                    ]},
+                    {"type": "set-widget", "lookup": "../bigWinCoins", "content":[
+                        {"type": "delay","duration": 555},
+                        {"type": "sprite.particles", "action": "start"}
+                    ]}
+                ]}
+            ]}
+        }
+    }
+}

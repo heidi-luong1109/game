@@ -1,0 +1,19 @@
+info face=line-win size=90 bold=0 italic=0 charset= unicode= stretchH=100 smooth=1 aa=1 padding=0,0,0,0 outline=0
+common lineHeight=80 base=26 scaleW=200 scaleH=228 pages=1 packed=0
+page id=0 image="line-win"
+chars count=14
+char id=48 x=51 y=152 width=49 height=75 xoffset=0 yoffset=4 xadvance=50 page=0 chnl=0 letter="0"
+char id=49 x=101 y=152 width=48 height=74 xoffset=0 yoffset=4 xadvance=49 page=0 chnl=0 letter="1"
+char id=50 x=0 y=75 width=50 height=74 xoffset=0 yoffset=4 xadvance=51 page=0 chnl=0 letter="2"
+char id=51 x=51 y=75 width=49 height=76 xoffset=0 yoffset=4 xadvance=50 page=0 chnl=0 letter="3"
+char id=52 x=0 y=0 width=52 height=74 xoffset=0 yoffset=4 xadvance=53 page=0 chnl=0 letter="4"
+char id=53 x=101 y=77 width=49 height=74 xoffset=0 yoffset=4 xadvance=50 page=0 chnl=0 letter="5"
+char id=54 x=151 y=77 width=48 height=76 xoffset=0 yoffset=4 xadvance=49 page=0 chnl=0 letter="6"
+char id=55 x=0 y=150 width=50 height=73 xoffset=0 yoffset=4 xadvance=51 page=0 chnl=0 letter="7"
+char id=56 x=101 y=0 width=49 height=76 xoffset=0 yoffset=4 xadvance=50 page=0 chnl=0 letter="8"
+char id=57 x=151 y=0 width=48 height=76 xoffset=0 yoffset=4 xadvance=49 page=0 chnl=0 letter="9"
+char id=44 x=53 y=0 width=27 height=35 xoffset=0 yoffset=60 xadvance=28 page=0 chnl=0 letter=","
+char id=46 x=81 y=0 width=19 height=18 xoffset=0 yoffset=60 xadvance=20 page=0 chnl=0 letter="."
+char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=20 page=0 chnl=0 letter=" "
+char id=9 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=160 page=0 chnl=0 letter="	"
+kernings count=0

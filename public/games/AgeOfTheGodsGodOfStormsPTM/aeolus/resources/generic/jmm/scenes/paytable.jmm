@@ -1,0 +1,65 @@
+{
+    "ui": {
+        "paytable.page": {"type": "anchor", "group": "infoPages", "content": [
+            {"#ID": "image", "type": "image", "props": {"anchor.fit": 0}}
+        ]},
+
+        "pager":    {"group": "pagers.click", "type": "panel", "size": [28, 28], "cursor": "hand"},
+        "pager.on": {"group": "pagers", "type": "image", "slice": "indicator.on", "size": [28, 28], "cursor": "hand"}
+    },
+
+    "scenes": {
+        "paytable-scene": {"content": [
+            {"type": "stack", "layout": {"fillout": true}, "props": {"anchor.fit": 0}, "content": [
+                {"type": "image", "slice": "background"}
+            ]},
+            {"@P": "ui/anchor.relative", "props": {"anchor.fit": 0, "anchor.alignment": "center"}, "ratio": 2.007, "content": [
+                {"type": "vport", "props": {"anchor.fit": 0, "anchor.alignment": "center"}, "layout": {"base": [1400, 1093]}, "size": [1400, 1093], "content": [
+                    {"type": "image", "slice": "paytable_bg", "size": [1530, 990], "pos": [-65, 103]},
+                    {"type": "image", "slice": "logo",        "size": [473, 104],  "pos": [467, 21]},
+
+                    {"type": "vport", "layout": {"base": [727, 24]}, "size": [1100, 36], "pos": [150, 190], "background": "indicator", "content": [
+                        {"type": "image", "slice": "title_1", "size": [213, 14], "pos": [-27, -25]},
+                        {"type": "image", "slice": "title_2", "size": [213, 14], "pos": [90, -25]},
+                        {"type": "image", "slice": "title_3", "size": [213, 14], "pos": [205, -25]},
+                        {"type": "image", "slice": "title_4", "size": [213, 28], "pos": [326, -31.5]},
+                        {"type": "image", "slice": "title_5", "size": [213, 14], "pos": [462, -25]},
+                        {"type": "image", "slice": "title_6", "size": [213, 14], "pos": [556, -25]},
+
+                        {"@P": "ui/pager.on", "pos": [66, -6]},
+                        {"@P": "ui/pager.on", "pos": [183, -6]},
+                        {"@P": "ui/pager.on", "pos": [301, -6]},
+                        {"@P": "ui/pager.on", "pos": [398, -6]},
+                        {"@P": "ui/pager.on", "pos": [419.5, -6]},
+                        {"@P": "ui/pager.on", "pos": [440, -6]},
+                        {"@P": "ui/pager.on", "pos": [556, -6]},
+                        {"@P": "ui/pager.on", "pos": [643.5, -6]},
+
+                        {"@P": "ui/pager", "pos": [66, -6]},
+                        {"@P": "ui/pager", "pos": [183, -6]},
+                        {"@P": "ui/pager", "pos": [301, -6]},
+                        {"@P": "ui/pager", "pos": [398, -6]},
+                        {"@P": "ui/pager", "pos": [419.5, -6]},
+                        {"@P": "ui/pager", "pos": [440, -6]},
+                        {"@P": "ui/pager", "pos": [556, -6]},
+                        {"@P": "ui/pager", "pos": [643.5, -6]}
+                    ]},
+
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.1"}}, "size": [1050, 477], "pos": [175, 240]},
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.2"}}, "size": [1050, 444], "pos": [175, 240]},
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.3"}}, "size": [1150, 590], "pos": [125, 240]},
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.4"}}, "size": [1150, 480], "pos": [125, 240]},
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.5"}}, "size": [1150, 467], "pos": [125, 240]},
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.6"}}, "size": [701, 532],  "pos": [349.5, 240]},
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.7"}}, "size": [687, 532],  "pos": [356.5, 240]},
+                    {"@P": {"#ID": "ui/paytable.page", "image": {"slice": "paytable.8"}}, "size": [1150, 582], "pos": [125, 240]},
+
+                    {"id": "paytable.prev", "type": "ibutton", "slice": "btn.prev", "size": [100, 65], "pos": [1177, 942], "cursor": "hand"},
+                    {"id": "paytable.next", "type": "ibutton", "slice": "btn.next", "size": [100, 65], "pos": [1282, 942], "cursor": "hand"},
+
+                    {"id": "paytable.back", "type": "ibutton", "slice": "btn.back", "size": [130, 122], "pos": [38, 885], "cursor": "hand"}
+                ]}
+            ]}
+        ]}
+    }
+}

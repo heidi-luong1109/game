@@ -1,0 +1,70 @@
+{
+    "resources": {
+
+        "audio":{
+            "pools":{
+                "music":   {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt1.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt1.ogg"}, "polyphony": 2,"preload": "main-scene,paytable-scene,loading-scene"},
+                "sfx":     {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt1.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt1.ogg"}, "polyphony": 3,"preload": "main-scene,paytable-scene"},
+                "music.2": {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt2.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt2.ogg"}, "polyphony": 2,"preload": "main-scene"},
+                "music.7": {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt2.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt2.ogg"}, "polyphony": 2,"preload": "main-scene"},
+                "sfx.2":   {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt2.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt2.ogg"}, "polyphony": 3,"preload": "main-scene"},
+                "music.3": {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt3.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt3.ogg"}, "polyphony": 6, "preload.deferred": "main-scene", "preload": "free-spins"},
+                "music.4": {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt3.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt3.ogg"}, "polyphony": 4, "preload.deferred": "main-scene", "preload": "free-spins"},
+                "music.5": {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt3.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt3.ogg"}, "polyphony": 4, "preload.deferred": "main-scene", "preload": "free-spins"},
+                "music.6": {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt3.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt3.ogg"}, "polyphony": 6, "preload.deferred": "main-scene", "preload": "free-spins"},
+                "music.8": {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt3.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt3.ogg"}, "polyphony": 6, "preload.deferred": "main-scene", "preload": "free-spins"},
+                "sfx.3":   {"url": {"audio/mpeg": "AOG_KOO_NGM2desktop_soundpack_pt3.mp3", "audio/ogg": "AOG_KOO_NGM2desktop_soundpack_pt3.ogg"}, "polyphony": 3,"preload": "main-scene,paytable-scene"}
+            },
+            "sounds": {
+                "loading":           {"mono": "ignore",               "frame": [2000, 16167],   "pool": "music"},
+                "loading_short":     {"mono": "ignore",               "frame": [2000, 16167],   "pool": "music"},
+                "ambient_main":      {"mono": "ignore",               "frame": [18467, 37960],  "pool": "music"},
+                "ambient_main_short":{"mono": "ignore",               "frame": [18467, 37960],  "pool": "music"},
+                "spin_button":       {"@P": "sounds/spin_button",     "frame": [56727, 1218]},
+                "reel_spin_sound":   {"@P": "sounds/reel_spin",       "frame": [58245, 1190]},
+                "reel_stop":         {"@P": "sounds/reel_stop",       "frame": [60035, 261]},
+                "manual_stop":       {"@P": "sounds/manual_stop",     "frame": [60596, 542]},
+                "special_reel_stop1":{"@P": "sounds/reel_stop",       "frame": [61438, 1604]},
+                "special_reel_stop2":{"@P": "sounds/reel_stop",       "frame": [63342, 1558]},
+                "special_reel_stop3":{"@P": "sounds/reel_stop",       "frame": [65200, 1697]},
+                "special_reel_stop4":{"@P": "sounds/reel_stop",       "frame": [67197, 1708]},
+                "special_reel_stop5":{"@P": "sounds/reel_stop",       "frame": [69205, 2452]},
+                "anticipation":      {"@P": "sounds/anticipation",    "frame": [71957, 13574]},
+                "tick":              {"@P": "sounds/tick",            "frame": [84785, 300],    "pool": "sfx.3"},
+                "fg_triggered":      {"mono": "force",                "frame": [85831, 4053],   "pool": "sfx"},
+                "five_oak":          {"@P": "sounds/five_oak",        "frame": [90184, 2974]},
+                "win.lvl.1a":        {"@P": "sounds/win",             "frame": [2000, 1395],    "pool": "music.2", "type": "soundtrack", "end": 310},
+                "win.lvl.1b":        {"@P": "sounds/win",             "frame": [3695, 3206],    "pool": "music.2", "type": "soundtrack", "end": 1765},
+                "win.lvl.2":         {"@P": "sounds/win",             "frame": [7202, 8872],    "pool": "music.2", "type": "soundtrack", "end": 7021},
+                "win.lvl.3":         {"@P": "sounds/win",             "frame": [16374, 15559],  "pool": "music.2", "type": "soundtrack", "end": 14025},
+                "win.lvl.4":         {"@P": "sounds/win",             "frame": [32233, 26681],  "pool": "music.2", "type": "soundtrack", "end": 24541},
+                "big_win_text":      {"mono": "skip",                 "frame": [59214, 6086],   "pool": "sfx.2"},
+                "intro":             {"frame": [65600, 4875],   "pool": "sfx.2"},
+                "fg_start_tickup":   {"mono": "force",                "frame": [70775, 2579],   "pool": "sfx.2"},
+                "fg_pending":        {"mono": "ignore",                "frame": [73654, 7310],   "pool": "music.2","shift": 300, "type": "cross-loop"},
+                "fg_pending2":       {"mono": "ignore",                "frame": [73654, 7310],   "pool": "music.7","shift": 300,"type": "cross-loop"},
+                "ambient":           {"mono": "ignore",                "frame": [2000, 28330],   "pool": "music.3"},
+                "ambient_short":     {"mono": "ignore",                "frame": [2000, 28330],   "pool": "music.5"},
+                "fg_tickup":         {"mono": "ignore",                "frame": [30630, 28330],  "pool": "music.8"},
+                "fg_tickup_short":   {"mono": "ignore",                "frame": [30630, 28330],  "pool": "music.6"},
+                "fg.win":            {"mono": "force",                 "frame": [30630, 28330],  "pool": "music.3"},
+                "fg_stop_tickup":    {"mono": "force",                 "frame": [59260, 1669],   "pool": "sfx.3"},
+                "outro":             {"mono": "force",                 "frame": [61229, 5666],   "pool": "music.6"},
+                "charge_electicity": {"mono": "force",                 "frame": [67196, 3902],   "pool": "music.4"},
+                "voice_multiplier":  {"mono": "force",                 "frame": [71398, 1857],   "pool": "music.4"},
+                "lightning_strike":  {"mono": "force",                 "frame": [85519, 3448],   "pool": "music.4"},
+                "multiplier_increase":{"mono": "force",                "frame": [73825, 1987],   "pool": "music.5"},
+                "autoplay_stop":      {"@P": "sounds/autoplay_stop",   "frame": [76113, 1569],   "pool": "sfx.3"},
+                "autoplay_start":     {"@P": "sounds/autoplay_start",  "frame": [77982, 1314],   "pool": "sfx.3"},
+                "start_button":       {"@P": "sounds/autoplay_start",  "frame": [77982, 1314],   "pool": "sfx.3"},
+                "minus_button":       {"@P": "sounds/minus_button",    "frame": [79595, 123],    "pool": "sfx.3"},
+                "plus_button":        {"@P": "sounds/plus_button",     "frame": [80019, 124],    "pool": "sfx.3"},
+                "continue":           {"@P": "sounds/continue_button", "frame": [80443, 1436],   "pool": "sfx.3"},
+                "turbo_off":          {"@P": "sounds/minus_button",    "frame": [82756, 353],    "pool": "sfx.3"},
+                "turbo_on":           {"@P": "sounds/plus_button",     "frame": [83410, 1075],   "pool": "sfx.3"},
+                "info_button":        {"mono": "force",                "frame": [82179, 277],    "pool": "sfx.3"}
+
+            }
+        }
+    }
+}

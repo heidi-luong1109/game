@@ -1,0 +1,53 @@
+{
+    "resources": {
+
+        "audio":{
+            "pools":{
+                "music": {"url": "AOG_Zeus_mobile_soundpack_16.03.16.mp3", "polyphony": 5},
+                "sfx":   {"url": "AOG_Zeus_mobile_soundpack_16.03.16.mp3", "polyphony": 5}
+            },
+
+            "sounds": {
+                "ambient_main"       : {"mono": "ignore",               "frame": [1000, 37660],  "pool": "music"},
+                "spin_button"        : {"@P": "sounds/spin_button",     "frame": [38960, 721]},
+                "reel_spin_sound"    : {"@P": "sounds/reel_spin",       "frame": [39981, 1190]},
+                "reel_stop"          : {"@P": "sounds/reel_stop",       "frame": [41471, 264]},
+                "manual_stop"        : {"@P": "sounds/manual_stop",     "frame": [42035, 557]},
+                "special_reel_stop1" : {"@P": "sounds/reel_stop",       "frame": [42892, 1061]},
+                "special_reel_stop2" : {"@P": "sounds/reel_stop",       "frame": [44253, 1035]},
+                "special_reel_stop3" : {"@P": "sounds/reel_stop",       "frame": [45588, 1119]},
+                "special_reel_stop4" : {"@P": "sounds/reel_stop",       "frame": [47007, 1138]},
+                "special_reel_stop5" : {"@P": "sounds/reel_stop",       "frame": [48445, 1662]},
+                "anticipation"       : {"@P": "sounds/anticipation",    "frame": [50407, 13624]},
+                "tick"               : {"@P": "sounds/tick",            "frame": [229714, 300]},
+                "fg_triggered"       : {"mono": "force",                "frame": [64862, 3554]},
+                "five_oak"           : {"@P": "sounds/five_oak",        "frame": [68715, 2999]},
+                "win.lvl.1"          : {"@P": "sounds/win",             "frame": [72015, 1103],   "type": "soundtrack", "end": 309},
+                "win.lvl.2"          : {"@P": "sounds/win",             "frame": [73418, 2765],   "type": "soundtrack", "end": 1766},
+                "win.lvl.3"          : {"@P": "sounds/win",             "frame": [76483, 8343],   "type": "soundtrack", "end": 7265},
+                "win.lvl.4"          : {"@P": "sounds/win",             "frame": [85126, 15635],  "type": "soundtrack", "end": 14237},
+                "win.lvl.5"          : {"@P": "sounds/win",             "frame": [101061, 26658], "type": "soundtrack", "end": 24586},
+                "big_win_text"       : {"mono": "skip",                 "frame": [128019, 4785]},
+                "fg_start_tickup"    : {"mono": "force",                "frame": [133104, 2080]},
+                "fg_pending"         : {"mono": "force",                "frame": [135484, 15867], "pool": "music"},
+                "fg_pending2"        : {"mono": "force",                "frame": [135484, 15867], "pool": "music"},
+                "ambient"            : {"mono": "ignore",               "frame": [151651, 28029], "pool": "music"},
+                "fg_tickup"          : {"mono": "force",                "frame": [179980, 28029], "pool": "music"},
+                "fg_stop_tickup"     : {"mono": "force",                "frame": [208309, 1152]},
+                "outro"              : {"mono": "force",                "frame": [209761, 5220],  "pool": "music"},
+                "lightning"          : {"mono": "force",                "frame": [215281, 4820],  "pool": "music"},
+                "multiplier_increase": {"mono": "force",                "frame": [220401, 2010],  "pool": "music"},
+                "autoplay_stop"      : {"@P": "sounds/autoplay_stop",   "frame": [222711, 1225]},
+                "autoplay_start"     : {"@P": "sounds/autoplay_start",  "frame": [224235, 902]},
+                "minus_button"       : {"@P": "sounds/minus_button",    "frame": [225438, 125]},
+                "plus_button"        : {"@P": "sounds/plus_button",     "frame": [225864, 127]},
+                "continue_button"    : {"@P": "sounds/continue_button", "frame": [226291, 898]},
+                "slide_out"          : {"@P": "sounds/slide_out",       "frame": [227489, 268]},
+                "slide_in"           : {"@P": "sounds/slide_in",        "frame": [227489, 268]},
+                "turbo_off"          : {"@P": "sounds/minus_button",    "frame": [228057, 354]},
+                "turbo_on"           : {"@P": "sounds/plus_button",     "frame": [228712, 700]}
+
+            }
+        }
+    }
+}
