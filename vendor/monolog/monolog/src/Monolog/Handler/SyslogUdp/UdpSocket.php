@@ -12,7 +12,6 @@
 namespace Monolog\Handler\SyslogUdp;
 
 use Monolog\Utils;
-use Socket;
 
 class UdpSocket
 {
@@ -22,21 +21,14 @@ class UdpSocket
     protected $ip;
     /** @var int */
     protected $port;
-    /** @var resource|Socket|null */
+    /** @var resource|null */
     protected $socket;
 
     public function __construct(string $ip, int $port = 514)
     {
         $this->ip = $ip;
         $this->port = $port;
-        $domain = AF_INET;
-        $protocol = SOL_UDP;
-        // Check if we are using unix sockets.
-        if ($port === 0) {
-            $domain = AF_UNIX;
-            $protocol = IPPROTO_IP;
-        }
-        $this->socket = socket_create($domain, SOCK_DGRAM, $protocol) ?: null;
+        $this->socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
     }
 
     public function write($line, $header = "")
@@ -46,7 +38,7 @@ class UdpSocket
 
     public function close(): void
     {
-        if (is_resource($this->socket) || $this->socket instanceof Socket) {
+        if (is_resource($this->socket)) {
             socket_close($this->socket);
             $this->socket = null;
         }
@@ -54,7 +46,7 @@ class UdpSocket
 
     protected function send(string $chunk): void
     {
-        if (!is_resource($this->socket) && !$this->socket instanceof Socket) {
+        if (!is_resource($this->socket)) {
             throw new \RuntimeException('The UdpSocket to '.$this->ip.':'.$this->port.' has been closed and can not be written to anymore');
         }
         socket_sendto($this->socket, $chunk, strlen($chunk), $flags = 0, $this->ip, $this->port);

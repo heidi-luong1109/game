@@ -41,12 +41,8 @@ final class UrlAutolinkProcessor
             (?:\# (?:[\pL\pN\-._\~!$&\'()*+,;=:@/?]|%%[0-9A-Fa-f]{2})* )?   # a fragment (optional)
         )~ixu';
 
-    /** @var string */
     private $finalRegex;
 
-    /**
-     * @param array<int, string> $allowedProtocols
-     */
     public function __construct(array $allowedProtocols = ['http', 'https', 'ftp'])
     {
         $this->finalRegex = \sprintf(self::REGEX, \implode('|', $allowedProtocols));
@@ -69,7 +65,7 @@ final class UrlAutolinkProcessor
         }
     }
 
-    private static function processAutolinks(Text $node, string $regex): void
+    private static function processAutolinks(Text $node, $regex)
     {
         $contents = \preg_split($regex, $node->getContent(), -1, PREG_SPLIT_DELIM_CAPTURE);
 
@@ -107,9 +103,9 @@ final class UrlAutolinkProcessor
             }
 
             // Does the URL need its closing paren chopped off?
-            if (\substr($content, -1) === ')' && ($diff = self::diffParens($content)) > 0) {
-                $content = \substr($content, 0, -$diff);
-                $leftovers = str_repeat(')', $diff) . $leftovers;
+            if (\substr($content, -1) === ')' && self::hasMoreCloserParensThanOpeners($content)) {
+                $content = \substr($content, 0, -1);
+                $leftovers = ')' . $leftovers;
             }
 
             self::addLink($node, $content);
@@ -118,7 +114,7 @@ final class UrlAutolinkProcessor
         $node->detach();
     }
 
-    private static function addLink(Text $node, string $url): void
+    private static function addLink(Text $node, $url)
     {
         // Auto-prefix 'http://' onto 'www' URLs
         if (\substr($url, 0, 4) === 'www.') {
@@ -133,14 +129,14 @@ final class UrlAutolinkProcessor
     /**
      * @param string $content
      *
-     * @return int
+     * @return bool
      */
-    private static function diffParens(string $content): int
+    private static function hasMoreCloserParensThanOpeners($content)
     {
         // Scan the entire autolink for the total number of parentheses.
         // If there is a greater number of closing parentheses than opening ones,
-        // we don’t consider ANY of the last characters as part of the autolink,
-        // in order to facilitate including an autolink inside a parenthesis.
+        // we don’t consider the last character part of the autolink, in order to
+        // facilitate including an autolink inside a parenthesis.
         \preg_match_all('/[()]/', $content, $matches);
 
         $charCount = ['(' => 0, ')' => 0];
@@ -148,6 +144,6 @@ final class UrlAutolinkProcessor
             $charCount[$char]++;
         }
 
-        return $charCount[')'] - $charCount['('];
+        return $charCount[')'] > $charCount['('];
     }
 }

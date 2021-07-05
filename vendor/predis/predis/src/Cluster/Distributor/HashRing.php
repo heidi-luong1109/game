@@ -161,7 +161,7 @@ class HashRing implements DistributorInterface, HashGeneratorInterface
         $replicas = (int) round($weightRatio * $totalNodes * $replicas);
 
         for ($i = 0; $i < $replicas; ++$i) {
-            $key = $this->hash("$nodeHash:$i");
+            $key = crc32("$nodeHash:$i");
             $ring[$key] = $nodeObject;
         }
     }

@@ -128,10 +128,6 @@ class Validator
     {
         return $this->assertCallback(
             function ($value) use ($choices) {
-                if ($value === null) {
-                    return true;
-                }
-
                 return in_array($value, $choices, true);
             },
             sprintf('is not one of [%s]', implode(', ', $choices))

@@ -12,15 +12,13 @@ use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Reflector;
 use Illuminate\Support\Traits\Macroable;
-use Illuminate\Support\Traits\ReflectsClosures;
 use Psr\Http\Client\ClientExceptionInterface;
 use Symfony\Component\Process\Process;
 
 class Event
 {
-    use Macroable, ManagesFrequencies, ReflectsClosures;
+    use Macroable, ManagesFrequencies;
 
     /**
      * The command string.
@@ -262,20 +260,6 @@ class Event
         foreach ($this->afterCallbacks as $callback) {
             $container->call($callback);
         }
-    }
-
-    /**
-     * Call all of the "after" callbacks for the event.
-     *
-     * @param  \Illuminate\Contracts\Container\Container  $container
-     * @param  int  $exitCode
-     * @return void
-     */
-    public function callAfterCallbacksWithExitCode(Container $container, $exitCode)
-    {
-        $this->exitCode = (int) $exitCode;
-
-        $this->callAfterCallbacks($container);
     }
 
     /**
@@ -674,7 +658,7 @@ class Event
      */
     public function when($callback)
     {
-        $this->filters[] = Reflector::isCallable($callback) ? $callback : function () use ($callback) {
+        $this->filters[] = is_callable($callback) ? $callback : function () use ($callback) {
             return $callback;
         };
 
@@ -689,7 +673,7 @@ class Event
      */
     public function skip($callback)
     {
-        $this->rejects[] = Reflector::isCallable($callback) ? $callback : function () use ($callback) {
+        $this->rejects[] = is_callable($callback) ? $callback : function () use ($callback) {
             return $callback;
         };
 
@@ -734,20 +718,6 @@ class Event
     }
 
     /**
-     * Register a callback that uses the output after the job runs.
-     *
-     * @param  \Closure  $callback
-     * @param  bool  $onlyIfOutputExists
-     * @return $this
-     */
-    public function thenWithOutput(Closure $callback, $onlyIfOutputExists = false)
-    {
-        $this->ensureOutputIsBeingCaptured();
-
-        return $this->then($this->withOutputCallback($callback, $onlyIfOutputExists));
-    }
-
-    /**
      * Register a callback to be called if the operation succeeds.
      *
      * @param  \Closure  $callback
@@ -763,20 +733,6 @@ class Event
     }
 
     /**
-     * Register a callback that uses the output if the operation succeeds.
-     *
-     * @param  \Closure  $callback
-     * @param  bool  $onlyIfOutputExists
-     * @return $this
-     */
-    public function onSuccessWithOutput(Closure $callback, $onlyIfOutputExists = false)
-    {
-        $this->ensureOutputIsBeingCaptured();
-
-        return $this->onSuccess($this->withOutputCallback($callback, $onlyIfOutputExists));
-    }
-
-    /**
      * Register a callback to be called if the operation fails.
      *
      * @param  \Closure  $callback
@@ -789,38 +745,6 @@ class Event
                 $container->call($callback);
             }
         });
-    }
-
-    /**
-     * Register a callback that uses the output if the operation fails.
-     *
-     * @param  \Closure  $callback
-     * @param  bool  $onlyIfOutputExists
-     * @return $this
-     */
-    public function onFailureWithOutput(Closure $callback, $onlyIfOutputExists = false)
-    {
-        $this->ensureOutputIsBeingCaptured();
-
-        return $this->onFailure($this->withOutputCallback($callback, $onlyIfOutputExists));
-    }
-
-    /**
-     * Get a callback that provides output.
-     *
-     * @param  \Closure  $callback
-     * @param  bool  $onlyIfOutputExists
-     * @return \Closure
-     */
-    protected function withOutputCallback(Closure $callback, $onlyIfOutputExists = false)
-    {
-        return function (Container $container) use ($callback, $onlyIfOutputExists) {
-            $output = $this->output && file_exists($this->output) ? file_get_contents($this->output) : '';
-
-            return $onlyIfOutputExists && empty($output)
-                            ? null
-                            : $container->call($callback, ['output' => $output]);
-        };
     }
 
     /**

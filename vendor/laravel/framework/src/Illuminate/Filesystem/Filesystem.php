@@ -6,9 +6,7 @@ use ErrorException;
 use FilesystemIterator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Traits\Macroable;
-use RuntimeException;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Mime\MimeTypes;
 
 class Filesystem
 {
@@ -51,7 +49,7 @@ class Filesystem
             return $lock ? $this->sharedGet($path) : file_get_contents($path);
         }
 
-        throw new FileNotFoundException("File does not exist at path {$path}.");
+        throw new FileNotFoundException("File does not exist at path {$path}");
     }
 
     /**
@@ -97,7 +95,7 @@ class Filesystem
             return require $path;
         }
 
-        throw new FileNotFoundException("File does not exist at path {$path}.");
+        throw new FileNotFoundException("File does not exist at path {$path}");
     }
 
     /**
@@ -312,23 +310,6 @@ class Filesystem
     public function extension($path)
     {
         return pathinfo($path, PATHINFO_EXTENSION);
-    }
-
-    /**
-     * Guess the file extension from the mime-type of a given file.
-     *
-     * @param  string  $path
-     * @return string|null
-     */
-    public function guessExtension($path)
-    {
-        if (! class_exists(MimeTypes::class)) {
-            throw new RuntimeException(
-                'To enable support for guessing extensions, please install the symfony/mime package.'
-            );
-        }
-
-        return (new MimeTypes)->getExtensions($this->mimeType($path))[0] ?? null;
     }
 
     /**
@@ -547,7 +528,9 @@ class Filesystem
         // If the destination directory does not actually exist, we will go ahead and
         // create it recursively, which just gets the destination prepared to copy
         // the files over. Once we make the directory we'll proceed the copying.
-        $this->ensureDirectoryExists($destination, 0777);
+        if (! $this->isDirectory($destination)) {
+            $this->makeDirectory($destination, 0777, true);
+        }
 
         $items = new FilesystemIterator($directory, $options);
 

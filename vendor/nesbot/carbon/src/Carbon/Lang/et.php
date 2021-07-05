@@ -30,24 +30,22 @@
  * - Zahhar Kirillov
  * - João Magalhães
  * - Ingmar
- * - Illimar Tambek
- * - Mihkel
  */
 return [
     'year' => ':count aasta|:count aastat',
-    'y' => ':count a',
+    'y' => ':count aasta|:count aastat',
     'month' => ':count kuu|:count kuud',
-    'm' => ':count k',
+    'm' => ':count kuu|:count kuud',
     'week' => ':count nädal|:count nädalat',
-    'w' => ':count näd',
+    'w' => ':count nädal|:count nädalat',
     'day' => ':count päev|:count päeva',
-    'd' => ':count p',
+    'd' => ':count päev|:count päeva',
     'hour' => ':count tund|:count tundi',
-    'h' => ':count t',
+    'h' => ':count tund|:count tundi',
     'minute' => ':count minut|:count minutit',
-    'min' => ':count min',
+    'min' => ':count minut|:count minutit',
     'second' => ':count sekund|:count sekundit',
-    's' => ':count s',
+    's' => ':count sekund|:count sekundit',
     'ago' => ':time tagasi',
     'from_now' => ':time pärast',
     'after' => ':time pärast',
@@ -62,7 +60,6 @@ return [
     'first_day_of_week' => 1,
     'day_of_first_week_of_year' => 4,
     'diff_now' => 'nüüd',
-    'diff_today' => 'täna',
     'diff_yesterday' => 'eile',
     'diff_tomorrow' => 'homme',
     'diff_before_yesterday' => 'üleeile',
@@ -70,10 +67,10 @@ return [
     'formats' => [
         'LT' => 'HH:mm',
         'LTS' => 'HH:mm:ss',
-        'L' => 'DD.MM.YYYY',
-        'LL' => 'D. MMMM YYYY',
-        'LLL' => 'D. MMMM YYYY HH:mm',
-        'LLLL' => 'dddd, D. MMMM YYYY HH:mm',
+        'L' => 'DD/MM/YYYY',
+        'LL' => 'DD. MMMM YYYY',
+        'LLL' => 'DD. MMMM YYYY HH:mm',
+        'LLLL' => 'dddd, DD. MMMM YYYY HH:mm',
     ],
     'calendar' => [
         'sameDay' => '[täna] LT',

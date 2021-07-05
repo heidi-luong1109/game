@@ -73,7 +73,7 @@ class DurationLimiterBuilder
     /**
      * Set the amount of time the lock window is maintained.
      *
-     * @param  \DateTimeInterface|\DateInterval|int  $decay
+     * @param  int  $decay
      * @return $this
      */
     public function every($decay)

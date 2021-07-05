@@ -22,7 +22,7 @@ use Symfony\Component\VarDumper\Cloner\Stub;
  */
 class SplCaster
 {
-    private const SPL_FILE_OBJECT_FLAGS = [
+    private static $splFileObjectFlags = [
         \SplFileObject::DROP_NEW_LINE => 'DROP_NEW_LINE',
         \SplFileObject::READ_AHEAD => 'READ_AHEAD',
         \SplFileObject::SKIP_EMPTY => 'SKIP_EMPTY',
@@ -91,35 +91,11 @@ class SplCaster
         ];
 
         $prefix = Caster::PREFIX_VIRTUAL;
-        unset($a["\0SplFileInfo\0fileName"]);
-        unset($a["\0SplFileInfo\0pathName"]);
 
-        if (\PHP_VERSION_ID < 80000) {
-            if (false === $c->getPathname()) {
-                $a[$prefix.'⚠'] = 'The parent constructor was not called: the object is in an invalid state';
+        if (false === $c->getPathname()) {
+            $a[$prefix.'⚠'] = 'The parent constructor was not called: the object is in an invalid state';
 
-                return $a;
-            }
-        } else {
-            try {
-                $c->isReadable();
-            } catch (\RuntimeException $e) {
-                if ('Object not initialized' !== $e->getMessage()) {
-                    throw $e;
-                }
-
-                $a[$prefix.'⚠'] = 'The parent constructor was not called: the object is in an invalid state';
-
-                return $a;
-            } catch (\Error $e) {
-                if ('Object not initialized' !== $e->getMessage()) {
-                    throw $e;
-                }
-
-                $a[$prefix.'⚠'] = 'The parent constructor was not called: the object is in an invalid state';
-
-                return $a;
-            }
+            return $a;
         }
 
         foreach ($map as $key => $accessor) {
@@ -169,7 +145,7 @@ class SplCaster
 
         if (isset($a[$prefix.'flags'])) {
             $flagsArray = [];
-            foreach (self::SPL_FILE_OBJECT_FLAGS as $value => $name) {
+            foreach (self::$splFileObjectFlags as $value => $name) {
                 if ($a[$prefix.'flags'] & $value) {
                     $flagsArray[] = $name;
                 }
@@ -184,11 +160,19 @@ class SplCaster
         return $a;
     }
 
+    public static function castFixedArray(\SplFixedArray $c, array $a, Stub $stub, bool $isNested)
+    {
+        $a += [
+            Caster::PREFIX_VIRTUAL.'storage' => $c->toArray(),
+        ];
+
+        return $a;
+    }
+
     public static function castObjectStorage(\SplObjectStorage $c, array $a, Stub $stub, bool $isNested)
     {
         $storage = [];
         unset($a[Caster::PREFIX_DYNAMIC."\0gcdata"]); // Don't hit https://bugs.php.net/65967
-        unset($a["\0SplObjectStorage\0storage"]);
 
         $clone = clone $c;
         foreach ($clone as $obj) {
@@ -222,15 +206,13 @@ class SplCaster
     private static function castSplArray($c, array $a, Stub $stub, bool $isNested): array
     {
         $prefix = Caster::PREFIX_VIRTUAL;
+        $class = $stub->class;
         $flags = $c->getFlags();
 
         if (!($flags & \ArrayObject::STD_PROP_LIST)) {
             $c->setFlags(\ArrayObject::STD_PROP_LIST);
-            $a = Caster::castObject($c, \get_class($c), method_exists($c, '__debugInfo'), $stub->class);
+            $a = Caster::castObject($c, $class);
             $c->setFlags($flags);
-        }
-        if (\PHP_VERSION_ID < 70400) {
-            $a[$prefix.'storage'] = $c->getArrayCopy();
         }
         $a += [
             $prefix.'flag::STD_PROP_LIST' => (bool) ($flags & \ArrayObject::STD_PROP_LIST),
@@ -239,6 +221,7 @@ class SplCaster
         if ($c instanceof \ArrayObject) {
             $a[$prefix.'iteratorClass'] = new ClassStub($c->getIteratorClass());
         }
+        $a[$prefix.'storage'] = $c->getArrayCopy();
 
         return $a;
     }

@@ -5,6 +5,9 @@
  *
  * (c) Colin O'Dell <colinodell@gmail.com>
  *
+ * Original code based on the CommonMark JS reference parser (https://bitly.com/commonmark-js)
+ *  - (c) John MacFarlane
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -13,22 +16,20 @@ namespace League\CommonMark;
 
 /**
  * Converts CommonMark-compatible Markdown to HTML.
- *
- * @deprecated This class is deprecated since league/commonmark 1.4, use MarkdownConverter instead.
  */
 class Converter implements ConverterInterface
 {
     /**
      * The document parser instance.
      *
-     * @var DocParserInterface
+     * @var \League\CommonMark\DocParserInterface
      */
     protected $docParser;
 
     /**
      * The html renderer instance.
      *
-     * @var ElementRendererInterface
+     * @var \League\CommonMark\ElementRendererInterface
      */
     protected $htmlRenderer;
 
@@ -40,10 +41,6 @@ class Converter implements ConverterInterface
      */
     public function __construct(DocParserInterface $docParser, ElementRendererInterface $htmlRenderer)
     {
-        if (!($this instanceof MarkdownConverter)) {
-            @trigger_error(sprintf('The %s class is deprecated since league/commonmark 1.4, use %s instead.', self::class, MarkdownConverter::class), E_USER_DEPRECATED);
-        }
-
         $this->docParser = $docParser;
         $this->htmlRenderer = $htmlRenderer;
     }

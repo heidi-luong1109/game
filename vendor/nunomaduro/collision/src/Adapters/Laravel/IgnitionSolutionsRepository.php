@@ -33,6 +33,8 @@ class IgnitionSolutionsRepository implements SolutionsRepository
 
     /**
      * IgnitionSolutionsRepository constructor.
+     *
+     * @param  \Facade\IgnitionContracts\SolutionProviderRepository  $solutionProviderRepository
      */
     public function __construct(SolutionProviderRepository $solutionProviderRepository)
     {

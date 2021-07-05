@@ -97,18 +97,17 @@ class PlainTextHandler extends Handler
      * Set var dumper callback function.
      *
      * @param  callable $dumper
-     * @return static
+     * @return void
      */
     public function setDumper(callable $dumper)
     {
         $this->dumper = $dumper;
-        return $this;
     }
 
     /**
      * Add error trace to output.
      * @param  bool|null  $addTraceToOutput
-     * @return bool|static
+     * @return bool|$this
      */
     public function addTraceToOutput($addTraceToOutput = null)
     {
@@ -123,7 +122,7 @@ class PlainTextHandler extends Handler
     /**
      * Add previous exceptions to output.
      * @param  bool|null $addPreviousToOutput
-     * @return bool|static
+     * @return bool|$this
      */
     public function addPreviousToOutput($addPreviousToOutput = null)
     {
@@ -139,7 +138,7 @@ class PlainTextHandler extends Handler
      * Add error trace function arguments to output.
      * Set to True for all frame args, or integer for the n first frame args.
      * @param  bool|integer|null $addTraceFunctionArgsToOutput
-     * @return static|bool|integer
+     * @return null|bool|integer
      */
     public function addTraceFunctionArgsToOutput($addTraceFunctionArgsToOutput = null)
     {
@@ -152,7 +151,6 @@ class PlainTextHandler extends Handler
         } else {
             $this->addTraceFunctionArgsToOutput = $addTraceFunctionArgsToOutput;
         }
-        return $this;
     }
 
     /**
@@ -160,12 +158,10 @@ class PlainTextHandler extends Handler
      * If the limit is reached, the var_dump output is discarded.
      * Prevent memory limit errors.
      * @var integer
-     * @return static
      */
     public function setTraceFunctionArgsOutputLimit($traceFunctionArgsOutputLimit)
     {
         $this->traceFunctionArgsOutputLimit = (integer) $traceFunctionArgsOutputLimit;
-        return $this;
     }
 
     /**
@@ -203,7 +199,7 @@ class PlainTextHandler extends Handler
     /**
      * Only output to logger.
      * @param  bool|null $loggerOnly
-     * @return static|bool
+     * @return null|bool
      */
     public function loggerOnly($loggerOnly = null)
     {
@@ -212,7 +208,6 @@ class PlainTextHandler extends Handler
         }
 
         $this->loggerOnly = (bool) $loggerOnly;
-        return $this;
     }
 
     /**

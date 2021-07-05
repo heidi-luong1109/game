@@ -41,7 +41,7 @@ class CallQueuedClosure implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \Closure  $job
+     * @param  \Closure  $closure
      * @return self
      */
     public static function create(Closure $job)

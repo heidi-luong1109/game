@@ -12,7 +12,7 @@ interface ExceptionHandler
      * @param  \Throwable  $e
      * @return void
      *
-     * @throws \Throwable
+     * @throws \Exception
      */
     public function report(Throwable $e);
 

@@ -16,7 +16,6 @@
  * - dennisoderwald
  * - Timo
  * - Karag2006
- * - Pete Scopes (pdscopes)
  */
 return [
     'year' => ':count Jahr|:count Jahre',
@@ -40,12 +39,6 @@ return [
     'second' => ':count Sekunde|:count Sekunden',
     'a_second' => 'ein paar Sekunden|:count Sekunden',
     's' => ':count Sek.',
-    'millisecond' => ':count Millisekunde|:count Millisekunden',
-    'a_millisecond' => 'eine Millisekunde|:count Millisekunden',
-    'ms' => ':countms',
-    'microsecond' => ':count Mikrosekunde|:count Mikrosekunden',
-    'a_microsecond' => 'eine Mikrosekunde|:count Mikrosekunden',
-    'µs' => ':countµs',
     'ago' => 'vor :time',
     'from_now' => 'in :time',
     'after' => ':time später',
@@ -69,12 +62,8 @@ return [
     'a_day_ago' => 'ein Tag|:count Tagen',
 
     'diff_now' => 'Gerade eben',
-    'diff_today' => 'heute',
-    'diff_today_regexp' => 'heute(?:\\s+um)?',
     'diff_yesterday' => 'Gestern',
-    'diff_yesterday_regexp' => 'gestern(?:\\s+um)?',
     'diff_tomorrow' => 'Morgen',
-    'diff_tomorrow_regexp' => 'morgen(?:\\s+um)?',
     'diff_before_yesterday' => 'Vorgestern',
     'diff_after_tomorrow' => 'Übermorgen',
 

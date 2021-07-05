@@ -49,8 +49,6 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
     protected $bubble;
 
     /**
-     * @psalm-param HandlerInterface|callable(?array, HandlerInterface): HandlerInterface $handler
-     *
      * @param callable|HandlerInterface $handler        Handler or factory callable($record|null, $filterHandler).
      * @param int|array                 $minLevelOrList A list of levels to accept or a minimum level if maxLevel is provided
      * @param int|string                $maxLevel       Maximum level to accept, only used if $minLevelOrList is not an array
@@ -145,7 +143,7 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
     public function getHandler(array $record = null)
     {
         if (!$this->handler instanceof HandlerInterface) {
-            $this->handler = ($this->handler)($record, $this);
+            $this->handler = call_user_func($this->handler, $record, $this);
             if (!$this->handler instanceof HandlerInterface) {
                 throw new \RuntimeException("The factory callable should return a HandlerInterface");
             }
@@ -159,14 +157,9 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
      */
     public function setFormatter(FormatterInterface $formatter): HandlerInterface
     {
-        $handler = $this->getHandler();
-        if ($handler instanceof FormattableHandlerInterface) {
-            $handler->setFormatter($formatter);
+        $this->getHandler()->setFormatter($formatter);
 
-            return $this;
-        }
-
-        throw new \UnexpectedValueException('The nested handler of type '.get_class($handler).' does not support formatters.');
+        return $this;
     }
 
     /**
@@ -174,12 +167,7 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
      */
     public function getFormatter(): FormatterInterface
     {
-        $handler = $this->getHandler();
-        if ($handler instanceof FormattableHandlerInterface) {
-            return $handler->getFormatter();
-        }
-
-        throw new \UnexpectedValueException('The nested handler of type '.get_class($handler).' does not support formatters.');
+        return $this->getHandler()->getFormatter();
     }
 
     public function reset()

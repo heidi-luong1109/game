@@ -9,9 +9,6 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
-use function is_readable;
-use function sprintf;
-
 /**
  * Constraint that checks if the file/dir(name) that it is evaluated for is readable.
  *
@@ -35,11 +32,11 @@ final class IsReadable extends Constraint
      */
     protected function matches($other): bool
     {
-        return is_readable($other);
+        return \is_readable($other);
     }
 
     /**
-     * Returns the description of the failure.
+     * Returns the description of the failure
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
@@ -48,7 +45,7 @@ final class IsReadable extends Constraint
      */
     protected function failureDescription($other): string
     {
-        return sprintf(
+        return \sprintf(
             '"%s" is readable',
             $other
         );

@@ -3,6 +3,7 @@
 namespace Hexters\CoinPayment\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factory;
 use Hexters\CoinPayment\Console\InstallationCommand;
 use Hexters\CoinPayment\Helpers\CoinPaymentHelper;
 
@@ -25,6 +26,7 @@ class CoinPaymentServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+        $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
@@ -103,7 +105,19 @@ class CoinPaymentServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'coinpayment');
         }
     }
-    
+
+    /**
+     * Register an additional directory of factories.
+     * 
+     * @return void
+     */
+    public function registerFactories()
+    {
+        if (! app()->environment('production')) {
+            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+        }
+    }
+
     /**
      * Get the services provided by the provider.
      *

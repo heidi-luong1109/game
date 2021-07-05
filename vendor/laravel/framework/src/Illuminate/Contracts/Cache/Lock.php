@@ -24,7 +24,7 @@ interface Lock
     /**
      * Release the lock.
      *
-     * @return bool
+     * @return void
      */
     public function release();
 

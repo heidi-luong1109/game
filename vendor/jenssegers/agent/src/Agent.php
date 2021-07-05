@@ -39,8 +39,7 @@ class Agent extends Mobile_Detect
     protected static $additionalBrowsers = [
         'Opera Mini' => 'Opera Mini',
         'Opera' => 'Opera|OPR',
-        'Edge' => 'Edge|Edg',
-        'Coc Coc' => 'coc_coc_browser',
+        'Edge' => 'Edge',
         'UCBrowser' => 'UCBrowser',
         'Vivaldi' => 'Vivaldi',
         'Chrome' => 'Chrome',
@@ -70,9 +69,8 @@ class Agent extends Mobile_Detect
         'Netscape' => 'Netscape/[VER]',
         'Mozilla' => 'rv:[VER]',
         'IE' => ['IEMobile/[VER];', 'IEMobile [VER]', 'MSIE [VER];', 'rv:[VER]'],
-        'Edge' => ['Edge/[VER]', 'Edg/[VER]'],
+        'Edge' => 'Edge/[VER]',
         'Vivaldi' => 'Vivaldi/[VER]',
-        'Coc Coc' => 'coc_coc_browser/[VER]',
     ];
 
     /**
@@ -199,7 +197,7 @@ class Agent extends Mobile_Detect
      * Match a detection rule and return the matched key.
      * @param  array $rules
      * @param  string|null $userAgent
-     * @return string|bool
+     * @return string
      */
     protected function findDetectionRulesAgainstUA(array $rules, $userAgent = null)
     {
@@ -221,7 +219,7 @@ class Agent extends Mobile_Detect
     /**
      * Get the browser name.
      * @param  string|null $userAgent
-     * @return string|bool
+     * @return string
      */
     public function browser($userAgent = null)
     {
@@ -231,7 +229,7 @@ class Agent extends Mobile_Detect
     /**
      * Get the platform name.
      * @param  string|null $userAgent
-     * @return string|bool
+     * @return string
      */
     public function platform($userAgent = null)
     {
@@ -241,7 +239,7 @@ class Agent extends Mobile_Detect
     /**
      * Get the device name.
      * @param  string|null $userAgent
-     * @return string|bool
+     * @return string
      */
     public function device($userAgent = null)
     {
@@ -299,27 +297,6 @@ class Agent extends Mobile_Detect
     public function isRobot($userAgent = null)
     {
         return $this->getCrawlerDetect()->isCrawler($userAgent ?: $this->userAgent);
-    }
-
-    /**
-     * Get the device type
-     * @param null $userAgent
-     * @param null $httpHeaders
-     * @return string
-     */
-    public function deviceType($userAgent = null, $httpHeaders = null)
-    {
-        if ($this->isDesktop($userAgent, $httpHeaders)) {
-            return "desktop";
-        } elseif ($this->isPhone($userAgent, $httpHeaders)) {
-            return "phone";
-        } elseif ($this->isTablet($userAgent, $httpHeaders)) {
-            return "tablet";
-        } elseif ($this->isRobot($userAgent)) {
-            return "robot";
-        }
-
-        return "other";
     }
 
     public function version($propertyName, $type = self::VERSION_TYPE_STRING)

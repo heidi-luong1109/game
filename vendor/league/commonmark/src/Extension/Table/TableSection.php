@@ -26,7 +26,6 @@ final class TableSection extends AbstractStringContainerBlock implements InlineC
     const TYPE_HEAD = 'thead';
     const TYPE_BODY = 'tbody';
 
-    /** @var string */
     public $type = self::TYPE_BODY;
 
     public function __construct(string $type = self::TYPE_BODY)

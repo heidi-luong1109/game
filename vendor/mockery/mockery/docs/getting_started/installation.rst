@@ -35,12 +35,6 @@ To install, you then may call:
 This will install Mockery as a development dependency, meaning it won't be
 installed when using ``php composer.phar update --no-dev`` in production.
 
-Other way to install is directly from composer command line, as below.
-
-.. code-block:: bash
-
-    php composer.phar require --dev mockery/mockery
-
 Git
 ---
 

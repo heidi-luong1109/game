@@ -139,16 +139,13 @@ class TestHandler extends AbstractProcessingHandler
      */
     public function hasRecordThatMatches(string $regex, $level): bool
     {
-        return $this->hasRecordThatPasses(function (array $rec) use ($regex): bool {
+        return $this->hasRecordThatPasses(function ($rec) use ($regex) {
             return preg_match($regex, $rec['message']) > 0;
         }, $level);
     }
 
     /**
-     * @psalm-param callable(array, int): mixed $predicate
-     *
      * @param string|int $level Logging level value or name
-     * @return bool
      */
     public function hasRecordThatPasses(callable $predicate, $level)
     {
@@ -159,7 +156,7 @@ class TestHandler extends AbstractProcessingHandler
         }
 
         foreach ($this->recordsByLevel[$level] as $i => $rec) {
-            if ($predicate($rec, $i)) {
+            if (call_user_func($predicate, $rec, $i)) {
                 return true;
             }
         }

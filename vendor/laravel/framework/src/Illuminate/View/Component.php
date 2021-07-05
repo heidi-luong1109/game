@@ -33,13 +33,6 @@ abstract class Component
     protected $except = [];
 
     /**
-     * The component alias name.
-     *
-     * @var string
-     */
-    public $componentName;
-
-    /**
      * The component attributes.
      *
      * @var \Illuminate\View\ComponentAttributeBag
@@ -49,14 +42,14 @@ abstract class Component
     /**
      * Get the view / view contents that represent the component.
      *
-     * @return \Illuminate\View\View|\Closure|string
+     * @return \Illuminate\View\View|string
      */
     abstract public function render();
 
     /**
      * Resolve the Blade view or view file that should be used when rendering the component.
      *
-     * @return \Illuminate\View\View|\Closure|string
+     * @return \Illuminate\View\View|string
      */
     public function resolveView()
     {
@@ -66,18 +59,11 @@ abstract class Component
             return $view;
         }
 
-        $resolver = function ($view) {
-            $factory = Container::getInstance()->make('view');
+        $factory = Container::getInstance()->make('view');
 
-            return $factory->exists($view)
-                        ? $view
-                        : $this->createBladeViewFromString($factory, $view);
-        };
-
-        return $view instanceof Closure ? function (array $data = []) use ($view, $resolver) {
-            return $resolver($view($data));
-        }
-        : $resolver($view);
+        return $factory->exists($view)
+                    ? $view
+                    : $this->createBladeViewFromString($factory, $view);
     }
 
     /**
@@ -134,9 +120,6 @@ abstract class Component
 
             static::$propertyCache[$class] = collect($reflection->getProperties(ReflectionProperty::IS_PUBLIC))
                 ->reject(function (ReflectionProperty $property) {
-                    return $property->isStatic();
-                })
-                ->reject(function (ReflectionProperty $property) {
                     return $this->shouldIgnore($property->getName());
                 })
                 ->map(function (ReflectionProperty $property) {
@@ -192,21 +175,8 @@ abstract class Component
     protected function createVariableFromMethod(ReflectionMethod $method)
     {
         return $method->getNumberOfParameters() === 0
-                        ? $this->createInvokableVariable($method->getName())
+                        ? $this->{$method->getName()}()
                         : Closure::fromCallable([$this, $method->getName()]);
-    }
-
-    /**
-     * Create an invokable, toStringable variable for the given component method.
-     *
-     * @param  string  $method
-     * @return \Illuminate\View\InvokableComponentVariable
-     */
-    protected function createInvokableVariable(string $method)
-    {
-        return new InvokableComponentVariable(function () use ($method) {
-            return $this->{$method}();
-        });
     }
 
     /**
@@ -234,22 +204,8 @@ abstract class Component
             'resolveView',
             'shouldRender',
             'view',
-            'withName',
             'withAttributes',
         ], $this->except);
-    }
-
-    /**
-     * Set the component alias name.
-     *
-     * @param  string  $name
-     * @return $this
-     */
-    public function withName($name)
-    {
-        $this->componentName = $name;
-
-        return $this;
     }
 
     /**

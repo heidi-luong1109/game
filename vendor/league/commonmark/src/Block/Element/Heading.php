@@ -58,11 +58,23 @@ class Heading extends AbstractStringContainerBlock implements InlineContainerInt
         $this->finalStringContents = \implode("\n", $this->strings->toArray());
     }
 
+    /**
+     * Returns true if this block can contain the given block as a child node
+     *
+     * @param AbstractBlock $block
+     *
+     * @return bool
+     */
     public function canContain(AbstractBlock $block): bool
     {
         return false;
     }
 
+    /**
+     * Whether this is a code block
+     *
+     * @return bool
+     */
     public function isCode(): bool
     {
         return false;
@@ -73,6 +85,10 @@ class Heading extends AbstractStringContainerBlock implements InlineContainerInt
         return false;
     }
 
+    /**
+     * @param ContextInterface $context
+     * @param Cursor           $cursor
+     */
     public function handleRemainingContents(ContextInterface $context, Cursor $cursor)
     {
         // nothing to do; contents were already added via the constructor.

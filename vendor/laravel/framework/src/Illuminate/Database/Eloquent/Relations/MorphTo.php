@@ -45,13 +45,6 @@ class MorphTo extends BelongsTo
     protected $morphableEagerLoads = [];
 
     /**
-     * A map of relationship counts to load for each individual morph type.
-     *
-     * @var array
-     */
-    protected $morphableEagerLoadCounts = [];
-
-    /**
      * Create a new morph to relationship instance.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
@@ -128,10 +121,7 @@ class MorphTo extends BelongsTo
                             ->with(array_merge(
                                 $this->getQuery()->getEagerLoads(),
                                 (array) ($this->morphableEagerLoads[get_class($instance)] ?? [])
-                            ))
-                            ->withCount(
-                                (array) ($this->morphableEagerLoadCounts[get_class($instance)] ?? [])
-                            );
+                            ));
 
         $whereIn = $this->whereInMethod($instance, $ownerKey);
 
@@ -161,11 +151,7 @@ class MorphTo extends BelongsTo
     {
         $class = Model::getActualClassNameForMorph($type);
 
-        return tap(new $class, function ($instance) {
-            if (! $instance->getConnectionName()) {
-                $instance->setConnection($this->getConnection()->getName());
-            }
-        });
+        return new $class;
     }
 
     /**
@@ -287,21 +273,6 @@ class MorphTo extends BelongsTo
     {
         $this->morphableEagerLoads = array_merge(
             $this->morphableEagerLoads, $with
-        );
-
-        return $this;
-    }
-
-    /**
-     * Specify which relationship counts to load for a given morph type.
-     *
-     * @param  array  $withCount
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     */
-    public function morphWithCount(array $withCount)
-    {
-        $this->morphableEagerLoadCounts = array_merge(
-            $this->morphableEagerLoadCounts, $withCount
         );
 
         return $this;

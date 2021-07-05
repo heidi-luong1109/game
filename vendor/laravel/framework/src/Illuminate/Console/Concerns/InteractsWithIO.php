@@ -200,7 +200,7 @@ trait InteractsWithIO
      * @param  string|null  $default
      * @param  mixed|null  $attempts
      * @param  bool  $multiple
-     * @return string|array
+     * @return string
      */
     public function choice($question, array $choices, $default = null, $attempts = null, $multiple = false)
     {

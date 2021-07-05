@@ -17,11 +17,6 @@ use Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandle
 use Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
 use Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
 
-// Help opcache.preload discover always-needed symbols
-class_exists(MetadataBag::class);
-class_exists(StrictSessionHandler::class);
-class_exists(SessionHandlerProxy::class);
-
 /**
  * This provides a base class for session attribute storage.
  *
@@ -144,17 +139,17 @@ class NativeSessionStorage implements SessionStorageInterface
             return true;
         }
 
-        if (\PHP_SESSION_ACTIVE === session_status()) {
+        if (PHP_SESSION_ACTIVE === session_status()) {
             throw new \RuntimeException('Failed to start the session: already started by PHP.');
         }
 
-        if (filter_var(ini_get('session.use_cookies'), \FILTER_VALIDATE_BOOLEAN) && headers_sent($file, $line)) {
+        if (filter_var(ini_get('session.use_cookies'), FILTER_VALIDATE_BOOLEAN) && headers_sent($file, $line)) {
             throw new \RuntimeException(sprintf('Failed to start the session because headers have already been sent by "%s" at line %d.', $file, $line));
         }
 
         // ok to try and start the session
         if (!session_start()) {
-            throw new \RuntimeException('Failed to start the session.');
+            throw new \RuntimeException('Failed to start the session');
         }
 
         if (null !== $this->emulateSameSite) {
@@ -207,7 +202,7 @@ class NativeSessionStorage implements SessionStorageInterface
     public function regenerate(bool $destroy = false, int $lifetime = null)
     {
         // Cannot regenerate the session ID for non-active sessions.
-        if (\PHP_SESSION_ACTIVE !== session_status()) {
+        if (PHP_SESSION_ACTIVE !== session_status()) {
             return false;
         }
 
@@ -215,10 +210,8 @@ class NativeSessionStorage implements SessionStorageInterface
             return false;
         }
 
-        if (null !== $lifetime && $lifetime != ini_get('session.cookie_lifetime')) {
-            $this->save();
+        if (null !== $lifetime) {
             ini_set('session.cookie_lifetime', $lifetime);
-            $this->start();
         }
 
         if ($destroy) {
@@ -226,6 +219,10 @@ class NativeSessionStorage implements SessionStorageInterface
         }
 
         $isRegenerated = session_regenerate_id($destroy);
+
+        // The reference to $_SESSION in session bags is lost in PHP7 and we need to re-create it.
+        // @see https://bugs.php.net/70013
+        $this->loadSession();
 
         if (null !== $this->emulateSameSite) {
             $originalCookie = SessionUtils::popSessionCookie(session_name(), session_id());
@@ -256,7 +253,7 @@ class NativeSessionStorage implements SessionStorageInterface
 
         // Register error handler to add information about the current save handler
         $previousHandler = set_error_handler(function ($type, $msg, $file, $line) use (&$previousHandler) {
-            if (\E_WARNING === $type && 0 === strpos($msg, 'session_write_close():')) {
+            if (E_WARNING === $type && 0 === strpos($msg, 'session_write_close():')) {
                 $handler = $this->saveHandler instanceof SessionHandlerProxy ? $this->saveHandler->getHandler() : $this->saveHandler;
                 $msg = sprintf('session_write_close(): Failed to write session data with "%s" handler', \get_class($handler));
             }
@@ -314,7 +311,7 @@ class NativeSessionStorage implements SessionStorageInterface
     public function getBag(string $name)
     {
         if (!isset($this->bags[$name])) {
-            throw new \InvalidArgumentException(sprintf('The SessionBagInterface "%s" is not registered.', $name));
+            throw new \InvalidArgumentException(sprintf('The SessionBagInterface %s is not registered.', $name));
         }
 
         if (!$this->started && $this->saveHandler->isActive()) {
@@ -365,7 +362,7 @@ class NativeSessionStorage implements SessionStorageInterface
      */
     public function setOptions(array $options)
     {
-        if (headers_sent() || \PHP_SESSION_ACTIVE === session_status()) {
+        if (headers_sent() || PHP_SESSION_ACTIVE === session_status()) {
             return;
         }
 
@@ -387,9 +384,6 @@ class NativeSessionStorage implements SessionStorageInterface
                     // PHP < 7.3 does not support same_site cookies. We will emulate it in
                     // the start() method instead.
                     $this->emulateSameSite = $value;
-                    continue;
-                }
-                if ('cookie_secure' === $key && 'auto' === $value) {
                     continue;
                 }
                 ini_set('url_rewriter.tags' !== $key ? 'session.'.$key : $key, $value);
@@ -433,7 +427,7 @@ class NativeSessionStorage implements SessionStorageInterface
         }
         $this->saveHandler = $saveHandler;
 
-        if (headers_sent() || \PHP_SESSION_ACTIVE === session_status()) {
+        if (headers_sent() || PHP_SESSION_ACTIVE === session_status()) {
             return;
         }
 

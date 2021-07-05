@@ -12,9 +12,7 @@ class RetryCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'queue:retry
-                            {id?* : The ID of the failed job or "all" to retry all jobs}
-                            {--range=* : Range of job IDs (numeric) to be retried}';
+    protected $signature = 'queue:retry {id* : The ID of the failed job or "all" to retry all jobs}';
 
     /**
      * The console command description.
@@ -55,30 +53,7 @@ class RetryCommand extends Command
         $ids = (array) $this->argument('id');
 
         if (count($ids) === 1 && $ids[0] === 'all') {
-            return Arr::pluck($this->laravel['queue.failer']->all(), 'id');
-        }
-
-        if ($ranges = (array) $this->option('range')) {
-            $ids = array_merge($ids, $this->getJobIdsByRanges($ranges));
-        }
-
-        return array_values(array_filter(array_unique($ids)));
-    }
-
-    /**
-     * Get the job IDs ranges, if applicable.
-     *
-     * @param  array  $ranges
-     * @return array
-     */
-    protected function getJobIdsByRanges(array $ranges)
-    {
-        $ids = [];
-
-        foreach ($ranges as $range) {
-            if (preg_match('/^[0-9]+\-[0-9]+$/', $range)) {
-                $ids = array_merge($ids, range(...explode('-', $range)));
-            }
+            $ids = Arr::pluck($this->laravel['queue.failer']->all(), 'id');
         }
 
         return $ids;

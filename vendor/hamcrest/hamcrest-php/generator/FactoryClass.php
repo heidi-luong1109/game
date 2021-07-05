@@ -33,6 +33,7 @@ class FactoryClass
         $this->methods = array();
         foreach ($this->getPublicStaticMethods() as $method) {
             if ($method->isFactory()) {
+//                echo $this->getName() . '::' . $method->getName() . ' : ' . count($method->getCalls()) . PHP_EOL;
                 $this->methods[] = $method;
             }
         }

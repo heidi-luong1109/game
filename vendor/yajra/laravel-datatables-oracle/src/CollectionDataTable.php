@@ -2,10 +2,10 @@
 
 namespace Yajra\DataTables;
 
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\Support\Arrayable;
 
 class CollectionDataTable extends DataTableAbstract
 {
@@ -294,18 +294,10 @@ class CollectionDataTable extends DataTableAbstract
                     $first  = $a;
                     $second = $b;
                 }
-                if (is_numeric($first[$column] ?? null) && is_numeric($second[$column] ?? null)) {
-                    if ($first[$column] < $second[$column]) {
-                        $cmp = -1;
-                    } elseif ($first[$column] > $second[$column]) {
-                        $cmp = 1;
-                    } else {
-                        $cmp = 0;
-                    }
-                } elseif ($this->config->isCaseInsensitive()) {
-                    $cmp = strnatcasecmp($first[$column] ?? null, $second[$column] ?? null);
+                if ($this->config->isCaseInsensitive()) {
+                    $cmp = strnatcasecmp($first[$column], $second[$column]);
                 } else {
-                    $cmp = strnatcmp($first[$column] ?? null, $second[$column] ?? null);
+                    $cmp = strnatcmp($first[$column], $second[$column]);
                 }
                 if ($cmp != 0) {
                     return $cmp;

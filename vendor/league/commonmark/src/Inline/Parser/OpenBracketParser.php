@@ -20,11 +20,19 @@ use League\CommonMark\InlineParserContext;
 
 final class OpenBracketParser implements InlineParserInterface
 {
+    /**
+     * @return string[]
+     */
     public function getCharacters(): array
     {
         return ['['];
     }
 
+    /**
+     * @param InlineParserContext $inlineContext
+     *
+     * @return bool
+     */
     public function parse(InlineParserContext $inlineContext): bool
     {
         $inlineContext->getCursor()->advanceBy(1);

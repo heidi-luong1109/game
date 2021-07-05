@@ -74,7 +74,7 @@ class Route
     /**
      * The array of matched parameters.
      *
-     * @var array|null
+     * @var array
      */
     public $parameters;
 
@@ -91,20 +91,6 @@ class Route
      * @var array
      */
     protected $originalParameters;
-
-    /**
-     * Indicates the maximum number of seconds the route should acquire a session lock for.
-     *
-     * @var int|null
-     */
-    protected $lockSeconds;
-
-    /**
-     * Indicates the maximum number of seconds the route should wait while attempting to acquire a session lock.
-     *
-     * @var int|null
-     */
-    protected $waitSeconds;
 
     /**
      * The computed gathered middleware.
@@ -361,8 +347,8 @@ class Route
      * Get a given parameter from the route.
      *
      * @param  string  $name
-     * @param  string|object|null  $default
-     * @return string|object|null
+     * @param  mixed  $default
+     * @return string|object
      */
     public function parameter($name, $default = null)
     {
@@ -373,8 +359,8 @@ class Route
      * Get original value of a given parameter from the route.
      *
      * @param  string  $name
-     * @param  string|null  $default
-     * @return string|null
+     * @param  mixed  $default
+     * @return string
      */
     public function originalParameter($name, $default = null)
     {
@@ -385,7 +371,7 @@ class Route
      * Set a parameter to the given value.
      *
      * @param  string  $name
-     * @param  string|object|null  $value
+     * @param  mixed  $value
      * @return void
      */
     public function setParameter($name, $value)
@@ -494,14 +480,12 @@ class Route
     /**
      * Get the binding field for the given parameter.
      *
-     * @param  string|int  $parameter
+     * @param  string  $parameter
      * @return string|null
      */
     public function bindingFieldFor($parameter)
     {
-        $fields = is_int($parameter) ? array_values($this->bindingFields) : $this->bindingFields;
-
-        return $fields[$parameter] ?? null;
+        return $this->bindingFields[$parameter] ?? null;
     }
 
     /**
@@ -691,13 +675,7 @@ class Route
             return $this->getDomain();
         }
 
-        $parsed = RouteUri::parse($domain);
-
-        $this->action['domain'] = $parsed->uri;
-
-        $this->bindingFields = array_merge(
-            $this->bindingFields, $parsed->bindingFields
-        );
+        $this->action['domain'] = $domain;
 
         return $this;
     }
@@ -907,10 +885,6 @@ class Route
     {
         $this->action = $action;
 
-        if (isset($this->action['domain'])) {
-            $this->domain($this->action['domain']);
-        }
-
         return $this;
     }
 
@@ -927,9 +901,9 @@ class Route
 
         $this->computedMiddleware = [];
 
-        return $this->computedMiddleware = Router::uniqueMiddleware(array_merge(
+        return $this->computedMiddleware = array_unique(array_merge(
             $this->middleware(), $this->controllerMiddleware()
-        ));
+        ), SORT_REGULAR);
     }
 
     /**
@@ -969,76 +943,6 @@ class Route
         return $this->controllerDispatcher()->getMiddleware(
             $this->getController(), $this->getControllerMethod()
         );
-    }
-
-    /**
-     * Specify middleware that should be removed from the given route.
-     *
-     * @param  array|string  $middleware
-     * @return $this|array
-     */
-    public function withoutMiddleware($middleware)
-    {
-        $this->action['excluded_middleware'] = array_merge(
-            (array) ($this->action['excluded_middleware'] ?? []), Arr::wrap($middleware)
-        );
-
-        return $this;
-    }
-
-    /**
-     * Get the middleware should be removed from the route.
-     *
-     * @return array
-     */
-    public function excludedMiddleware()
-    {
-        return (array) ($this->action['excluded_middleware'] ?? []);
-    }
-
-    /**
-     * Specify that the route should not allow concurrent requests from the same session.
-     *
-     * @param  int|null  $lockSeconds
-     * @param  int|null  $waitSeconds
-     * @return $this
-     */
-    public function block($lockSeconds = 10, $waitSeconds = 10)
-    {
-        $this->lockSeconds = $lockSeconds;
-        $this->waitSeconds = $waitSeconds;
-
-        return $this;
-    }
-
-    /**
-     * Specify that the route should allow concurrent requests from the same session.
-     *
-     * @return $this
-     */
-    public function withoutBlocking()
-    {
-        return $this->block(null, null);
-    }
-
-    /**
-     * Get the maximum number of seconds the route's session lock should be held for.
-     *
-     * @return int|null
-     */
-    public function locksFor()
-    {
-        return $this->lockSeconds;
-    }
-
-    /**
-     * Get the maximum number of seconds to wait while attempting to acquire a session lock.
-     *
-     * @return int|null
-     */
-    public function waitsFor()
-    {
-        return $this->waitSeconds;
     }
 
     /**

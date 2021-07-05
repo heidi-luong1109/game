@@ -21,9 +21,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInterface, LocaleAwareInterface, WarmableInterface
 {
-    public const MESSAGE_DEFINED = 0;
-    public const MESSAGE_MISSING = 1;
-    public const MESSAGE_EQUALS_FALLBACK = 2;
+    const MESSAGE_DEFINED = 0;
+    const MESSAGE_MISSING = 1;
+    const MESSAGE_EQUALS_FALLBACK = 2;
 
     /**
      * @var TranslatorInterface|TranslatorBagInterface
@@ -38,7 +38,7 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
     public function __construct(TranslatorInterface $translator)
     {
         if (!$translator instanceof TranslatorBagInterface || !$translator instanceof LocaleAwareInterface) {
-            throw new InvalidArgumentException(sprintf('The Translator "%s" must implement TranslatorInterface, TranslatorBagInterface and LocaleAwareInterface.', get_debug_type($translator)));
+            throw new InvalidArgumentException(sprintf('The Translator "%s" must implement TranslatorInterface, TranslatorBagInterface and LocaleAwareInterface.', \get_class($translator)));
         }
 
         $this->translator = $translator;
@@ -82,23 +82,11 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
     /**
      * {@inheritdoc}
      */
-    public function getCatalogues(): array
-    {
-        return $this->translator->getCatalogues();
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return string[]
-     */
     public function warmUp(string $cacheDir)
     {
         if ($this->translator instanceof WarmableInterface) {
-            return (array) $this->translator->warmUp($cacheDir);
+            $this->translator->warmUp($cacheDir);
         }
-
-        return [];
     }
 
     /**

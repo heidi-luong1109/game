@@ -15,7 +15,6 @@ use League\CommonMark\Inline\Element\AbstractInline;
 
 final class TaskListItemMarker extends AbstractInline
 {
-    /** @var bool */
     protected $checked = false;
 
     public function __construct(bool $isCompleted)

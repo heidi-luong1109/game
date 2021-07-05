@@ -63,9 +63,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>ver.</b> 10.1
+            <b>ver.</b> 8.00
         </div>
-        <strong><a href="">MyCasino</a></strong> - Admin
+        <strong><a href="">ITALY SYSTEM </a></strong> - Multi Shop System
     </footer>
 
 </div>

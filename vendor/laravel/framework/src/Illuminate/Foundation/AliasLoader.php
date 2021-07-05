@@ -134,13 +134,13 @@ class AliasLoader
     /**
      * Add an alias to the loader.
      *
-     * @param  string  $alias
      * @param  string  $class
+     * @param  string  $alias
      * @return void
      */
-    public function alias($alias, $class)
+    public function alias($class, $alias)
     {
-        $this->aliases[$alias] = $class;
+        $this->aliases[$class] = $alias;
     }
 
     /**

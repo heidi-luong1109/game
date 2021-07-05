@@ -48,7 +48,7 @@ class SqlServerGrammar extends Grammar
     {
         return "select col.name from sys.columns as col
                 join sys.objects as obj on col.object_id = obj.object_id
-                where obj.type = 'U' and obj.object_id = object_id('$table')";
+                where obj.type = 'U' and obj.name = '$table'";
     }
 
     /**
@@ -208,12 +208,10 @@ class SqlServerGrammar extends Grammar
     {
         $columns = "'".implode("','", $command->columns)."'";
 
-        $tableName = $this->getTablePrefix().$blueprint->getTable();
-
         $sql = "DECLARE @sql NVARCHAR(MAX) = '';";
-        $sql .= "SELECT @sql += 'ALTER TABLE [dbo].[{$tableName}] DROP CONSTRAINT ' + OBJECT_NAME([default_object_id]) + ';' ";
+        $sql .= "SELECT @sql += 'ALTER TABLE [dbo].[{$blueprint->getTable()}] DROP CONSTRAINT ' + OBJECT_NAME([default_object_id]) + ';' ";
         $sql .= 'FROM SYS.COLUMNS ';
-        $sql .= "WHERE [object_id] = OBJECT_ID('[dbo].[{$tableName}]') AND [name] in ({$columns}) AND [default_object_id] <> 0;";
+        $sql .= "WHERE [object_id] = OBJECT_ID('[dbo].[{$blueprint->getTable()}]') AND [name] in ({$columns}) AND [default_object_id] <> 0;";
         $sql .= 'EXEC(@sql)';
 
         return $sql;

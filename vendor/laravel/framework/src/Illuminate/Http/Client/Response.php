@@ -29,7 +29,7 @@ class Response implements ArrayAccess
     /**
      * Create a new response instance.
      *
-     * @param  \Psr\Http\Message\MessageInterface  $response
+     * @param  \Psr\Http\Message\MessageInterface
      * @return void
      */
     public function __construct($response)
@@ -48,27 +48,17 @@ class Response implements ArrayAccess
     }
 
     /**
-     * Get the JSON decoded body of the response as an array or scalar value.
+     * Get the JSON decoded body of the response.
      *
-     * @return mixed
+     * @return array
      */
     public function json()
     {
         if (! $this->decoded) {
-            $this->decoded = json_decode($this->body(), true);
+            $this->decoded = json_decode((string) $this->response->getBody(), true);
         }
 
         return $this->decoded;
-    }
-
-    /**
-     * Get the JSON decoded body of the response as an object.
-     *
-     * @return object
-     */
-    public function object()
-    {
-        return json_decode($this->body(), false);
     }
 
     /**
@@ -145,16 +135,6 @@ class Response implements ArrayAccess
     }
 
     /**
-     * Determine if the response indicates a client or server error occurred.
-     *
-     * @return bool
-     */
-    public function failed()
-    {
-        return $this->serverError() || $this->clientError();
-    }
-
-    /**
      * Determine if the response indicates a client error occurred.
      *
      * @return bool
@@ -177,7 +157,7 @@ class Response implements ArrayAccess
     /**
      * Get the response cookies.
      *
-     * @return \GuzzleHttp\Cookie\CookieJar
+     * @return array
      */
     public function cookies()
     {

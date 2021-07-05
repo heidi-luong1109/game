@@ -10,7 +10,7 @@
     </div>
 
 	<div>
-<font size="4"><a href="https://t.me/betito247"></a></font>
+<font size="4"><a href=""></a></font>
 </div>
               
     @include('backend.partials.messages')

@@ -352,13 +352,13 @@ class Mailer implements MailerContract, MailQueueContract
     protected function addContent($message, $view, $plain, $raw, $data)
     {
         if (isset($view)) {
-            $message->setBody($this->renderView($view, $data) ?: ' ', 'text/html');
+            $message->setBody($this->renderView($view, $data), 'text/html');
         }
 
         if (isset($plain)) {
             $method = isset($view) ? 'addPart' : 'setBody';
 
-            $message->$method($this->renderView($plain, $data) ?: ' ', 'text/plain');
+            $message->$method($this->renderView($plain, $data), 'text/plain');
         }
 
         if (isset($raw)) {
@@ -398,7 +398,7 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Queue a new e-mail message for sending.
      *
-     * @param  \Illuminate\Contracts\Mail\Mailable|string|array  $view
+     * @param  \Illuminate\Contracts\Mail\Mailable  $view
      * @param  string|null  $queue
      * @return mixed
      *
@@ -515,8 +515,6 @@ class Mailer implements MailerContract, MailQueueContract
      */
     protected function sendSwiftMessage($message)
     {
-        $this->failedRecipients = [];
-
         try {
             return $this->swift->send($message, $this->failedRecipients);
         } finally {

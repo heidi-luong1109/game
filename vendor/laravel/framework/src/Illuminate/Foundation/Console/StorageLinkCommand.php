@@ -3,8 +3,6 @@
 namespace Illuminate\Foundation\Console;
 
 use Illuminate\Console\Command;
-use RuntimeException;
-use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 class StorageLinkCommand extends Command
 {
@@ -13,7 +11,7 @@ class StorageLinkCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'storage:link {--relative : Create the symbolic link using relative paths}';
+    protected $signature = 'storage:link';
 
     /**
      * The console command description.
@@ -33,10 +31,6 @@ class StorageLinkCommand extends Command
             if (file_exists($link)) {
                 $this->error("The [$link] link already exists.");
             } else {
-                if ($this->option('relative')) {
-                    $target = $this->getRelativeTarget($link, $target);
-                }
-
                 $this->laravel->make('files')->link($target, $link);
 
                 $this->info("The [$link] link has been connected to [$target].");
@@ -55,21 +49,5 @@ class StorageLinkCommand extends Command
     {
         return $this->laravel['config']['filesystems.links'] ??
                [public_path('storage') => storage_path('app/public')];
-    }
-
-    /**
-     * Get the relative path to the target.
-     *
-     * @param  string  $link
-     * @param  string  $target
-     * @return string
-     */
-    protected function getRelativeTarget($link, $target)
-    {
-        if (! class_exists(SymfonyFilesystem::class)) {
-            throw new RuntimeException('To enable support for relative links, please install the symfony/filesystem package.');
-        }
-
-        return (new SymfonyFilesystem)->makePathRelative($target, dirname($link));
     }
 }

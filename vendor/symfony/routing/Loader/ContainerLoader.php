@@ -22,10 +22,9 @@ class ContainerLoader extends ObjectLoader
 {
     private $container;
 
-    public function __construct(ContainerInterface $container, string $env = null)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        parent::__construct($env);
     }
 
     /**

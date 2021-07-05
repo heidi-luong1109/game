@@ -67,6 +67,8 @@ class MailServiceProvider extends ServiceProvider implements DeferrableProvider
         return [
             'mail.manager',
             'mailer',
+            'swift.mailer',
+            'swift.transport',
             Markdown::class,
         ];
     }

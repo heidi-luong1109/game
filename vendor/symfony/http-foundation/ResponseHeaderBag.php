@@ -18,11 +18,11 @@ namespace Symfony\Component\HttpFoundation;
  */
 class ResponseHeaderBag extends HeaderBag
 {
-    public const COOKIES_FLAT = 'flat';
-    public const COOKIES_ARRAY = 'array';
+    const COOKIES_FLAT = 'flat';
+    const COOKIES_ARRAY = 'array';
 
-    public const DISPOSITION_ATTACHMENT = 'attachment';
-    public const DISPOSITION_INLINE = 'inline';
+    const DISPOSITION_ATTACHMENT = 'attachment';
+    const DISPOSITION_INLINE = 'inline';
 
     protected $computedCacheControl = [];
     protected $cookies = [];
@@ -239,9 +239,9 @@ class ResponseHeaderBag extends HeaderBag
     /**
      * Clears a cookie in the browser.
      */
-    public function clearCookie(string $name, ?string $path = '/', string $domain = null, bool $secure = false, bool $httpOnly = true, string $sameSite = null)
+    public function clearCookie(string $name, ?string $path = '/', string $domain = null, bool $secure = false, bool $httpOnly = true)
     {
-        $this->setCookie(new Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, false, $sameSite));
+        $this->setCookie(new Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, false, null));
     }
 
     /**
@@ -286,6 +286,8 @@ class ResponseHeaderBag extends HeaderBag
 
     private function initDate(): void
     {
-        $this->set('Date', gmdate('D, d M Y H:i:s').' GMT');
+        $now = \DateTime::createFromFormat('U', time());
+        $now->setTimezone(new \DateTimeZone('UTC'));
+        $this->set('Date', $now->format('D, d M Y H:i:s').' GMT');
     }
 }

@@ -1,8 +1,8 @@
 <header class="main-header">
     <!-- Logo -->
     <a class="logo" href="{{ url('/') }}">
-        <span class="logo-mini"><b>T</b></span>
-        <span class="logo-lg"><b>Admin</b> <small></small></span>
+        <span class="logo-mini"><b>I</b></span>
+        <span class="logo-lg"><b>ITALY</b> <small></small></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

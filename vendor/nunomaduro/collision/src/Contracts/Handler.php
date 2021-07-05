@@ -24,6 +24,8 @@ interface Handler extends HandlerInterface
     /**
      * Sets the output.
      *
+     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return \NunoMaduro\Collision\Contracts\Handler
      */
     public function setOutput(OutputInterface $output): Handler;

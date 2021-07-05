@@ -27,10 +27,8 @@ use League\CommonMark\Inline\Element\AbstractStringContainer;
  */
 final class StaggeredDelimiterProcessor implements DelimiterProcessorInterface
 {
-    /** @var string */
     private $delimiterChar;
 
-    /** @var int */
     private $minLength = 0;
 
     /** @var array<int, DelimiterProcessorInterface>|DelimiterProcessorInterface[] */
@@ -42,16 +40,25 @@ final class StaggeredDelimiterProcessor implements DelimiterProcessorInterface
         $this->add($processor);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOpeningCharacter(): string
     {
         return $this->delimiterChar;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getClosingCharacter(): string
     {
         return $this->delimiterChar;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMinLength(): int
     {
         return $this->minLength;
@@ -61,8 +68,6 @@ final class StaggeredDelimiterProcessor implements DelimiterProcessorInterface
      * Adds the given processor to this staggered delimiter processor
      *
      * @param DelimiterProcessorInterface $processor
-     *
-     * @return void
      */
     public function add(DelimiterProcessorInterface $processor)
     {
@@ -78,14 +83,20 @@ final class StaggeredDelimiterProcessor implements DelimiterProcessorInterface
         $this->minLength = \min($this->minLength, $len);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDelimiterUse(DelimiterInterface $opener, DelimiterInterface $closer): int
     {
         return $this->findProcessor($opener->getLength())->getDelimiterUse($opener, $closer);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function process(AbstractStringContainer $opener, AbstractStringContainer $closer, int $delimiterUse)
     {
-        $this->findProcessor($delimiterUse)->process($opener, $closer, $delimiterUse);
+        return $this->findProcessor($delimiterUse)->process($opener, $closer, $delimiterUse);
     }
 
     private function findProcessor(int $len): DelimiterProcessorInterface

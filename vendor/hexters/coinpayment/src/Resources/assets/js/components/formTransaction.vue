@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="text-center mb-3">
-                    <a v-bind:href="payload.redirect_url">&laquo; Cancel Transaction</a>
+                    <a v-bind:href="payload.redirect_url">&laquo; Cancel transaction</a>
                 </div>
             </div>
 
@@ -302,7 +302,7 @@ export default {
                 container: this.fullPage ? null : this.$refs.formContainer,
                 canCancel: false
             });
-    
+
             axios.post(_host + '/coinpayment/ajax/create', newPayload)
                 .then(json => {
                     self.transaction = json.data;
@@ -310,12 +310,15 @@ export default {
                     self.format_expired();
                     loader.hide()
                 })
-                .catch(error => {
-                    if(error.response.status >= 400) {
-                        swal(error.response.data.message, {
-                            icon: 'warning'
-                        });
+                .then(error => {
+                    if(error) {
+                        if(error.response.data.message != undefined) {
+                            swal(error.response.data.message, {
+                                icon: 'warning'
+                            });
+                        }
                     }
+
                     loader.hide()
                 });
         },
@@ -330,6 +333,8 @@ export default {
             })
             .then(json => {
                 if(json.data.result) {
+                    console.log(json.data);
+                    
                     self.rates = json.data.data.rates.accepted_coin;
                     self.header = json.data.data.config;
                     self.payload = json.data.data.payload;
@@ -338,7 +343,7 @@ export default {
                 }
             })
             .catch(error => {
-                if(typeof error.response.data.message !== "undefined") {
+                if(error.response.data.message !== undefined) {
                     swal(error.response.data.message, {
                         icon: 'warning'
                     });

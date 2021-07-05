@@ -21,7 +21,6 @@ use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\NodeVisitorAbstract;
 use Psy\CodeCleaner\NoReturnValue;
-use Psy\Command\TimeitCommand;
 
 /**
  * A node visitor for instrumenting code to be executed by the `timeit` command.
@@ -102,7 +101,7 @@ class TimeitVisitor extends NodeVisitorAbstract
      */
     private function getStartCall()
     {
-        return new StaticCall(new FullyQualifiedName(TimeitCommand::class), 'markStart');
+        return new StaticCall(new FullyQualifiedName('Psy\Command\TimeitCommand'), 'markStart');
     }
 
     /**
@@ -120,7 +119,7 @@ class TimeitVisitor extends NodeVisitorAbstract
             $arg = NoReturnValue::create();
         }
 
-        return new StaticCall(new FullyQualifiedName(TimeitCommand::class), 'markEnd', [new Arg($arg)]);
+        return new StaticCall(new FullyQualifiedName('Psy\Command\TimeitCommand'), 'markEnd', [new Arg($arg)]);
     }
 
     /**
@@ -135,6 +134,6 @@ class TimeitVisitor extends NodeVisitorAbstract
      */
     private function maybeExpression($expr, $attrs = [])
     {
-        return \class_exists(Expression::class) ? new Expression($expr, $attrs) : $expr;
+        return \class_exists('PhpParser\Node\Stmt\Expression') ? new Expression($expr, $attrs) : $expr;
     }
 }

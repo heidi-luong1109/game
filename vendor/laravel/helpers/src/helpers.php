@@ -199,7 +199,7 @@ if (! function_exists('array_prepend')) {
      */
     function array_prepend($array, $value, $key = null)
     {
-        return Arr::prepend(...func_get_args());
+        return Arr::prepend($array, $value, $key);
     }
 }
 

@@ -37,7 +37,7 @@ interface ResponseFactory
     /**
      * Create a new JSON response instance.
      *
-     * @param  mixed  $data
+     * @param  string|array|object  $data
      * @param  int  $status
      * @param  array  $headers
      * @param  int  $options
@@ -49,7 +49,7 @@ interface ResponseFactory
      * Create a new JSONP response instance.
      *
      * @param  string  $callback
-     * @param  mixed  $data
+     * @param  string|array|object  $data
      * @param  int  $status
      * @param  array  $headers
      * @param  int  $options

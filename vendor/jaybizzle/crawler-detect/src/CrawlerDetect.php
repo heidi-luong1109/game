@@ -11,18 +11,18 @@
 
 namespace Jaybizzle\CrawlerDetect;
 
+use Jaybizzle\CrawlerDetect\Fixtures\Headers;
 use Jaybizzle\CrawlerDetect\Fixtures\Crawlers;
 use Jaybizzle\CrawlerDetect\Fixtures\Exclusions;
-use Jaybizzle\CrawlerDetect\Fixtures\Headers;
 
 class CrawlerDetect
 {
     /**
      * The user agent.
      *
-     * @var string|null
+     * @var null
      */
-    protected $userAgent;
+    protected $userAgent = null;
 
     /**
      * Headers that contain a user agent.
@@ -93,7 +93,7 @@ class CrawlerDetect
      * Compile the regex patterns into one regex string.
      *
      * @param array
-     *
+     * 
      * @return string
      */
     public function compileRegex($patterns)
@@ -138,7 +138,7 @@ class CrawlerDetect
     /**
      * Set the user agent.
      *
-     * @param string|null $userAgent
+     * @param string $userAgent
      */
     public function setUserAgent($userAgent)
     {
@@ -168,11 +168,17 @@ class CrawlerDetect
             $userAgent ?: $this->userAgent
         ));
 
-        if ($agent === '') {
+        if ($agent == '') {
             return false;
         }
 
-        return (bool) preg_match("/{$this->compiledRegex}/i", $agent, $this->matches);
+        $result = preg_match("/{$this->compiledRegex}/i", $agent, $matches);
+
+        if ($matches) {
+            $this->matches = $matches;
+        }
+
+        return (bool) $result;
     }
 
     /**

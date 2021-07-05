@@ -3,7 +3,6 @@
 namespace Illuminate\Support\Traits;
 
 use CachingIterator;
-use Closure;
 use Exception;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -11,7 +10,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Enumerable;
 use Illuminate\Support\HigherOrderCollectionProxy;
-use Illuminate\Support\HigherOrderWhenProxy;
 use JsonSerializable;
 use Symfony\Component\VarDumper\VarDumper;
 use Traversable;
@@ -37,7 +35,6 @@ use Traversable;
  * @property-read HigherOrderCollectionProxy $sortByDesc
  * @property-read HigherOrderCollectionProxy $sum
  * @property-read HigherOrderCollectionProxy $unique
- * @property-read HigherOrderCollectionProxy $until
  */
 trait EnumeratesValues
 {
@@ -47,31 +44,9 @@ trait EnumeratesValues
      * @var array
      */
     protected static $proxies = [
-        'average',
-        'avg',
-        'contains',
-        'each',
-        'every',
-        'filter',
-        'first',
-        'flatMap',
-        'groupBy',
-        'keyBy',
-        'map',
-        'max',
-        'min',
-        'partition',
-        'reject',
-        'skipUntil',
-        'skipWhile',
-        'some',
-        'sortBy',
-        'sortByDesc',
-        'sum',
-        'takeUntil',
-        'takeWhile',
-        'unique',
-        'until',
+        'average', 'avg', 'contains', 'each', 'every', 'filter', 'first',
+        'flatMap', 'groupBy', 'keyBy', 'map', 'max', 'min', 'partition',
+        'reject', 'some', 'sortBy', 'sortByDesc', 'sum', 'unique',
     ];
 
     /**
@@ -169,9 +144,9 @@ trait EnumeratesValues
      */
     public function dd(...$args)
     {
-        $this->dump(...$args);
+        call_user_func_array([$this, 'dump'], $args);
 
-        exit(1);
+        die(1);
     }
 
     /**
@@ -181,8 +156,8 @@ trait EnumeratesValues
      */
     public function dump()
     {
-        (new Collection(func_get_args()))
-            ->push($this->all())
+        (new static(func_get_args()))
+            ->push($this)
             ->each(function ($item) {
                 VarDumper::dump($item);
             });
@@ -412,9 +387,13 @@ trait EnumeratesValues
      */
     public function sum($callback = null)
     {
-        $callback = is_null($callback)
-            ? $this->identity()
-            : $this->valueRetriever($callback);
+        if (is_null($callback)) {
+            $callback = function ($value) {
+                return $value;
+            };
+        } else {
+            $callback = $this->valueRetriever($callback);
+        }
 
         return $this->reduce(function ($result, $item) use ($callback) {
             return $result + $callback($item);
@@ -425,16 +404,12 @@ trait EnumeratesValues
      * Apply the callback if the value is truthy.
      *
      * @param  bool|mixed  $value
-     * @param  callable|null  $callback
+     * @param  callable  $callback
      * @param  callable|null  $default
      * @return static|mixed
      */
-    public function when($value, callable $callback = null, callable $default = null)
+    public function when($value, callable $callback, callable $default = null)
     {
-        if (! $callback) {
-            return new HigherOrderWhenProxy($this, $value);
-        }
-
         if ($value) {
             return $callback($this, $value);
         } elseif ($default) {
@@ -724,21 +699,6 @@ trait EnumeratesValues
     }
 
     /**
-     * Take items in the collection until the given condition is met.
-     *
-     * This is an alias to the "takeUntil" method.
-     *
-     * @param  mixed  $value
-     * @return static
-     *
-     * @deprecated Use the "takeUntil" method directly.
-     */
-    public function until($value)
-    {
-        return $this->takeUntil($value);
-    }
-
-    /**
      * Collect the values into a collection.
      *
      * @return \Illuminate\Support\Collection
@@ -800,6 +760,25 @@ trait EnumeratesValues
     public function getCachingIterator($flags = CachingIterator::CALL_TOSTRING)
     {
         return new CachingIterator($this->getIterator(), $flags);
+    }
+
+    /**
+     * Count the number of items in the collection using a given truth test.
+     *
+     * @param  callable|null  $callback
+     * @return static
+     */
+    public function countBy($callback = null)
+    {
+        if (is_null($callback)) {
+            $callback = function ($value) {
+                return $value;
+            };
+        }
+
+        return new static($this->groupBy($callback)->map(function ($value) {
+            return $value->count();
+        }));
     }
 
     /**
@@ -939,44 +918,6 @@ trait EnumeratesValues
 
         return function ($item) use ($value) {
             return data_get($item, $value);
-        };
-    }
-
-    /**
-     * Make a function to check an item's equality.
-     *
-     * @param  mixed  $value
-     * @return \Closure
-     */
-    protected function equality($value)
-    {
-        return function ($item) use ($value) {
-            return $item === $value;
-        };
-    }
-
-    /**
-     * Make a function using another function, by negating its result.
-     *
-     * @param  \Closure  $callback
-     * @return \Closure
-     */
-    protected function negate(Closure $callback)
-    {
-        return function (...$params) use ($callback) {
-            return ! $callback(...$params);
-        };
-    }
-
-    /**
-     * Make a function that returns what's passed to it.
-     *
-     * @return \Closure
-     */
-    protected function identity()
-    {
-        return function ($value) {
-            return $value;
         };
     }
 }

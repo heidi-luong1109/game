@@ -40,7 +40,7 @@ class ClassNamesMatcher extends AbstractMatcher
                 return \implode('\\', \array_slice($pieces, $nsPos, \count($pieces)));
             },
             \array_filter(
-                \array_merge(\get_declared_classes(), \get_declared_interfaces()),
+                \get_declared_classes(),
                 function ($className) use ($quotedClass) {
                     return AbstractMatcher::startsWith($quotedClass, $className);
                 }
@@ -53,7 +53,7 @@ class ClassNamesMatcher extends AbstractMatcher
      */
     public function hasMatched(array $tokens)
     {
-        $token = \array_pop($tokens);
+        $token     = \array_pop($tokens);
         $prevToken = \array_pop($tokens);
 
         $blacklistedTokens = [

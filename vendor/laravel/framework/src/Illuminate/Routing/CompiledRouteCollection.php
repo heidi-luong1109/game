@@ -152,12 +152,10 @@ class CompiledRouteCollection extends AbstractRouteCollection
      */
     protected function requestWithoutTrailingSlash(Request $request)
     {
-        $trimmedRequest = Request::createFromBase($request);
-
-        $parts = explode('?', $request->server->get('REQUEST_URI'), 2);
+        $trimmedRequest = clone $request;
 
         $trimmedRequest->server->set(
-            'REQUEST_URI', rtrim($parts[0], '/').(isset($parts[1]) ? '?'.$parts[1] : '')
+            'REQUEST_URI', rtrim($request->server->get('REQUEST_URI'), '/')
         );
 
         return $trimmedRequest;
@@ -210,7 +208,7 @@ class CompiledRouteCollection extends AbstractRouteCollection
     {
         $attributes = collect($this->attributes)->first(function (array $attributes) use ($action) {
             if (isset($attributes['action']['controller'])) {
-                return trim($attributes['action']['controller'], '\\') === $action;
+                return $attributes['action']['controller'] === $action;
             }
 
             return $attributes['action']['uses'] === $action;
@@ -293,12 +291,13 @@ class CompiledRouteCollection extends AbstractRouteCollection
             ), '/');
         }
 
-        return $this->router->newRoute($attributes['methods'], $baseUri == '' ? '/' : $baseUri, $attributes['action'])
+        return (new Route($attributes['methods'], $baseUri == '' ? '/' : $baseUri, $attributes['action']))
             ->setFallback($attributes['fallback'])
             ->setDefaults($attributes['defaults'])
             ->setWheres($attributes['wheres'])
             ->setBindingFields($attributes['bindingFields'])
-            ->block($attributes['lockSeconds'] ?? null, $attributes['waitSeconds'] ?? null);
+            ->setRouter($this->router)
+            ->setContainer($this->container);
     }
 
     /**

@@ -36,7 +36,7 @@ class MockFileSessionStorage extends MockArraySessionStorage
         }
 
         if (!is_dir($savePath) && !@mkdir($savePath, 0777, true) && !is_dir($savePath)) {
-            throw new \RuntimeException(sprintf('Session Storage was not able to create directory "%s".', $savePath));
+            throw new \RuntimeException(sprintf('Session Storage was not able to create directory "%s"', $savePath));
         }
 
         $this->savePath = $savePath;
@@ -86,7 +86,7 @@ class MockFileSessionStorage extends MockArraySessionStorage
     public function save()
     {
         if (!$this->started) {
-            throw new \RuntimeException('Trying to save a session that was not started yet or was already closed.');
+            throw new \RuntimeException('Trying to save a session that was not started yet or was already closed');
         }
 
         $data = $this->data;
@@ -102,10 +102,7 @@ class MockFileSessionStorage extends MockArraySessionStorage
 
         try {
             if ($data) {
-                $path = $this->getFilePath();
-                $tmp = $path.bin2hex(random_bytes(6));
-                file_put_contents($tmp, serialize($data));
-                rename($tmp, $path);
+                file_put_contents($this->getFilePath(), serialize($data));
             } else {
                 $this->destroy();
             }
@@ -113,8 +110,9 @@ class MockFileSessionStorage extends MockArraySessionStorage
             $this->data = $data;
         }
 
-        // this is needed when the session object is re-used across multiple requests
-        // in functional tests.
+        // this is needed for Silex, where the session object is re-used across requests
+        // in functional tests. In Symfony, the container is rebooted, so we don't have
+        // this issue
         $this->started = false;
     }
 
@@ -124,11 +122,8 @@ class MockFileSessionStorage extends MockArraySessionStorage
      */
     private function destroy(): void
     {
-        set_error_handler(static function () {});
-        try {
+        if (is_file($this->getFilePath())) {
             unlink($this->getFilePath());
-        } finally {
-            restore_error_handler();
         }
     }
 
@@ -145,14 +140,8 @@ class MockFileSessionStorage extends MockArraySessionStorage
      */
     private function read(): void
     {
-        set_error_handler(static function () {});
-        try {
-            $data = file_get_contents($this->getFilePath());
-        } finally {
-            restore_error_handler();
-        }
-
-        $this->data = $data ? unserialize($data) : [];
+        $filePath = $this->getFilePath();
+        $this->data = is_readable($filePath) && is_file($filePath) ? unserialize(file_get_contents($filePath)) : [];
 
         $this->loadSession();
     }

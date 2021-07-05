@@ -11,93 +11,13 @@
 
 namespace Psy;
 
+use XdgBaseDir\Xdg;
+
 /**
  * A Psy Shell configuration path helper.
  */
 class ConfigPaths
 {
-    private $configDir;
-    private $dataDir;
-    private $runtimeDir;
-    private $env;
-
-    /**
-     * ConfigPaths constructor.
-     *
-     * Optionally provide `configDir`, `dataDir` and `runtimeDir` overrides.
-     *
-     * @see self::overrideDirs
-     *
-     * @param string[]     $overrides Directory overrides
-     * @param EnvInterface $env
-     */
-    public function __construct($overrides = [], $env = null)
-    {
-        $this->overrideDirs($overrides);
-        $this->env = $env ?: new SuperglobalsEnv();
-    }
-
-    /**
-     * Provide `configDir`, `dataDir` and `runtimeDir` overrides.
-     *
-     * If a key is set but empty, the override will be removed. If it is not set
-     * at all, any existing override will persist.
-     *
-     * @param string[] $overrides Directory overrides
-     */
-    public function overrideDirs($overrides)
-    {
-        if (\array_key_exists('configDir', $overrides)) {
-            $this->configDir = $overrides['configDir'] ?: null;
-        }
-
-        if (\array_key_exists('dataDir', $overrides)) {
-            $this->dataDir = $overrides['dataDir'] ?: null;
-        }
-
-        if (\array_key_exists('runtimeDir', $overrides)) {
-            $this->runtimeDir = $overrides['runtimeDir'] ?: null;
-        }
-    }
-
-    /**
-     * Get the current home directory.
-     *
-     * @return string|null
-     */
-    public function homeDir()
-    {
-        if ($homeDir = $this->getEnv('HOME') ?: $this->windowsHomeDir()) {
-            return \strtr($homeDir, '\\', '/');
-        }
-
-        return null;
-    }
-
-    private function windowsHomeDir()
-    {
-        if (\defined('PHP_WINDOWS_VERSION_MAJOR')) {
-            $homeDrive = $this->getEnv('HOMEDRIVE');
-            $homePath = $this->getEnv('HOMEPATH');
-            if ($homeDrive && $homePath) {
-                return $homeDrive.'/'.$homePath;
-            }
-        }
-
-        return null;
-    }
-
-    private function homeConfigDir()
-    {
-        if ($homeConfigDir = $this->getEnv('XDG_CONFIG_HOME')) {
-            return $homeConfigDir;
-        }
-
-        $homeDir = $this->homeDir();
-
-        return $homeDir === '/' ? $homeDir.'.config' : $homeDir.'/.config';
-    }
-
     /**
      * Get potential config directory paths.
      *
@@ -108,23 +28,11 @@ class ConfigPaths
      *
      * @return string[]
      */
-    public function configDirs()
-    {
-        if ($this->configDir !== null) {
-            return [$this->configDir];
-        }
-
-        $configDirs = $this->getEnvArray('XDG_CONFIG_DIRS') ?: ['/etc/xdg'];
-
-        return $this->allDirNames(\array_merge([$this->homeConfigDir()], $configDirs));
-    }
-
-    /**
-     * @deprecated
-     */
     public static function getConfigDirs()
     {
-        return (new self())->configDirs();
+        $xdg = new Xdg();
+
+        return self::getDirNames($xdg->getConfigDirs());
     }
 
     /**
@@ -135,14 +43,13 @@ class ConfigPaths
      *
      *     http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
      *
-     * @deprecated
-     *
      * @return string[]
      */
     public static function getHomeConfigDirs()
     {
-        // Not quite the same, but this is deprecated anyway /shrug
-        return self::getConfigDirs();
+        $xdg = new Xdg();
+
+        return self::getDirNames([$xdg->getHomeConfigDir()]);
     }
 
     /**
@@ -153,18 +60,13 @@ class ConfigPaths
      * config directory (`%APPDATA%/PsySH` on Windows, `~/.config/psysh`
      * everywhere else).
      *
-     * @see self::homeConfigDir
+     * @see self::getHomeConfigDirs
      *
      * @return string
      */
-    public function currentConfigDir()
+    public static function getCurrentConfigDir()
     {
-        if ($this->configDir !== null) {
-            return $this->configDir;
-        }
-
-        $configDirs = $this->allDirNames([$this->homeConfigDir()]);
-
+        $configDirs = self::getHomeConfigDirs();
         foreach ($configDirs as $configDir) {
             if (@\is_dir($configDir)) {
                 return $configDir;
@@ -175,31 +77,18 @@ class ConfigPaths
     }
 
     /**
-     * @deprecated
-     */
-    public static function getCurrentConfigDir()
-    {
-        return (new self())->currentConfigDir();
-    }
-
-    /**
      * Find real config files in config directories.
      *
-     * @param string[] $names Config file names
+     * @param string[] $names     Config file names
+     * @param string   $configDir Optionally use a specific config directory
      *
      * @return string[]
      */
-    public function configFiles(array $names)
-    {
-        return $this->allRealFiles($this->configDirs(), $names);
-    }
-
-    /**
-     * @deprecated
-     */
     public static function getConfigFiles(array $names, $configDir = null)
     {
-        return (new self(['configDir' => $configDir]))->configFiles($names);
+        $dirs = ($configDir === null) ? self::getConfigDirs() : [$configDir];
+
+        return self::getRealFiles($dirs, $names);
     }
 
     /**
@@ -214,125 +103,90 @@ class ConfigPaths
      *
      * @return string[]
      */
-    public function dataDirs()
-    {
-        if ($this->dataDir !== null) {
-            return [$this->dataDir];
-        }
-
-        $homeDataDir = $this->getEnv('XDG_DATA_HOME') ?: $this->homeDir().'/.local/share';
-        $dataDirs = $this->getEnvArray('XDG_DATA_DIRS') ?: ['/usr/local/share', '/usr/share'];
-
-        return $this->allDirNames(\array_merge([$homeDataDir], $dataDirs));
-    }
-
-    /**
-     * @deprecated
-     */
     public static function getDataDirs()
     {
-        return (new self())->dataDirs();
+        $xdg = new Xdg();
+
+        return self::getDirNames($xdg->getDataDirs());
     }
 
     /**
      * Find real data files in config directories.
      *
-     * @param string[] $names Config file names
+     * @param string[] $names   Config file names
+     * @param string   $dataDir Optionally use a specific config directory
      *
      * @return string[]
      */
-    public function dataFiles(array $names)
-    {
-        return $this->allRealFiles($this->dataDirs(), $names);
-    }
-
-    /**
-     * @deprecated
-     */
     public static function getDataFiles(array $names, $dataDir = null)
     {
-        return (new self(['dataDir' => $dataDir]))->dataFiles($names);
+        $dirs = ($dataDir === null) ? self::getDataDirs() : [$dataDir];
+
+        return self::getRealFiles($dirs, $names);
     }
 
     /**
      * Get a runtime directory.
      *
-     * Defaults to `/psysh` inside the system's temp dir.
+     * Defaults to  `/psysh` inside the system's temp dir.
      *
      * @return string
      */
-    public function runtimeDir()
-    {
-        if ($this->runtimeDir !== null) {
-            return $this->runtimeDir;
-        }
-
-        // Fallback to a boring old folder in the system temp dir.
-        $runtimeDir = $this->getEnv('XDG_RUNTIME_DIR') ?: \sys_get_temp_dir();
-
-        return \strtr($runtimeDir, '\\', '/').'/psysh';
-    }
-
-    /**
-     * @deprecated
-     */
     public static function getRuntimeDir()
     {
-        return (new self())->runtimeDir();
+        $xdg = new Xdg();
+
+        \set_error_handler(['Psy\Exception\ErrorException', 'throwException']);
+
+        try {
+            // XDG doesn't really work on Windows, sometimes complains about
+            // permissions, sometimes tries to remove non-empty directories.
+            // It's a bit flaky. So we'll give this a shot first...
+            $runtimeDir = $xdg->getRuntimeDir(false);
+        } catch (\Exception $e) {
+            // Well. That didn't work. Fall back to a boring old folder in the
+            // system temp dir.
+            $runtimeDir = \sys_get_temp_dir();
+        }
+
+        \restore_error_handler();
+
+        return \strtr($runtimeDir, '\\', '/') . '/psysh';
     }
 
-    /**
-     * Get all PsySH directory name candidates given a list of base directories.
-     *
-     * This expects that XDG-compatible directory paths will be passed in.
-     * `psysh` will be added to each of $baseDirs, and we'll throw in `~/.psysh`
-     * and a couple of Windows-friendly paths as well.
-     *
-     * @param string[] $baseDirs base directory paths
-     *
-     * @return string[]
-     */
-    private function allDirNames(array $baseDirs)
+    private static function getDirNames(array $baseDirs)
     {
         $dirs = \array_map(function ($dir) {
-            return \strtr($dir, '\\', '/').'/psysh';
+            return \strtr($dir, '\\', '/') . '/psysh';
         }, $baseDirs);
 
         // Add ~/.psysh
-        if ($home = $this->getEnv('HOME')) {
-            $dirs[] = \strtr($home, '\\', '/').'/.psysh';
+        if ($home = \getenv('HOME')) {
+            $dirs[] = \strtr($home, '\\', '/') . '/.psysh';
         }
 
         // Add some Windows specific ones :)
         if (\defined('PHP_WINDOWS_VERSION_MAJOR')) {
-            if ($appData = $this->getEnv('APPDATA')) {
+            if ($appData = \getenv('APPDATA')) {
                 // AppData gets preference
-                \array_unshift($dirs, \strtr($appData, '\\', '/').'/PsySH');
+                \array_unshift($dirs, \strtr($appData, '\\', '/') . '/PsySH');
             }
 
-            if ($windowsHomeDir = $this->windowsHomeDir()) {
-                $dir = \strtr($windowsHomeDir, '\\', '/').'/.psysh';
-                if (!\in_array($dir, $dirs)) {
-                    $dirs[] = $dir;
-                }
+            $dir = \strtr(\getenv('HOMEDRIVE') . '/' . \getenv('HOMEPATH'), '\\', '/') . '/.psysh';
+            if (!\in_array($dir, $dirs)) {
+                $dirs[] = $dir;
             }
         }
 
         return $dirs;
     }
 
-    /**
-     * Given a list of directories, and a list of filenames, find the ones that
-     * are real files.
-     *
-     * @return string[]
-     */
-    private function allRealFiles(array $dirNames, array $fileNames)
+    private static function getRealFiles(array $dirNames, array $fileNames)
     {
         $files = [];
         foreach ($dirNames as $dir) {
             foreach ($fileNames as $name) {
-                $file = $dir.'/'.$name;
+                $file = $dir . '/' . $name;
                 if (@\is_file($file)) {
                     $files[] = $file;
                 }
@@ -359,7 +213,7 @@ class ConfigPaths
         }
 
         if (!\is_dir($dir) || !\is_writable($dir)) {
-            \trigger_error(\sprintf('Writing to directory %s is not allowed.', $dir), \E_USER_NOTICE);
+            \trigger_error(\sprintf('Writing to %s is not allowed.', $dir), E_USER_NOTICE);
 
             return false;
         }
@@ -383,7 +237,7 @@ class ConfigPaths
                 return $file;
             }
 
-            \trigger_error(\sprintf('Writing to %s is not allowed.', $file), \E_USER_NOTICE);
+            \trigger_error(\sprintf('Writing to %s is not allowed.', $file), E_USER_NOTICE);
 
             return false;
         }
@@ -395,19 +249,5 @@ class ConfigPaths
         \touch($file);
 
         return $file;
-    }
-
-    private function getEnv($key)
-    {
-        return $this->env->get($key);
-    }
-
-    private function getEnvArray($key)
-    {
-        if ($value = $this->getEnv($key)) {
-            return \explode(':', $value);
-        }
-
-        return null;
     }
 }

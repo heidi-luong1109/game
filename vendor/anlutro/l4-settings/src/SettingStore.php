@@ -9,6 +9,9 @@
 
 namespace anlutro\LaravelSettings;
 
+use Illuminate\Support\Facades\Cache;
+use \Illuminate\Support\Facades\Config;
+
 abstract class SettingStore
 {
 	/**
@@ -52,59 +55,6 @@ abstract class SettingStore
 	protected $loaded = false;
 
 	/**
-	 * Default values.
-	 *
-	 * @var array
-	 */
-	protected $defaults = [];
-
-	/**
-	 * @var \Illuminate\Contracts\Cache\Store|\Illuminate\Cache\StoreInterface
-	 */
-	protected $cache = null;
-
-	/**
-	 * Cache TTL in seconds.
-	 *
-	 * @var int
-	 */
-	protected $cacheTtl = 15;
-
-	/**
-	 * Whether to reset the cache when changing a setting.
-	 *
-	 * @var boolean
-	 */
-	protected $cacheForgetOnWrite = true;
-
-	/**
-	 * Set default values.
-	 *
-	 * @param array $defaults
-	 */
-	public function setDefaults(array $defaults)
-	{
-		$this->defaults = $defaults;
-	}
-
-	/**
-	 * Set the cache.
-	 * @param \Illuminate\Contracts\Cache\Store|\Illuminate\Cache\StoreInterface $cache
-	 * @param int $ttl
-	 * @param bool $forgetOnWrite
-	 */
-	public function setCache($cache, $ttl = null, $forgetOnWrite = null)
-	{
-		$this->cache = $cache;
-		if ($ttl !== null) {
-			$this->cacheTtl = $ttl;
-		}
-		if ($forgetOnWrite !== null) {
-			$this->cacheForgetOnWrite = $forgetOnWrite;
-		}
-	}
-
-	/**
 	 * Get a specific key from the settings data.
 	 *
 	 * @param  string|array $key
@@ -114,10 +64,8 @@ abstract class SettingStore
 	 */
 	public function get($key, $default = null)
 	{
-		if ($default === NULL) {
-			$default = ArrayUtil::get($this->defaults, $key);
-		} elseif (is_array($key) && is_array($default)) {
-			$default = array_merge(ArrayUtil::get($this->defaults, $key, []), $default);
+		if ($default === NULL && !is_array($key)) {
+			$default = Config::get('settings.defaults.'.$key);
 		}
         
 		$this->load();
@@ -213,8 +161,8 @@ abstract class SettingStore
 			return;
 		}
 
-		if ($this->cache && $this->cacheForgetOnWrite) {
-			$this->cache->forget(static::CACHE_KEY);
+		if (Config::get('settings.forgetCacheByWrite')) {
+			Cache::forget(static::CACHE_KEY);
 		}
 
 		$this->write($this->data);
@@ -241,14 +189,12 @@ abstract class SettingStore
 	 *
 	 * @return array
 	 */
-	private function readData()
-	{
-		if ($this->cache) {
-			return $this->cache->remember(static::CACHE_KEY, $this->cacheTtl, function () {
+	private function readData() {
+		if (Config::get('settings.enableCache')) {
+			return Cache::remember(static::CACHE_KEY, Config::get('settings.cacheTtl'), function () {
 				return $this->read();
 			});
 		}
-
 		return $this->read();
 	}
 

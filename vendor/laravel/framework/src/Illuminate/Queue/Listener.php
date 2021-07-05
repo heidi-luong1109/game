@@ -214,7 +214,7 @@ class Listener
      */
     public function stop()
     {
-        exit;
+        die;
     }
 
     /**

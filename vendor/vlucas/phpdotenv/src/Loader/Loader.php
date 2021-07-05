@@ -86,12 +86,8 @@ class Loader implements LoaderInterface
      */
     private static function resolveNestedVariables(RepositoryInterface $repository, Value $value = null)
     {
-        /** @var Option<Value> */
-        $option = Option::fromValue($value);
-
-        return $option
+        return Option::fromValue($value)
             ->map(function (Value $v) use ($repository) {
-                /** @var string */
                 return array_reduce($v->getVars(), function ($s, $i) use ($repository) {
                     return substr($s, 0, $i).self::resolveNestedVariable($repository, substr($s, $i));
                 }, $v->getChars());

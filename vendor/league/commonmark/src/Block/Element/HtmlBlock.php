@@ -54,19 +54,29 @@ class HtmlBlock extends AbstractStringContainerBlock
 
     /**
      * @param int $type
-     *
-     * @return void
      */
     public function setType(int $type)
     {
         $this->type = $type;
     }
 
+    /**
+     * Returns true if this block can contain the given block as a child node
+     *
+     * @param AbstractBlock $block
+     *
+     * @return bool
+     */
     public function canContain(AbstractBlock $block): bool
     {
         return false;
     }
 
+    /**
+     * Whether this is a code block
+     *
+     * @return bool
+     */
     public function isCode(): bool
     {
         return true;
@@ -88,6 +98,10 @@ class HtmlBlock extends AbstractStringContainerBlock
         $this->finalStringContents = \implode("\n", $this->strings->toArray());
     }
 
+    /**
+     * @param ContextInterface $context
+     * @param Cursor           $cursor
+     */
     public function handleRemainingContents(ContextInterface $context, Cursor $cursor)
     {
         /** @var self $tip */

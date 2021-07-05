@@ -22,11 +22,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | Set the custom middleware 
-    | you can set the "web", "auth" or "auth:guard"
+    | you can set the "auth" or "auth:guard"
     |
     */
     
-    'middleware' => ['web'],
+    'middleware' => ['auth'],
 
     /*
     |--------------------------------------------------------------------------
@@ -84,14 +84,4 @@ return [
     'font' => [
         'family' => "'Roboto', sans-serif"
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom coin logo
-    |--------------------------------------------------------------------------
-    */
-    
-    'logos' => [
-        'Bitcoin' => 'https://github.com/hexters/CoinPayment/blob/master/btc.png?raw=true',
-    ]
 ];

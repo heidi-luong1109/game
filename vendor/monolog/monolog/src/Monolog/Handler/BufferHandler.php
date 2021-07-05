@@ -27,7 +27,6 @@ class BufferHandler extends AbstractHandler implements ProcessableHandlerInterfa
 {
     use ProcessableHandlerTrait;
 
-    /** @var HandlerInterface */
     protected $handler;
     protected $bufferSize = 0;
     protected $bufferLimit;
@@ -138,13 +137,9 @@ class BufferHandler extends AbstractHandler implements ProcessableHandlerInterfa
      */
     public function setFormatter(FormatterInterface $formatter): HandlerInterface
     {
-        if ($this->handler instanceof FormattableHandlerInterface) {
-            $this->handler->setFormatter($formatter);
+        $this->handler->setFormatter($formatter);
 
-            return $this;
-        }
-
-        throw new \UnexpectedValueException('The nested handler of type '.get_class($this->handler).' does not support formatters.');
+        return $this;
     }
 
     /**
@@ -152,10 +147,6 @@ class BufferHandler extends AbstractHandler implements ProcessableHandlerInterfa
      */
     public function getFormatter(): FormatterInterface
     {
-        if ($this->handler instanceof FormattableHandlerInterface) {
-            return $this->handler->getFormatter();
-        }
-
-        throw new \UnexpectedValueException('The nested handler of type '.get_class($this->handler).' does not support formatters.');
+        return $this->handler->getFormatter();
     }
 }

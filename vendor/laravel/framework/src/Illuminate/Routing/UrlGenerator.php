@@ -311,7 +311,7 @@ class UrlGenerator implements UrlGeneratorContract
      * Create a signed route URL for a named route.
      *
      * @param  string  $name
-     * @param  mixed  $parameters
+     * @param  array  $parameters
      * @param  \DateTimeInterface|\DateInterval|int|null  $expiration
      * @param  bool  $absolute
      * @return string
@@ -320,7 +320,7 @@ class UrlGenerator implements UrlGeneratorContract
      */
     public function signedRoute($name, $parameters = [], $expiration = null, $absolute = true)
     {
-        $parameters = Arr::wrap($parameters);
+        $parameters = $this->formatParameters($parameters);
 
         if (array_key_exists('signature', $parameters)) {
             throw new InvalidArgumentException(
@@ -616,25 +616,25 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Force the scheme for URLs.
      *
-     * @param  string|null  $scheme
+     * @param  string  $scheme
      * @return void
      */
     public function forceScheme($scheme)
     {
         $this->cachedScheme = null;
 
-        $this->forceScheme = $scheme ? $scheme.'://' : null;
+        $this->forceScheme = $scheme.'://';
     }
 
     /**
      * Set the forced root URL.
      *
-     * @param  string|null  $root
+     * @param  string  $root
      * @return void
      */
     public function forceRootUrl($root)
     {
-        $this->forcedRoot = $root ? rtrim($root, '/') : null;
+        $this->forcedRoot = rtrim($root, '/');
 
         $this->cachedRoot = null;
     }
@@ -699,14 +699,7 @@ class UrlGenerator implements UrlGeneratorContract
 
         $this->cachedRoot = null;
         $this->cachedScheme = null;
-
-        tap(optional($this->routeGenerator)->defaultParameters ?: [], function ($defaults) {
-            $this->routeGenerator = null;
-
-            if (! empty($defaults)) {
-                $this->defaults($defaults);
-            }
-        });
+        $this->routeGenerator = null;
     }
 
     /**

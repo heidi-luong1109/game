@@ -170,9 +170,9 @@ class RouteListCommand extends Command
      */
     protected function getMiddleware($route)
     {
-        return collect($this->router->gatherRouteMiddleware($route))->map(function ($middleware) {
+        return collect($route->gatherMiddleware())->map(function ($middleware) {
             return $middleware instanceof Closure ? 'Closure' : $middleware;
-        })->implode("\n");
+        })->implode(',');
     }
 
     /**
@@ -240,7 +240,7 @@ class RouteListCommand extends Command
             }
         }
 
-        return array_map('strtolower', $results);
+        return $results;
     }
 
     /**

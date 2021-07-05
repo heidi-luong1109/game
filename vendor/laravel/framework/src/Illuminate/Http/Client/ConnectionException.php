@@ -2,7 +2,9 @@
 
 namespace Illuminate\Http\Client;
 
-class ConnectionException extends HttpClientException
+use Exception;
+
+class ConnectionException extends Exception
 {
     //
 }

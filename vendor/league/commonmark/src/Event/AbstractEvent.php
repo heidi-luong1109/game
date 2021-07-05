@@ -25,7 +25,6 @@ namespace League\CommonMark\Event;
  */
 abstract class AbstractEvent
 {
-    /** @var bool */
     private $propagationStopped = false;
 
     /**

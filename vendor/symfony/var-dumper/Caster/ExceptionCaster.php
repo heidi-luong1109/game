@@ -27,21 +27,21 @@ class ExceptionCaster
     public static $srcContext = 1;
     public static $traceArgs = true;
     public static $errorTypes = [
-        \E_DEPRECATED => 'E_DEPRECATED',
-        \E_USER_DEPRECATED => 'E_USER_DEPRECATED',
-        \E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR',
-        \E_ERROR => 'E_ERROR',
-        \E_WARNING => 'E_WARNING',
-        \E_PARSE => 'E_PARSE',
-        \E_NOTICE => 'E_NOTICE',
-        \E_CORE_ERROR => 'E_CORE_ERROR',
-        \E_CORE_WARNING => 'E_CORE_WARNING',
-        \E_COMPILE_ERROR => 'E_COMPILE_ERROR',
-        \E_COMPILE_WARNING => 'E_COMPILE_WARNING',
-        \E_USER_ERROR => 'E_USER_ERROR',
-        \E_USER_WARNING => 'E_USER_WARNING',
-        \E_USER_NOTICE => 'E_USER_NOTICE',
-        \E_STRICT => 'E_STRICT',
+        E_DEPRECATED => 'E_DEPRECATED',
+        E_USER_DEPRECATED => 'E_USER_DEPRECATED',
+        E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR',
+        E_ERROR => 'E_ERROR',
+        E_WARNING => 'E_WARNING',
+        E_PARSE => 'E_PARSE',
+        E_NOTICE => 'E_NOTICE',
+        E_CORE_ERROR => 'E_CORE_ERROR',
+        E_CORE_WARNING => 'E_CORE_WARNING',
+        E_COMPILE_ERROR => 'E_COMPILE_ERROR',
+        E_COMPILE_WARNING => 'E_COMPILE_WARNING',
+        E_USER_ERROR => 'E_USER_ERROR',
+        E_USER_WARNING => 'E_USER_WARNING',
+        E_USER_NOTICE => 'E_USER_NOTICE',
+        E_STRICT => 'E_STRICT',
     ];
 
     private static $framesCache = [];
@@ -73,7 +73,8 @@ class ExceptionCaster
 
         if (isset($a[$xPrefix.'previous'], $a[$trace]) && $a[$xPrefix.'previous'] instanceof \Exception) {
             $b = (array) $a[$xPrefix.'previous'];
-            $class = get_debug_type($a[$xPrefix.'previous']);
+            $class = \get_class($a[$xPrefix.'previous']);
+            $class = 'c' === $class[0] && 0 === strpos($class, "class@anonymous\0") ? get_parent_class($class).'@anonymous' : $class;
             self::traceUnshift($b[$xPrefix.'trace'], $class, $b[$prefix.'file'], $b[$prefix.'line']);
             $a[$trace] = new TraceStub($b[$xPrefix.'trace'], false, 0, -\count($a[$trace]->value));
         }
@@ -138,10 +139,10 @@ class ExceptionCaster
 
             $frame = new FrameStub(
                 [
-                    'object' => $f['object'] ?? null,
-                    'class' => $f['class'] ?? null,
-                    'type' => $f['type'] ?? null,
-                    'function' => $f['function'] ?? null,
+                    'object' => isset($f['object']) ? $f['object'] : null,
+                    'class' => isset($f['class']) ? $f['class'] : null,
+                    'type' => isset($f['type']) ? $f['type'] : null,
+                    'function' => isset($f['function']) ? $f['function'] : null,
                 ] + $frames[$i - 1],
                 false,
                 true
@@ -160,7 +161,7 @@ class ExceptionCaster
                 }
                 $f = $frames[$i - 1];
                 if ($trace->keepArgs && !empty($f['args']) && $frame instanceof EnumStub) {
-                    $frame->value['arguments'] = new ArgsStub($f['args'], $f['function'] ?? null, $f['class'] ?? null);
+                    $frame->value['arguments'] = new ArgsStub($f['args'], isset($f['function']) ? $f['function'] : null, isset($f['class']) ? $f['class'] : null);
                 }
             } elseif ('???' !== $lastCall) {
                 $label = new ClassStub($lastCall);
@@ -209,18 +210,18 @@ class ExceptionCaster
                 $srcKey = $f['file'];
                 $ellipsis = new LinkStub($srcKey, 0);
                 $srcAttr = 'collapse='.(int) $ellipsis->inVendor;
-                $ellipsisTail = $ellipsis->attr['ellipsis-tail'] ?? 0;
-                $ellipsis = $ellipsis->attr['ellipsis'] ?? 0;
+                $ellipsisTail = isset($ellipsis->attr['ellipsis-tail']) ? $ellipsis->attr['ellipsis-tail'] : 0;
+                $ellipsis = isset($ellipsis->attr['ellipsis']) ? $ellipsis->attr['ellipsis'] : 0;
 
-                if (is_file($f['file']) && 0 <= self::$srcContext) {
+                if (file_exists($f['file']) && 0 <= self::$srcContext) {
                     if (!empty($f['class']) && (is_subclass_of($f['class'], 'Twig\Template') || is_subclass_of($f['class'], 'Twig_Template')) && method_exists($f['class'], 'getDebugInfo')) {
-                        $template = $f['object'] ?? unserialize(sprintf('O:%d:"%s":0:{}', \strlen($f['class']), $f['class']));
+                        $template = isset($f['object']) ? $f['object'] : unserialize(sprintf('O:%d:"%s":0:{}', \strlen($f['class']), $f['class']));
 
                         $ellipsis = 0;
                         $templateSrc = method_exists($template, 'getSourceContext') ? $template->getSourceContext()->getCode() : (method_exists($template, 'getSource') ? $template->getSource() : '');
                         $templateInfo = $template->getDebugInfo();
                         if (isset($templateInfo[$f['line']])) {
-                            if (!method_exists($template, 'getSourceContext') || !is_file($templatePath = $template->getSourceContext()->getPath())) {
+                            if (!method_exists($template, 'getSourceContext') || !file_exists($templatePath = $template->getSourceContext()->getPath())) {
                                 $templatePath = null;
                             }
                             if ($templateSrc) {
@@ -281,9 +282,9 @@ class ExceptionCaster
         }
         unset($a[$xPrefix.'string'], $a[Caster::PREFIX_DYNAMIC.'xdebug_message'], $a[Caster::PREFIX_DYNAMIC.'__destructorException']);
 
-        if (isset($a[Caster::PREFIX_PROTECTED.'message']) && false !== strpos($a[Caster::PREFIX_PROTECTED.'message'], "@anonymous\0")) {
-            $a[Caster::PREFIX_PROTECTED.'message'] = preg_replace_callback('/[a-zA-Z_\x7f-\xff][\\\\a-zA-Z0-9_\x7f-\xff]*+@anonymous\x00.*?\.php(?:0x?|:[0-9]++\$)[0-9a-fA-F]++/', function ($m) {
-                return class_exists($m[0], false) ? (get_parent_class($m[0]) ?: key(class_implements($m[0])) ?: 'class').'@anonymous' : $m[0];
+        if (isset($a[Caster::PREFIX_PROTECTED.'message']) && false !== strpos($a[Caster::PREFIX_PROTECTED.'message'], "class@anonymous\0")) {
+            $a[Caster::PREFIX_PROTECTED.'message'] = preg_replace_callback('/class@anonymous\x00.*?\.php(?:0x?|:[0-9]++\$)[0-9a-fA-F]++/', function ($m) {
+                return class_exists($m[0], false) ? get_parent_class($m[0]).'@anonymous' : $m[0];
             }, $a[Caster::PREFIX_PROTECTED.'message']);
         }
 
@@ -312,7 +313,7 @@ class ExceptionCaster
         $src = [];
 
         for ($i = $line - 1 - $srcContext; $i <= $line - 1 + $srcContext; ++$i) {
-            $src[] = ($srcLines[$i] ?? '')."\n";
+            $src[] = (isset($srcLines[$i]) ? $srcLines[$i] : '')."\n";
         }
 
         if ($frame['function'] ?? false) {

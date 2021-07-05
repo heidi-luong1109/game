@@ -28,6 +28,11 @@ final class PunctuationParser implements InlineParserInterface
         return ['-', '.'];
     }
 
+    /**
+     * @param InlineParserContext $inlineContext
+     *
+     * @return bool
+     */
     public function parse(InlineParserContext $inlineContext): bool
     {
         $cursor = $inlineContext->getCursor();

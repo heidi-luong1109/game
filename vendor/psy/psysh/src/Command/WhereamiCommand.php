@@ -11,9 +11,9 @@
 
 namespace Psy\Command;
 
-use Psy\Formatter\CodeFormatter;
-use Psy\Output\ShellOutput;
-use Psy\Shell;
+use JakubOnderka\PhpConsoleHighlighter\Highlighter;
+use Psy\Configuration;
+use Psy\ConsoleColorFactory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,14 +23,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class WhereamiCommand extends Command
 {
+    private $colorMode;
     private $backtrace;
 
     /**
-     * @param string|null $colorMode (deprecated and ignored)
+     * @param string|null $colorMode (default: null)
      */
     public function __construct($colorMode = null)
     {
-        $this->backtrace = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS);
+        $this->colorMode = $colorMode ?: Configuration::COLOR_MODE_AUTO;
+        $this->backtrace = \debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 
         parent::__construct();
     }
@@ -44,20 +46,17 @@ class WhereamiCommand extends Command
             ->setName('whereami')
             ->setDefinition([
                 new InputOption('num', 'n', InputOption::VALUE_OPTIONAL, 'Number of lines before and after.', '5'),
-                new InputOption('file', 'f|a', InputOption::VALUE_NONE, 'Show the full source for the current file.'),
             ])
             ->setDescription('Show where you are in the code.')
             ->setHelp(
                 <<<'HELP'
 Show where you are in the code.
 
-Optionally, include the number of lines before and after you want to display,
-or --file for the whole file.
+Optionally, include how many lines before and after you want to display.
 
 e.g.
 <return>> whereami </return>
 <return>> whereami -n10</return>
-<return>> whereami --file</return>
 HELP
             );
     }
@@ -80,11 +79,11 @@ HELP
 
     private static function isDebugCall(array $stackFrame)
     {
-        $class = isset($stackFrame['class']) ? $stackFrame['class'] : null;
+        $class    = isset($stackFrame['class']) ? $stackFrame['class'] : null;
         $function = isset($stackFrame['function']) ? $stackFrame['function'] : null;
 
-        return ($class === null && $function === 'Psy\\debug') ||
-            ($class === Shell::class && \in_array($function, ['__construct', 'debug']));
+        return ($class === null && $function === 'Psy\debug') ||
+            ($class === 'Psy\Shell' && \in_array($function, ['__construct', 'debug']));
     }
 
     /**
@@ -112,24 +111,21 @@ HELP
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $info = $this->fileInfo();
-        $num = $input->getOption('num');
-        $lineNum = $info['line'];
-        $startLine = \max($lineNum - $num, 1);
-        $endLine = $lineNum + $num;
-        $code = \file_get_contents($info['file']);
-
-        if ($input->getOption('file')) {
-            $startLine = 1;
-            $endLine = null;
-        }
+        $info        = $this->fileInfo();
+        $num         = $input->getOption('num');
+        $factory     = new ConsoleColorFactory($this->colorMode);
+        $colors      = $factory->getConsoleColor();
+        $highlighter = new Highlighter($colors);
+        $contents    = \file_get_contents($info['file']);
 
         if ($output instanceof ShellOutput) {
             $output->startPaging();
         }
 
-        $output->writeln(\sprintf('From <info>%s:%s</info>:', $this->replaceCwd($info['file']), $lineNum));
-        $output->write(CodeFormatter::formatCode($code, $startLine, $endLine, $lineNum), false);
+        $output->writeln('');
+        $output->writeln(\sprintf('From <info>%s:%s</info>:', $this->replaceCwd($info['file']), $info['line']));
+        $output->writeln('');
+        $output->write($highlighter->getCodeSnippet($contents, $info['line'], $num, $num), false, OutputInterface::OUTPUT_RAW);
 
         if ($output instanceof ShellOutput) {
             $output->stopPaging();
@@ -152,8 +148,8 @@ HELP
             return $file;
         }
 
-        $cwd = \rtrim($cwd, \DIRECTORY_SEPARATOR).\DIRECTORY_SEPARATOR;
+        $cwd = \rtrim($cwd, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        return \preg_replace('/^'.\preg_quote($cwd, '/').'/', '', $file);
+        return \preg_replace('/^' . \preg_quote($cwd, '/') . '/', '', $file);
     }
 }

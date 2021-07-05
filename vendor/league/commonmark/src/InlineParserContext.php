@@ -21,13 +21,9 @@ use League\CommonMark\Reference\ReferenceMapInterface;
 
 class InlineParserContext
 {
-    /** @var AbstractStringContainerBlock */
     private $container;
-    /** @var ReferenceMapInterface */
     private $referenceMap;
-    /** @var Cursor */
     private $cursor;
-    /** @var DelimiterStack */
     private $delimiterStack;
 
     public function __construct(AbstractStringContainerBlock $container, ReferenceMapInterface $referenceMap)
@@ -38,21 +34,33 @@ class InlineParserContext
         $this->delimiterStack = new DelimiterStack();
     }
 
+    /**
+     * @return AbstractBlock
+     */
     public function getContainer(): AbstractBlock
     {
         return $this->container;
     }
 
+    /**
+     * @return ReferenceMapInterface
+     */
     public function getReferenceMap(): ReferenceMapInterface
     {
         return $this->referenceMap;
     }
 
+    /**
+     * @return Cursor
+     */
     public function getCursor(): Cursor
     {
         return $this->cursor;
     }
 
+    /**
+     * @return DelimiterStack
+     */
     public function getDelimiterStack(): DelimiterStack
     {
         return $this->delimiterStack;

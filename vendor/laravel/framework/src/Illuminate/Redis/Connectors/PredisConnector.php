@@ -8,6 +8,9 @@ use Illuminate\Redis\Connections\PredisConnection;
 use Illuminate\Support\Arr;
 use Predis\Client;
 
+/**
+ * @deprecated Predis is no longer maintained by its original author
+ */
 class PredisConnector implements Connector
 {
     /**

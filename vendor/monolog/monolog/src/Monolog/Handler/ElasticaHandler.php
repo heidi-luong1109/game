@@ -25,7 +25,7 @@ use Elastica\Exception\ExceptionInterface;
  *    $client = new \Elastica\Client();
  *    $options = array(
  *        'index' => 'elastic_index_name',
- *        'type' => 'elastic_doc_type', Types have been removed in Elastica 7
+ *        'type' => 'elastic_doc_type',
  *    );
  *    $handler = new ElasticaHandler($client, $options);
  *    $log = new Logger('application');

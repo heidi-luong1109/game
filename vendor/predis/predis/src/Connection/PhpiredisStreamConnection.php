@@ -67,19 +67,9 @@ class PhpiredisStreamConnection extends StreamConnection
      */
     public function __destruct()
     {
-        parent::__destruct();
-
         phpiredis_reader_destroy($this->reader);
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function disconnect()
-    {
-        phpiredis_reader_reset($this->reader);
-
-        parent::disconnect();
+        parent::__destruct();
     }
 
     /**
@@ -97,23 +87,9 @@ class PhpiredisStreamConnection extends StreamConnection
     /**
      * {@inheritdoc}
      */
-    protected function assertParameters(ParametersInterface $parameters)
+    protected function assertSslSupport(ParametersInterface $parameters)
     {
-        switch ($parameters->scheme) {
-            case 'tcp':
-            case 'redis':
-            case 'unix':
-                break;
-
-            case 'tls':
-            case 'rediss':
-                throw new \InvalidArgumentException('SSL encryption is not supported by this connection backend.');
-
-            default:
-                throw new \InvalidArgumentException("Invalid scheme: '$parameters->scheme'.");
-        }
-
-        return $parameters;
+        throw new \InvalidArgumentException('SSL encryption is not supported by this connection backend.');
     }
 
     /**

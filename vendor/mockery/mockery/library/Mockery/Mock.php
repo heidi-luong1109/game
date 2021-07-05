@@ -20,12 +20,11 @@
 
 namespace Mockery;
 
-use Mockery\Exception\BadMethodCallException;
-use Mockery\ExpectsHigherOrderMessage;
 use Mockery\HigherOrderMessage;
-use Mockery\LegacyMockInterface;
 use Mockery\MockInterface;
-use Mockery\Reflector;
+use Mockery\LegacyMockInterface;
+use Mockery\ExpectsHigherOrderMessage;
+use Mockery\Exception\BadMethodCallException;
 
 class Mock implements MockInterface
 {
@@ -37,7 +36,7 @@ class Mock implements MockInterface
     protected $_mockery_expectations = array();
 
     /**
-     * Stores an initial number of expectations that can be manipulated
+     * Stores an inital number of expectations that can be manipulated
      * while using the getter method.
      *
      * @var int
@@ -51,14 +50,6 @@ class Mock implements MockInterface
      * @var bool
      */
     protected $_mockery_ignoreMissing = false;
-
-    /**
-     * Flag to indicate whether we want to set the ignoreMissing flag on
-     * mocks generated form this calls to this one
-     *
-     * @var bool
-     */
-    protected $_mockery_ignoreMissingRecursive = false;
 
     /**
      * Flag to indicate whether we can defer method calls missing from our
@@ -179,7 +170,7 @@ class Mock implements MockInterface
     public function mockery_init(\Mockery\Container $container = null, $partialObject = null, $instanceMock = true)
     {
         if (is_null($container)) {
-            $container = new \Mockery\Container();
+            $container = new \Mockery\Container;
         }
         $this->_mockery_container = $container;
         if (!is_null($partialObject)) {
@@ -200,7 +191,7 @@ class Mock implements MockInterface
     /**
      * Set expected method calls
      *
-     * @param string ...$methodNames one or many methods that are expected to be called in this mock
+     * @param mixed ...$methodNames one or many methods that are expected to be called in this mock
      *
      * @return \Mockery\ExpectationInterface|\Mockery\Expectation|\Mockery\HigherOrderMessage
      */
@@ -220,9 +211,7 @@ class Mock implements MockInterface
         $allowMockingProtectedMethods = $this->_mockery_allowMockingProtectedMethods;
 
         $lastExpectation = \Mockery::parseShouldReturnArgs(
-            $this,
-            $methodNames,
-            function ($method) use ($self, $allowMockingProtectedMethods) {
+            $this, $methodNames, function ($method) use ($self, $allowMockingProtectedMethods) {
                 $rm = $self->mockery_getMethod($method);
                 if ($rm) {
                     if ($rm->isPrivate()) {
@@ -288,7 +277,7 @@ class Mock implements MockInterface
     /**
      * Shortcut method for setting an expectation that a method should not be called.
      *
-     * @param string ...$methodNames one or many methods that are expected not to be called in this mock
+     * @param array ...$methodNames one or many methods that are expected not to be called in this mock
      * @return \Mockery\ExpectationInterface|\Mockery\Expectation|\Mockery\HigherOrderMessage
      */
     public function shouldNotReceive(...$methodNames)
@@ -316,13 +305,11 @@ class Mock implements MockInterface
     /**
      * Set mock to ignore unexpected methods and return Undefined class
      * @param mixed $returnValue the default return value for calls to missing functions on this mock
-     * @param bool $recursive Specify if returned mocks should also have shouldIgnoreMissing set
      * @return Mock
      */
-    public function shouldIgnoreMissing($returnValue = null, $recursive = false)
+    public function shouldIgnoreMissing($returnValue = null)
     {
         $this->_mockery_ignoreMissing = true;
-        $this->_mockery_ignoreMissingRecursive = $recursive;
         $this->_mockery_defaultReturnValue = $returnValue;
         return $this;
     }
@@ -330,7 +317,7 @@ class Mock implements MockInterface
     public function asUndefined()
     {
         $this->_mockery_ignoreMissing = true;
-        $this->_mockery_defaultReturnValue = new \Mockery\Undefined();
+        $this->_mockery_defaultReturnValue = new \Mockery\Undefined;
         return $this;
     }
 
@@ -623,7 +610,7 @@ class Mock implements MockInterface
 
     public function __isset($name)
     {
-        if (false === stripos($name, '_mockery_') && get_parent_class($this) && method_exists(get_parent_class($this), '__isset')) {
+        if (false === stripos($name, '_mockery_') && method_exists(get_parent_class($this), '__isset')) {
             return call_user_func('parent::__isset', $name);
         }
 
@@ -646,7 +633,7 @@ class Mock implements MockInterface
      */
     public function mockery_callSubjectMethod($name, array $args)
     {
-        if (!method_exists($this, $name) && get_parent_class($this) && method_exists(get_parent_class($this), '__call')) {
+        if (!method_exists($this, $name) && method_exists(get_parent_class($this), '__call')) {
             return call_user_func('parent::__call', $name, $args);
         }
         return call_user_func_array('parent::' . $name, $args);
@@ -667,12 +654,13 @@ class Mock implements MockInterface
     {
         $rfc = new \ReflectionClass($this);
 
-        // PHP 8 has Stringable interface
+        // HHVM has a Stringish interface
         $interfaces = array_filter($rfc->getInterfaces(), function ($i) {
-            return $i->getName() !== 'Stringable';
+            return $i->getName() !== "Stringish";
         });
+        $onlyImplementsMock = 2 == count($interfaces);
 
-        return false === $rfc->getParentClass() && 2 === count($interfaces);
+        return (false === $rfc->getParentClass()) && $onlyImplementsMock;
     }
 
     public function mockery_isInstance()
@@ -715,52 +703,55 @@ class Mock implements MockInterface
      */
     public function mockery_returnValueForMethod($name)
     {
+        if (version_compare(PHP_VERSION, '7.0.0-dev') < 0) {
+            return;
+        }
+
         $rm = $this->mockery_getMethod($name);
+        if (!$rm || !$rm->hasReturnType()) {
+            return;
+        }
+
+        $returnType = $rm->getReturnType();
 
         // Default return value for methods with nullable type is null
-        if ($rm === null || $rm->getReturnType() === null || $rm->getReturnType()->allowsNull()) {
+        if ($returnType->allowsNull()) {
             return null;
         }
 
-        $returnType = Reflector::getReturnType($rm, true);
-
-        switch ($returnType) {
-            case null:     return null;
+        $type = PHP_VERSION_ID >= 70100 ? $returnType->getName() : (string) $returnType;
+        switch ($type) {
+            case '':       return;
             case 'string': return '';
             case 'int':    return 0;
             case 'float':  return 0.0;
             case 'bool':   return false;
-
-            case 'array':
-            case 'iterable':
-                return [];
+            case 'array':  return [];
 
             case 'callable':
-            case '\Closure':
+            case 'Closure':
                 return function () {
                 };
 
-            case '\Traversable':
-            case '\Generator':
-                $generator = function () { yield; };
+            case 'Traversable':
+            case 'Generator':
+                // Remove eval() when minimum version >=5.5
+                $generator = eval('return function () { yield; };');
                 return $generator();
+
+            case 'self':
+                return \Mockery::mock($rm->getDeclaringClass()->getName());
 
             case 'void':
                 return null;
 
             case 'object':
-                $mock = \Mockery::mock();
-                if ($this->_mockery_ignoreMissingRecursive) {
-                    $mock->shouldIgnoreMissing($this->_mockery_defaultReturnValue, true);
+                if (version_compare(PHP_VERSION, '7.2.0-dev') >= 0) {
+                    return \Mockery::mock();
                 }
-                return $mock;
 
             default:
-                $mock = \Mockery::mock($returnType);
-                if ($this->_mockery_ignoreMissingRecursive) {
-                    $mock->shouldIgnoreMissing($this->_mockery_defaultReturnValue, true);
-                }
-                return $mock;
+                return \Mockery::mock($type);
         }
     }
 
@@ -897,9 +888,9 @@ class Mock implements MockInterface
         ) {
             return call_user_func_array(array($this->_mockery_partial, $method), $args);
         } elseif ($this->_mockery_deferMissing && is_callable("parent::$method")
-            && (!$this->hasMethodOverloadingInParentClass() || (get_parent_class($this) && method_exists(get_parent_class($this), $method)))) {
+            && (!$this->hasMethodOverloadingInParentClass() || method_exists(get_parent_class($this), $method))) {
             return call_user_func_array("parent::$method", $args);
-        } elseif ($this->_mockery_deferMissing && get_parent_class($this) && method_exists(get_parent_class($this), '__call')) {
+        } elseif ($this->_mockery_deferMissing && method_exists(get_parent_class($this), '__call')) {
             return call_user_func('parent::__call', $method, $args);
         } elseif ($method == '__toString') {
             // __toString is special because we force its addition to the class API regardless of the
@@ -907,7 +898,7 @@ class Mock implements MockInterface
             // _mockery_ignoreMissing and break the API with an error.
             return sprintf("%s#%s", __CLASS__, spl_object_hash($this));
         } elseif ($this->_mockery_ignoreMissing) {
-            if (\Mockery::getConfiguration()->mockingNonExistentMethodsAllowed() || (!is_null($this->_mockery_partial) && method_exists($this->_mockery_partial, $method)) || is_callable("parent::$method")) {
+            if (\Mockery::getConfiguration()->mockingNonExistentMethodsAllowed() || (method_exists($this->_mockery_partial, $method) || is_callable("parent::$method"))) {
                 if ($this->_mockery_defaultReturnValue instanceof \Mockery\Undefined) {
                     return call_user_func_array(array($this->_mockery_defaultReturnValue, $method), $args);
                 } elseif (null === $this->_mockery_defaultReturnValue) {

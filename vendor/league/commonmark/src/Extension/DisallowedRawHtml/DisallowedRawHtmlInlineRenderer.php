@@ -19,7 +19,6 @@ use League\CommonMark\Util\ConfigurationInterface;
 
 final class DisallowedRawHtmlInlineRenderer implements InlineRendererInterface, ConfigurationAwareInterface
 {
-    /** @var InlineRendererInterface */
     private $htmlInlineRenderer;
 
     public function __construct(InlineRendererInterface $htmlBlockRenderer)
@@ -27,6 +26,9 @@ final class DisallowedRawHtmlInlineRenderer implements InlineRendererInterface, 
         $this->htmlInlineRenderer = $htmlBlockRenderer;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function render(AbstractInline $inline, ElementRendererInterface $htmlRenderer)
     {
         $rendered = $this->htmlInlineRenderer->render($inline, $htmlRenderer);
@@ -39,6 +41,9 @@ final class DisallowedRawHtmlInlineRenderer implements InlineRendererInterface, 
         return preg_replace('/<(\/?(?:title|textarea|style|xmp|iframe|noembed|noframes|script|plaintext)[ \/>])/i', '&lt;$1', $rendered);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setConfiguration(ConfigurationInterface $configuration)
     {
         if ($this->htmlInlineRenderer instanceof ConfigurationAwareInterface) {

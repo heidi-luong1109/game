@@ -171,13 +171,12 @@ class HtmlBuilder
      * @param string $url
      * @param string $title
      * @param array  $attributes
-     * @param bool   $escape
      *
      * @return \Illuminate\Support\HtmlString
      */
-    public function secureLink($url, $title = null, $attributes = [], $escape = true)
+    public function secureLink($url, $title = null, $attributes = [])
     {
-        return $this->link($url, $title, $attributes, true, $escape);
+        return $this->link($url, $title, $attributes, true);
     }
 
     /**
@@ -187,15 +186,14 @@ class HtmlBuilder
      * @param string $title
      * @param array  $attributes
      * @param bool   $secure
-     * @param bool   $escape
      *
      * @return \Illuminate\Support\HtmlString
      */
-    public function linkAsset($url, $title = null, $attributes = [], $secure = null, $escape = true)
+    public function linkAsset($url, $title = null, $attributes = [], $secure = null)
     {
         $url = $this->url->asset($url, $secure);
 
-        return $this->link($url, $title ?: $url, $attributes, $secure, $escape);
+        return $this->link($url, $title ?: $url, $attributes, $secure);
     }
 
     /**
@@ -204,13 +202,12 @@ class HtmlBuilder
      * @param string $url
      * @param string $title
      * @param array  $attributes
-     * @param bool   $escape
      *
      * @return \Illuminate\Support\HtmlString
      */
-    public function linkSecureAsset($url, $title = null, $attributes = [], $escape = true)
+    public function linkSecureAsset($url, $title = null, $attributes = [])
     {
-        return $this->linkAsset($url, $title, $attributes, true, $escape);
+        return $this->linkAsset($url, $title, $attributes, true);
     }
 
     /**
@@ -220,14 +217,12 @@ class HtmlBuilder
      * @param string $title
      * @param array  $parameters
      * @param array  $attributes
-     * @param bool   $secure
-     * @param bool   $escape
      *
      * @return \Illuminate\Support\HtmlString
      */
-    public function linkRoute($name, $title = null, $parameters = [], $attributes = [], $secure = null, $escape = true)
+    public function linkRoute($name, $title = null, $parameters = [], $attributes = [])
     {
-        return $this->link($this->url->route($name, $parameters), $title, $attributes, $secure, $escape);
+        return $this->link($this->url->route($name, $parameters), $title, $attributes);
     }
 
     /**
@@ -237,14 +232,12 @@ class HtmlBuilder
      * @param string $title
      * @param array  $parameters
      * @param array  $attributes
-     * @param bool   $secure
-     * @param bool   $escape
      *
      * @return \Illuminate\Support\HtmlString
      */
-    public function linkAction($action, $title = null, $parameters = [], $attributes = [], $secure = null, $escape = true)
+    public function linkAction($action, $title = null, $parameters = [], $attributes = [])
     {
-        return $this->link($this->url->action($action, $parameters), $title, $attributes, $secure, $escape);
+        return $this->link($this->url->action($action, $parameters), $title, $attributes);
     }
 
     /**

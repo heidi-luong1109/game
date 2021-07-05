@@ -8,7 +8,6 @@ use Illuminate\Contracts\Broadcasting\Broadcaster as BroadcasterContract;
 use Illuminate\Contracts\Routing\BindingRegistrar;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Reflector;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionFunction;
@@ -205,9 +204,9 @@ abstract class Broadcaster implements BroadcasterContract
                 continue;
             }
 
-            $className = Reflector::getParameterClassName($parameter);
+            $instance = $parameter->getClass()->newInstance();
 
-            if (is_null($model = (new $className)->resolveRouteBinding($value))) {
+            if (! $model = $instance->resolveRouteBinding($value)) {
                 throw new AccessDeniedHttpException;
             }
 
@@ -226,8 +225,8 @@ abstract class Broadcaster implements BroadcasterContract
      */
     protected function isImplicitlyBindable($key, $parameter)
     {
-        return $parameter->getName() === $key &&
-                        Reflector::isParameterSubclassOf($parameter, UrlRoutable::class);
+        return $parameter->name === $key && $parameter->getClass() &&
+                        $parameter->getClass()->isSubclassOf(UrlRoutable::class);
     }
 
     /**

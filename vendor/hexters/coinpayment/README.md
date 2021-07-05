@@ -16,7 +16,6 @@ CoinPayment is a Laravel module for handling transactions from [**CoinPayment**]
 |[v1.1.3](https://github.com/hexters/CoinPayment/releases/tag/v1.1.3)|5.6|
 |[v2.0.0](https://github.com/hexters/CoinPayment)|5.8|
 |[v2.0.3](https://github.com/hexters/CoinPayment)|^6.x|
-|[v2.1.0](https://github.com/hexters/CoinPayment)|^8.x|
 
 ## Requirement
 * Laravel ^5.8
@@ -43,7 +42,6 @@ Installation finish.
 ## Getting Started
 Create Button transaction. Example placed on your controller
 ```
-  use Hexters\CoinPayment\Helpers\CoinPaymentFacade as CoinPayment;
   . . . 
   /*
   *   @required true
@@ -90,7 +88,7 @@ Create Button transaction. Example placed on your controller
     ]
   ];
 
-  return CoinPayment::generatelink($transaction);
+  return \CoinPayment::generatelink($transaction);
   . . . 
 ```
 

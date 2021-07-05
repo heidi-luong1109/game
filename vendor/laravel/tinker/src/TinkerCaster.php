@@ -82,19 +82,6 @@ class TinkerCaster
     }
 
     /**
-     * Get an array representing the properties of a fluent string.
-     *
-     * @param  \Illuminate\Support\Stringable  $stringable
-     * @return array
-     */
-    public static function castStringable($stringable)
-    {
-        return [
-            Caster::PREFIX_VIRTUAL.'value' => (string) $stringable,
-        ];
-    }
-
-    /**
      * Get an array representing the properties of a model.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
@@ -110,30 +97,10 @@ class TinkerCaster
             $model->getVisible() ?: array_diff(array_keys($attributes), $model->getHidden())
         );
 
-        $hidden = array_flip($model->getHidden());
-
-        $appends = (function () {
-            return array_combine($this->appends, $this->appends);
-        })->bindTo($model, $model)();
-
-        foreach ($appends as $appended) {
-            $attributes[$appended] = $model->{$appended};
-        }
-
         $results = [];
 
-        foreach ($attributes as $key => $value) {
-            $prefix = '';
-
-            if (isset($visible[$key])) {
-                $prefix = Caster::PREFIX_VIRTUAL;
-            }
-
-            if (isset($hidden[$key])) {
-                $prefix = Caster::PREFIX_PROTECTED;
-            }
-
-            $results[$prefix.$key] = $value;
+        foreach (array_intersect_key($attributes, $visible) as $key => $value) {
+            $results[(isset($visible[$key]) ? Caster::PREFIX_VIRTUAL : Caster::PREFIX_PROTECTED).$key] = $value;
         }
 
         return $results;

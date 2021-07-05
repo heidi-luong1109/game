@@ -45,7 +45,9 @@ class ArgvInput extends Input
 
     public function __construct(array $argv = null, InputDefinition $definition = null)
     {
-        $argv = $argv ?? $_SERVER['argv'] ?? [];
+        if (null === $argv) {
+            $argv = $_SERVER['argv'];
+        }
 
         // strip the application name
         array_shift($argv);
@@ -165,25 +167,11 @@ class ArgvInput extends Input
         // unexpected argument
         } else {
             $all = $this->definition->getArguments();
-            $symfonyCommandName = null;
-            if (($inputArgument = $all[$key = array_key_first($all)] ?? null) && 'command' === $inputArgument->getName()) {
-                $symfonyCommandName = $this->arguments['command'] ?? null;
-                unset($all[$key]);
-            }
-
             if (\count($all)) {
-                if ($symfonyCommandName) {
-                    $message = sprintf('Too many arguments to "%s" command, expected arguments "%s".', $symfonyCommandName, implode('" "', array_keys($all)));
-                } else {
-                    $message = sprintf('Too many arguments, expected arguments "%s".', implode('" "', array_keys($all)));
-                }
-            } elseif ($symfonyCommandName) {
-                $message = sprintf('No arguments expected for "%s" command, got "%s".', $symfonyCommandName, $token);
-            } else {
-                $message = sprintf('No arguments expected, got "%s".', $token);
+                throw new RuntimeException(sprintf('Too many arguments, expected arguments "%s".', implode('" "', array_keys($all))));
             }
 
-            throw new RuntimeException($message);
+            throw new RuntimeException(sprintf('No arguments expected, got "%s".', $token));
         }
     }
 
@@ -209,17 +197,7 @@ class ArgvInput extends Input
     private function addLongOption(string $name, $value)
     {
         if (!$this->definition->hasOption($name)) {
-            if (!$this->definition->hasNegation($name)) {
-                throw new RuntimeException(sprintf('The "--%s" option does not exist.', $name));
-            }
-
-            $optionName = $this->definition->negationToName($name);
-            if (null !== $value) {
-                throw new RuntimeException(sprintf('The "--%s" option does not accept a value.', $name));
-            }
-            $this->options[$optionName] = false;
-
-            return;
+            throw new RuntimeException(sprintf('The "--%s" option does not exist.', $name));
         }
 
         $option = $this->definition->getOption($name);

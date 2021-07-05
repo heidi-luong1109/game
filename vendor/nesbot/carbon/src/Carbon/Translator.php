@@ -165,7 +165,7 @@ class Translator extends Translation\Translator
 
             return $format(
                 ...array_values($parameters),
-                ...array_fill(0, max(0, $count - \count($parameters)), null)
+                ...array_fill(0, max(0, $count - count($parameters)), null)
             );
         }
 
@@ -313,11 +313,11 @@ class Translator extends Translation\Translator
      */
     public function setLocale($locale)
     {
-        $locale = preg_replace_callback('/[-_]([a-z]{2,}|[0-9]{2,})/', function ($matches) {
+        $locale = preg_replace_callback('/[-_]([a-z]{2,})/', function ($matches) {
             // _2-letters or YUE is a region, _3+-letters is a variant
             $upper = strtoupper($matches[1]);
 
-            if ($upper === 'YUE' || $upper === 'ISO' || \strlen($upper) < 3) {
+            if ($upper === 'YUE' || $upper === 'ISO' || strlen($upper) < 3) {
                 return "_$upper";
             }
 
@@ -340,11 +340,33 @@ class Translator extends Translation\Translator
             $completeLocaleChunks = preg_split('/[_.-]+/', $completeLocale);
 
             $getScore = function ($language) use ($completeLocaleChunks) {
-                return static::compareChunkLists($completeLocaleChunks, preg_split('/[_.-]+/', $language));
+                $chunks = preg_split('/[_.-]+/', $language);
+                $score = 0;
+
+                foreach ($completeLocaleChunks as $index => $chunk) {
+                    if (!isset($chunks[$index])) {
+                        $score++;
+
+                        continue;
+                    }
+
+                    if (strtolower($chunks[$index]) === strtolower($chunk)) {
+                        $score += 10;
+                    }
+                }
+
+                return $score;
             };
 
             usort($locales, function ($first, $second) use ($getScore) {
-                return $getScore($second) <=> $getScore($first);
+                $first = $getScore($first);
+                $second = $getScore($second);
+
+                if ($first === $second) {
+                    return 0;
+                }
+
+                return $first < $second ? 1 : -1;
             });
 
             $locale = $locales[0];
@@ -380,24 +402,5 @@ class Translator extends Translation\Translator
         return [
             'locale' => $this->getLocale(),
         ];
-    }
-
-    private static function compareChunkLists($referenceChunks, $chunks)
-    {
-        $score = 0;
-
-        foreach ($referenceChunks as $index => $chunk) {
-            if (!isset($chunks[$index])) {
-                $score++;
-
-                continue;
-            }
-
-            if (strtolower($chunks[$index]) === strtolower($chunk)) {
-                $score += 10;
-            }
-        }
-
-        return $score;
     }
 }

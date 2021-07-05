@@ -9,7 +9,6 @@
  */
 namespace PHPUnit\Framework\MockObject\Rule;
 
-use function sprintf;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\MockObject\Invocation as BaseInvocation;
 
@@ -58,7 +57,7 @@ class InvokedAtIndex extends InvocationOrder
     {
         if ($this->currentIndex < $this->sequenceIndex) {
             throw new ExpectationFailedException(
-                sprintf(
+                \sprintf(
                     'The expected invocation at index %s was never reached.',
                     $this->sequenceIndex
                 )

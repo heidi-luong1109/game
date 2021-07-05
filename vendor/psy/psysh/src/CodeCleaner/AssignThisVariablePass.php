@@ -26,14 +26,14 @@ class AssignThisVariablePass extends CodeCleanerPass
     /**
      * Validate that the user input does not assign the `$this` variable.
      *
-     * @throws FatalErrorException if the user assign the `$this` variable
+     * @throws RuntimeException if the user assign the `$this` variable
      *
      * @param Node $node
      */
     public function enterNode(Node $node)
     {
         if ($node instanceof Assign && $node->var instanceof Variable && $node->var->name === 'this') {
-            throw new FatalErrorException('Cannot re-assign $this', 0, \E_ERROR, null, $node->getLine());
+            throw new FatalErrorException('Cannot re-assign $this', 0, E_ERROR, null, $node->getLine());
         }
     }
 }

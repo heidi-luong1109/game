@@ -46,8 +46,6 @@ trait Queueable
 
     /**
      * The middleware the job should be dispatched through.
-     *
-     * @var array
      */
     public $middleware = [];
 
@@ -156,7 +154,8 @@ trait Queueable
     /**
      * Serialize a job for queuing.
      *
-     * @param  mixed  $job
+     * @param mixed $job
+     *
      * @return string
      */
     protected function serializeJob($job)
@@ -164,7 +163,7 @@ trait Queueable
         if ($job instanceof Closure) {
             if (! class_exists(CallQueuedClosure::class)) {
                 throw new RuntimeException(
-                    'To enable support for closure jobs, please install the illuminate/queue package.'
+                    'To enable support for closure jobs, please install illuminate/queue.'
                 );
             }
 

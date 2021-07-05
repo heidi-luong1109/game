@@ -11,6 +11,7 @@
 
 namespace Monolog\Formatter;
 
+use Monolog\Utils;
 use Throwable;
 
 /**
@@ -27,18 +28,16 @@ class JsonFormatter extends NormalizerFormatter
 
     protected $batchMode;
     protected $appendNewline;
-    protected $ignoreEmptyContextAndExtra;
 
     /**
      * @var bool
      */
     protected $includeStacktraces = false;
 
-    public function __construct(int $batchMode = self::BATCH_MODE_JSON, bool $appendNewline = true, bool $ignoreEmptyContextAndExtra = false)
+    public function __construct(int $batchMode = self::BATCH_MODE_JSON, bool $appendNewline = true)
     {
         $this->batchMode = $batchMode;
         $this->appendNewline = $appendNewline;
-        $this->ignoreEmptyContextAndExtra = $ignoreEmptyContextAndExtra;
     }
 
     /**
@@ -63,24 +62,17 @@ class JsonFormatter extends NormalizerFormatter
 
     /**
      * {@inheritdoc}
+     *
+     * @suppress PhanTypeComparisonToArray
      */
     public function format(array $record): string
     {
         $normalized = $this->normalize($record);
-
         if (isset($normalized['context']) && $normalized['context'] === []) {
-            if ($this->ignoreEmptyContextAndExtra) {
-                unset($normalized['context']);
-            } else {
-                $normalized['context'] = new \stdClass;
-            }
+            $normalized['context'] = new \stdClass;
         }
         if (isset($normalized['extra']) && $normalized['extra'] === []) {
-            if ($this->ignoreEmptyContextAndExtra) {
-                unset($normalized['extra']);
-            } else {
-                $normalized['extra'] = new \stdClass;
-            }
+            $normalized['extra'] = new \stdClass;
         }
 
         return $this->toJson($normalized, true) . ($this->appendNewline ? "\n" : '');

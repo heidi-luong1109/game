@@ -25,7 +25,6 @@ return [
     'ago' => ':time སྔན་ལ',
     'from_now' => ':time ལ་',
     'diff_yesterday' => 'ཁ་སང',
-    'diff_today' => 'དི་རིང',
     'diff_tomorrow' => 'སང་ཉིན',
     'formats' => [
         'LT' => 'A h:mm',

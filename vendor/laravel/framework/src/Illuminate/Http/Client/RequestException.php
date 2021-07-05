@@ -2,7 +2,9 @@
 
 namespace Illuminate\Http\Client;
 
-class RequestException extends HttpClientException
+use Exception;
+
+class RequestException extends Exception
 {
     /**
      * The response instance.

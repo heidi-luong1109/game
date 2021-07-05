@@ -4,7 +4,6 @@ namespace Illuminate\Redis\Connections;
 
 use Closure;
 use Illuminate\Contracts\Redis\Connection as ConnectionContract;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Redis;
 use RedisCluster;
@@ -23,24 +22,15 @@ class PhpRedisConnection extends Connection implements ConnectionContract
     protected $connector;
 
     /**
-     * The connection configuration array.
-     *
-     * @var array
-     */
-    protected $config;
-
-    /**
      * Create a new PhpRedis connection.
      *
      * @param  \Redis  $client
      * @param  callable|null  $connector
-     * @param  array  $config
      * @return void
      */
-    public function __construct($client, callable $connector = null, array $config = [])
+    public function __construct($client, callable $connector = null)
     {
         $this->client = $client;
-        $this->config = $config;
         $this->connector = $connector;
     }
 
@@ -241,7 +231,7 @@ class PhpRedisConnection extends Connection implements ConnectionContract
      */
     public function zrangebyscore($key, $min, $max, $options = [])
     {
-        if (isset($options['limit']) && Arr::isAssoc($options['limit'])) {
+        if (isset($options['limit'])) {
             $options['limit'] = [
                 $options['limit']['offset'],
                 $options['limit']['count'],
@@ -262,7 +252,7 @@ class PhpRedisConnection extends Connection implements ConnectionContract
      */
     public function zrevrangebyscore($key, $min, $max, $options = [])
     {
-        if (isset($options['limit']) && Arr::isAssoc($options['limit'])) {
+        if (isset($options['limit'])) {
             $options['limit'] = [
                 $options['limit']['offset'],
                 $options['limit']['count'],
@@ -302,93 +292,6 @@ class PhpRedisConnection extends Connection implements ConnectionContract
             $options['weights'] ?? null,
             $options['aggregate'] ?? 'sum',
         ]);
-    }
-
-    /**
-     * Scans all keys based on options.
-     *
-     * @param  mixed  $cursor
-     * @param  array  $options
-     * @return mixed
-     */
-    public function scan($cursor, $options = [])
-    {
-        $result = $this->client->scan($cursor,
-            $options['match'] ?? '*',
-            $options['count'] ?? 10
-        );
-
-        if ($result === false) {
-            $result = [];
-        }
-
-        return $cursor === 0 && empty($result) ? false : [$cursor, $result];
-    }
-
-    /**
-     * Scans the given set for all values based on options.
-     *
-     * @param  string  $key
-     * @param  mixed  $cursor
-     * @param  array  $options
-     * @return mixed
-     */
-    public function zscan($key, $cursor, $options = [])
-    {
-        $result = $this->client->zscan($key, $cursor,
-            $options['match'] ?? '*',
-            $options['count'] ?? 10
-        );
-
-        if ($result === false) {
-            $result = [];
-        }
-
-        return $cursor === 0 && empty($result) ? false : [$cursor, $result];
-    }
-
-    /**
-     * Scans the given hash for all values based on options.
-     *
-     * @param  string  $key
-     * @param  mixed  $cursor
-     * @param  array  $options
-     * @return mixed
-     */
-    public function hscan($key, $cursor, $options = [])
-    {
-        $result = $this->client->hscan($key, $cursor,
-            $options['match'] ?? '*',
-            $options['count'] ?? 10
-        );
-
-        if ($result === false) {
-            $result = [];
-        }
-
-        return $cursor === 0 && empty($result) ? false : [$cursor, $result];
-    }
-
-    /**
-     * Scans the given set for all values based on options.
-     *
-     * @param  string  $key
-     * @param  mixed  $cursor
-     * @param  array  $options
-     * @return mixed
-     */
-    public function sscan($key, $cursor, $options = [])
-    {
-        $result = $this->client->sscan($key, $cursor,
-            $options['match'] ?? '*',
-            $options['count'] ?? 10
-        );
-
-        if ($result === false) {
-            $result = [];
-        }
-
-        return $cursor === 0 && empty($result) ? false : [$cursor, $result];
     }
 
     /**
@@ -502,13 +405,7 @@ class PhpRedisConnection extends Connection implements ConnectionContract
         }
 
         foreach ($this->client->_masters() as [$host, $port]) {
-            $redis = tap(new Redis)->connect($host, $port);
-
-            if (isset($this->config['password']) && ! empty($this->config['password'])) {
-                $redis->auth($this->config['password']);
-            }
-
-            $redis->flushDb();
+            tap(new Redis)->connect($host, $port)->flushDb();
         }
     }
 
@@ -529,8 +426,6 @@ class PhpRedisConnection extends Connection implements ConnectionContract
      * @param  string  $method
      * @param  array  $parameters
      * @return mixed
-     *
-     * @throws \RedisException
      */
     public function command($method, array $parameters = [])
     {

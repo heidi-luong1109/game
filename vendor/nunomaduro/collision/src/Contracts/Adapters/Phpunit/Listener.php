@@ -25,6 +25,8 @@ interface Listener extends TestListener
      * Renders the provided error
      * on the console.
      *
+     * @param  \Throwable $t
+     *
      * @return void
      */
     public function render(Test $test, \Throwable $t);

@@ -150,7 +150,7 @@ class EditCommand extends Command implements ContextAware
 
     /**
      * @param string $filePath
-     * @param bool   $shouldRemoveFile
+     * @param string $shouldRemoveFile
      *
      * @return string
      *
@@ -159,10 +159,9 @@ class EditCommand extends Command implements ContextAware
     private function editFile($filePath, $shouldRemoveFile)
     {
         $escapedFilePath = \escapeshellarg($filePath);
-        $editor = (isset($_SERVER['EDITOR']) && $_SERVER['EDITOR']) ? $_SERVER['EDITOR'] : 'nano';
 
         $pipes = [];
-        $proc = \proc_open("{$editor} {$escapedFilePath}", [\STDIN, \STDOUT, \STDERR], $pipes);
+        $proc = \proc_open((\getenv('EDITOR') ?: 'nano') . " {$escapedFilePath}", [STDIN, STDOUT, STDERR], $pipes);
         \proc_close($proc);
 
         $editedContent = @\file_get_contents($filePath);

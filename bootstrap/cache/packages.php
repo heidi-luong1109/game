@@ -1,51 +1,4 @@
 <?php return array (
-  'anhskohbo/no-captcha' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'NoCaptcha' => 'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha',
-    ),
-  ),
-  'anlutro/l4-settings' => 
-  array (
-    'aliases' => 
-    array (
-      'Setting' => 'anlutro\\LaravelSettings\\Facade',
-    ),
-    'providers' => 
-    array (
-      0 => 'anlutro\\LaravelSettings\\ServiceProvider',
-    ),
-  ),
-  'eklundkristoffer/seedster' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Seedster\\SeedsterServiceProvider',
-    ),
-  ),
-  'fideloper/proxy' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    ),
-  ),
-  'hexters/coinpayment' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Hexters\\CoinPayment\\Providers\\CoinPaymentServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'CoinPayment' => 'Hexters\\CoinPayment\\Helpers\\CoinPaymentFacade',
-    ),
-  ),
   'intervention/image' => 
   array (
     'providers' => 
@@ -68,32 +21,6 @@
       'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
     ),
   ),
-  'jeremykenedy/laravel-roles' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'jeremykenedy\\LaravelRoles\\RolesServiceProvider',
-    ),
-  ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    ),
-  ),
-  'laravelcollective/html' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Collective\\Html\\HtmlServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Form' => 'Collective\\Html\\FormFacade',
-      'Html' => 'Collective\\Html\\HtmlFacade',
-    ),
-  ),
   'nesbot/carbon' => 
   array (
     'providers' => 
@@ -101,11 +28,29 @@
       0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
-  'nunomaduro/collision' => 
+  'anlutro/l4-settings' => 
+  array (
+    'aliases' => 
+    array (
+      'Setting' => 'anlutro\\LaravelSettings\\Facade',
+    ),
+    'providers' => 
+    array (
+      0 => 'anlutro\\LaravelSettings\\ServiceProvider',
+    ),
+  ),
+  'eklundkristoffer/seedster' => 
   array (
     'providers' => 
     array (
-      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+      0 => 'Seedster\\SeedsterServiceProvider',
+    ),
+  ),
+  'jeremykenedy/laravel-roles' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'jeremykenedy\\LaravelRoles\\RolesServiceProvider',
     ),
   ),
   'proengsoft/laravel-jsvalidation' => 
@@ -131,6 +76,13 @@
       0 => 'Tymon\\JWTAuth\\Providers\\LaravelServiceProvider',
     ),
   ),
+  'fideloper/proxy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    ),
+  ),
   'yajra/laravel-datatables-oracle' => 
   array (
     'providers' => 
@@ -140,6 +92,54 @@
     'aliases' => 
     array (
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
+    ),
+  ),
+  'laravelcollective/html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Collective\\Html\\HtmlServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
+    ),
+  ),
+  'anhskohbo/no-captcha' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'NoCaptcha' => 'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha',
+    ),
+  ),
+  'laravel/tinker' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'hexters/coinpayment' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Hexters\\CoinPayment\\Providers\\CoinPaymentServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'CoinPayment' => 'Hexters\\CoinPayment\\Helpers\\CoinPaymentFacade',
+    ),
+  ),
+  'nunomaduro/collision' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
 );

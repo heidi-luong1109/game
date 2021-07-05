@@ -61,6 +61,9 @@ final class ImageRenderer implements InlineRendererInterface, ConfigurationAware
         return new HtmlElement('img', $attrs, '', true);
     }
 
+    /**
+     * @param ConfigurationInterface $configuration
+     */
     public function setConfiguration(ConfigurationInterface $configuration)
     {
         $this->config = $configuration;

@@ -22,8 +22,8 @@ class AbstractStringContainer extends AbstractInline
     protected $content = '';
 
     /**
-     * @param string               $contents
-     * @param array<string, mixed> $data
+     * @param string $contents
+     * @param array  $data
      */
     public function __construct(string $contents = '', array $data = [])
     {

@@ -64,11 +64,7 @@ can also add your own there if you publish one.
 
 ### Requirements
 
-- Monolog `^2.0` works with PHP 7.2 or above, use Monolog `^1.25` for PHP 5.3+ support.
-
-### Support
-
-Monolog 1.x support is somewhat limited at this point and only important fixes will be done. You should migrate to Monolog 2 where possible to benefit from all the latest features and fixes.
+- Monolog 2.x works with PHP 7.2 or above, use Monolog `^1.0` for PHP 5.3+ support.
 
 ### Submitting bugs and feature requests
 
@@ -86,7 +82,7 @@ Bugs and feature request are tracked on [GitHub](https://github.com/Seldaek/mono
 - [Slim](http://www.slimframework.com/) is usable with Monolog via the [Slim-Monolog](https://github.com/Flynsarmy/Slim-Monolog) log writer.
 - [XOOPS 2.6](http://xoops.org/) comes out of the box with Monolog.
 - [Aura.Web_Project](https://github.com/auraphp/Aura.Web_Project) comes out of the box with Monolog.
-- [Nette Framework](http://nette.org/en/) can be used with Monolog via [contributte/monolog](https://github.com/contributte/monolog) extension.
+- [Nette Framework](http://nette.org/en/) can be used with Monolog via [Kdyby/Monolog](https://github.com/Kdyby/Monolog) extension.
 - [Proton Micro Framework](https://github.com/alexbilbie/Proton) comes out of the box with Monolog.
 - [FuelPHP](http://fuelphp.com/) comes out of the box with Monolog.
 - [Equip Framework](https://github.com/equip/framework) comes out of the box with Monolog.
@@ -101,7 +97,7 @@ See also the list of [contributors](https://github.com/Seldaek/monolog/contribut
 
 ### License
 
-Monolog is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+Monolog is licensed under the MIT License - see the `LICENSE` file for details
 
 ### Acknowledgements
 

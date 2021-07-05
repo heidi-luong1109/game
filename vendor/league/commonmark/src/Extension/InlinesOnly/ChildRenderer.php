@@ -23,6 +23,9 @@ use League\CommonMark\Inline\Element\AbstractInline;
  */
 final class ChildRenderer implements BlockRendererInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function render(AbstractBlock $block, ElementRendererInterface $htmlRenderer, bool $inTightList = false)
     {
         $out = '';

@@ -4,6 +4,7 @@ namespace Illuminate\Foundation\Testing\Concerns;
 
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Arr;
 use Illuminate\Testing\PendingCommand;
 
 trait InteractsWithConsole
@@ -23,25 +24,11 @@ trait InteractsWithConsole
     public $expectedOutput = [];
 
     /**
-     * All of the expected ouput tables.
-     *
-     * @var array
-     */
-    public $expectedTables = [];
-
-    /**
      * All of the expected questions.
      *
      * @var array
      */
     public $expectedQuestions = [];
-
-    /**
-     * All of the expected choice questions.
-     *
-     * @var array
-     */
-    public $expectedChoices = [];
 
     /**
      * Call artisan command and return code.
@@ -55,6 +42,16 @@ trait InteractsWithConsole
         if (! $this->mockConsoleOutput) {
             return $this->app[Kernel::class]->call($command, $parameters);
         }
+
+        $this->beforeApplicationDestroyed(function () {
+            if (count($this->expectedQuestions)) {
+                $this->fail('Question "'.Arr::first($this->expectedQuestions)[0].'" was not asked.');
+            }
+
+            if (count($this->expectedOutput)) {
+                $this->fail('Output "'.Arr::first($this->expectedOutput).'" was not printed.');
+            }
+        });
 
         return new PendingCommand($this, $this->app, $command, $parameters);
     }

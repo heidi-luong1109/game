@@ -1,17 +1,17 @@
 <?php
 
-namespace {{ namespace }};
+namespace DummyNamespace;
 
 use Illuminate\Console\Command;
 
-class {{ class }} extends Command
+class DummyClass extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = '{{ command }}';
+    protected $signature = 'dummy:command';
 
     /**
      * The console command description.
@@ -33,10 +33,10 @@ class {{ class }} extends Command
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return mixed
      */
     public function handle()
     {
-        return 0;
+        //
     }
 }

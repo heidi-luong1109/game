@@ -27,6 +27,7 @@ trait ProcessableHandlerTrait
 
     /**
      * {@inheritdoc}
+     * @suppress PhanTypeMismatchReturn
      */
     public function pushProcessor(callable $callback): HandlerInterface
     {

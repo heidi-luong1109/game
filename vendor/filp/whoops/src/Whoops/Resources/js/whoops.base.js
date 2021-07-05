@@ -100,7 +100,7 @@ Zepto(function($) {
 
   var clipboard = new Clipboard('.clipboard');
   var showTooltip = function(elem, msg) {
-    elem.classList.add('tooltipped', 'tooltipped-s');
+    elem.setAttribute('class', 'clipboard tooltipped tooltipped-s');
     elem.setAttribute('aria-label', msg);
   };
 
@@ -117,7 +117,7 @@ Zepto(function($) {
   var btn = document.querySelector('.clipboard');
 
   btn.addEventListener('mouseleave', function(e) {
-    e.currentTarget.classList.remove('tooltipped', 'tooltipped-s');
+    e.currentTarget.setAttribute('class', 'clipboard');
     e.currentTarget.removeAttribute('aria-label');
   });
 

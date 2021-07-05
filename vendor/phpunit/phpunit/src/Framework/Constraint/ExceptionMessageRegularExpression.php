@@ -9,8 +9,6 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
-use function sprintf;
-use Exception;
 use PHPUnit\Util\RegularExpression as RegularExpressionUtil;
 
 final class ExceptionMessageRegularExpression extends Constraint
@@ -36,8 +34,8 @@ final class ExceptionMessageRegularExpression extends Constraint
      *
      * @param \PHPUnit\Framework\Exception $other
      *
+     * @throws \Exception
      * @throws \PHPUnit\Framework\Exception
-     * @throws Exception
      */
     protected function matches($other): bool
     {
@@ -53,7 +51,7 @@ final class ExceptionMessageRegularExpression extends Constraint
     }
 
     /**
-     * Returns the description of the failure.
+     * Returns the description of the failure
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
@@ -62,7 +60,7 @@ final class ExceptionMessageRegularExpression extends Constraint
      */
     protected function failureDescription($other): string
     {
-        return sprintf(
+        return \sprintf(
             "exception message '%s' matches '%s'",
             $other->getMessage(),
             $this->expectedMessageRegExp

@@ -67,6 +67,6 @@ class Exclusions extends AbstractProvider
         '; IDbot',
         '; ID bot',
         '; POWER BOT',
-        'OCTOPUS-CORE',
+        ';', // Remove the following characters ;
     );
 }

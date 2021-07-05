@@ -16,39 +16,25 @@ namespace League\CommonMark\Util;
 
 /**
  * @internal
- * @phpstan-template T
- * @phpstan-implements \IteratorAggregate<T>
  */
 final class PrioritizedList implements \IteratorAggregate
 {
-    /**
-     * @var array<int, array<mixed>>
-     * @phpstan-var array<int, array<T>>
-     */
     private $list = [];
 
-    /**
-     * @var iterable<mixed>|null
-     * @phpstan-var iterable<T>|null
-     */
     private $optimized;
 
     /**
      * @param mixed $item
      * @param int   $priority
-     *
-     * @phpstan-param T $item
      */
-    public function add($item, int $priority): void
+    public function add($item, int $priority)
     {
         $this->list[$priority][] = $item;
         $this->optimized = null;
     }
 
     /**
-     * @return iterable<int, mixed>
-     *
-     * @phpstan-return iterable<int, T>
+     * @return \Traversable
      */
     public function getIterator(): iterable
     {

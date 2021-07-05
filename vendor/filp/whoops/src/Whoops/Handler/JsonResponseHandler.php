@@ -28,7 +28,7 @@ class JsonResponseHandler extends Handler
     /**
      * Returns errors[[]] instead of error[] to be in compliance with the json:api spec
      * @param bool $jsonApi Default is false
-     * @return static
+     * @return $this
      */
     public function setJsonApi($jsonApi = false)
     {
@@ -38,7 +38,7 @@ class JsonResponseHandler extends Handler
 
     /**
      * @param  bool|null  $returnFrames
-     * @return bool|static
+     * @return bool|$this
      */
     public function addTraceToOutput($returnFrames = null)
     {

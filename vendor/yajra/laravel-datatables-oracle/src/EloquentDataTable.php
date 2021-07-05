@@ -3,13 +3,11 @@
 namespace Yajra\DataTables;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Yajra\DataTables\Exceptions\Exception;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class EloquentDataTable extends QueryDataTable
 {
@@ -92,15 +90,9 @@ class EloquentDataTable extends QueryDataTable
             return parent::compileQuerySearch($query, $columnName, $keyword, $boolean);
         }
 
-        if ($this->isMorphRelation($relation)) {
-            $query->{$boolean . 'WhereHasMorph'}($relation, '*', function (Builder $query) use ($column, $keyword) {
-                parent::compileQuerySearch($query, $column, $keyword, '');
-            });
-        } else {
-            $query->{$boolean . 'WhereHas'}($relation, function (Builder $query) use ($column, $keyword) {
-                parent::compileQuerySearch($query, $column, $keyword, '');
-            });
-        }
+        $query->{$boolean . 'WhereHas'}($relation, function (Builder $query) use ($column, $keyword) {
+            parent::compileQuerySearch($query, $column, $keyword, '');
+        });
     }
 
     /**
@@ -120,25 +112,6 @@ class EloquentDataTable extends QueryDataTable
         }
 
         return $this->joinEagerLoadedColumn($relation, $columnName);
-    }
-
-    /**
-     * Check if a relation is a morphed one or not.
-     *
-     * @param  string $relation
-     * @return bool
-     */
-    protected function isMorphRelation($relation)
-    {
-        $isMorph = false;
-        if ($relation !== null && $relation !== '') {
-            $relationParts = explode('.', $relation);
-            $firstRelation = array_shift($relationParts);
-            $model         = $this->query->getModel();
-            $isMorph       = method_exists($model, $firstRelation) && $model->$firstRelation() instanceof MorphTo;
-        }
-
-        return $isMorph;
     }
 
     /**
@@ -183,20 +156,6 @@ class EloquentDataTable extends QueryDataTable
 
                     $lastQuery->addSelect($table . '.' . $relationColumn);
                     $this->performJoin($table, $foreign, $other);
-
-                    break;
-
-                case $model instanceof HasOneThrough:
-                    $pivot    = explode('.', $model->getQualifiedParentKeyName())[0]; // extract pivot table from key
-                    $pivotPK  = $pivot . '.' . $model->getLocalKeyName();
-                    $pivotFK  = $model->getQualifiedLocalKeyName();
-                    $this->performJoin($pivot, $pivotPK, $pivotFK);
-
-                    $related = $model->getRelated();
-                    $table   = $related->getTable();
-                    $tablePK = $related->getForeignKey();
-                    $foreign = $pivot . '.' . $tablePK;
-                    $other   = $related->getQualifiedKeyName();
 
                     break;
 

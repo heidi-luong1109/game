@@ -125,11 +125,7 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchIps($ips)
     {
-        $ips = null !== $ips ? (array) $ips : [];
-
-        $this->ips = array_reduce($ips, static function (array $ips, string $ip) {
-            return array_merge($ips, preg_split('/\s*,\s*/', $ip));
-        }, []);
+        $this->ips = null !== $ips ? (array) $ips : [];
     }
 
     /**
@@ -164,11 +160,7 @@ class RequestMatcher implements RequestMatcherInterface
         }
 
         foreach ($this->attributes as $key => $pattern) {
-            $requestAttribute = $request->attributes->get($key);
-            if (!\is_string($requestAttribute)) {
-                return false;
-            }
-            if (!preg_match('{'.$pattern.'}', $requestAttribute)) {
+            if (!preg_match('{'.$pattern.'}', $request->attributes->get($key))) {
                 return false;
             }
         }

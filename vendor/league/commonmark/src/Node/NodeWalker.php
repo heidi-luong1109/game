@@ -31,6 +31,9 @@ final class NodeWalker
      */
     private $entering;
 
+    /**
+     * @param Node $root
+     */
     public function __construct(Node $root)
     {
         $this->root = $root;
@@ -78,8 +81,6 @@ final class NodeWalker
      *
      * @param Node $node
      * @param bool $entering
-     *
-     * @return void
      */
     public function resumeAt(Node $node, bool $entering = true)
     {

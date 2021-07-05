@@ -20,7 +20,7 @@ use Symfony\Component\Config\Resource\ResourceInterface;
  */
 interface MessageCatalogueInterface
 {
-    public const INTL_DOMAIN_SUFFIX = '+intl-icu';
+    const INTL_DOMAIN_SUFFIX = '+intl-icu';
 
     /**
      * Gets the catalogue locale.

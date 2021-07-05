@@ -19,6 +19,12 @@ use League\CommonMark\Cursor;
 
 final class LazyParagraphParser implements BlockParserInterface
 {
+    /**
+     * @param ContextInterface $context
+     * @param Cursor           $cursor
+     *
+     * @return bool
+     */
     public function parse(ContextInterface $context, Cursor $cursor): bool
     {
         if (!$cursor->isIndented()) {

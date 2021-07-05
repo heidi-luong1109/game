@@ -8,7 +8,6 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Concerns\BuildsQueries;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Processors\Processor;
 use Illuminate\Pagination\Paginator;
@@ -226,7 +225,7 @@ class Builder
     public function select($columns = ['*'])
     {
         $this->columns = [];
-        $this->bindings['select'] = [];
+
         $columns = is_array($columns) ? $columns : func_get_args();
 
         foreach ($columns as $as => $column) {
@@ -243,7 +242,7 @@ class Builder
     /**
      * Add a subselect expression to the query.
      *
-     * @param  \Closure|$this|string  $query
+     * @param  \Closure|\Illuminate\Database\Query\Builder|string  $query
      * @param  string  $as
      * @return $this
      *
@@ -338,7 +337,7 @@ class Builder
      */
     protected function parseSub($query)
     {
-        if ($query instanceof self || $query instanceof EloquentBuilder || $query instanceof Relation) {
+        if ($query instanceof self || $query instanceof EloquentBuilder) {
             return [$query->toSql(), $query->getBindings()];
         } elseif (is_string($query)) {
             return [$query, []];
@@ -709,7 +708,7 @@ class Builder
         );
 
         if (! $value instanceof Expression) {
-            $this->addBinding($this->flattenValue($value), 'where');
+            $this->addBinding($value, 'where');
         }
 
         return $this;
@@ -985,18 +984,6 @@ class Builder
     }
 
     /**
-     * Add an "or where in raw" clause for integer values to the query.
-     *
-     * @param  string  $column
-     * @param  \Illuminate\Contracts\Support\Arrayable|array  $values
-     * @return $this
-     */
-    public function orWhereIntegerInRaw($column, $values)
-    {
-        return $this->whereIntegerInRaw($column, $values, 'or');
-    }
-
-    /**
      * Add a "where not in raw" clause for integer values to the query.
      *
      * @param  string  $column
@@ -1007,18 +994,6 @@ class Builder
     public function whereIntegerNotInRaw($column, $values, $boolean = 'and')
     {
         return $this->whereIntegerInRaw($column, $values, $boolean, true);
-    }
-
-    /**
-     * Add an "or where not in raw" clause for integer values to the query.
-     *
-     * @param  string  $column
-     * @param  \Illuminate\Contracts\Support\Arrayable|array  $values
-     * @return $this
-     */
-    public function orWhereIntegerNotInRaw($column, $values)
-    {
-        return $this->whereIntegerNotInRaw($column, $values, 'or');
     }
 
     /**
@@ -1078,25 +1053,7 @@ class Builder
 
         $this->wheres[] = compact('type', 'column', 'values', 'boolean', 'not');
 
-        $this->addBinding(array_slice($this->cleanBindings(Arr::flatten($values)), 0, 2), 'where');
-
-        return $this;
-    }
-
-    /**
-     * Add a where between statement using columns to the query.
-     *
-     * @param  string  $column
-     * @param  array  $values
-     * @param  string  $boolean
-     * @param  bool  $not
-     * @return $this
-     */
-    public function whereBetweenColumns($column, array $values, $boolean = 'and', $not = false)
-    {
-        $type = 'betweenColumns';
-
-        $this->wheres[] = compact('type', 'column', 'values', 'boolean', 'not');
+        $this->addBinding($this->cleanBindings($values), 'where');
 
         return $this;
     }
@@ -1114,18 +1071,6 @@ class Builder
     }
 
     /**
-     * Add an or where between statement using columns to the query.
-     *
-     * @param  string  $column
-     * @param  array  $values
-     * @return $this
-     */
-    public function orWhereBetweenColumns($column, array $values)
-    {
-        return $this->whereBetweenColumns($column, $values, 'or');
-    }
-
-    /**
      * Add a where not between statement to the query.
      *
      * @param  string  $column
@@ -1139,19 +1084,6 @@ class Builder
     }
 
     /**
-     * Add a where not between statement using columns to the query.
-     *
-     * @param  string  $column
-     * @param  array  $values
-     * @param  string  $boolean
-     * @return $this
-     */
-    public function whereNotBetweenColumns($column, array $values, $boolean = 'and')
-    {
-        return $this->whereBetweenColumns($column, $values, $boolean, true);
-    }
-
-    /**
      * Add an or where not between statement to the query.
      *
      * @param  string  $column
@@ -1161,18 +1093,6 @@ class Builder
     public function orWhereNotBetween($column, array $values)
     {
         return $this->whereNotBetween($column, $values, 'or');
-    }
-
-    /**
-     * Add an or where not between statement using columns to the query.
-     *
-     * @param  string  $column
-     * @param  array  $values
-     * @return $this
-     */
-    public function orWhereNotBetweenColumns($column, array $values)
-    {
-        return $this->whereNotBetweenColumns($column, $values, 'or');
     }
 
     /**
@@ -1200,8 +1120,6 @@ class Builder
         [$value, $operator] = $this->prepareValueAndOperator(
             $value, $operator, func_num_args() === 2
         );
-
-        $value = $this->flattenValue($value);
 
         if ($value instanceof DateTimeInterface) {
             $value = $value->format('Y-m-d');
@@ -1242,8 +1160,6 @@ class Builder
             $value, $operator, func_num_args() === 2
         );
 
-        $value = $this->flattenValue($value);
-
         if ($value instanceof DateTimeInterface) {
             $value = $value->format('H:i:s');
         }
@@ -1282,8 +1198,6 @@ class Builder
         [$value, $operator] = $this->prepareValueAndOperator(
             $value, $operator, func_num_args() === 2
         );
-
-        $value = $this->flattenValue($value);
 
         if ($value instanceof DateTimeInterface) {
             $value = $value->format('d');
@@ -1328,8 +1242,6 @@ class Builder
             $value, $operator, func_num_args() === 2
         );
 
-        $value = $this->flattenValue($value);
-
         if ($value instanceof DateTimeInterface) {
             $value = $value->format('m');
         }
@@ -1372,8 +1284,6 @@ class Builder
         [$value, $operator] = $this->prepareValueAndOperator(
             $value, $operator, func_num_args() === 2
         );
-
-        $value = $this->flattenValue($value);
 
         if ($value instanceof DateTimeInterface) {
             $value = $value->format('Y');
@@ -1447,7 +1357,7 @@ class Builder
     /**
      * Add another query builder as a nested where to the query builder.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  $this  $query
      * @param  string  $boolean
      * @return $this
      */
@@ -1592,7 +1502,7 @@ class Builder
     }
 
     /**
-     * Adds an or where condition using row values.
+     * Adds a or where condition using row values.
      *
      * @param  array  $columns
      * @param  string  $operator
@@ -1627,7 +1537,7 @@ class Builder
     }
 
     /**
-     * Add an "or where JSON contains" clause to the query.
+     * Add a "or where JSON contains" clause to the query.
      *
      * @param  string  $column
      * @param  mixed  $value
@@ -1652,7 +1562,7 @@ class Builder
     }
 
     /**
-     * Add an "or where JSON not contains" clause to the query.
+     * Add a "or where JSON not contains" clause to the query.
      *
      * @param  string  $column
      * @param  mixed  $value
@@ -1683,14 +1593,14 @@ class Builder
         $this->wheres[] = compact('type', 'column', 'operator', 'value', 'boolean');
 
         if (! $value instanceof Expression) {
-            $this->addBinding((int) $this->flattenValue($value));
+            $this->addBinding($value);
         }
 
         return $this;
     }
 
     /**
-     * Add an "or where JSON length" clause to the query.
+     * Add a "or where JSON length" clause to the query.
      *
      * @param  string  $column
      * @param  mixed  $operator
@@ -1832,14 +1742,14 @@ class Builder
         $this->havings[] = compact('type', 'column', 'operator', 'value', 'boolean');
 
         if (! $value instanceof Expression) {
-            $this->addBinding($this->flattenValue($value), 'having');
+            $this->addBinding($value, 'having');
         }
 
         return $this;
     }
 
     /**
-     * Add an "or having" clause to the query.
+     * Add a "or having" clause to the query.
      *
      * @param  string  $column
      * @param  string|null  $operator
@@ -1870,7 +1780,7 @@ class Builder
 
         $this->havings[] = compact('type', 'column', 'values', 'boolean', 'not');
 
-        $this->addBinding(array_slice($this->cleanBindings(Arr::flatten($values)), 0, 2), 'having');
+        $this->addBinding($this->cleanBindings($values), 'having');
 
         return $this;
     }
@@ -1909,7 +1819,7 @@ class Builder
     /**
      * Add an "order by" clause to the query.
      *
-     * @param  \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string  $column
+     * @param  \Closure|\Illuminate\Database\Query\Builder|string  $column
      * @param  string  $direction
      * @return $this
      *
@@ -2105,27 +2015,6 @@ class Builder
 
         return $this->orderBy($column, 'asc')
                     ->limit($perPage);
-    }
-
-    /**
-     * Remove all existing orders and optionally add a new order.
-     *
-     * @param  string|null  $column
-     * @param  string  $direction
-     * @return $this
-     */
-    public function reorder($column = null, $direction = 'asc')
-    {
-        $this->orders = null;
-        $this->unionOrders = null;
-        $this->bindings['order'] = [];
-        $this->bindings['unionOrder'] = [];
-
-        if ($column) {
-            return $this->orderBy($column, $direction);
-        }
-
-        return $this;
     }
 
     /**
@@ -2330,7 +2219,9 @@ class Builder
         // Once we have run the pagination count query, we will get the resulting count and
         // take into account what type of query it was. When there is a group by we will
         // just return the count of the entire results set since that will be correct.
-        if (! isset($results[0])) {
+        if (isset($this->groups)) {
+            return count($results);
+        } elseif (! isset($results[0])) {
             return 0;
         } elseif (is_object($results[0])) {
             return (int) $results[0]->aggregate;
@@ -2347,37 +2238,12 @@ class Builder
      */
     protected function runPaginationCountQuery($columns = ['*'])
     {
-        if ($this->groups || $this->havings) {
-            $clone = $this->cloneForPaginationCount();
-
-            if (is_null($clone->columns) && ! empty($this->joins)) {
-                $clone->select($this->from.'.*');
-            }
-
-            return $this->newQuery()
-                ->from(new Expression('('.$clone->toSql().') as '.$this->grammar->wrap('aggregate_table')))
-                ->mergeBindings($clone)
-                ->setAggregate('count', $this->withoutSelectAliases($columns))
-                ->get()->all();
-        }
-
         $without = $this->unions ? ['orders', 'limit', 'offset'] : ['columns', 'orders', 'limit', 'offset'];
 
         return $this->cloneWithout($without)
                     ->cloneWithoutBindings($this->unions ? ['order'] : ['select', 'order'])
                     ->setAggregate('count', $this->withoutSelectAliases($columns))
                     ->get()->all();
-    }
-
-    /**
-     * Clone the existing query instance for usage in a pagination subquery.
-     *
-     * @return self
-     */
-    protected function cloneForPaginationCount()
-    {
-        return $this->cloneWithout(['orders', 'limit', 'offset'])
-                    ->cloneWithoutBindings(['order']);
     }
 
     /**
@@ -2475,9 +2341,9 @@ class Builder
             return $column;
         }
 
-        $separator = strpos(strtolower($column), ' as ') !== false ? ' as ' : '\.';
+        $seperator = strpos(strtolower($column), ' as ') !== false ? ' as ' : '\.';
 
-        return last(preg_split('~'.$separator.'~i', $column));
+        return last(preg_split('~'.$seperator.'~i', $column));
     }
 
     /**
@@ -3093,17 +2959,6 @@ class Builder
     }
 
     /**
-     * Get a scalar type value from an unknown type of input.
-     *
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function flattenValue($value)
-    {
-        return is_array($value) ? head(Arr::flatten($value)) : $value;
-    }
-
-    /**
      * Get the default key name of the table.
      *
      * @return string
@@ -3165,7 +3020,6 @@ class Builder
     {
         return $value instanceof self ||
                $value instanceof EloquentBuilder ||
-               $value instanceof Relation ||
                $value instanceof Closure;
     }
 

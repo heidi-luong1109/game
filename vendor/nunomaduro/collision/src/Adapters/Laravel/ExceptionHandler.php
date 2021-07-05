@@ -42,10 +42,13 @@ class ExceptionHandler implements ExceptionHandlerContract
 
     /**
      * Creates a new instance of the ExceptionHandler.
+     *
+     * @param \Illuminate\Contracts\Container\Container $container
+     * @param \Illuminate\Contracts\Debug\ExceptionHandler $appExceptionHandler
      */
     public function __construct(Container $container, ExceptionHandlerContract $appExceptionHandler)
     {
-        $this->container           = $container;
+        $this->container = $container;
         $this->appExceptionHandler = $appExceptionHandler;
     }
 
@@ -87,6 +90,7 @@ class ExceptionHandler implements ExceptionHandlerContract
     /**
      * Determine if the exception should be reported.
      *
+     * @param  Throwable $e
      * @return bool
      */
     public function shouldReport(Throwable $e)

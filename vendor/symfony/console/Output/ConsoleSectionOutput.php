@@ -82,10 +82,10 @@ class ConsoleSectionOutput extends StreamOutput
      */
     public function addContent(string $input)
     {
-        foreach (explode(\PHP_EOL, $input) as $lineContent) {
+        foreach (explode(PHP_EOL, $input) as $lineContent) {
             $this->lines += ceil($this->getDisplayLength($lineContent) / $this->terminal->getWidth()) ?: 1;
             $this->content[] = $lineContent;
-            $this->content[] = \PHP_EOL;
+            $this->content[] = PHP_EOL;
         }
     }
 
@@ -136,8 +136,8 @@ class ConsoleSectionOutput extends StreamOutput
         return implode('', array_reverse($erasedContent));
     }
 
-    private function getDisplayLength(string $text): int
+    private function getDisplayLength(string $text): string
     {
-        return Helper::width(Helper::removeDecoration($this->getFormatter(), str_replace("\t", '        ', $text)));
+        return Helper::strlenWithoutDecoration($this->getFormatter(), str_replace("\t", '        ', $text));
     }
 }

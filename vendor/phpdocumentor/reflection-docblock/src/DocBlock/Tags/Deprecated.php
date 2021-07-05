@@ -48,7 +48,7 @@ final class Deprecated extends BaseTag implements Factory\StaticMethod
 
     public function __construct(?string $version = null, ?Description $description = null)
     {
-        Assert::nullOrNotEmpty($version);
+        Assert::nullOrStringNotEmpty($version);
 
         $this->version     = $version;
         $this->description = $description;
@@ -95,14 +95,6 @@ final class Deprecated extends BaseTag implements Factory\StaticMethod
      */
     public function __toString() : string
     {
-        if ($this->description) {
-            $description = $this->description->render();
-        } else {
-            $description = '';
-        }
-
-        $version = (string) $this->version;
-
-        return $version . ($description !== '' ? ($version !== '' ? ' ' : '') . $description : '');
+        return ($this->version ?? '') . ($this->description ? ' ' . $this->description->render() : '');
     }
 }

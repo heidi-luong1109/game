@@ -84,7 +84,7 @@ class JoinClause extends Builder
      *
      * @param  \Closure|string  $first
      * @param  string|null  $operator
-     * @param  \Illuminate\Database\Query\Expression|string|null  $second
+     * @param  string|null  $second
      * @param  string  $boolean
      * @return $this
      *

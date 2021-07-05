@@ -31,7 +31,6 @@ class FallbackGroupHandler extends GroupHandler
                 // What throwable?
             }
         }
-
         return false === $this->bubble;
     }
 

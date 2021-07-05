@@ -1,7 +1,4 @@
-![Laravel Roles](https://github-project-images.s3-us-west-2.amazonaws.com/laravel-blocker/laravel-roles-logo.png)
-
 # Laravel Roles
-A Powerful package for handling roles and permissions in Laravel. Supports Laravel 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6.0, 7.0, and 8.0+.
 
 [![Total Downloads](https://poser.pugx.org/jeremykenedy/laravel-roles/d/total.svg)](https://packagist.org/packages/jeremykenedy/laravel-roles)
 [![Latest Stable Version](https://poser.pugx.org/jeremykenedy/laravel-roles/v/stable.svg)](https://packagist.org/packages/jeremykenedy/laravel-roles)
@@ -12,8 +9,12 @@ A Powerful package for handling roles and permissions in Laravel. Supports Larav
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/jeremykenedy/laravel-roles/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MadeWithLaravel.com shield](https://madewithlaravel.com/storage/repo-shields/1363-shield.svg)](https://madewithlaravel.com/p/laravel-roles/shield-link)
+<a href="https://www.patreon.com/bePatron?u=10119959" title="Become a Patreon">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon" width="85px" > 
+</a>
 
 #### Table of contents
+- [About](#about)
 - [Features](#features)
 - [Installation](#installation)
     - [Composer](#composer)
@@ -44,6 +45,10 @@ A Powerful package for handling roles and permissions in Laravel. Supports Larav
 - [File Tree](#file-tree)
 - [Opening an Issue](#opening-an-issue)
 - [License](#license)
+
+## About
+A Powerful package for handling roles and permissions in Laravel.
+Supports Laravel 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, and 6.0.
 
 ## Features
 | Laravel Roles Features  |
@@ -107,8 +112,6 @@ Add the package to your application service providers in `config/app.php` file.
     php artisan vendor:publish --tag=laravelroles-config
     php artisan vendor:publish --tag=laravelroles-migrations
     php artisan vendor:publish --tag=laravelroles-seeds
-    php artisan vendor:publish --tag=laravelroles-views
-    php artisan vendor:publish --tag=laravelroles-lang
 ```
 
 ### HasRoleAndPermission Trait And Contract

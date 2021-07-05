@@ -33,13 +33,13 @@ class ScalarFormatter extends NormalizerFormatter
 
     /**
      * @param  mixed $value
-     * @return string|int|bool|null
+     * @return mixed
      */
     protected function normalizeValue($value)
     {
         $normalized = $this->normalize($value);
 
-        if (is_array($normalized)) {
+        if (is_array($normalized) || is_object($normalized)) {
             return $this->toJson($normalized, true);
         }
 

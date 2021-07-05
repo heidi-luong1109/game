@@ -18,17 +18,16 @@
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
 
-use Mockery\ClosureWrapper;
 use Mockery\ExpectationInterface;
 use Mockery\Generator\CachingGenerator;
 use Mockery\Generator\Generator;
 use Mockery\Generator\MockConfigurationBuilder;
-use Mockery\Generator\MockNameBuilder;
 use Mockery\Generator\StringManipulationGenerator;
 use Mockery\Loader\EvalLoader;
 use Mockery\Loader\Loader;
 use Mockery\Matcher\MatcherAbstract;
-use Mockery\Reflector;
+use Mockery\ClosureWrapper;
+use Mockery\Generator\MockNameBuilder;
 
 class Mockery
 {
@@ -70,35 +69,37 @@ class Mockery
      */
     public static function globalHelpers()
     {
-        require_once __DIR__ . '/helpers.php';
+        require_once __DIR__.'/helpers.php';
     }
 
     /**
      * @return array
-     *
-     * @deprecated since 1.3.2 and will be removed in 2.0.
      */
     public static function builtInTypes()
     {
-        return array(
+        $builtInTypes = array(
+            'self',
             'array',
-            'bool',
             'callable',
+            // Up to php 7
+            'bool',
             'float',
             'int',
-            'iterable',
-            'object',
-            'self',
             'string',
+            'iterable',
             'void',
         );
+
+        if (version_compare(PHP_VERSION, '7.2.0-dev') >= 0) {
+            $builtInTypes[] = 'object';
+        }
+
+        return $builtInTypes;
     }
 
     /**
      * @param string $type
      * @return bool
-     *
-     * @deprecated since 1.3.2 and will be removed in 2.0.
      */
     public static function isBuiltInType($type)
     {
@@ -214,7 +215,7 @@ class Mockery
      */
     public static function fetchMock($name)
     {
-        return self::getContainer()->fetchMock($name);
+        return self::$_container->fetchMock($name);
     }
 
     /**
@@ -233,7 +234,7 @@ class Mockery
     }
 
     /**
-     * Setter for the $_generator static property.
+     * Setter for the $_generator static propery.
      *
      * @param \Mockery\Generator\Generator $generator
      */
@@ -398,7 +399,7 @@ class Mockery
     /**
      * Return instance of CONTAINS matcher.
      *
-     * @param mixed $args
+     * @param array ...$args
      *
      * @return \Mockery\Matcher\Contains
      */
@@ -591,10 +592,10 @@ class Mockery
                     $sample[] = "$key => $value";
                 }
 
-                $argument = "[" . implode(", ", $sample) . "]";
+                $argument = "[".implode(", ", $sample)."]";
             }
 
-            return ((strlen($argument) > 1000) ? substr($argument, 0, 1000) . '...]' : $argument);
+            return ((strlen($argument) > 1000) ? substr($argument, 0, 1000).'...]' : $argument);
         }
 
         if (is_bool($argument)) {
@@ -609,7 +610,7 @@ class Mockery
             return 'NULL';
         }
 
-        return "'" . (string) $argument . "'";
+        return "'".(string) $argument."'";
     }
 
     /**
@@ -662,22 +663,10 @@ class Mockery
             return array('...');
         }
 
-        $defaultFormatter = function ($object, $nesting) {
-            return array('properties' => self::extractInstancePublicProperties($object, $nesting));
-        };
-
-        $class = get_class($object);
-
-        $formatter = self::getConfiguration()->getObjectFormatter($class, $defaultFormatter);
-
-        $array = array(
-          'class' => $class,
-          'identity' => '#' . md5(spl_object_hash($object))
+        return array(
+            'class' => get_class($object),
+            'properties' => self::extractInstancePublicProperties($object, $nesting)
         );
-
-        $array = array_merge($array, $formatter($object, $nesting));
-
-        return $array;
     }
 
     /**
@@ -697,11 +686,7 @@ class Mockery
         foreach ($properties as $publicProperty) {
             if (!$publicProperty->isStatic()) {
                 $name = $publicProperty->getName();
-                try {
-                    $cleanedProperties[$name] = self::cleanupNesting($object->$name, $nesting);
-                } catch (\Exception $exception) {
-                    $cleanedProperties[$name] = $exception->getMessage();
-                }
+                $cleanedProperties[$name] = self::cleanupNesting($object->$name, $nesting);
             }
         }
 
@@ -873,26 +858,29 @@ class Mockery
     ) {
         $newMockName = 'demeter_' . md5($parent) . '_' . $method;
 
-        $parRef = null;
-        $parRefMethod = null;
-        $parRefMethodRetType = null;
+        if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+            $parRef = null;
+            $parRefMethod = null;
+            $parRefMethodRetType = null;
 
-        $parentMock = $exp->getMock();
-        if ($parentMock !== null) {
-            $parRef = new ReflectionObject($parentMock);
-        }
+            $parentMock = $exp->getMock();
+            if ($parentMock !== null) {
+                $parRef = new ReflectionObject($parentMock);
+            }
 
-        if ($parRef !== null && $parRef->hasMethod($method)) {
-            $parRefMethod = $parRef->getMethod($method);
-            $parRefMethodRetType = Reflector::getReturnType($parRefMethod, true);
+            if ($parRef !== null && $parRef->hasMethod($method)) {
+                $parRefMethod = $parRef->getMethod($method);
+                $parRefMethodRetType = $parRefMethod->getReturnType();
 
-            if ($parRefMethodRetType !== null) {
-                $nameBuilder = new MockNameBuilder();
-                $nameBuilder->addPart('\\' . $newMockName);
-                $mock = self::namedMock($nameBuilder->build(), $parRefMethodRetType);
-                $exp->andReturn($mock);
+                if ($parRefMethodRetType !== null) {
+                    $nameBuilder = new MockNameBuilder();
+                    $nameBuilder->addPart('\\' . $newMockName);
+                    $type = PHP_VERSION_ID >= 70100 ? $parRefMethodRetType->getName() : (string)$parRefMethodRetType;
+                    $mock = self::namedMock($nameBuilder->build(), $type);
+                    $exp->andReturn($mock);
 
-                return $mock;
+                    return $mock;
+                }
             }
         }
 

@@ -20,14 +20,10 @@
 
 namespace Mockery\Generator;
 
-use Mockery\Reflector;
-
 class Parameter
 {
-    /** @var int */
-    private static $parameterCounter = 0;
+    private static $parameterCounter;
 
-    /** @var \ReflectionParameter */
     private $rfp;
 
     public function __construct(\ReflectionParameter $rfp)
@@ -40,75 +36,72 @@ class Parameter
         return call_user_func_array(array($this->rfp, $method), $args);
     }
 
-    /**
-     * Get the reflection class for the parameter type, if it exists.
-     *
-     * This will be null if there was no type, or it was a scalar or a union.
-     *
-     * @return \ReflectionClass|null
-     *
-     * @deprecated since 1.3.3 and will be removed in 2.0.
-     */
     public function getClass()
     {
-        $typeHint = Reflector::getTypeHint($this->rfp, true);
-
-        return \class_exists($typeHint) ? DefinedTargetClass::factory($typeHint, false) : null;
+        return new DefinedTargetClass($this->rfp->getClass());
     }
 
-    /**
-     * Get the string representation for the paramater type.
-     *
-     * @return string|null
-     */
-    public function getTypeHint()
-    {
-        return Reflector::getTypeHint($this->rfp);
-    }
-
-    /**
-     * Get the string representation for the paramater type.
-     *
-     * @return string
-     *
-     * @deprecated since 1.3.2 and will be removed in 2.0. Use getTypeHint() instead.
-     */
     public function getTypeHintAsString()
     {
-        return (string) Reflector::getTypeHint($this->rfp, true);
+        if (method_exists($this->rfp, 'getTypehintText')) {
+            // Available in HHVM
+            $typehint = $this->rfp->getTypehintText();
+
+            // not exhaustive, but will do for now
+            if (in_array($typehint, array('int', 'integer', 'float', 'string', 'bool', 'boolean'))) {
+                return '';
+            }
+
+            return $typehint;
+        }
+
+        if ($this->rfp->isArray()) {
+            return 'array';
+        }
+
+        /*
+         * PHP < 5.4.1 has some strange behaviour with a typehint of self and
+         * subclass signatures, so we risk the regexp instead
+         */
+        if ((version_compare(PHP_VERSION, '5.4.1') >= 0)) {
+            try {
+                if ($this->rfp->getClass()) {
+                    return $this->rfp->getClass()->getName();
+                }
+            } catch (\ReflectionException $re) {
+                // noop
+            }
+        }
+
+        if (version_compare(PHP_VERSION, '7.0.0-dev') >= 0 && $this->rfp->hasType()) {
+            return PHP_VERSION_ID >= 70100 ? $this->rfp->getType()->getName() : (string) $this->rfp->getType();
+        }
+
+        if (preg_match('/^Parameter #[0-9]+ \[ \<(required|optional)\> (?<typehint>\S+ )?.*\$' . $this->rfp->getName() . ' .*\]$/', $this->rfp->__toString(), $typehintMatch)) {
+            if (!empty($typehintMatch['typehint'])) {
+                return $typehintMatch['typehint'];
+            }
+        }
+
+        return '';
     }
 
     /**
-     * Get the name of the parameter.
-     *
-     * Some internal classes have funny looking definitions!
-     *
-     * @return string
+     * Some internal classes have funny looking definitions...
      */
     public function getName()
     {
         $name = $this->rfp->getName();
         if (!$name || $name == '...') {
-            $name = 'arg' . self::$parameterCounter++;
+            $name = 'arg' . static::$parameterCounter++;
         }
 
         return $name;
     }
 
-    /**
-     * Determine if the parameter is an array.
-     *
-     * @return bool
-     */
-    public function isArray()
-    {
-        return Reflector::isArray($this->rfp);
-    }
 
     /**
-     * Determine if the parameter is variadic.
-     *
-     * @return bool
+     * Variadics only introduced in 5.6
      */
     public function isVariadic()
     {

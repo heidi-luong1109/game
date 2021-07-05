@@ -2,7 +2,6 @@
 
 namespace jeremykenedy\LaravelRoles\Test;
 
-use jeremykenedy\LaravelRoles\RolesFacade;
 use jeremykenedy\LaravelRoles\RolesServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
@@ -15,7 +14,7 @@ class TestCase extends OrchestraTestCase
      *
      * @return jeremykenedy\LaravelRoles\RolesServiceProvider
      */
-    protected function getPackageProviders($app): void
+    protected function getPackageProviders($app)
     {
         return [RolesServiceProvider::class];
     }
@@ -27,10 +26,10 @@ class TestCase extends OrchestraTestCase
      *
      * @return array
      */
-    protected function getPackageAliases($app): void
+    protected function getPackageAliases($app)
     {
         return [
-            'laravelroles' => RolesFacade::class,
+            'laravelroles',
         ];
     }
 }

@@ -25,12 +25,10 @@ class SyslogUdpHandler extends AbstractSyslogHandler
 {
     const RFC3164 = 0;
     const RFC5424 = 1;
-    const RFC5424e = 2;
 
     private $dateFormats = array(
         self::RFC3164 => 'M d H:i:s',
         self::RFC5424 => \DateTime::RFC3339,
-        self::RFC5424e => \DateTime::RFC3339_EXTENDED,
     );
 
     protected $socket;
@@ -38,8 +36,8 @@ class SyslogUdpHandler extends AbstractSyslogHandler
     protected $rfc;
 
     /**
-     * @param string     $host     Either IP/hostname or a path to a unix socket (port must be 0 then)
-     * @param int        $port     Port number, or 0 if $host is a unix socket
+     * @param string     $host
+     * @param int        $port
      * @param string|int $facility Either one of the names of the keys in $this->facilities, or a LOG_* facility constant
      * @param string|int $level    The minimum logging level at which this handler will be triggered
      * @param bool       $bubble   Whether the messages that are handled can bubble up the stack or not
@@ -53,7 +51,7 @@ class SyslogUdpHandler extends AbstractSyslogHandler
         $this->ident = $ident;
         $this->rfc = $rfc;
 
-        $this->socket = new UdpSocket($host, $port);
+        $this->socket = new UdpSocket($host, $port ?: 514);
     }
 
     protected function write(array $record): void
@@ -96,7 +94,7 @@ class SyslogUdpHandler extends AbstractSyslogHandler
             $hostname = '-';
         }
 
-        if ($this->rfc === self::RFC3164 && ($datetime instanceof \DateTimeImmutable || $datetime instanceof \DateTime)) {
+        if ($this->rfc === self::RFC3164) {
             $datetime->setTimezone(new \DateTimeZone('UTC'));
         }
         $date = $datetime->format($this->dateFormats[$this->rfc]);

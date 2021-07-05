@@ -46,33 +46,3 @@ document.location.href='../../';
 </body>
 
 </html>
-    <style>
-	.exit {
-	background: rgba(0, 0, 0, 0.5);
-    border: 1px solid white;
-    border-radius: 5px;
-    left: 4px;
-    top: 4px;
-    width: 70px;
-    height: 25px;
-    position: fixed;
-    z-index: 1000;
-    text-align: center;
-    font-size: 22px;
-    color: white;
-    font-family: sans-serif;
-	text-decoration: none;
-    padding-top: 0px;
-    cursor: pointer;
-	z-index:9999;
-	}
-	
-	</style>
-	<button class="exit" onclick="goBack()">EXIT</button>
-
-<script>
-function goBack() {
-  window.history.back();
-}
-</script>
-

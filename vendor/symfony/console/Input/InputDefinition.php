@@ -30,10 +30,9 @@ class InputDefinition
 {
     private $arguments;
     private $requiredCount;
-    private $lastArrayArgument;
-    private $lastOptionalArgument;
+    private $hasAnArrayArgument = false;
+    private $hasOptional;
     private $options;
-    private $negations;
     private $shortcuts;
 
     /**
@@ -72,8 +71,8 @@ class InputDefinition
     {
         $this->arguments = [];
         $this->requiredCount = 0;
-        $this->lastOptionalArgument = null;
-        $this->lastArrayArgument = null;
+        $this->hasOptional = false;
+        $this->hasAnArrayArgument = false;
         $this->addArguments($arguments);
     }
 
@@ -100,22 +99,22 @@ class InputDefinition
             throw new LogicException(sprintf('An argument with name "%s" already exists.', $argument->getName()));
         }
 
-        if (null !== $this->lastArrayArgument) {
-            throw new LogicException(sprintf('Cannot add a required argument "%s" after an array argument "%s".', $argument->getName(), $this->lastArrayArgument->getName()));
+        if ($this->hasAnArrayArgument) {
+            throw new LogicException('Cannot add an argument after an array argument.');
         }
 
-        if ($argument->isRequired() && null !== $this->lastOptionalArgument) {
-            throw new LogicException(sprintf('Cannot add a required argument "%s" after an optional one "%s".', $argument->getName(), $this->lastOptionalArgument->getName()));
+        if ($argument->isRequired() && $this->hasOptional) {
+            throw new LogicException('Cannot add a required argument after an optional one.');
         }
 
         if ($argument->isArray()) {
-            $this->lastArrayArgument = $argument;
+            $this->hasAnArrayArgument = true;
         }
 
         if ($argument->isRequired()) {
             ++$this->requiredCount;
         } else {
-            $this->lastOptionalArgument = $argument;
+            $this->hasOptional = true;
         }
 
         $this->arguments[$argument->getName()] = $argument;
@@ -172,7 +171,7 @@ class InputDefinition
      */
     public function getArgumentCount()
     {
-        return null !== $this->lastArrayArgument ? \PHP_INT_MAX : \count($this->arguments);
+        return $this->hasAnArrayArgument ? PHP_INT_MAX : \count($this->arguments);
     }
 
     /**
@@ -209,7 +208,6 @@ class InputDefinition
     {
         $this->options = [];
         $this->shortcuts = [];
-        $this->negations = [];
         $this->addOptions($options);
     }
 
@@ -233,9 +231,6 @@ class InputDefinition
         if (isset($this->options[$option->getName()]) && !$option->equals($this->options[$option->getName()])) {
             throw new LogicException(sprintf('An option named "%s" already exists.', $option->getName()));
         }
-        if (isset($this->negations[$option->getName()])) {
-            throw new LogicException(sprintf('An option named "%s" already exists.', $option->getName()));
-        }
 
         if ($option->getShortcut()) {
             foreach (explode('|', $option->getShortcut()) as $shortcut) {
@@ -250,14 +245,6 @@ class InputDefinition
             foreach (explode('|', $option->getShortcut()) as $shortcut) {
                 $this->shortcuts[$shortcut] = $option->getName();
             }
-        }
-
-        if ($option->isNegatable()) {
-            $negatedName = 'no-'.$option->getName();
-            if (isset($this->options[$negatedName])) {
-                throw new LogicException(sprintf('An option named "%s" already exists.', $negatedName));
-            }
-            $this->negations[$negatedName] = $option->getName();
         }
     }
 
@@ -311,14 +298,6 @@ class InputDefinition
     }
 
     /**
-     * Returns true if an InputOption object exists by negated name.
-     */
-    public function hasNegation(string $name): bool
-    {
-        return isset($this->negations[$name]);
-    }
-
-    /**
      * Gets an InputOption by shortcut.
      *
      * @return InputOption An InputOption object
@@ -360,22 +339,6 @@ class InputDefinition
     }
 
     /**
-     * Returns the InputOption name given a negation.
-     *
-     * @throws InvalidArgumentException When option given does not exist
-     *
-     * @internal
-     */
-    public function negationToName(string $negation): string
-    {
-        if (!isset($this->negations[$negation])) {
-            throw new InvalidArgumentException(sprintf('The "--%s" option does not exist.', $negation));
-        }
-
-        return $this->negations[$negation];
-    }
-
-    /**
      * Gets the synopsis.
      *
      * @return string The synopsis
@@ -399,8 +362,7 @@ class InputDefinition
                 }
 
                 $shortcut = $option->getShortcut() ? sprintf('-%s|', $option->getShortcut()) : '';
-                $negation = $option->isNegatable() ? sprintf('|--no-%s', $option->getName()) : '';
-                $elements[] = sprintf('[%s--%s%s%s]', $shortcut, $option->getName(), $value, $negation);
+                $elements[] = sprintf('[%s--%s%s]', $shortcut, $option->getName(), $value);
             }
         }
 

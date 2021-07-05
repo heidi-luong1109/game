@@ -3,11 +3,9 @@
 namespace Laravel\Tinker\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Env;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
 use Psy\Shell;
-use Psy\VersionUpdater\Checker;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -45,8 +43,9 @@ class TinkerCommand extends Command
     {
         $this->getApplication()->setCatchExceptions(false);
 
-        $config = Configuration::fromInput($this->input);
-        $config->setUpdateCheck(Checker::NEVER);
+        $config = new Configuration([
+            'updateCheck' => 'never',
+        ]);
 
         $config->getPresenter()->addCasters(
             $this->getCasters()
@@ -56,7 +55,11 @@ class TinkerCommand extends Command
         $shell->addCommands($this->getCommands());
         $shell->setIncludes($this->argument('include'));
 
-        $path = Env::get('COMPOSER_VENDOR_DIR', $this->getLaravel()->basePath().DIRECTORY_SEPARATOR.'vendor');
+        if (isset($_ENV['COMPOSER_VENDOR_DIR'])) {
+            $path = $_ENV['COMPOSER_VENDOR_DIR'];
+        } else {
+            $path = $this->getLaravel()->basePath().DIRECTORY_SEPARATOR.'vendor';
+        }
 
         $path .= '/composer/autoload_classmap.php';
 
@@ -67,21 +70,20 @@ class TinkerCommand extends Command
         );
 
         if ($code = $this->option('execute')) {
-            try {
-                $shell->setOutput($this->output);
-                $shell->execute($code);
-            } finally {
-                $loader->unregister();
-            }
+            $shell->execute($code);
+
+            $loader->unregister();
 
             return 0;
         }
 
         try {
-            return $shell->run();
+            $shell->run();
         } finally {
             $loader->unregister();
         }
+
+        return 0;
     }
 
     /**
@@ -118,7 +120,6 @@ class TinkerCommand extends Command
         $casters = [
             'Illuminate\Support\Collection' => 'Laravel\Tinker\TinkerCaster::castCollection',
             'Illuminate\Support\HtmlString' => 'Laravel\Tinker\TinkerCaster::castHtmlString',
-            'Illuminate\Support\Stringable' => 'Laravel\Tinker\TinkerCaster::castStringable',
         ];
 
         if (class_exists('Illuminate\Database\Eloquent\Model')) {

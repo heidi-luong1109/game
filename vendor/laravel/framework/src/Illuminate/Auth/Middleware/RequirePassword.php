@@ -23,25 +23,16 @@ class RequirePassword
     protected $urlGenerator;
 
     /**
-     * The password timeout.
-     *
-     * @var int
-     */
-    protected $passwordTimeout;
-
-    /**
      * Create a new middleware instance.
      *
      * @param  \Illuminate\Contracts\Routing\ResponseFactory  $responseFactory
      * @param  \Illuminate\Contracts\Routing\UrlGenerator  $urlGenerator
-     * @param  int|null  $passwordTimeout
      * @return void
      */
-    public function __construct(ResponseFactory $responseFactory, UrlGenerator $urlGenerator, $passwordTimeout = null)
+    public function __construct(ResponseFactory $responseFactory, UrlGenerator $urlGenerator)
     {
         $this->responseFactory = $responseFactory;
         $this->urlGenerator = $urlGenerator;
-        $this->passwordTimeout = $passwordTimeout ?: 10800;
     }
 
     /**
@@ -79,6 +70,6 @@ class RequirePassword
     {
         $confirmedAt = time() - $request->session()->get('auth.password_confirmed_at', 0);
 
-        return $confirmedAt > $this->passwordTimeout;
+        return $confirmedAt > config('auth.password_timeout', 10800);
     }
 }

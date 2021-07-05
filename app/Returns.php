@@ -14,6 +14,7 @@ namespace VanguardLTE
         ];
         public static $values = [
             'percent' => [
+                1, 
                 5, 
                 10, 
                 20, 

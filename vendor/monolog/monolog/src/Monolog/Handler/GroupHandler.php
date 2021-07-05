@@ -23,7 +23,6 @@ class GroupHandler extends Handler implements ProcessableHandlerInterface, Reset
 {
     use ProcessableHandlerTrait;
 
-    /** @var HandlerInterface[] */
     protected $handlers;
     protected $bubble;
 
@@ -117,9 +116,7 @@ class GroupHandler extends Handler implements ProcessableHandlerInterface, Reset
     public function setFormatter(FormatterInterface $formatter): HandlerInterface
     {
         foreach ($this->handlers as $handler) {
-            if ($handler instanceof FormattableHandlerInterface) {
-                $handler->setFormatter($formatter);
-            }
+            $handler->setFormatter($formatter);
         }
 
         return $this;

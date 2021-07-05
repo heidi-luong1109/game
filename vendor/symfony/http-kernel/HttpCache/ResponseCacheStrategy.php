@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  * ResponseCacheStrategy knows how to compute the Response cache HTTP header
  * based on the different response cache headers.
  *
- * This implementation changes the main response TTL to the smallest TTL received
+ * This implementation changes the master response TTL to the smallest TTL received
  * or force validation if one of the surrogates has validation cache strategy.
  *
  * @author Fabien Potencier <fabien@symfony.com>
@@ -27,12 +27,12 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
     /**
      * Cache-Control headers that are sent to the final response if they appear in ANY of the responses.
      */
-    private const OVERRIDE_DIRECTIVES = ['private', 'no-cache', 'no-store', 'no-transform', 'must-revalidate', 'proxy-revalidate'];
+    private static $overrideDirectives = ['private', 'no-cache', 'no-store', 'no-transform', 'must-revalidate', 'proxy-revalidate'];
 
     /**
      * Cache-Control headers that are sent to the final response if they appear in ALL of the responses.
      */
-    private const INHERIT_DIRECTIVES = ['public', 'immutable'];
+    private static $inheritDirectives = ['public', 'immutable'];
 
     private $embeddedResponses = 0;
     private $isNotCacheableResponseEmbedded = false;
@@ -60,13 +60,13 @@ class ResponseCacheStrategy implements ResponseCacheStrategyInterface
     {
         ++$this->embeddedResponses;
 
-        foreach (self::OVERRIDE_DIRECTIVES as $directive) {
+        foreach (self::$overrideDirectives as $directive) {
             if ($response->headers->hasCacheControlDirective($directive)) {
                 $this->flagDirectives[$directive] = true;
             }
         }
 
-        foreach (self::INHERIT_DIRECTIVES as $directive) {
+        foreach (self::$inheritDirectives as $directive) {
             if (false !== $this->flagDirectives[$directive]) {
                 $this->flagDirectives[$directive] = $response->headers->hasCacheControlDirective($directive);
             }

@@ -56,13 +56,7 @@ namespace VanguardLTE
                 86, 
                 84, 
                 82, 
-                80,
-				75,
-				70,
-				65,
-				60,
-				55,
-				50
+                80
             ], 
             'orderby' => [
                 'AZ', 

@@ -53,8 +53,9 @@ abstract class FactoryFile
     public function generateFactoryCall(FactoryCall $call)
     {
         $method = $call->getMethod();
-        $code = $method->getComment($this->indent) . "\n";
+        $code = $method->getComment($this->indent) . PHP_EOL;
         $code .= $this->generateDeclaration($call->getName(), $method);
+        // $code .= $this->generateImport($method);
         $code .= $this->generateCall($method);
         $code .= $this->generateClosing();
         return $code;
@@ -65,7 +66,7 @@ abstract class FactoryFile
         $code = $this->indent . $this->getDeclarationModifiers()
             . 'function ' . $name . '('
             . $this->generateDeclarationArguments($method)
-            . ')' . "\n" . $this->indent . '{' . "\n";
+            . ')' . PHP_EOL . $this->indent . '{' . PHP_EOL;
         return $code;
     }
 
@@ -85,25 +86,25 @@ abstract class FactoryFile
 
     public function generateImport(FactoryMethod $method)
     {
-        return $this->indent . self::INDENT . "require_once '" . $method->getClass()->getFile() . "';" . "\n";
+        return $this->indent . self::INDENT . "require_once '" . $method->getClass()->getFile() . "';" . PHP_EOL;
     }
 
     public function generateCall(FactoryMethod $method)
     {
         $code = '';
         if ($method->acceptsVariableArguments()) {
-            $code .= $this->indent . self::INDENT . '$args = func_get_args();' . "\n";
+            $code .= $this->indent . self::INDENT . '$args = func_get_args();' . PHP_EOL;
         }
 
         $code .= $this->indent . self::INDENT . 'return ';
         if ($method->acceptsVariableArguments()) {
             $code .= 'call_user_func_array(array(\''
                 . '\\' . $method->getClassName() . '\', \''
-                . $method->getName() . '\'), $args);' . "\n";
+                . $method->getName() . '\'), $args);' . PHP_EOL;
         } else {
             $code .= '\\' . $method->getClassName() . '::'
                 . $method->getName() . '('
-                . $method->getParameterInvocations() . ');' . "\n";
+                . $method->getParameterInvocations() . ');' . PHP_EOL;
         }
 
         return $code;
@@ -111,7 +112,7 @@ abstract class FactoryFile
 
     public function generateClosing()
     {
-        return $this->indent . '}' . "\n";
+        return $this->indent . '}' . PHP_EOL;
     }
 
     public function write()

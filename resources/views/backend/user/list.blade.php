@@ -153,7 +153,7 @@
 								@permission('users.balance.manage')
 								<th>@lang('app.balance')</th>
 								<th>@lang('app.bonus')</th>
-								<!--th>@lang('app.wager')</th-->
+								<th>@lang('app.wager')</th>
 								<th>@lang('app.pay_in')</th>
 								<th>@lang('app.pay_out')</th>
 								@endpermission
@@ -176,7 +176,7 @@
 								@permission('users.balance.manage')
 								<th>@lang('app.balance')</th>
 								<th>@lang('app.bonus')</th>
-								<!--th>@lang('app.wager')</th-->
+								<th>@lang('app.wager')</th>
 								<th>@lang('app.pay_in')</th>
 								<th>@lang('app.pay_out')</th>
 								@endpermission
@@ -207,59 +207,16 @@
 							</div>
 						@endif
 						<div class="form-group">
-						<input type="hidden" name="type" value="add">
-						<select name="summ" input style="   position: fixed;
-															width: 50%;
-															left: 25%;
-															background-color: #999;
-															font-size: 20px;
-															font-weight: 600;
-															text-align: center;
-															color: #000;">
-				    <option value=0>Cash IN</option>
-					<option value=5>Add 5</option>
-					<option value=10>Add 10</option>
-					<option value=20>Add 20</option>
-					<option value=30>Add 30</option>
-					<option value=40>Add 40</option>
-					<option value=50>Add 50</option>
-					<option value=60>Add 60</option>
-					<option value=70>Add 70</option>
-					<option value=80>Add 80</option>
-					<option value=90>Add 90</option>
-					<option value=100>Add 100</option>
-					<option value=150>Add 150</option>
-					<option value=200>Add 200</option>
-					<option value=300>Add 300</option>
-					<option value=400>Add 400</option>
-					<option value=500>Add 500</option>
-					<input type="hidden" name="type" value="add">
+							<label for="OutSum">@lang('app.sum')</label>
+							<input type="text" class="form-control" id="OutSum" name="summ" placeholder="@lang('app.sum')" required>
+							<input type="hidden" name="type" value="add">
 							<input type="hidden" id="AddId" name="user_id">
-							<!--label for="OutSum">@lang('app.sum')</label-->
-							<!--input type="text" class="form-control" id="OutSum" name="summ" placeholder="@lang('app.sum00')" required-->
-							
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default pull-left" data-dismiss="modal">@lang('app.close')</button>
-						<button type="submit" id="toggle" class="btn btn-primary">@lang('app.pay_in')</button>
-						
-					
-    <script>
-const targetDiv = document.getElementById("toggle");
-const btn = document.getElementById("toggle");
-btn.onclick = function () {
-  if (targetDiv.style.display !== "none") {
-    targetDiv.style.display = "none";
-  } else {
-    targetDiv.style.display = "block";
-  }
-};
-</script>
-						
-						
-						
+						<button type="submit" class="btn btn-primary">@lang('app.pay_in')</button>
 					</div>
 				</form>
 			</div>
@@ -273,7 +230,7 @@ btn.onclick = function () {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span></button>
-						<h4 id="toggle" class="modal-title">@lang('app.balance') @lang('app.pay_out')</h4>
+						<h4 class="modal-title">@lang('app.balance') @lang('app.pay_out')</h4>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
@@ -287,9 +244,8 @@ btn.onclick = function () {
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default pull-left" data-dismiss="modal">@lang('app.close')</button>
-						<button  type="button" class="btn btn-primary" id="doOutAll" data-dismiss="modal">@lang('app.pay_out') @lang('app.all')</button>
-						<!--button  type="submit" class="btn btn-primary"">@lang('app.pay_out')</button-->
-						
+						<button type="button" class="btn btn-danger" id="doOutAll">@lang('app.pay_out') @lang('app.all')</button>
+						<button type="submit" class="btn btn-primary">@lang('app.pay_out')</button>
 					</div>
 				</form>
 			</div>

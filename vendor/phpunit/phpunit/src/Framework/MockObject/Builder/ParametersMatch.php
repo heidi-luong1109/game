@@ -9,10 +9,12 @@
  */
 namespace PHPUnit\Framework\MockObject\Builder;
 
+use PHPUnit\Framework\MockObject\Rule\AnyParameters;
+
 /**
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
-interface ParametersMatch extends Match_
+interface ParametersMatch extends Match
 {
     /**
      * Sets the parameters to match for, each parameter to this function will
@@ -42,7 +44,7 @@ interface ParametersMatch extends Match_
      * $b->withAnyParameters();
      * </code>
      *
-     * @return ParametersMatch
+     * @return AnyParameters
      */
     public function withAnyParameters();
 }

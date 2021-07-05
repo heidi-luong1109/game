@@ -42,7 +42,6 @@ return [
         return $output === $time ? "$time pIq" : $output;
     },
     'diff_yesterday' => 'wa’Hu’',
-    'diff_today' => 'DaHjaj',
     'diff_tomorrow' => 'wa’leS',
     'formats' => [
         'LT' => 'HH:mm',

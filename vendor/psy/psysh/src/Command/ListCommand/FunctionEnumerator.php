@@ -11,7 +11,6 @@
 
 namespace Psy\Command\ListCommand;
 
-use Psy\Reflection\ReflectionNamespace;
 use Symfony\Component\Console\Input\InputInterface;
 
 /**
@@ -24,8 +23,14 @@ class FunctionEnumerator extends Enumerator
      */
     protected function listItems(InputInterface $input, \Reflector $reflector = null, $target = null)
     {
-        // if we have a reflector, ensure that it's a namespace reflector
-        if (($target !== null || $reflector !== null) && !$reflector instanceof ReflectionNamespace) {
+        // only list functions when no Reflector is present.
+        //
+        // @todo make a NamespaceReflector and pass that in for commands like:
+        //
+        //     ls --functions Foo
+        //
+        // ... for listing functions in the Foo namespace
+        if ($reflector !== null || $target !== null) {
             return [];
         }
 
@@ -35,18 +40,17 @@ class FunctionEnumerator extends Enumerator
         }
 
         if ($input->getOption('user')) {
-            $label = 'User Functions';
+            $label     = 'User Functions';
             $functions = $this->getFunctions('user');
         } elseif ($input->getOption('internal')) {
-            $label = 'Internal Functions';
+            $label     = 'Internal Functions';
             $functions = $this->getFunctions('internal');
         } else {
-            $label = 'Functions';
+            $label     = 'Functions';
             $functions = $this->getFunctions();
         }
 
-        $prefix = $reflector === null ? null : \strtolower($reflector->getName()).'\\';
-        $functions = $this->prepareFunctions($functions, $prefix);
+        $functions = $this->prepareFunctions($functions);
 
         if (empty($functions)) {
             return [];
@@ -81,12 +85,11 @@ class FunctionEnumerator extends Enumerator
     /**
      * Prepare formatted function array.
      *
-     * @param array  $functions
-     * @param string $prefix
+     * @param array $functions
      *
      * @return array
      */
-    protected function prepareFunctions(array $functions, $prefix = null)
+    protected function prepareFunctions(array $functions)
     {
         \natcasesort($functions);
 
@@ -94,10 +97,6 @@ class FunctionEnumerator extends Enumerator
         $ret = [];
 
         foreach ($functions as $name) {
-            if ($prefix !== null && \strpos(\strtolower($name), $prefix) !== 0) {
-                continue;
-            }
-
             if ($this->showItem($name)) {
                 try {
                     $ret[$name] = [

@@ -8,7 +8,7 @@
 	@permission('users.balance.manage')
 	<td>{{ $user->balance }}</td>
 	<td>{{ $user->bonus }}</td>
-	<!--td>{{ $user->wager }}</td-->
+	<td>{{ $user->wager }}</td>
 	<td>
 		@if( 
 			(Auth::user()->hasRole('admin') && $user->hasRole(['agent'])) ||
@@ -32,7 +32,7 @@
 			)
 		)
 		<a class="newPayment outPayment" href="#" data-toggle="modal" data-target="#openOutModal" data-id="{{ $user->id }}" >
-		<button type="button" class="btn btn-block btn-danger btn-xs">@lang('app.outz')</button>
+		<button type="button" class="btn btn-block btn-danger btn-xs">@lang('app.out')</button>
 		</a>
 		@else
 			<button type="button" class="btn btn-block btn-danger disabled btn-xs">@lang('app.out')</button>

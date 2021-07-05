@@ -216,16 +216,16 @@ class FactoryMethod
 
     public function getCommentText()
     {
-        return implode("\n", $this->comment);
+        return implode(PHP_EOL, $this->comment);
     }
 
     public function getComment($indent = '')
     {
         $comment = $indent . '/**';
         foreach ($this->comment as $line) {
-            $comment .= "\n" . rtrim($indent . ' * ' . $line);
+            $comment .= PHP_EOL . rtrim($indent . ' * ' . $line);
         }
-        $comment .= "\n" . $indent . ' */';
+        $comment .= PHP_EOL . $indent . ' */';
         return $comment;
     }
 }

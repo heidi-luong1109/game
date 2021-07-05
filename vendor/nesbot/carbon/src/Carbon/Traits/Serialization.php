@@ -10,8 +10,7 @@
  */
 namespace Carbon\Traits;
 
-use Carbon\Exceptions\InvalidFormatException;
-use ReturnTypeWillChange;
+use InvalidArgumentException;
 
 /**
  * Trait Serialization.
@@ -27,7 +26,7 @@ use ReturnTypeWillChange;
  *
  * Depends on the following methods:
  *
- * @method string|static locale(string $locale = null, string ...$fallbackLocales)
+ * @method string|static locale(string $locale = null)
  * @method string        toJSON()
  */
 trait Serialization
@@ -70,7 +69,7 @@ trait Serialization
      *
      * @param string $value
      *
-     * @throws InvalidFormatException
+     * @throws \InvalidArgumentException
      *
      * @return static
      */
@@ -79,7 +78,7 @@ trait Serialization
         $instance = @unserialize("$value");
 
         if (!$instance instanceof static) {
-            throw new InvalidFormatException("Invalid serialized value: $value");
+            throw new InvalidArgumentException('Invalid serialized value.');
         }
 
         return $instance;
@@ -92,10 +91,9 @@ trait Serialization
      *
      * @return static
      */
-    #[ReturnTypeWillChange]
     public static function __set_state($dump)
     {
-        if (\is_string($dump)) {
+        if (is_string($dump)) {
             return static::parse($dump);
         }
 
@@ -127,7 +125,6 @@ trait Serialization
     /**
      * Set locale if specified on unserialize() called.
      */
-    #[ReturnTypeWillChange]
     public function __wakeup()
     {
         if (get_parent_class() && method_exists(parent::class, '__wakeup')) {
@@ -152,11 +149,10 @@ trait Serialization
     public function jsonSerialize()
     {
         $serializer = $this->localSerializer ?? static::$serializer;
-
         if ($serializer) {
-            return \is_string($serializer)
+            return is_string($serializer)
                 ? $this->rawFormat($serializer)
-                : $serializer($this);
+                : call_user_func($serializer, $this);
         }
 
         return $this->toJSON();

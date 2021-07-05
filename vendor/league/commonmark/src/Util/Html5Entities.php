@@ -23,8 +23,6 @@ final class Html5Entities
 {
     /**
      * @deprecated
-     *
-     * @var array<string, string>
      */
     public static $entitiesByName = [
         'Aacute'                          => 'Á',

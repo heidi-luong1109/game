@@ -13,7 +13,6 @@ use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Database\Console\Seeds\SeedCommand;
 use Illuminate\Database\Console\Seeds\SeederMakeCommand;
 use Illuminate\Database\Console\WipeCommand;
-use Illuminate\Foundation\Console\CastMakeCommand;
 use Illuminate\Foundation\Console\ChannelMakeCommand;
 use Illuminate\Foundation\Console\ClearCompiledCommand;
 use Illuminate\Foundation\Console\ComponentMakeCommand;
@@ -119,7 +118,6 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     protected $devCommands = [
         'CacheTable' => 'command.cache.table',
-        'CastMake' => 'command.cast.make',
         'ChannelMake' => 'command.channel.make',
         'ComponentMake' => 'command.component.make',
         'ConsoleMake' => 'command.console.make',
@@ -172,7 +170,7 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
     protected function registerCommands(array $commands)
     {
         foreach (array_keys($commands) as $command) {
-            $this->{"register{$command}Command"}();
+            call_user_func_array([$this, "register{$command}Command"], []);
         }
 
         $this->commands(array_values($commands));
@@ -211,18 +209,6 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
     {
         $this->app->singleton('command.cache.table', function ($app) {
             return new CacheTableCommand($app['files'], $app['composer']);
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerCastMakeCommand()
-    {
-        $this->app->singleton('command.cast.make', function ($app) {
-            return new CastMakeCommand($app['files']);
         });
     }
 

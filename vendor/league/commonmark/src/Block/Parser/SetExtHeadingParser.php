@@ -23,6 +23,12 @@ use League\CommonMark\Util\RegexHelper;
 
 final class SetExtHeadingParser implements BlockParserInterface
 {
+    /**
+     * @param ContextInterface $context
+     * @param Cursor           $cursor
+     *
+     * @return bool
+     */
     public function parse(ContextInterface $context, Cursor $cursor): bool
     {
         if ($cursor->isIndented()) {
@@ -33,7 +39,7 @@ final class SetExtHeadingParser implements BlockParserInterface
             return false;
         }
 
-        $match = RegexHelper::matchFirst('/^(?:=+|-+)[ \t]*$/', $cursor->getLine(), $cursor->getNextNonSpacePosition());
+        $match = RegexHelper::matchAll('/^(?:=+|-+)[ \t]*$/', $cursor->getLine(), $cursor->getNextNonSpacePosition());
         if ($match === null) {
             return false;
         }

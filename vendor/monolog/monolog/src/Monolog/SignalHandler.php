@@ -41,6 +41,9 @@ class SignalHandler
 
         if ($callPrevious) {
             $handler = pcntl_signal_get_handler($signo);
+            if ($handler === false) {
+                return $this;
+            }
             $this->previousSignalHandler[$signo] = $handler;
         } else {
             unset($this->previousSignalHandler[$signo]);

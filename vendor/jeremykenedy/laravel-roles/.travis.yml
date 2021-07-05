@@ -4,8 +4,8 @@ dist: trusty
 group: edge
 
 php:
+  - 7.2
   - 7.3
-  - 7.4
 
 sudo: false
 
@@ -23,7 +23,7 @@ before_script:
   - composer install --prefer-source --no-interaction
   - composer dump-autoload
   - composer require jeremykenedy/laravel-roles
-  - composer require laravel/ui
+  - composer require laravel/ui  
   - php artisan key:generate
   - php artisan vendor:publish --tag=laravelroles
   - php artisan ui vue --auth
@@ -35,5 +35,3 @@ before_install:
 
 install:
   - travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest
-
-script: vendor/bin/phpunit

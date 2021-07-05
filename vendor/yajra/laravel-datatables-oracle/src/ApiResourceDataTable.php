@@ -2,9 +2,9 @@
 
 namespace Yajra\DataTables;
 
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ApiResourceDataTable extends CollectionDataTable
 {

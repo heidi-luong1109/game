@@ -2,7 +2,6 @@
 
 namespace Illuminate\Routing;
 
-use Illuminate\Support\Reflector;
 use Illuminate\Support\Str;
 use ReflectionFunction;
 use ReflectionMethod;
@@ -23,7 +22,7 @@ class RouteSignatureParameters
                         : (new ReflectionFunction($action['uses']))->getParameters();
 
         return is_null($subClass) ? $parameters : array_filter($parameters, function ($p) use ($subClass) {
-            return Reflector::isParameterSubclassOf($p, $subClass);
+            return $p->getClass() && $p->getClass()->isSubclassOf($subClass);
         });
     }
 
@@ -37,7 +36,7 @@ class RouteSignatureParameters
     {
         [$class, $method] = Str::parseCallback($uses);
 
-        if (! method_exists($class, $method) && Reflector::isCallable($class, $method)) {
+        if (! method_exists($class, $method) && is_callable($class, $method)) {
             return [];
         }
 

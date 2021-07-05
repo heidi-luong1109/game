@@ -9,8 +9,6 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
-use function json_decode;
-use function sprintf;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Util\Json;
 use SebastianBergmann\Comparator\ComparisonFailure;
@@ -35,7 +33,7 @@ final class JsonMatches extends Constraint
      */
     public function toString(): string
     {
-        return sprintf(
+        return \sprintf(
             'matches JSON string "%s"',
             $this->value
         );
@@ -67,38 +65,36 @@ final class JsonMatches extends Constraint
     }
 
     /**
-     * Throws an exception for the given compared value and test description.
+     * Throws an exception for the given compared value and test description
      *
      * @param mixed             $other             evaluated value or object
      * @param string            $description       Additional information about the test
      * @param ComparisonFailure $comparisonFailure
      *
+     * @throws ExpectationFailedException
      * @throws \PHPUnit\Framework\Exception
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws ExpectationFailedException
-     *
-     * @psalm-return never-return
      */
     protected function fail($other, $description, ComparisonFailure $comparisonFailure = null): void
     {
         if ($comparisonFailure === null) {
-            [$error, $recodedOther] = Json::canonicalize($other);
+            [$error] = Json::canonicalize($other);
 
             if ($error) {
                 parent::fail($other, $description);
             }
 
-            [$error, $recodedValue] = Json::canonicalize($this->value);
+            [$error] = Json::canonicalize($this->value);
 
             if ($error) {
                 parent::fail($other, $description);
             }
 
             $comparisonFailure = new ComparisonFailure(
-                json_decode($this->value),
-                json_decode($other),
-                Json::prettify($recodedValue),
-                Json::prettify($recodedOther),
+                \json_decode($this->value),
+                \json_decode($other),
+                Json::prettify($this->value),
+                Json::prettify($other),
                 false,
                 'Failed asserting that two json values are equal.'
             );

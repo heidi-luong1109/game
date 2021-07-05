@@ -489,12 +489,12 @@
                                             <td>{{ $stat->balance_in }}</td>
                                             <td>{{ $stat->balance_out }}</td>
                                                 @endif
-                                                    <td>{{ number_format ($stat->balance + $stat->balance_in - $stat->balance_out, 2, ".", "") }}</td>
+                                                    <td>{{ number_format ($stat->balance + $stat->balance_in - $stat->balance_out, 4, ".", "") }}</td>
                                                 @permission('games.in_out')
                                                 @php
                                                 $banks = !$stat->end_date ? $stat->banks() : $stat->last_banks;
                                             @endphp
-                                            <td>{{ number_format ($banks, 2, ".", "") }}</td>
+                                            <td>{{ number_format ($banks, 4, ".", "") }}</td>
                                                 @endpermission
                                             <td>
                                                 @if( !$stat->end_date )
@@ -519,10 +519,10 @@
                                                 $total = $stat->money_in - $stat->money_out;
                                             @endphp
 
-                                            <td>{{ number_format ($total, 2, ".", "") }}</td>
+                                            <td>{{ number_format ($total, 4, ".", "") }}</td>
 
                                             @if(auth()->user()->hasRole('admin'))
-                                                <td>{{ number_format ($stat->profit(), 2, ".", "") }}</td>
+                                                <td>{{ number_format ($stat->profit(), 4, ".", "") }}</td>
                                             @endif
 
                                         </tr>

@@ -11,8 +11,6 @@
 
 namespace Psy\Readline;
 
-use Hoa\Console\Console;
-use Hoa\Console\Cursor;
 use Hoa\Console\Readline\Readline as HoaReadline;
 use Psy\Exception\BreakException;
 
@@ -24,25 +22,17 @@ class HoaConsole implements Readline
     /** @var HoaReadline */
     private $hoaReadline;
 
-    /** @var string|null */
-    private $lastPrompt;
-
     /**
      * @return bool
      */
     public static function isSupported()
     {
-        return \class_exists(Console::class, true);
+        return \class_exists('\Hoa\Console\Console', true);
     }
 
     public function __construct()
     {
         $this->hoaReadline = new HoaReadline();
-        $this->hoaReadline->addMapping('\C-l', function () {
-            $this->redisplay();
-
-            return HoaReadline::STATE_NO_ECHO;
-        });
     }
 
     /**
@@ -96,8 +86,6 @@ class HoaConsole implements Readline
      */
     public function readline($prompt = null)
     {
-        $this->lastPrompt = $prompt;
-
         return $this->hoaReadline->readLine($prompt);
     }
 
@@ -106,9 +94,7 @@ class HoaConsole implements Readline
      */
     public function redisplay()
     {
-        $currentLine = $this->hoaReadline->getLine();
-        Cursor::clear('all');
-        echo $this->lastPrompt, $currentLine;
+        // noop
     }
 
     /**

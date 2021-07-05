@@ -52,11 +52,13 @@
 @slot('subcopy')
 @lang(
     "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    'into your web browser: [:displayableActionUrl](:actionURL)',
     [
         'actionText' => $actionText,
+        'actionURL' => $actionUrl,
+        'displayableActionUrl' => $displayableActionUrl,
     ]
-) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
+)
 @endslot
 @endisset
 @endcomponent

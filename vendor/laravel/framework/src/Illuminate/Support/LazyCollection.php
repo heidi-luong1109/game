@@ -241,35 +241,6 @@ class LazyCollection implements Enumerable
     }
 
     /**
-     * Count the number of items in the collection by a field or using a callback.
-     *
-     * @param  callable|string  $countBy
-     * @return static
-     */
-    public function countBy($countBy = null)
-    {
-        $countBy = is_null($countBy)
-            ? $this->identity()
-            : $this->valueRetriever($countBy);
-
-        return new static(function () use ($countBy) {
-            $counts = [];
-
-            foreach ($this as $key => $value) {
-                $group = $countBy($value, $key);
-
-                if (empty($counts[$group])) {
-                    $counts[$group] = 0;
-                }
-
-                $counts[$group]++;
-            }
-
-            yield from $counts;
-        });
-    }
-
-    /**
      * Get the items that are not present in the given items.
      *
      * @param  mixed  $items
@@ -977,44 +948,6 @@ class LazyCollection implements Enumerable
     }
 
     /**
-     * Skip items in the collection until the given condition is met.
-     *
-     * @param  mixed  $value
-     * @return static
-     */
-    public function skipUntil($value)
-    {
-        $callback = $this->useAsCallable($value) ? $value : $this->equality($value);
-
-        return $this->skipWhile($this->negate($callback));
-    }
-
-    /**
-     * Skip items in the collection while the given condition is met.
-     *
-     * @param  mixed  $value
-     * @return static
-     */
-    public function skipWhile($value)
-    {
-        $callback = $this->useAsCallable($value) ? $value : $this->equality($value);
-
-        return new static(function () use ($callback) {
-            $iterator = $this->getIterator();
-
-            while ($iterator->valid() && $callback($iterator->current(), $iterator->key())) {
-                $iterator->next();
-            }
-
-            while ($iterator->valid()) {
-                yield $iterator->key() => $iterator->current();
-
-                $iterator->next();
-            }
-        });
-    }
-
-    /**
      * Get a slice of items from the enumerable.
      *
      * @param  int  $offset
@@ -1182,40 +1115,6 @@ class LazyCollection implements Enumerable
     }
 
     /**
-     * Take items in the collection until the given condition is met.
-     *
-     * @param  mixed  $value
-     * @return static
-     */
-    public function takeUntil($value)
-    {
-        $callback = $this->useAsCallable($value) ? $value : $this->equality($value);
-
-        return new static(function () use ($callback) {
-            foreach ($this as $key => $item) {
-                if ($callback($item, $key)) {
-                    break;
-                }
-
-                yield $key => $item;
-            }
-        });
-    }
-
-    /**
-     * Take items in the collection while the given condition is met.
-     *
-     * @param  mixed  $value
-     * @return static
-     */
-    public function takeWhile($value)
-    {
-        $callback = $this->useAsCallable($value) ? $value : $this->equality($value);
-
-        return $this->takeUntil($this->negate($callback));
-    }
-
-    /**
      * Pass each item in the collection to the given callback, lazily.
      *
      * @param  callable  $callback
@@ -1252,7 +1151,7 @@ class LazyCollection implements Enumerable
      * e.g. new LazyCollection([1, 2, 3])->zip([4, 5, 6]);
      *      => [[1, 4], [2, 5], [3, 6]]
      *
-     * @param  mixed  ...$items
+     * @param  mixed ...$items
      * @return static
      */
     public function zip($items)

@@ -1,11 +1,11 @@
 <?php
 
-namespace {{ namespace }};
+namespace DummyNamespace;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use {{ namespacedUserModel }};
+use NamespacedDummyUserModel;
 
-class {{ class }}
+class DummyClass
 {
     use HandlesAuthorization;
 

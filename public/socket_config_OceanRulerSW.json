@@ -2,10 +2,10 @@
 
 "port":8559,
 
-"host":"vlt.mycasinoch.com",
+"host":"betsoft",
 "prefix":"http://",
 
-"host_ws":"vlt.mycasinoch.com",
+"host_ws":"betsoft",
 "prefix_ws":"ws://",
 
 "ssl":false

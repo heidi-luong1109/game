@@ -18,11 +18,19 @@ use League\CommonMark\InlineParserContext;
 
 final class TaskListItemMarkerParser implements InlineParserInterface
 {
+    /**
+     * @return string[]
+     */
     public function getCharacters(): array
     {
         return ['['];
     }
 
+    /**
+     * @param InlineParserContext $inlineContext
+     *
+     * @return bool
+     */
     public function parse(InlineParserContext $inlineContext): bool
     {
         $container = $inlineContext->getContainer();

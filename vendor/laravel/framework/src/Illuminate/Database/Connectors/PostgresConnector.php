@@ -47,8 +47,6 @@ class PostgresConnector extends Connector implements ConnectorInterface
         // determine if the option has been specified and run a statement if so.
         $this->configureApplicationName($connection, $config);
 
-        $this->configureSynchronousCommit($connection, $config);
-
         return $connection;
     }
 
@@ -174,21 +172,5 @@ class PostgresConnector extends Connector implements ConnectorInterface
         }
 
         return $dsn;
-    }
-
-    /**
-     * Configure the synchronous_commit setting.
-     *
-     * @param  \PDO  $connection
-     * @param  array  $config
-     * @return void
-     */
-    protected function configureSynchronousCommit($connection, array $config)
-    {
-        if (! isset($config['synchronous_commit'])) {
-            return;
-        }
-
-        $connection->prepare("set synchronous_commit to '{$config['synchronous_commit']}'")->execute();
     }
 }

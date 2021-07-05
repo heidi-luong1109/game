@@ -19,8 +19,6 @@ class ClassMethod extends Node\Stmt implements FunctionLike
     public $returnType;
     /** @var Node\Stmt[]|null Statements */
     public $stmts;
-    /** @var Node\AttributeGroup[] PHP attribute groups */
-    public $attrGroups;
 
     private static $magicNames = [
         '__construct'  => true,
@@ -50,7 +48,6 @@ class ClassMethod extends Node\Stmt implements FunctionLike
      *                          'params'     => array()        : Parameters
      *                          'returnType' => null           : Return type
      *                          'stmts'      => array()        : Statements
-     *                          'attrGroups' => array()        : PHP attribute groups
      * @param array $attributes Additional attributes
      */
     public function __construct($name, array $subNodes = [], array $attributes = []) {
@@ -62,11 +59,10 @@ class ClassMethod extends Node\Stmt implements FunctionLike
         $returnType = $subNodes['returnType'] ?? null;
         $this->returnType = \is_string($returnType) ? new Node\Identifier($returnType) : $returnType;
         $this->stmts = array_key_exists('stmts', $subNodes) ? $subNodes['stmts'] : [];
-        $this->attrGroups = $subNodes['attrGroups'] ?? [];
     }
 
     public function getSubNodeNames() : array {
-        return ['attrGroups', 'flags', 'byRef', 'name', 'params', 'returnType', 'stmts'];
+        return ['flags', 'byRef', 'name', 'params', 'returnType', 'stmts'];
     }
 
     public function returnsByRef() : bool {
@@ -83,10 +79,6 @@ class ClassMethod extends Node\Stmt implements FunctionLike
 
     public function getStmts() {
         return $this->stmts;
-    }
-
-    public function getAttrGroups() : array {
-        return $this->attrGroups;
     }
 
     /**
@@ -128,7 +120,7 @@ class ClassMethod extends Node\Stmt implements FunctionLike
 
     /**
      * Whether the method is final.
-     *
+     * 
      * @return bool
      */
     public function isFinal() : bool {
@@ -152,7 +144,7 @@ class ClassMethod extends Node\Stmt implements FunctionLike
     public function isMagic() : bool {
         return isset(self::$magicNames[$this->name->toLowerString()]);
     }
-
+    
     public function getType() : string {
         return 'Stmt_ClassMethod';
     }

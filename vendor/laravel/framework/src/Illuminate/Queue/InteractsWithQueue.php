@@ -11,7 +11,7 @@ trait InteractsWithQueue
      *
      * @var \Illuminate\Contracts\Queue\Job
      */
-    public $job;
+    protected $job;
 
     /**
      * Get the number of times the job has been attempted.

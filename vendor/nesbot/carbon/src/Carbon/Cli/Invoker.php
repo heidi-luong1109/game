@@ -4,7 +4,7 @@ namespace Carbon\Cli;
 
 class Invoker
 {
-    public const CLI_CLASS_NAME = 'Carbon\\Cli';
+    const CLI_CLASS_NAME = 'Carbon\\Cli';
 
     protected function runWithCli(string $className, array $parameters): bool
     {

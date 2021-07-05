@@ -17,7 +17,7 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * A pretty-printer for docblocks.
  */
-class DocblockFormatter implements ReflectorFormatter
+class DocblockFormatter implements Formatter
 {
     private static $vectorParamTemplates = [
         'type' => 'info',
@@ -34,7 +34,7 @@ class DocblockFormatter implements ReflectorFormatter
     public static function format(\Reflector $reflector)
     {
         $docblock = new Docblock($reflector);
-        $chunks = [];
+        $chunks   = [];
 
         if (!empty($docblock->desc)) {
             $chunks[] = '<comment>Description:</comment>';
@@ -89,13 +89,7 @@ class DocblockFormatter implements ReflectorFormatter
         $template = \implode(' ', $template);
 
         return \implode("\n", \array_map(function ($line) use ($template) {
-            $escaped = \array_map(function ($l) {
-                if ($l === null) {
-                    return '';
-                }
-
-                return OutputFormatter::escape($l);
-            }, $line);
+            $escaped = \array_map(['Symfony\Component\Console\Formatter\OutputFormatter', 'escape'], $line);
 
             return \rtrim(\vsprintf($template, $escaped));
         }, $lines));
@@ -155,7 +149,7 @@ class DocblockFormatter implements ReflectorFormatter
      */
     private static function indent($text, $indent = '  ')
     {
-        return $indent.\str_replace("\n", "\n".$indent, $text);
+        return $indent . \str_replace("\n", "\n" . $indent, $text);
     }
 
     /**

@@ -24,8 +24,6 @@ interface StringContainerInterface
 {
     /**
      * @param string $line
-     *
-     * @return void
      */
     public function addLine(string $line);
 
@@ -37,8 +35,6 @@ interface StringContainerInterface
     /**
      * @param ContextInterface $context
      * @param Cursor           $cursor
-     *
-     * @return void
      */
     public function handleRemainingContents(ContextInterface $context, Cursor $cursor);
 }

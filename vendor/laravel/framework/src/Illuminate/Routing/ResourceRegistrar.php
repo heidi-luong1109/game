@@ -95,15 +95,9 @@ class ResourceRegistrar
         $collection = new RouteCollection;
 
         foreach ($this->getResourceMethods($defaults, $options) as $m) {
-            $route = $this->{'addResource'.ucfirst($m)}(
+            $collection->add($this->{'addResource'.ucfirst($m)}(
                 $name, $base, $controller, $options
-            );
-
-            if (isset($options['bindingFields'])) {
-                $this->setResourceBindingFields($route, $options['bindingFields']);
-            }
-
-            $collection->add($route);
+            ));
         }
 
         return $collection;
@@ -320,24 +314,6 @@ class ResourceRegistrar
     }
 
     /**
-     * Set the route's binding fields if the resource is scoped.
-     *
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  array  $bindingFields
-     * @return void
-     */
-    protected function setResourceBindingFields($route, $bindingFields)
-    {
-        preg_match_all('/(?<={).*?(?=})/', $route->uri, $matches);
-
-        $fields = array_fill_keys($matches[0], null);
-
-        $route->setBindingFields(array_replace(
-            $fields, array_intersect_key($bindingFields, $fields)
-        ));
-    }
-
-    /**
      * Get the base resource URI for a given resource.
      *
      * @param  string  $resource
@@ -411,14 +387,6 @@ class ResourceRegistrar
 
         if (isset($options['middleware'])) {
             $action['middleware'] = $options['middleware'];
-        }
-
-        if (isset($options['excluded_middleware'])) {
-            $action['excluded_middleware'] = $options['excluded_middleware'];
-        }
-
-        if (isset($options['wheres'])) {
-            $action['where'] = $options['wheres'];
         }
 
         return $action;

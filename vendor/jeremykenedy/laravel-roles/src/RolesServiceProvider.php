@@ -37,9 +37,6 @@ class RolesServiceProvider extends ServiceProvider
         if (config('roles.rolesGuiEnabled')) {
             $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         }
-        if (config('roles.rolesApiEnabled')) {
-            $this->loadRoutesFrom(__DIR__.'/routes/api.php');
-        }
         $this->loadTranslationsFrom(__DIR__.'/resources/lang/', $this->_packageTag);
         $this->registerBladeExtensions();
     }
@@ -125,14 +122,6 @@ class RolesServiceProvider extends ServiceProvider
             __DIR__.'/Database/Migrations'    => database_path('migrations'),
             __DIR__.'/Database/Seeds/publish' => database_path('seeds'),
         ], $publishTag);
-
-        $this->publishes([
-            __DIR__.'/resources/views' => base_path('resources/views/vendor/'.$publishTag),
-        ], $publishTag.'-views');
-
-        $this->publishes([
-            __DIR__.'/resources/lang' => base_path('resources/lang/vendor/'.$publishTag),
-        ], $publishTag.'-lang');
     }
 
     /**

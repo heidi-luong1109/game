@@ -210,7 +210,7 @@ class Str
     public static function endsWith($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && substr($haystack, -strlen($needle)) === (string) $needle) {
+            if (substr($haystack, -strlen($needle)) === (string) $needle) {
                 return true;
             }
         }
@@ -371,45 +371,6 @@ class Str
     }
 
     /**
-     * Pad both sides of a string with another.
-     *
-     * @param  string  $value
-     * @param  int  $length
-     * @param  string  $pad
-     * @return string
-     */
-    public static function padBoth($value, $length, $pad = ' ')
-    {
-        return str_pad($value, $length, $pad, STR_PAD_BOTH);
-    }
-
-    /**
-     * Pad the left side of a string with another.
-     *
-     * @param  string  $value
-     * @param  int  $length
-     * @param  string  $pad
-     * @return string
-     */
-    public static function padLeft($value, $length, $pad = ' ')
-    {
-        return str_pad($value, $length, $pad, STR_PAD_LEFT);
-    }
-
-    /**
-     * Pad the right side of a string with another.
-     *
-     * @param  string  $value
-     * @param  int  $length
-     * @param  string  $pad
-     * @return string
-     */
-    public static function padRight($value, $length, $pad = ' ')
-    {
-        return str_pad($value, $length, $pad, STR_PAD_RIGHT);
-    }
-
-    /**
      * Parse a Class[@]method style callback into class and method.
      *
      * @param  string  $callback
@@ -524,10 +485,6 @@ class Str
      */
     public static function replaceLast($search, $replace, $subject)
     {
-        if ($search === '') {
-            return $subject;
-        }
-
         $position = strrpos($subject, $search);
 
         if ($position !== false) {
@@ -647,7 +604,7 @@ class Str
     public static function startsWith($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
-            if ((string) $needle !== '' && strncmp($haystack, $needle, strlen($needle)) === 0) {
+            if ((string) $needle !== '' && substr($haystack, 0, strlen($needle)) === (string) $needle) {
                 return true;
             }
         }
@@ -685,24 +642,6 @@ class Str
     public static function substr($string, $start, $length = null)
     {
         return mb_substr($string, $start, $length, 'UTF-8');
-    }
-
-    /**
-     * Returns the number of substring occurrences.
-     *
-     * @param  string  $haystack
-     * @param  string  $needle
-     * @param  int  $offset
-     * @param  int|null  $length
-     * @return int
-     */
-    public static function substrCount($haystack, $needle, $offset = 0, $length = null)
-    {
-        if (! is_null($length)) {
-            return substr_count($haystack, $needle, $offset, $length);
-        } else {
-            return substr_count($haystack, $needle, $offset);
-        }
     }
 
     /**

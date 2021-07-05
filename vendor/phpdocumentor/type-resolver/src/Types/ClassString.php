@@ -18,8 +18,6 @@ use phpDocumentor\Reflection\Type;
 
 /**
  * Value Object representing the type 'string'.
- *
- * @psalm-immutable
  */
 final class ClassString implements Type
 {

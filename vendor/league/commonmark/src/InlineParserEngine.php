@@ -28,7 +28,6 @@ use League\CommonMark\Util\RegexHelper;
  */
 final class InlineParserEngine
 {
-    /** @var EnvironmentInterface */
     protected $environment;
 
     public function __construct(EnvironmentInterface $environment)
@@ -39,8 +38,6 @@ final class InlineParserEngine
     /**
      * @param AbstractStringContainerBlock $container
      * @param ReferenceMapInterface        $referenceMap
-     *
-     * @return void
      */
     public function parse(AbstractStringContainerBlock $container, ReferenceMapInterface $referenceMap)
     {
@@ -122,8 +119,6 @@ final class InlineParserEngine
 
     /**
      * @param InlineParserContext $inlineParserContext
-     *
-     * @return void
      */
     private function processInlines(InlineParserContext $inlineParserContext)
     {
@@ -138,8 +133,6 @@ final class InlineParserEngine
      * @param string              $character
      * @param Node                $container
      * @param InlineParserContext $inlineParserContext
-     *
-     * @return void
      */
     private function addPlainText(string $character, Node $container, InlineParserContext $inlineParserContext)
     {

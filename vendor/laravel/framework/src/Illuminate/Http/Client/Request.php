@@ -3,7 +3,6 @@
 namespace Illuminate\Http\Client;
 
 use ArrayAccess;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use LogicException;
 
@@ -63,40 +62,9 @@ class Request implements ArrayAccess
      */
     public function hasHeader($key, $value = null)
     {
-        if (is_null($value)) {
-            return ! empty($this->request->getHeaders()[$key]);
-        }
-
-        $headers = $this->headers();
-
-        if (! Arr::has($headers, $key)) {
-            return false;
-        }
-
-        $value = is_array($value) ? $value : [$value];
-
-        return empty(array_diff($value, $headers[$key]));
-    }
-
-    /**
-     * Determine if the request has the given headers.
-     *
-     * @param  array|string  $headers
-     * @return bool
-     */
-    public function hasHeaders($headers)
-    {
-        if (is_string($headers)) {
-            $headers = [$headers => null];
-        }
-
-        foreach ($headers as $key => $value) {
-            if (! $this->hasHeader($key, $value)) {
-                return false;
-            }
-        }
-
-        return true;
+        return is_null($value)
+                    ? ! empty($this->request->getHeaders()[$key])
+                    : in_array($value, $this->headers()[$key]);
     }
 
     /**
@@ -107,7 +75,7 @@ class Request implements ArrayAccess
      */
     public function header($key)
     {
-        return Arr::get($this->headers(), $key, []);
+        return $this->headers()[$key];
     }
 
     /**
@@ -216,8 +184,7 @@ class Request implements ArrayAccess
      */
     public function isJson()
     {
-        return $this->hasHeader('Content-Type') &&
-               Str::contains($this->header('Content-Type')[0], 'json');
+        return Str::contains($this->header('Content-Type')[0], 'json');
     }
 
     /**
@@ -227,8 +194,7 @@ class Request implements ArrayAccess
      */
     public function isMultipart()
     {
-        return $this->hasHeader('Content-Type') &&
-               Str::contains($this->header('Content-Type')[0], 'multipart');
+        return Str::startsWith($this->header('Content-Type')[0], 'multipart');
     }
 
     /**
@@ -242,16 +208,6 @@ class Request implements ArrayAccess
         $this->data = $data;
 
         return $this;
-    }
-
-    /**
-     * Get the underlying PSR compliant request instance.
-     *
-     * @return \Psr\Http\Message\RequestInterface
-     */
-    public function toPsrRequest()
-    {
-        return $this->request;
     }
 
     /**

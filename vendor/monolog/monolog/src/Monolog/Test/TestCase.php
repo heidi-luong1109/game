@@ -49,6 +49,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @suppress PhanTypeMismatchReturn
+     */
     protected function getIdentityFormatter(): FormatterInterface
     {
         $formatter = $this->createMock(FormatterInterface::class);

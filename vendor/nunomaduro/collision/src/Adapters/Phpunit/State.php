@@ -11,7 +11,6 @@
 
 namespace NunoMaduro\Collision\Adapters\Phpunit;
 
-use NunoMaduro\Collision\Contracts\Adapters\Phpunit\HasPrintableTestCaseName;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -38,7 +37,7 @@ final class State
      *
      * @var string
      */
-    public $testCaseName;
+    public $testCaseClass;
 
     /**
      * The current test case tests.
@@ -49,22 +48,32 @@ final class State
 
     /**
      * The state constructor.
+     *
+     * @param  string  $testCaseClass
      */
-    private function __construct(string $testCaseName)
+    private function __construct(string $testCaseClass)
     {
-        $this->testCaseName = $testCaseName;
+        $this->testCaseClass = $testCaseClass;
     }
 
     /**
      * Creates a new State starting from the given test case.
+     *
+     * @param  TestCase  $test
+     *
+     * @return self
      */
     public static function from(TestCase $test): self
     {
-        return new self(self::getPrintableTestCaseName($test));
+        return new self(get_class($test));
     }
 
     /**
      * Adds the given test to the State.
+     *
+     * @param  TestResult  $test
+     *
+     * @return void
      */
     public function add(TestResult $test): void
     {
@@ -75,6 +84,8 @@ final class State
 
     /**
      * Gets the test case title.
+     *
+     * @return string
      */
     public function getTestCaseTitle(): string
     {
@@ -95,6 +106,8 @@ final class State
 
     /**
      * Gets the test case title color.
+     *
+     * @return string
      */
     public function getTestCaseTitleColor(): string
     {
@@ -115,6 +128,8 @@ final class State
 
     /**
      * Returns the number of tests on the current test case.
+     *
+     * @return int
      */
     public function testCaseTestsCount(): int
     {
@@ -123,6 +138,8 @@ final class State
 
     /**
      * Returns the number of tests on the complete test suite.
+     *
+     * @return int
      */
     public function testSuiteTestsCount(): int
     {
@@ -131,24 +148,36 @@ final class State
 
     /**
      * Checks if the given test case is different from the current one.
+     *
+     * @param  TestCase  $testCase
+     *
+     * @return bool
      */
     public function testCaseHasChanged(TestCase $testCase): bool
     {
-        return self::getPrintableTestCaseName($testCase) !== $this->testCaseName;
+        return get_class($testCase) !== $this->testCaseClass;
     }
 
     /**
      * Moves the a new test case.
+     *
+     * @param  TestCase  $testCase
+     *
+     * @return void
      */
     public function moveTo(TestCase $testCase): void
     {
-        $this->testCaseName = self::getPrintableTestCaseName($testCase);
+        $this->testCaseClass = get_class($testCase);
 
         $this->testCaseTests = [];
     }
 
     /**
      * Foreach test in the test case.
+     *
+     * @param  callable  $callback
+     *
+     * @return void
      */
     public function eachTestCaseTests(callable $callback): void
     {
@@ -157,6 +186,11 @@ final class State
         }
     }
 
+    /**
+     * @param  string  $type
+     *
+     * @return int
+     */
     public function countTestsInTestSuiteBy(string $type): int
     {
         return count(array_filter($this->suiteTests, function (TestResult $testResult) use ($type) {
@@ -166,6 +200,10 @@ final class State
 
     /**
      * Checks if the given test already contains a result.
+     *
+     * @param  TestCase  $test
+     *
+     * @return bool
      */
     public function existsInTestCase(TestCase $test): bool
     {
@@ -176,19 +214,5 @@ final class State
         }
 
         return false;
-    }
-
-    /**
-     * Returns the printable test case name from the given `TestCase`.
-     */
-    private static function getPrintableTestCaseName(TestCase $test): string
-    {
-        if ($test instanceof HasPrintableTestCaseName) {
-            $name = $test->getPrintableTestCaseName();
-        } else {
-            $name = get_class($test);
-        }
-
-        return $name;
     }
 }

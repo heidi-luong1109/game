@@ -4,7 +4,6 @@ namespace Illuminate\Support;
 
 use Closure;
 use Illuminate\Support\Traits\Macroable;
-use Symfony\Component\VarDumper\VarDumper;
 
 class Stringable
 {
@@ -195,21 +194,6 @@ class Stringable
     }
 
     /**
-     * Split a string using a regular expression.
-     *
-     * @param  string  $pattern
-     * @param  int  $limit
-     * @param  int  $flags
-     * @return \Illuminate\Support\Collection
-     */
-    public function split($pattern, $limit = -1, $flags = 0)
-    {
-        $segments = preg_split($pattern, $this->value, $limit, $flags);
-
-        return ! empty($segments) ? collect($segments) : collect();
-    }
-
-    /**
      * Cap a string with a single instance of a given value.
      *
      * @param  string  $cap
@@ -248,17 +232,7 @@ class Stringable
      */
     public function isEmpty()
     {
-        return $this->value === '';
-    }
-
-    /**
-     * Determine if the given string is not empty.
-     *
-     * @return bool
-     */
-    public function isNotEmpty()
-    {
-        return ! $this->isEmpty();
+        return empty($this->value);
     }
 
     /**
@@ -339,42 +313,6 @@ class Stringable
     }
 
     /**
-     * Pad both sides of the string with another.
-     *
-     * @param  int  $length
-     * @param  string  $pad
-     * @return static
-     */
-    public function padBoth($length, $pad = ' ')
-    {
-        return new static(Str::padBoth($this->value, $length, $pad));
-    }
-
-    /**
-     * Pad the left side of the string with another.
-     *
-     * @param  int  $length
-     * @param  string  $pad
-     * @return static
-     */
-    public function padLeft($length, $pad = ' ')
-    {
-        return new static(Str::padLeft($this->value, $length, $pad));
-    }
-
-    /**
-     * Pad the right side of the string with another.
-     *
-     * @param  int  $length
-     * @param  string  $pad
-     * @return static
-     */
-    public function padRight($length, $pad = ' ')
-    {
-        return new static(Str::padRight($this->value, $length, $pad));
-    }
-
-    /**
      * Parse a Class@method style callback into class and method.
      *
      * @param  string|null  $default
@@ -421,8 +359,8 @@ class Stringable
     /**
      * Replace the given value in the given string.
      *
-     * @param  string|string[]  $search
-     * @param  string|string[]  $replace
+     * @param  string  $search
+     * @param  string  $replace
      * @return static
      */
     public function replace($search, $replace)
@@ -581,19 +519,6 @@ class Stringable
     }
 
     /**
-     * Returns the number of substring occurrences.
-     *
-     * @param  string  $needle
-     * @param  int|null  $offset
-     * @param  int|null  $length
-     * @return int
-     */
-    public function substrCount($needle, $offset = null, $length = null)
-    {
-        return Str::substrCount($this->value, $needle, $offset, $length);
-    }
-
-    /**
      * Trim the string of the given characters.
      *
      * @param  string  $characters
@@ -605,28 +530,6 @@ class Stringable
     }
 
     /**
-     * Left trim the string of the given characters.
-     *
-     * @param  string  $characters
-     * @return static
-     */
-    public function ltrim($characters = null)
-    {
-        return new static(ltrim(...array_merge([$this->value], func_get_args())));
-    }
-
-    /**
-     * Right trim the string of the given characters.
-     *
-     * @param  string  $characters
-     * @return static
-     */
-    public function rtrim($characters = null)
-    {
-        return new static(rtrim(...array_merge([$this->value], func_get_args())));
-    }
-
-    /**
      * Make a string's first character uppercase.
      *
      * @return static
@@ -634,25 +537,6 @@ class Stringable
     public function ucfirst()
     {
         return new static(Str::ucfirst($this->value));
-    }
-
-    /**
-     * Apply the callback's string changes if the given "value" is true.
-     *
-     * @param  mixed  $value
-     * @param  callable  $callback
-     * @param  callable|null  $default
-     * @return mixed|$this
-     */
-    public function when($value, $callback, $default = null)
-    {
-        if ($value) {
-            return $callback($this, $value) ?: $this;
-        } elseif ($default) {
-            return $default($this, $value) ?: $this;
-        }
-
-        return $this;
     }
 
     /**
@@ -682,30 +566,6 @@ class Stringable
     public function words($words = 100, $end = '...')
     {
         return new static(Str::words($this->value, $words, $end));
-    }
-
-    /**
-     * Dump the string.
-     *
-     * @return $this
-     */
-    public function dump()
-    {
-        VarDumper::dump($this->value);
-
-        return $this;
-    }
-
-    /**
-     * Dump the string and end the script.
-     *
-     * @return void
-     */
-    public function dd()
-    {
-        $this->dump();
-
-        exit(1);
     }
 
     /**

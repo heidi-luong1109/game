@@ -19,7 +19,6 @@ use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Reflector;
 use Illuminate\Support\ViewErrorBag;
 use Illuminate\Validation\ValidationException;
 use Psr\Log\LoggerInterface;
@@ -95,7 +94,7 @@ class Handler implements ExceptionHandlerContract
      * @param  \Throwable  $e
      * @return void
      *
-     * @throws \Throwable
+     * @throws \Exception
      */
     public function report(Throwable $e)
     {
@@ -103,7 +102,7 @@ class Handler implements ExceptionHandlerContract
             return;
         }
 
-        if (Reflector::isCallable($reportCallable = [$e, 'report'])) {
+        if (is_callable($reportCallable = [$e, 'report'])) {
             $this->container->call($reportCallable);
 
             return;
@@ -323,7 +322,7 @@ class Handler implements ExceptionHandlerContract
      */
     protected function convertExceptionToResponse(Throwable $e)
     {
-        return new SymfonyResponse(
+        return SymfonyResponse::create(
             $this->renderExceptionContent($e),
             $this->isHttpException($e) ? $e->getStatusCode() : 500,
             $this->isHttpException($e) ? $e->getHeaders() : []
@@ -389,7 +388,7 @@ class Handler implements ExceptionHandlerContract
     {
         $renderer = new HtmlErrorRenderer($debug);
 
-        return $renderer->render($e)->getAsString();
+        return $renderer->getBody($renderer->render($e));
     }
 
     /**
