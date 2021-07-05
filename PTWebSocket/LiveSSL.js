@@ -4,8 +4,8 @@ var serverConfig;
 serverConfig = JSON.parse(fs.readFileSync('../public/socket_live_config.json', 'utf8'));
 
 var https = require('https').createServer({
-    "key" : fs.readFileSync( "ssl/goldsvet.com.key" ),
-    "cert": fs.readFileSync( "ssl/goldsvet.com.crt" )
+    "key" : fs.readFileSync( "ssl/aupokies.com.key" ),
+    "cert": fs.readFileSync( "ssl/aupokies.com.crt" )
 });
 
 var io = require('socket.io')(https);

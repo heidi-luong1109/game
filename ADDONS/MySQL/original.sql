@@ -3949,7 +3949,7 @@ CREATE TABLE `w_settings` (
 --
 
 INSERT INTO `w_settings` (`id`, `key`, `value`) VALUES
-(1, 'app_name', 'GOLDSVET / mrs'),
+(1, 'app_name', 'AUPOKIES / mrs'),
 (2, 'remember_me', '1'),
 (4, 'login_reset_token_lifetime', '30'),
 (5, 'throttle_enabled', '1'),

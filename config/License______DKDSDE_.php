@@ -1,7 +1,7 @@
 <?php 
 return [
     'APL_SALT' => 'uwa7caknczxbfue1x9rzhjsel2xx37yrbkjm2k5ga91rzoxe11', 
-    'APL_ROOT_URL' => 'https://goldsvet.org/lic', 
+    'APL_ROOT_URL' => 'https://aupokies.org/lic', 
     'APL_PRODUCT_ID' => 7, 
     'APL_DAYS' => 5, 
     'APL_STORAGE' => 'FILE', 

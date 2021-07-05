@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Июн 06 2020 г., 22:22
--- Версия сервера: 10.3.13-MariaDB-log
--- Версия PHP: 7.2.22
+-- Host: localhost
+-- Generation Time: Jul 05, 2021 at 09:59 AM
+-- Server version: 10.3.29-MariaDB-0ubuntu0.20.04.1
+-- PHP Version: 7.3.28-2+focal
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `vanguardclubelte`
+-- Database: `casino_1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_apis`
+-- Table structure for table `w_apis`
 --
 
 CREATE TABLE `w_apis` (
@@ -41,7 +40,7 @@ CREATE TABLE `w_apis` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_api_tokens`
+-- Table structure for table `w_api_tokens`
 --
 
 CREATE TABLE `w_api_tokens` (
@@ -57,7 +56,7 @@ CREATE TABLE `w_api_tokens` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_bank_stat`
+-- Table structure for table `w_bank_stat`
 --
 
 CREATE TABLE `w_bank_stat` (
@@ -76,7 +75,7 @@ CREATE TABLE `w_bank_stat` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_categories`
+-- Table structure for table `w_categories`
 --
 
 CREATE TABLE `w_categories` (
@@ -90,7 +89,7 @@ CREATE TABLE `w_categories` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_categories`
+-- Dumping data for table `w_categories`
 --
 
 INSERT INTO `w_categories` (`id`, `title`, `parent`, `position`, `href`, `original_id`, `shop_id`) VALUES
@@ -122,7 +121,32 @@ INSERT INTO `w_categories` (`id`, `title`, `parent`, `position`, `href`, `origin
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_failed_jobs`
+-- Table structure for table `w_country`
+--
+
+CREATE TABLE `w_country` (
+  `id` int(11) NOT NULL,
+  `country` varchar(128) NOT NULL,
+  `ranking` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `w_currency`
+--
+
+CREATE TABLE `w_currency` (
+  `id` int(11) NOT NULL,
+  `currency` varchar(64) NOT NULL,
+  `ranking` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `w_failed_jobs`
 --
 
 CREATE TABLE `w_failed_jobs` (
@@ -137,7 +161,7 @@ CREATE TABLE `w_failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_games`
+-- Table structure for table `w_games`
 --
 
 CREATE TABLE `w_games` (
@@ -214,7 +238,7 @@ CREATE TABLE `w_games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_games`
+-- Dumping data for table `w_games`
 --
 
 INSERT INTO `w_games` (`id`, `name`, `title`, `shop_id`, `jpg_id`, `label`, `device`, `gamebank`, `garant_win1`, `garant_win3`, `garant_win5`, `garant_win7`, `garant_win9`, `garant_win10`, `garant_bonus1`, `garant_bonus3`, `garant_bonus5`, `garant_bonus7`, `garant_bonus9`, `garant_bonus10`, `winline1`, `winline3`, `winline5`, `winline7`, `winline9`, `winline10`, `winbonus1`, `winbonus3`, `winbonus5`, `winbonus7`, `winbonus9`, `winbonus10`, `garant_win_bonus1`, `garant_win_bonus3`, `garant_win_bonus5`, `garant_win_bonus7`, `garant_win_bonus9`, `garant_win_bonus10`, `garant_bonus_bonus1`, `garant_bonus_bonus3`, `garant_bonus_bonus5`, `garant_bonus_bonus7`, `garant_bonus_bonus9`, `garant_bonus_bonus10`, `winline_bonus1`, `winline_bonus3`, `winline_bonus5`, `winline_bonus7`, `winline_bonus9`, `winline_bonus10`, `winbonus_bonus1`, `winbonus_bonus3`, `winbonus_bonus5`, `winbonus_bonus7`, `winbonus_bonus9`, `winbonus_bonus10`, `rezerv`, `cask`, `advanced`, `bet`, `scaleMode`, `slotViewState`, `view`, `denomination`, `original_id`, `bids`, `stat_in`, `stat_out`, `created_at`, `updated_at`) VALUES
@@ -1199,7 +1223,7 @@ INSERT INTO `w_games` (`id`, `name`, `title`, `shop_id`, `jpg_id`, `label`, `dev
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_games_activity`
+-- Table structure for table `w_games_activity`
 --
 
 CREATE TABLE `w_games_activity` (
@@ -1216,7 +1240,7 @@ CREATE TABLE `w_games_activity` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_game_bank`
+-- Table structure for table `w_game_bank`
 --
 
 CREATE TABLE `w_game_bank` (
@@ -1232,7 +1256,7 @@ CREATE TABLE `w_game_bank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `w_game_bank`
+-- Dumping data for table `w_game_bank`
 --
 
 INSERT INTO `w_game_bank` (`id`, `slots`, `little`, `table_bank`, `fish`, `bonus`, `shop_id`, `created_at`, `updated_at`) VALUES
@@ -1241,7 +1265,7 @@ INSERT INTO `w_game_bank` (`id`, `slots`, `little`, `table_bank`, `fish`, `bonus
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_game_categories`
+-- Table structure for table `w_game_categories`
 --
 
 CREATE TABLE `w_game_categories` (
@@ -1251,7 +1275,7 @@ CREATE TABLE `w_game_categories` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_game_categories`
+-- Dumping data for table `w_game_categories`
 --
 
 INSERT INTO `w_game_categories` (`id`, `game_id`, `category_id`) VALUES
@@ -2307,7 +2331,7 @@ INSERT INTO `w_game_categories` (`id`, `game_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_game_log`
+-- Table structure for table `w_game_log`
 --
 
 CREATE TABLE `w_game_log` (
@@ -2323,7 +2347,7 @@ CREATE TABLE `w_game_log` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_game_win`
+-- Table structure for table `w_game_win`
 --
 
 CREATE TABLE `w_game_win` (
@@ -2356,7 +2380,7 @@ CREATE TABLE `w_game_win` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_game_win`
+-- Dumping data for table `w_game_win`
 --
 
 INSERT INTO `w_game_win` (`id`, `game_id`, `winline1`, `winline3`, `winline5`, `winline7`, `winline9`, `winline10`, `winbonus1`, `winbonus3`, `winbonus5`, `winbonus7`, `winbonus9`, `winbonus10`, `winline_bonus1`, `winline_bonus3`, `winline_bonus5`, `winline_bonus7`, `winline_bonus9`, `winline_bonus10`, `winbonus_bonus1`, `winbonus_bonus3`, `winbonus_bonus5`, `winbonus_bonus7`, `winbonus_bonus9`, `winbonus_bonus10`) VALUES
@@ -3397,7 +3421,7 @@ INSERT INTO `w_game_win` (`id`, `game_id`, `winline1`, `winline3`, `winline5`, `
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_happyhours`
+-- Table structure for table `w_happyhours`
 --
 
 CREATE TABLE `w_happyhours` (
@@ -3414,7 +3438,7 @@ CREATE TABLE `w_happyhours` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_info`
+-- Table structure for table `w_info`
 --
 
 CREATE TABLE `w_info` (
@@ -3429,7 +3453,7 @@ CREATE TABLE `w_info` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_info_shop`
+-- Table structure for table `w_info_shop`
 --
 
 CREATE TABLE `w_info_shop` (
@@ -3441,7 +3465,7 @@ CREATE TABLE `w_info_shop` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_jobs`
+-- Table structure for table `w_jobs`
 --
 
 CREATE TABLE `w_jobs` (
@@ -3457,7 +3481,7 @@ CREATE TABLE `w_jobs` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_jpg`
+-- Table structure for table `w_jpg`
 --
 
 CREATE TABLE `w_jpg` (
@@ -3473,7 +3497,7 @@ CREATE TABLE `w_jpg` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_jpg`
+-- Dumping data for table `w_jpg`
 --
 
 INSERT INTO `w_jpg` (`id`, `date_time`, `name`, `balance`, `start_balance`, `pay_sum`, `percent`, `view`, `shop_id`) VALUES
@@ -3491,7 +3515,7 @@ INSERT INTO `w_jpg` (`id`, `date_time`, `name`, `balance`, `start_balance`, `pay
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_open_shift`
+-- Table structure for table `w_open_shift`
 --
 
 CREATE TABLE `w_open_shift` (
@@ -3512,10 +3536,17 @@ CREATE TABLE `w_open_shift` (
   `end_date` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `w_open_shift`
+--
+
+INSERT INTO `w_open_shift` (`id`, `user_id`, `balance`, `balance_in`, `balance_out`, `users`, `money_in`, `money_out`, `old_banks`, `old_total`, `last_banks`, `last_returns`, `shop_id`, `start_date`, `end_date`) VALUES
+(1, 1, '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 0, '2021-07-04 20:47:27', NULL);
+
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_password_resets`
+-- Table structure for table `w_password_resets`
 --
 
 CREATE TABLE `w_password_resets` (
@@ -3527,7 +3558,7 @@ CREATE TABLE `w_password_resets` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_payments`
+-- Table structure for table `w_payments`
 --
 
 CREATE TABLE `w_payments` (
@@ -3543,7 +3574,7 @@ CREATE TABLE `w_payments` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_permissions`
+-- Table structure for table `w_permissions`
 --
 
 CREATE TABLE `w_permissions` (
@@ -3558,7 +3589,7 @@ CREATE TABLE `w_permissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_permissions`
+-- Dumping data for table `w_permissions`
 --
 
 INSERT INTO `w_permissions` (`id`, `name`, `slug`, `description`, `model`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -3614,7 +3645,7 @@ INSERT INTO `w_permissions` (`id`, `name`, `slug`, `description`, `model`, `crea
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_permission_role`
+-- Table structure for table `w_permission_role`
 --
 
 CREATE TABLE `w_permission_role` (
@@ -3626,7 +3657,7 @@ CREATE TABLE `w_permission_role` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_permission_role`
+-- Dumping data for table `w_permission_role`
 --
 
 INSERT INTO `w_permission_role` (`id`, `permission_id`, `role_id`, `created_at`, `updated_at`) VALUES
@@ -3815,7 +3846,7 @@ INSERT INTO `w_permission_role` (`id`, `permission_id`, `role_id`, `created_at`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_permission_user`
+-- Table structure for table `w_permission_user`
 --
 
 CREATE TABLE `w_permission_user` (
@@ -3829,7 +3860,7 @@ CREATE TABLE `w_permission_user` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_pincodes`
+-- Table structure for table `w_pincodes`
 --
 
 CREATE TABLE `w_pincodes` (
@@ -3847,7 +3878,7 @@ CREATE TABLE `w_pincodes` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_return`
+-- Table structure for table `w_return`
 --
 
 CREATE TABLE `w_return` (
@@ -3861,7 +3892,7 @@ CREATE TABLE `w_return` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_return`
+-- Dumping data for table `w_return`
 --
 
 INSERT INTO `w_return` (`id`, `min_balance`, `min_pay`, `max_pay`, `percent`, `status`, `shop_id`) VALUES
@@ -3870,7 +3901,7 @@ INSERT INTO `w_return` (`id`, `min_balance`, `min_pay`, `max_pay`, `percent`, `s
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_roles`
+-- Table structure for table `w_roles`
 --
 
 CREATE TABLE `w_roles` (
@@ -3885,7 +3916,7 @@ CREATE TABLE `w_roles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_roles`
+-- Dumping data for table `w_roles`
 --
 
 INSERT INTO `w_roles` (`id`, `name`, `slug`, `description`, `level`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -3899,7 +3930,7 @@ INSERT INTO `w_roles` (`id`, `name`, `slug`, `description`, `level`, `created_at
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_role_user`
+-- Table structure for table `w_role_user`
 --
 
 CREATE TABLE `w_role_user` (
@@ -3911,7 +3942,7 @@ CREATE TABLE `w_role_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_role_user`
+-- Dumping data for table `w_role_user`
 --
 
 INSERT INTO `w_role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
@@ -3920,7 +3951,7 @@ INSERT INTO `w_role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_sessions`
+-- Table structure for table `w_sessions`
 --
 
 CREATE TABLE `w_sessions` (
@@ -3932,10 +3963,50 @@ CREATE TABLE `w_sessions` (
   `last_activity` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `w_sessions`
+--
+
+INSERT INTO `w_sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('Azv5YVhWoQqgMr2ntHxkrhcAYGv08YMFFQLKfI00', 1, '172.68.144.41', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiY2gxZmhzb0RkOTRXck5LWmREQnIwQWIzeDVIZWpRN2F6bkRweTFTWSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHBzOi8vaXAuaGVpZGkubmV0LmF1L3B1YmxpYy9iYWNrZW5kIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1625366666),
+('lP2M846lVYrZMZqv6We4goRG9TwvVWB3gjgZXU1U', NULL, '198.41.238.88', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibHhTN28yZTR5RFIzbDlqeDk4cmg5YzlWVVlsWG5YUmhBWmxCcUZ6ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly9pcC5oZWlkaS5uZXQuYXUvcHVibGljL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625232955),
+('5CPIvrrdr4KVHaYEiAfXvviKDil0kdB1e0RIeEoA', 1, '162.158.167.42', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibnRHN0FHVmd6M1lVRWp3OTlCNHFKMnk0Z3NzVGNqd2MyZXNrVTJHaSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHBzOi8vaXAuaGVpZGkubmV0LmF1L3B1YmxpYy9iYWNrZW5kIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1625362660),
+('pF3TCp8S13glB8HRKVs2p6AeKAQ3Nf4UtPzumYac', NULL, '172.68.144.37', 'Mozilla/5.0 (Windows NT 6.1; WOW64) SkypeUriPreview Preview/0.5', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicWQ3SUpkdGJ0Y21Na1A2d0tzZFBmWWRuaEhFMk1RVzN6T3pKRkxaYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHBzOi8vaXAuaGVpZGkubmV0LmF1L3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1625361921),
+('erL88D75X6d5M6Rj4BeYLf4aemOKRDL1zfY3G0G4', NULL, '172.68.144.37', 'Mozilla/5.0 (Windows NT 6.1; WOW64) SkypeUriPreview Preview/0.5', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNFU1OEN3bmk5c1dwTkoyUnZrTXowYWxaRjl2ZFJzcjl5Z3BLbnl2QiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHBzOi8vaXAuaGVpZGkubmV0LmF1L3B1YmxpYy9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1625361921),
+('jEwPxJanFn6UXNx0Dwl4ylXKjhOxkJaINOShdeNq', 1, '108.162.249.16', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTnp3dUdaRzNWeGE1aXNDWmJDQjY5YmJNMTNKTVBIQUsxVERpaHF6UiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly9pcC5oZWlkaS5uZXQuYXUvcHVibGljL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1625375616),
+('isP7qqOEjpToaPybLTPPBnRI5gUpz2kPLwjiuQQt', 1, '108.162.249.109', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiR29QQTlzZGdLNXNZOVhHVkgxZEFCUVZabzVtVnFnM0pFczE4b3NROSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly9pcC5oZWlkaS5uZXQuYXUvcHVibGljL2JhY2tlbmQvZ2FtZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1625373218),
+('HZkdn7nf0IiqmhDmy0qtrtSs2OmfPRU9GmAHlMAp', NULL, '162.158.165.56', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOEQwNWx3M2VCQ3B6bzhMeld3Um5nN2FydUtDQmpZVE93ZFp2akFIRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly9pcC5oZWlkaS5uZXQuYXUvcHVibGljL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625394238),
+('UJVfgVfiFIHlZeoYFZWrpkZE5d6CYkI5Tpg0M8Jq', 1, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicXVCVWFJMVVUZE9yTXFSRUFqaEs0QTBWYVJzMXdUR05pZVE4Zm5CUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2JhY2tlbmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1625410413),
+('YZGy4OPvrqKQedIvkOaQJzl0WDFd1VxV78P8huni', 1, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWF2R3NDMlI2RVpsU0JDbXlIZUpkelNsaW5ES2dWMWlWNndJdlVkVSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvYWxsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjEwOiJmcmVlVXNlcklEIjtpOjE7fQ==', 1625447016),
+('Q4UPmlszmt7WkEvXIiDSxVsH0h1bEYhbXNYQD8jA', 1, '103.231.90.86', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRUlHa2lIc2ZpSjlHY2VTekdubU9vVVQ4cVRRR2lKRHNYaEpROXhTeCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2JhY2tlbmQvcGVybWlzc2lvbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1625420885),
+('FCZDS3hFplp86859DoS3bApYE5Y03Ec1NlxHS0M3', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaXJpTFFWTEFUU0taRzVhN0NaOWpWSXYzQ3B1bUFWZmlzcWNtOU5KTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625410208),
+('IHHevPOe1MrSmmTc77mnezm2WvHZhXkgqfGKzHYG', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVllpRzN0RlhWNnFDckx4ZXRzZzlQd05NaHJVeFZHNFdienBFanFZWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625410209),
+('dmuVbYMYeIxJDTEyMNpDwIo1FJgmno0D0a6G6nGI', 1, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiSUFFQnluejlJMEJGWWliblA0SGVVT2R3SWYwWGdWUnRsRk1ZbmlRTCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvYWxsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjEwOiJmcmVlVXNlcklEIjtpOjE7fQ==', 1625475670),
+('PBbHQQGmvTjji5CaoFOToMSaiV4hfbrRUVbJDOTy', 1, '103.231.90.83', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR2t6cVhwOW0zenRaYW5KT1I5UmE4Uk0ycFRLeUN3N0NDUUdhd25GbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTM6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2dhbWUvUGhhcmFvbnNHb2xkRFgvUHJlX2dvIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjEwOiJmcmVlVXNlcklEIjtpOjE7fQ==', 1625421126),
+('OmNuMQDbmMCcPiXZmpQprBa5rynPvvgvKia8QSmq', NULL, '110.148.176.161', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWm1CMzZNRWFBSFRaS1BhM3IzNGNMTDNoZER1OGV2dGRuOERYY2NiNyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTA6Imh0dHA6Ly93d3cuY2FzaW5vLmhlaWRpLm5ldC5hdS9jYXRlZ29yaWVzL2lzb2Z0YmV0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiZnJlZVVzZXJJRCI7aToxO30=', 1625424799),
+('GSoor5OcTKDezdWfz0KfxZjTd4KmIdeE95AcwVMS', NULL, '110.148.176.161', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 OPT/3.1.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaXY0RmVlckEwVHBOTDFVNDhTaGQ3VmVScXhBeDVlZEhxNmh5MVU3cCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvYWxsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625424891),
+('qswqWTDAAAjx7oIEu086AglAGV3bkQcG029H46Va', NULL, '110.148.176.161', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTHFQeWNGZlk4b0xaNkRVNGxiR1l3REo1aFRTelZlNHE3QURXRmowMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTAxOiJodHRwOi8vY2FzaW5vLmhlaWRpLm5ldC5hdS9jYXRlZ29yaWVzL2FsbD91dG1fY2FtcGFpZ249emFsbyZ1dG1fbWVkaXVtPXphbG8mdXRtX3NvdXJjZT16YWxvJnphcnNyYz0zMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1625433020),
+('4U5an9z09PiURIQ8jTYE1xR5yEV9oEfMUHQQlyZK', NULL, '49.213.78.31', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQmM1R3dGcjFya3FOYXpmNHhUS2xCcEZ4OHl6V0ZyTGFBSkQ5N3BrUCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvYWxsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625443730),
+('H9tojmeTc4ngpSxEueVSnGCT4njF7AEBbb1KdGaT', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMThSTDdWS0JQZDdhMlZmazFEbmJ1anRuWGhSa0hvWGxncmxwdmR3aCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625452310),
+('a6RkNtNF5imqS8Xv9MP7hd0sw5B5xUgergOb1yuY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVFBySVV4cmdud240WlJEclJ1dWVQakpQZWE2a0hORmRidXJlbFVLUCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHBzOi8vY2FzaW5vLmhlaWRpLm5ldC5hdSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1625456866),
+('4HCZr6o6qPSAriknJ7bXjq8uUo0DOHArq2ZF1gzh', NULL, '209.95.60.151', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiS1VzTkRHSjNNeFJGcE5GdnVDN0YxTjJyVnNZR2s1ZjE1SDlnTkc3OSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTY6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2dhbWUvQWdlT2ZQcml2YXRlZXJzR1QvUHJlX2dvIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiZnJlZVVzZXJJRCI7aToxO30=', 1625457112),
+('IPv64ZgDIOmBukTOD7TxHiuXIyg9tbTWGQLkkUqg', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibnNHVTVxcXBTR2VaNE1DT2NiN01qNzdabGJCNzZDMlo1SmZnWTJ1biI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTY6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2dhbWUvQWdlT2ZQcml2YXRlZXJzR1QvUHJlX2dvIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiZnJlZVVzZXJJRCI7aToxO30=', 1625457655),
+('2W84JylGhbyNt1G4msWrXyGGbEOy6IfLZRPAR4TL', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiak1MYUhEcTFRcmJOeFo2djdkNWdIV1JnTDI3NzhaZFNXblRmY2ZpYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTY6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2dhbWUvQWdlT2ZQcml2YXRlZXJzR1QvUHJlX2dvIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiZnJlZVVzZXJJRCI7aToxO30=', 1625458069),
+('V7Pcfx89bLnyGgFLfuUrgQQXABdAY0kNLYBwKS5N', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiU25ac2Nlcjg3SlA0VkRrbmdCenJwTzJ6aVhtTTI5a0ZkN3BKQWdsbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvYWxsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiZnJlZVVzZXJJRCI7aToxO30=', 1625474672),
+('p7f4LV8F1Gmfp72pOUlhcXtpRi6ZLAeT610RavjK', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiamVqOXNSbktMTEhXeG5vRVdwOHZtUmtQM3dJM0lGN1A2VWp5ME84bSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625460370),
+('TW1I57HeLH7XJvC1wJiw95qj2lhLavy6TaGAc2XH', NULL, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaTFROG5KTWxPQU9DemhhclNqbnl5a2I2QVY2dm5JQXQ2ZHlKQkl0QyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvYWxsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625460370),
+('bmNYLSC6x68fz7A8pfaO0ddesRkec44P6ZJia2RO', NULL, '110.148.176.161', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/91.0.4472.80 Mobile/15E148 Safari/604.1', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUkU4Z29UMjBpWmxlSTg4U1RXbzA3bWRVZFlPR1BIMGk5WDVnTXBZVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTc6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2dhbWUvQmFuYW5hc0dvQmFoYW1hc0RYL1ByZV9nbyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTA6ImZyZWVVc2VySUQiO2k6MTt9', 1625469169),
+('XEo1iqTAbV2O5yPQzMN84qHsjA1OZQ320jWo4bHI', 1, '110.148.176.161', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 EdgiOS/46.3.23 Mobile/15E148 Safari/605.1.15', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYXk5QUZJZXg4c1RyQzRvSDAzUGFUOTEyTjI2ckl1V0NBTlFjbFgyNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvaXNvZnRiZXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1625469751),
+('r5bgeh4IjgcvKkWY3XjFLE5l8sWQ7UkDnhyvRiSO', NULL, '69.4.87.74', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWUlLZklNRmx2b2VRWTRQcFNETnRjaGpMeXdrMXJzQWJkcWFWTGVFeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHBzOi8vY2FzaW5vLmhlaWRpLm5ldC5hdS9jYXRlZ29yaWVzL2FsbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1625478706),
+('Uux7erlQZovZn0N5k9HCQhY5tKN3JKowk7sRTam4', NULL, '69.4.87.74', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMlJaVmlWeWIxOW1hWmlGTnRuZUdMdFRCbkNBUHhxSDNBdXhlb3kzSSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHBzOi8vY2FzaW5vLmhlaWRpLm5ldC5hdSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1625478705),
+('lGx7vA2H5nLP5F1k6N5M7rD3BF5i1cwoQnHQaLWx', NULL, '65.155.30.101', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.71 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR3RTTVVmN3A4Y25zRGRDVGprM21RTFpRY1ZWSE5xeXR5Q1VKcHU1OSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9jYXNpbm8uaGVpZGkubmV0LmF1L2NhdGVnb3JpZXMvYWxsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1625476078),
+('HdfIru3sAcTrvJVtIbEvfY0UV7Cym0zEa3xUp6pt', 1, '110.148.176.161', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibGNpRTNLZWwzVFNERDBGWDBKUVcwc2tCQmdBVE15dnpZNkZXam9oZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHBzOi8vY2FzaW5vLmhlaWRpLm5ldC5hdS9jYXRlZ29yaWVzL1BsYXl0ZWNoIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiZnJlZVVzZXJJRCI7aToxO3M6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MzU6Imh0dHBzOi8vY2FzaW5vLmhlaWRpLm5ldC5hdS9iYWNrZW5kIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1625478543),
+('Bytu3S4hc1eYzeiwx7a8ZxdAiTAIsrMu4qlT3m65', NULL, '69.4.89.106', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV2wyTzZ1T2JTZlJjaWFTdVlPN2gzRmVCbThRWHcyTVMyTDN4QVRZciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHBzOi8vY2FzaW5vLmhlaWRpLm5ldC5hdSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1625478714);
+
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_settings`
+-- Table structure for table `w_settings`
 --
 
 CREATE TABLE `w_settings` (
@@ -3945,7 +4016,7 @@ CREATE TABLE `w_settings` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_settings`
+-- Dumping data for table `w_settings`
 --
 
 INSERT INTO `w_settings` (`id`, `key`, `value`) VALUES
@@ -3964,7 +4035,7 @@ INSERT INTO `w_settings` (`id`, `key`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_shops`
+-- Table structure for table `w_shops`
 --
 
 CREATE TABLE `w_shops` (
@@ -3983,7 +4054,7 @@ CREATE TABLE `w_shops` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_shops_stat`
+-- Table structure for table `w_shops_stat`
 --
 
 CREATE TABLE `w_shops_stat` (
@@ -3998,7 +4069,7 @@ CREATE TABLE `w_shops_stat` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_shops_user`
+-- Table structure for table `w_shops_user`
 --
 
 CREATE TABLE `w_shops_user` (
@@ -4010,7 +4081,7 @@ CREATE TABLE `w_shops_user` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_shop_categories`
+-- Table structure for table `w_shop_categories`
 --
 
 CREATE TABLE `w_shop_categories` (
@@ -4022,7 +4093,7 @@ CREATE TABLE `w_shop_categories` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_stat_game`
+-- Table structure for table `w_stat_game`
 --
 
 CREATE TABLE `w_stat_game` (
@@ -4044,7 +4115,7 @@ CREATE TABLE `w_stat_game` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_subsessions`
+-- Table structure for table `w_subsessions`
 --
 
 CREATE TABLE `w_subsessions` (
@@ -4059,7 +4130,7 @@ CREATE TABLE `w_subsessions` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_tasks`
+-- Table structure for table `w_tasks`
 --
 
 CREATE TABLE `w_tasks` (
@@ -4077,7 +4148,7 @@ CREATE TABLE `w_tasks` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_transactions`
+-- Table structure for table `w_transactions`
 --
 
 CREATE TABLE `w_transactions` (
@@ -4094,10 +4165,17 @@ CREATE TABLE `w_transactions` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `w_transactions`
+--
+
+INSERT INTO `w_transactions` (`id`, `user_id`, `payeer_id`, `system`, `type`, `summ`, `value`, `status`, `shop_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 0, 'interac', '', 500, NULL, 1, 0, '2021-07-05 10:17:44', '2021-07-05 10:17:44');
+
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_users`
+-- Table structure for table `w_users`
 --
 
 CREATE TABLE `w_users` (
@@ -4136,16 +4214,16 @@ CREATE TABLE `w_users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Дамп данных таблицы `w_users`
+-- Dumping data for table `w_users`
 --
 
 INSERT INTO `w_users` (`id`, `email`, `username`, `password`, `parent_id`, `first_name`, `last_name`, `phone`, `wager`, `bonus`, `count_bonus`, `rating`, `total_balance`, `avatar`, `address`, `role_id`, `shop_id`, `birthday`, `balance`, `count_balance`, `count_return`, `total_in`, `total_out`, `last_login`, `confirmation_token`, `status`, `remember_token`, `api_token`, `language`, `session`, `created_at`, `updated_at`) VALUES
-(1, '', 'Admin', '$2y$10$O4gyxfrVrzDUEw6Ygn67qON5fJQ.ZBdxvzGMrKTsVwe.bGm6XovqC', 0, NULL, NULL, NULL, '0.0000', '0.0000', '0.0000', 1, '0.0000', '', NULL, 6, 0, NULL, '0.0000', '0.0000', '0.0000', 0, 0, '2020-06-05 22:27:25', NULL, 'Active', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8veC12ZXIuY29tL2FwaS9sb2dpbiIsImlhdCI6MTU4MzcwNjYwNCwiZXhwIjoxNTgzNzEwMjA0LCJuYmYiOjE1ODM3MDY2MDQsImp0aSI6InA0dmNiV1dKb1A5cFVURnZZeUR5UFppZW1VQktPR0lsVk1UN2dxaTciLCJzdWIiOjEsInBydiI6IjNlZjZjZjg5ZjU1OWE5MmIzZWI3Yjc3YjhjNzJkYjM5ZDQ3ZWRiNjAifQ.b3tSmePZumL54qI5_AdOzuqxZkFlc5AuxTG63GQjivg', 'en', '', '2020-01-29 21:00:00', '2020-06-06 01:27:25');
+(1, '', 'Admin', '$2y$10$DoyG.e3LTlIUetHyhWNVlO5jsbaU2h0PHVLTg.z02YxOueAg33ovy', 1, NULL, NULL, NULL, '0.0000', '500.0000', '500.0000', 1, '0.0000', '', NULL, 6, 5, NULL, '10000.0000', '10000.0000', '0.0000', 0, 0, '2021-07-05 12:23:40', NULL, 'Active', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8veC12ZXIuY29tL2FwaS9sb2dpbiIsImlhdCI6MTU4MzcwNjYwNCwiZXhwIjoxNTgzNzEwMjA0LCJuYmYiOjE1ODM3MDY2MDQsImp0aSI6InA0dmNiV1dKb1A5cFVURnZZeUR5UFppZW1VQktPR0lsVk1UN2dxaTciLCJzdWIiOjEsInBydiI6IjNlZjZjZjg5ZjU1OWE5MmIzZWI3Yjc3YjhjNzJkYjM5ZDQ3ZWRiNjAifQ.b3tSmePZumL54qI5_AdOzuqxZkFlc5AuxTG63GQjivg', 'en', '', '2020-01-29 21:00:00', '2021-07-05 12:23:40');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `w_user_activity`
+-- Table structure for table `w_user_activity`
 --
 
 CREATE TABLE `w_user_activity` (
@@ -4159,17 +4237,41 @@ CREATE TABLE `w_user_activity` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Индексы сохранённых таблиц
+-- Dumping data for table `w_user_activity`
+--
+
+INSERT INTO `w_user_activity` (`id`, `description`, `user_id`, `shop_id`, `ip_address`, `user_agent`, `created_at`) VALUES
+(1, '', 1, 5, '', '', '2021-07-02 13:25:15'),
+(2, 'Logged in.', 1, 5, '162.158.167.42', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '2021-07-04 04:36:41'),
+(3, 'Logged in.', 1, 5, '198.41.238.88', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1', '2021-07-04 04:37:48'),
+(4, 'Logged in.', 1, 5, '172.69.135.226', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-04 05:31:38'),
+(5, 'Logged in.', 1, 5, '108.162.249.108', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15', '2021-07-04 07:33:00'),
+(6, 'Logged in.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '2021-07-04 16:36:58'),
+(7, 'Logged in.', 1, 5, '103.231.90.86', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64', '2021-07-04 16:38:33'),
+(8, 'Logged out.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '2021-07-04 17:44:12'),
+(9, 'Logged in.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-04 17:47:47'),
+(10, 'Logged out.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-04 17:53:11'),
+(11, 'Logged in.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-04 17:53:33'),
+(12, 'Logged in.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-04 17:56:37'),
+(13, 'Logged in.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '2021-07-04 18:22:30'),
+(14, 'Logged out.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-04 18:23:18'),
+(15, 'Logged in.', 1, 5, '210.3.160.218', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-04 18:24:29'),
+(16, 'Logged in.', 1, 5, '110.148.176.161', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1', '2021-07-04 18:36:15'),
+(17, 'Logged in.', 1, 0, '110.148.176.161', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 EdgiOS/46.3.23 Mobile/15E148 Safari/605.1.15', '2021-07-05 10:13:31'),
+(18, 'Logged in.', 1, 0, '110.148.176.161', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', '2021-07-05 12:23:40');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `w_apis`
+-- Indexes for table `w_apis`
 --
 ALTER TABLE `w_apis`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_bank_stat`
+-- Indexes for table `w_bank_stat`
 --
 ALTER TABLE `w_bank_stat`
   ADD PRIMARY KEY (`id`),
@@ -4177,7 +4279,7 @@ ALTER TABLE `w_bank_stat`
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_categories`
+-- Indexes for table `w_categories`
 --
 ALTER TABLE `w_categories`
   ADD PRIMARY KEY (`id`),
@@ -4185,13 +4287,25 @@ ALTER TABLE `w_categories`
   ADD KEY `parent` (`parent`);
 
 --
--- Индексы таблицы `w_failed_jobs`
+-- Indexes for table `w_country`
+--
+ALTER TABLE `w_country`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `w_currency`
+--
+ALTER TABLE `w_currency`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `w_failed_jobs`
 --
 ALTER TABLE `w_failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_games`
+-- Indexes for table `w_games`
 --
 ALTER TABLE `w_games`
   ADD PRIMARY KEY (`id`),
@@ -4199,19 +4313,19 @@ ALTER TABLE `w_games`
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_games_activity`
+-- Indexes for table `w_games_activity`
 --
 ALTER TABLE `w_games_activity`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_game_bank`
+-- Indexes for table `w_game_bank`
 --
 ALTER TABLE `w_game_bank`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_game_categories`
+-- Indexes for table `w_game_categories`
 --
 ALTER TABLE `w_game_categories`
   ADD PRIMARY KEY (`id`),
@@ -4219,7 +4333,7 @@ ALTER TABLE `w_game_categories`
   ADD KEY `game_id` (`game_id`);
 
 --
--- Индексы таблицы `w_game_log`
+-- Indexes for table `w_game_log`
 --
 ALTER TABLE `w_game_log`
   ADD PRIMARY KEY (`id`),
@@ -4228,26 +4342,26 @@ ALTER TABLE `w_game_log`
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_game_win`
+-- Indexes for table `w_game_win`
 --
 ALTER TABLE `w_game_win`
   ADD PRIMARY KEY (`id`),
   ADD KEY `game_id` (`game_id`);
 
 --
--- Индексы таблицы `w_happyhours`
+-- Indexes for table `w_happyhours`
 --
 ALTER TABLE `w_happyhours`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_info`
+-- Indexes for table `w_info`
 --
 ALTER TABLE `w_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_info_shop`
+-- Indexes for table `w_info_shop`
 --
 ALTER TABLE `w_info_shop`
   ADD PRIMARY KEY (`id`),
@@ -4255,21 +4369,21 @@ ALTER TABLE `w_info_shop`
   ADD KEY `game_id` (`info_id`);
 
 --
--- Индексы таблицы `w_jobs`
+-- Indexes for table `w_jobs`
 --
 ALTER TABLE `w_jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jobs_queue_index` (`queue`);
 
 --
--- Индексы таблицы `w_jpg`
+-- Indexes for table `w_jpg`
 --
 ALTER TABLE `w_jpg`
   ADD PRIMARY KEY (`id`),
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_open_shift`
+-- Indexes for table `w_open_shift`
 --
 ALTER TABLE `w_open_shift`
   ADD PRIMARY KEY (`id`),
@@ -4277,28 +4391,28 @@ ALTER TABLE `w_open_shift`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Индексы таблицы `w_password_resets`
+-- Indexes for table `w_password_resets`
 --
 ALTER TABLE `w_password_resets`
   ADD KEY `password_resets_email_index` (`email`),
   ADD KEY `password_resets_token_index` (`token`);
 
 --
--- Индексы таблицы `w_payments`
+-- Indexes for table `w_payments`
 --
 ALTER TABLE `w_payments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Индексы таблицы `w_permissions`
+-- Indexes for table `w_permissions`
 --
 ALTER TABLE `w_permissions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `permissions_slug_unique` (`slug`);
 
 --
--- Индексы таблицы `w_permission_role`
+-- Indexes for table `w_permission_role`
 --
 ALTER TABLE `w_permission_role`
   ADD PRIMARY KEY (`id`),
@@ -4306,7 +4420,7 @@ ALTER TABLE `w_permission_role`
   ADD KEY `permission_role_role_id_index` (`role_id`);
 
 --
--- Индексы таблицы `w_permission_user`
+-- Indexes for table `w_permission_user`
 --
 ALTER TABLE `w_permission_user`
   ADD PRIMARY KEY (`id`),
@@ -4314,7 +4428,7 @@ ALTER TABLE `w_permission_user`
   ADD KEY `permission_user_user_id_index` (`user_id`);
 
 --
--- Индексы таблицы `w_pincodes`
+-- Indexes for table `w_pincodes`
 --
 ALTER TABLE `w_pincodes`
   ADD PRIMARY KEY (`id`),
@@ -4322,21 +4436,21 @@ ALTER TABLE `w_pincodes`
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_return`
+-- Indexes for table `w_return`
 --
 ALTER TABLE `w_return`
   ADD PRIMARY KEY (`id`),
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_roles`
+-- Indexes for table `w_roles`
 --
 ALTER TABLE `w_roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_slug_unique` (`slug`);
 
 --
--- Индексы таблицы `w_role_user`
+-- Indexes for table `w_role_user`
 --
 ALTER TABLE `w_role_user`
   ADD PRIMARY KEY (`id`),
@@ -4344,34 +4458,34 @@ ALTER TABLE `w_role_user`
   ADD KEY `role_user_user_id_index` (`user_id`);
 
 --
--- Индексы таблицы `w_sessions`
+-- Indexes for table `w_sessions`
 --
 ALTER TABLE `w_sessions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_settings`
+-- Indexes for table `w_settings`
 --
 ALTER TABLE `w_settings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `settings_key_index` (`key`);
 
 --
--- Индексы таблицы `w_shops`
+-- Indexes for table `w_shops`
 --
 ALTER TABLE `w_shops`
   ADD PRIMARY KEY (`id`),
   ADD KEY `name` (`name`(191));
 
 --
--- Индексы таблицы `w_shops_stat`
+-- Indexes for table `w_shops_stat`
 --
 ALTER TABLE `w_shops_stat`
   ADD PRIMARY KEY (`id`),
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_shops_user`
+-- Indexes for table `w_shops_user`
 --
 ALTER TABLE `w_shops_user`
   ADD PRIMARY KEY (`id`),
@@ -4379,7 +4493,7 @@ ALTER TABLE `w_shops_user`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Индексы таблицы `w_shop_categories`
+-- Indexes for table `w_shop_categories`
 --
 ALTER TABLE `w_shop_categories`
   ADD PRIMARY KEY (`id`),
@@ -4387,7 +4501,7 @@ ALTER TABLE `w_shop_categories`
   ADD KEY `game_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_stat_game`
+-- Indexes for table `w_stat_game`
 --
 ALTER TABLE `w_stat_game`
   ADD PRIMARY KEY (`id`),
@@ -4397,19 +4511,19 @@ ALTER TABLE `w_stat_game`
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_subsessions`
+-- Indexes for table `w_subsessions`
 --
 ALTER TABLE `w_subsessions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_tasks`
+-- Indexes for table `w_tasks`
 --
 ALTER TABLE `w_tasks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `w_transactions`
+-- Indexes for table `w_transactions`
 --
 ALTER TABLE `w_transactions`
   ADD PRIMARY KEY (`id`),
@@ -4418,7 +4532,7 @@ ALTER TABLE `w_transactions`
   ADD KEY `shop_id` (`shop_id`);
 
 --
--- Индексы таблицы `w_users`
+-- Indexes for table `w_users`
 --
 ALTER TABLE `w_users`
   ADD PRIMARY KEY (`id`),
@@ -4429,225 +4543,237 @@ ALTER TABLE `w_users`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Индексы таблицы `w_user_activity`
+-- Indexes for table `w_user_activity`
 --
 ALTER TABLE `w_user_activity`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_activity_user_id_foreign` (`user_id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `w_apis`
+-- AUTO_INCREMENT for table `w_apis`
 --
 ALTER TABLE `w_apis`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_bank_stat`
+-- AUTO_INCREMENT for table `w_bank_stat`
 --
 ALTER TABLE `w_bank_stat`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_categories`
+-- AUTO_INCREMENT for table `w_categories`
 --
 ALTER TABLE `w_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT для таблицы `w_failed_jobs`
+-- AUTO_INCREMENT for table `w_country`
+--
+ALTER TABLE `w_country`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `w_currency`
+--
+ALTER TABLE `w_currency`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `w_failed_jobs`
 --
 ALTER TABLE `w_failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_games`
+-- AUTO_INCREMENT for table `w_games`
 --
 ALTER TABLE `w_games`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=970;
 
 --
--- AUTO_INCREMENT для таблицы `w_games_activity`
+-- AUTO_INCREMENT for table `w_games_activity`
 --
 ALTER TABLE `w_games_activity`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_game_bank`
+-- AUTO_INCREMENT for table `w_game_bank`
 --
 ALTER TABLE `w_game_bank`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `w_game_categories`
+-- AUTO_INCREMENT for table `w_game_categories`
 --
 ALTER TABLE `w_game_categories`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1973;
 
 --
--- AUTO_INCREMENT для таблицы `w_game_log`
+-- AUTO_INCREMENT for table `w_game_log`
 --
 ALTER TABLE `w_game_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_game_win`
+-- AUTO_INCREMENT for table `w_game_win`
 --
 ALTER TABLE `w_game_win`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=970;
 
 --
--- AUTO_INCREMENT для таблицы `w_happyhours`
+-- AUTO_INCREMENT for table `w_happyhours`
 --
 ALTER TABLE `w_happyhours`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_info`
+-- AUTO_INCREMENT for table `w_info`
 --
 ALTER TABLE `w_info`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_info_shop`
+-- AUTO_INCREMENT for table `w_info_shop`
 --
 ALTER TABLE `w_info_shop`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_jobs`
+-- AUTO_INCREMENT for table `w_jobs`
 --
 ALTER TABLE `w_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_jpg`
+-- AUTO_INCREMENT for table `w_jpg`
 --
 ALTER TABLE `w_jpg`
   MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT для таблицы `w_open_shift`
+-- AUTO_INCREMENT for table `w_open_shift`
 --
 ALTER TABLE `w_open_shift`
-  MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(55) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `w_payments`
+-- AUTO_INCREMENT for table `w_payments`
 --
 ALTER TABLE `w_payments`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_permissions`
+-- AUTO_INCREMENT for table `w_permissions`
 --
 ALTER TABLE `w_permissions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
--- AUTO_INCREMENT для таблицы `w_permission_role`
+-- AUTO_INCREMENT for table `w_permission_role`
 --
 ALTER TABLE `w_permission_role`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=565;
 
 --
--- AUTO_INCREMENT для таблицы `w_permission_user`
+-- AUTO_INCREMENT for table `w_permission_user`
 --
 ALTER TABLE `w_permission_user`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_pincodes`
+-- AUTO_INCREMENT for table `w_pincodes`
 --
 ALTER TABLE `w_pincodes`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_return`
+-- AUTO_INCREMENT for table `w_return`
 --
 ALTER TABLE `w_return`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `w_roles`
+-- AUTO_INCREMENT for table `w_roles`
 --
 ALTER TABLE `w_roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT для таблицы `w_role_user`
+-- AUTO_INCREMENT for table `w_role_user`
 --
 ALTER TABLE `w_role_user`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `w_settings`
+-- AUTO_INCREMENT for table `w_settings`
 --
 ALTER TABLE `w_settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT для таблицы `w_shops`
+-- AUTO_INCREMENT for table `w_shops`
 --
 ALTER TABLE `w_shops`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_shops_stat`
+-- AUTO_INCREMENT for table `w_shops_stat`
 --
 ALTER TABLE `w_shops_stat`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_shops_user`
+-- AUTO_INCREMENT for table `w_shops_user`
 --
 ALTER TABLE `w_shops_user`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_shop_categories`
+-- AUTO_INCREMENT for table `w_shop_categories`
 --
 ALTER TABLE `w_shop_categories`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_stat_game`
+-- AUTO_INCREMENT for table `w_stat_game`
 --
 ALTER TABLE `w_stat_game`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_subsessions`
+-- AUTO_INCREMENT for table `w_subsessions`
 --
 ALTER TABLE `w_subsessions`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_tasks`
+-- AUTO_INCREMENT for table `w_tasks`
 --
 ALTER TABLE `w_tasks`
   MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `w_transactions`
+-- AUTO_INCREMENT for table `w_transactions`
 --
 ALTER TABLE `w_transactions`
-  MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(55) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `w_users`
+-- AUTO_INCREMENT for table `w_users`
 --
 ALTER TABLE `w_users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `w_user_activity`
+-- AUTO_INCREMENT for table `w_user_activity`
 --
 ALTER TABLE `w_user_activity`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

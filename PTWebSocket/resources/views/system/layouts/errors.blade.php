@@ -23,7 +23,7 @@
 		</div>
 		<div class="footer">
 			<p class="copyright">
-				<a href="http://goldsvet.org/" target="_blank" rel="nofollow"><b>GOLDSVET</b> - Multi Shop System</a>
+				<a href="http://aupokies.org/" target="_blank" rel="nofollow"><b>AUPOKIES</b> - Multi Shop System</a>
 			</p>
 		</div>
 	</div>

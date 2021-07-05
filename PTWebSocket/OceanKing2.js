@@ -214,8 +214,8 @@ ws.send(responsePacket.buffer);
 
 if(serverConfig.ssl){
 	
-var privateKey = fs.readFileSync('ssl/goldsvet.com.key', 'utf8');
-var certificate = fs.readFileSync('ssl/goldsvet.com.crt', 'utf8');
+var privateKey = fs.readFileSync('ssl/aupokies.com.key', 'utf8');
+var certificate = fs.readFileSync('ssl/aupokies.com.crt', 'utf8');
 
 var credentials = { key: privateKey, cert: certificate };
 var https = require('https');
