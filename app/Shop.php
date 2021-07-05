@@ -17,8 +17,7 @@ namespace VanguardLTE
         ];
         public static $values = [
             'currency' => [
-                '',
-				'ARS',
+                '', 
                 'EUR', 
                 'GBP', 
                 'USD', 

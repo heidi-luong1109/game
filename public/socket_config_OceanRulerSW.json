@@ -2,10 +2,10 @@
 
 "port":8559,
 
-"host":"betsoft",
+"host":"vanguardclubelte",
 "prefix":"http://",
 
-"host_ws":"betsoft",
+"host_ws":"vanguardclubelte",
 "prefix_ws":"ws://",
 
 "ssl":false

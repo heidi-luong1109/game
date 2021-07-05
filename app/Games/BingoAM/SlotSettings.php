@@ -57,16 +57,16 @@ namespace VanguardLTE\Games\BingoAM
         public $game = null;
         public $shop = null;
         public function __construct($sid, $playerId)
-        {
-            /*if( config('LicenseDK.APL_INCLUDE_KEY_CONFIG') != 'wi9qydosuimsnls5zoe5q298evkhim0ughx1w16qybs2fhlcpn' ) 
+        { /*
+            if( config('LicenseDK.APL_INCLUDE_KEY_CONFIG') != 'wi9qydosuimsnls5zoe5q298evkhim0ughx1w16qybs2fhlcpn' ) 
             {
                 return false;
             }
-            if( md5_file(base_path() . '/app/Lib/LicenseDK.php') != '3c5aece202a4218a19ec8c209817a74e' ) 
+            if( md5_file(base_path() . '/config/LicenseDK.php') != '27f30d89977203af2f6822e48707425d' ) 
             {
                 return false;
             }
-            if( md5_file(base_path() . '/config/LicenseDK.php') != '951a0e23768db0531ff539d246cb99cd' ) 
+            if( md5_file(base_path() . '/app/Lib/LicenseDK.php') != '22dde427cc10243ac0c7a3a625518e6f' ) 
             {
                 return false;
             }
@@ -76,7 +76,7 @@ namespace VanguardLTE\Games\BingoAM
             if( $license_notifications_array['notification_case'] != 'notification_license_ok' ) 
             {
                 $this->licenseDK = false;
-            }*/
+            } */
             $this->slotId = $sid;
             $this->playerId = $playerId;
             $user = \VanguardLTE\User::lockForUpdate()->find($this->playerId);
@@ -268,9 +268,9 @@ namespace VanguardLTE\Games\BingoAM
         }
         public function SetGameData($key, $value)
         {
-            $_obf_0D040604031A0C332A392C0F2E0C1018072E3C1C1B3C32 = 86400;
+            $_obf_0D3809171D170D2A39270A191B211D273D3E2F01080132 = 86400;
             $this->gameData[$key] = [
-                'timelife' => time() + $_obf_0D040604031A0C332A392C0F2E0C1018072E3C1C1B3C32, 
+                'timelife' => time() + $_obf_0D3809171D170D2A39270A191B211D273D3E2F01080132, 
                 'payload' => $value
             ];
         }
@@ -316,21 +316,21 @@ namespace VanguardLTE\Games\BingoAM
         }
         public function CheckBonusWin()
         {
-            $_obf_0D250A3827310B5B0C0D121C1303111534020E0F181C01 = 0;
-            $_obf_0D1003233B2728340337151E14011404193D37332A1301 = 0;
+            $_obf_0D0726215B3F0E0A162A310A40052D021C2E5C18075B01 = 0;
+            $_obf_0D101E1F2C0C35313D371B162C0A051E081E07272A2401 = 0;
             foreach( $this->Paytable as $vl ) 
             {
-                foreach( $vl as $_obf_0D0F161E053D31023119151106020D370C340240140611 ) 
+                foreach( $vl as $_obf_0D2234210521342C1F253E5C0C350B0D290D011E0E3C32 ) 
                 {
-                    if( $_obf_0D0F161E053D31023119151106020D370C340240140611 > 0 ) 
+                    if( $_obf_0D2234210521342C1F253E5C0C350B0D290D011E0E3C32 > 0 ) 
                     {
-                        $_obf_0D250A3827310B5B0C0D121C1303111534020E0F181C01++;
-                        $_obf_0D1003233B2728340337151E14011404193D37332A1301 += $_obf_0D0F161E053D31023119151106020D370C340240140611;
+                        $_obf_0D0726215B3F0E0A162A310A40052D021C2E5C18075B01++;
+                        $_obf_0D101E1F2C0C35313D371B162C0A051E081E07272A2401 += $_obf_0D2234210521342C1F253E5C0C350B0D290D011E0E3C32;
                         break;
                     }
                 }
             }
-            return $_obf_0D1003233B2728340337151E14011404193D37332A1301 / $_obf_0D250A3827310B5B0C0D121C1303111534020E0F181C01;
+            return $_obf_0D101E1F2C0C35313D371B162C0A051E081E07272A2401 / $_obf_0D0726215B3F0E0A162A310A40052D021C2E5C18075B01;
         }
         public function HasGameData($key)
         {
@@ -352,16 +352,16 @@ namespace VanguardLTE\Games\BingoAM
             $this->lastEvent = 'NULL';
             foreach( $history as $log ) 
             {
-                $_obf_0D1F212D1B1A262C271C2C331110342F041A3014182301 = json_decode($log->str);
-                if( $_obf_0D1F212D1B1A262C271C2C331110342F041A3014182301->responseEvent != 'gambleResult' ) 
+                $_obf_0D1C182417322707301D3D0523132F1D092E3316302332 = json_decode($log->str);
+                if( $_obf_0D1C182417322707301D3D0523132F1D092E3316302332->responseEvent != 'gambleResult' ) 
                 {
                     $this->lastEvent = $log->str;
                     break;
                 }
             }
-            if( isset($_obf_0D1F212D1B1A262C271C2C331110342F041A3014182301) ) 
+            if( isset($_obf_0D1C182417322707301D3D0523132F1D092E3316302332) ) 
             {
-                return $_obf_0D1F212D1B1A262C271C2C331110342F041A3014182301;
+                return $_obf_0D1C182417322707301D3D0523132F1D092E3316302332;
             }
             else
             {
@@ -370,29 +370,28 @@ namespace VanguardLTE\Games\BingoAM
         }
         public function UpdateJackpots($bet)
         {
-            return null;
             $bet = $bet * $this->CurrentDenom;
             $count_balance = $this->GetCountBalanceUser();
-            $_obf_0D0E13392A1E352D293108251212135B0D022529241422 = [];
-            $_obf_0D052A14092A1117372103081A331C2C2622010A2D0C22 = 0;
+            $_obf_0D111D5B053122252536131839161E0939380D11211522 = [];
+            $_obf_0D143C061314401508322D0218111E2425353D03314022 = 0;
             for( $i = 0; $i < count($this->jpgs); $i++ ) 
             {
                 if( $count_balance == 0 ) 
                 {
-                    $_obf_0D0E13392A1E352D293108251212135B0D022529241422[$i] = $this->jpgs[$i]->balance;
+                    $_obf_0D111D5B053122252536131839161E0939380D11211522[$i] = $this->jpgs[$i]->balance;
                 }
                 else if( $count_balance < $bet ) 
                 {
-                    $_obf_0D0E13392A1E352D293108251212135B0D022529241422[$i] = $count_balance / 100 * $this->jpgs[$i]->percent + $this->jpgs[$i]->balance;
+                    $_obf_0D111D5B053122252536131839161E0939380D11211522[$i] = $count_balance / 100 * $this->jpgs[$i]->percent + $this->jpgs[$i]->balance;
                 }
                 else
                 {
-                    $_obf_0D0E13392A1E352D293108251212135B0D022529241422[$i] = $bet / 100 * $this->jpgs[$i]->percent + $this->jpgs[$i]->balance;
+                    $_obf_0D111D5B053122252536131839161E0939380D11211522[$i] = $bet / 100 * $this->jpgs[$i]->percent + $this->jpgs[$i]->balance;
                 }
-                if( $this->jpgs[$i]->pay_sum < $_obf_0D0E13392A1E352D293108251212135B0D022529241422[$i] && $this->jpgs[$i]->pay_sum > 0 ) 
+                if( $this->jpgs[$i]->pay_sum < $_obf_0D111D5B053122252536131839161E0939380D11211522[$i] && $this->jpgs[$i]->pay_sum > 0 ) 
                 {
-                    $_obf_0D052A14092A1117372103081A331C2C2622010A2D0C22 = $this->jpgs[$i]->pay_sum / $this->CurrentDenom;
-                    $_obf_0D0E13392A1E352D293108251212135B0D022529241422[$i] = $_obf_0D0E13392A1E352D293108251212135B0D022529241422[$i] - $this->jpgs[$i]->pay_sum;
+                    $_obf_0D143C061314401508322D0218111E2425353D03314022 = $this->jpgs[$i]->pay_sum / $this->CurrentDenom;
+                    $_obf_0D111D5B053122252536131839161E0939380D11211522[$i] = $_obf_0D111D5B053122252536131839161E0939380D11211522[$i] - $this->jpgs[$i]->pay_sum;
                     $this->SetBalance($this->jpgs[$i]->pay_sum / $this->CurrentDenom);
                     if( $this->jpgs[$i]->pay_sum > 0 ) 
                     {
@@ -410,7 +409,7 @@ namespace VanguardLTE\Games\BingoAM
                         ]);
                     }
                 }
-                $this->jpgs[$i]->update(['balance' => $_obf_0D0E13392A1E352D293108251212135B0D022529241422[$i]]);
+                $this->jpgs[$i]->update(['balance' => $_obf_0D111D5B053122252536131839161E0939380D11211522[$i]]);
                 $this->jpgs[$i] = $this->jpgs[$i]->refresh();
                 if( $this->jpgs[$i]->balance < $this->jpgs[$i]->start_balance ) 
                 {
@@ -421,49 +420,49 @@ namespace VanguardLTE\Games\BingoAM
                     }
                 }
             }
-            if( $_obf_0D052A14092A1117372103081A331C2C2622010A2D0C22 > 0 ) 
+            if( $_obf_0D143C061314401508322D0218111E2425353D03314022 > 0 ) 
             {
-                $_obf_0D052A14092A1117372103081A331C2C2622010A2D0C22 = sprintf('%01.2f', $_obf_0D052A14092A1117372103081A331C2C2622010A2D0C22);
-                $this->Jackpots['jackPay'] = $_obf_0D052A14092A1117372103081A331C2C2622010A2D0C22;
+                $_obf_0D143C061314401508322D0218111E2425353D03314022 = sprintf('%01.2f', $_obf_0D143C061314401508322D0218111E2425353D03314022);
+                $this->Jackpots['jackPay'] = $_obf_0D143C061314401508322D0218111E2425353D03314022;
             }
         }
         public function GetCombination($cards, $suits)
         {
             sort($cards, SORT_NUMERIC);
-            $_obf_0D330D330F083923172A0E26131934041C1017062C0C32 = 0;
-            $_obf_0D123822023E012533162723355C17041A123112110C11 = 0;
+            $_obf_0D321A06332C321101281F3F2408121F123201381D3922 = 0;
+            $_obf_0D401A2C10171A10330A272B1737171E36401109193132 = 0;
             $straight = 0;
             $flush = 0;
             $full = 0;
-            $_obf_0D1C24385B233D32332F0E04352E320C1D0A2A21271901 = 0;
-            $_obf_0D0526242B1D1D5B5B1E1A23212E351B0C342207401C32 = 0;
-            $_obf_0D211D0C340B25155B222D3D3503230806311D03042132 = 0;
-            $_obf_0D10015C3713031E5C0E3E2B07165B0C020F2A22152B01 = 0;
+            $_obf_0D112D233B1F020805310A2D273736173C060210110F22 = 0;
+            $_obf_0D5B0F052F10120C34130F05300E2E0C190E3D38233F01 = 0;
+            $_obf_0D1E2724162F34090910342C1931383421080F2A182F01 = 0;
+            $_obf_0D3412061D1527313F1D2103172A1D251E1C023F130511 = 0;
             for( $i = 2; $i <= 14; $i++ ) 
             {
-                $_obf_0D0A0725010E0A090328080A1F09042C2D1C2536340E01 = 0;
+                $_obf_0D373E28400B3133012B2218231F340B5C1C2C0C1E3101 = 0;
                 for( $j = 0; $j <= 4; $j++ ) 
                 {
                     if( $cards[$j] == $i ) 
                     {
-                        $_obf_0D0A0725010E0A090328080A1F09042C2D1C2536340E01++;
+                        $_obf_0D373E28400B3133012B2218231F340B5C1C2C0C1E3101++;
                     }
                 }
-                if( $_obf_0D0A0725010E0A090328080A1F09042C2D1C2536340E01 == 4 ) 
+                if( $_obf_0D373E28400B3133012B2218231F340B5C1C2C0C1E3101 == 4 ) 
                 {
-                    $_obf_0D1C24385B233D32332F0E04352E320C1D0A2A21271901 += 1;
+                    $_obf_0D112D233B1F020805310A2D273736173C060210110F22 += 1;
                 }
-                else if( $_obf_0D0A0725010E0A090328080A1F09042C2D1C2536340E01 == 3 ) 
+                else if( $_obf_0D373E28400B3133012B2218231F340B5C1C2C0C1E3101 == 3 ) 
                 {
-                    $_obf_0D123822023E012533162723355C17041A123112110C11 += 1;
+                    $_obf_0D401A2C10171A10330A272B1737171E36401109193132 += 1;
                 }
-                else if( $_obf_0D0A0725010E0A090328080A1F09042C2D1C2536340E01 == 2 ) 
+                else if( $_obf_0D373E28400B3133012B2218231F340B5C1C2C0C1E3101 == 2 ) 
                 {
                     if( $i >= 11 ) 
                     {
-                        $_obf_0D10015C3713031E5C0E3E2B07165B0C020F2A22152B01 = 1;
+                        $_obf_0D3412061D1527313F1D2103172A1D251E1C023F130511 = 1;
                     }
-                    $_obf_0D330D330F083923172A0E26131934041C1017062C0C32 += 1;
+                    $_obf_0D321A06332C321101281F3F2408121F123201381D3922 += 1;
                 }
             }
             if( $cards[0] + 1 == $cards[1] && $cards[0] + 2 == $cards[2] && $cards[0] + 3 == $cards[3] && $cards[0] + 4 == $cards[4] ) 
@@ -474,60 +473,60 @@ namespace VanguardLTE\Games\BingoAM
             {
                 $flush += 1;
             }
-            if( $_obf_0D330D330F083923172A0E26131934041C1017062C0C32 > 0 && $_obf_0D123822023E012533162723355C17041A123112110C11 > 0 ) 
+            if( $_obf_0D321A06332C321101281F3F2408121F123201381D3922 > 0 && $_obf_0D401A2C10171A10330A272B1737171E36401109193132 > 0 ) 
             {
                 $full = 1;
             }
             if( $straight > 0 && $flush > 0 ) 
             {
-                $_obf_0D0526242B1D1D5B5B1E1A23212E351B0C342207401C32 = 1;
+                $_obf_0D5B0F052F10120C34130F05300E2E0C190E3D38233F01 = 1;
             }
-            if( $_obf_0D0526242B1D1D5B5B1E1A23212E351B0C342207401C32 > 0 && $cards[0] == 8 ) 
+            if( $_obf_0D5B0F052F10120C34130F05300E2E0C190E3D38233F01 > 0 && $cards[0] == 8 ) 
             {
-                $_obf_0D211D0C340B25155B222D3D3503230806311D03042132 = 1;
+                $_obf_0D1E2724162F34090910342C1931383421080F2A182F01 = 1;
             }
-            $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 0;
-            if( $_obf_0D330D330F083923172A0E26131934041C1017062C0C32 >= 1 && $_obf_0D10015C3713031E5C0E3E2B07165B0C020F2A22152B01 >= 1 ) 
+            $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 0;
+            if( $_obf_0D321A06332C321101281F3F2408121F123201381D3922 >= 1 && $_obf_0D3412061D1527313F1D2103172A1D251E1C023F130511 >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 1;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 1;
             }
-            if( $_obf_0D330D330F083923172A0E26131934041C1017062C0C32 >= 2 ) 
+            if( $_obf_0D321A06332C321101281F3F2408121F123201381D3922 >= 2 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 2;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 2;
             }
-            if( $_obf_0D330D330F083923172A0E26131934041C1017062C0C32 >= 2 ) 
+            if( $_obf_0D321A06332C321101281F3F2408121F123201381D3922 >= 2 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 2;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 2;
             }
-            if( $_obf_0D123822023E012533162723355C17041A123112110C11 >= 1 ) 
+            if( $_obf_0D401A2C10171A10330A272B1737171E36401109193132 >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 3;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 3;
             }
             if( $straight >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 4;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 4;
             }
             if( $flush >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 6;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 6;
             }
             if( $full >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 9;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 9;
             }
-            if( $_obf_0D1C24385B233D32332F0E04352E320C1D0A2A21271901 >= 1 ) 
+            if( $_obf_0D112D233B1F020805310A2D273736173C060210110F22 >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 25;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 25;
             }
-            if( $_obf_0D0526242B1D1D5B5B1E1A23212E351B0C342207401C32 >= 1 ) 
+            if( $_obf_0D5B0F052F10120C34130F05300E2E0C190E3D38233F01 >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 50;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 50;
             }
-            if( $_obf_0D211D0C340B25155B222D3D3503230806311D03042132 >= 1 ) 
+            if( $_obf_0D1E2724162F34090910342C1931383421080F2A182F01 >= 1 ) 
             {
-                $_obf_0D3930021E065C30212C110F1D2D150E03113925171401 = 250;
+                $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32 = 250;
             }
-            return $_obf_0D3930021E065C30212C110F1D2D150E03113925171401;
+            return $_obf_0D144030072C09300C13273D0B122A320C3B04012D0B32;
         }
         public function HexFormat($num)
         {
@@ -563,18 +562,18 @@ namespace VanguardLTE\Games\BingoAM
         }
         public function InternalError($errcode)
         {
-            $_obf_0D280A1516183F171D1809285B36091811040F26391C11 = '';
-            $_obf_0D280A1516183F171D1809285B36091811040F26391C11 .= "\n";
-            $_obf_0D280A1516183F171D1809285B36091811040F26391C11 .= ('{"responseEvent":"error","responseType":"' . $errcode . '","serverResponse":"InternalError"}');
-            $_obf_0D280A1516183F171D1809285B36091811040F26391C11 .= "\n";
-            $_obf_0D280A1516183F171D1809285B36091811040F26391C11 .= ' ############################################### ';
-            $_obf_0D280A1516183F171D1809285B36091811040F26391C11 .= "\n";
-            $_obf_0D05022C0626351A3C1C5B0D0A2D1A1B0D061C05380332 = '';
+            $_obf_0D173D2C0F0E1039243839032714070829293F01115C01 = '';
+            $_obf_0D173D2C0F0E1039243839032714070829293F01115C01 .= "\n";
+            $_obf_0D173D2C0F0E1039243839032714070829293F01115C01 .= ('{"responseEvent":"error","responseType":"' . $errcode . '","serverResponse":"InternalError"}');
+            $_obf_0D173D2C0F0E1039243839032714070829293F01115C01 .= "\n";
+            $_obf_0D173D2C0F0E1039243839032714070829293F01115C01 .= ' ############################################### ';
+            $_obf_0D173D2C0F0E1039243839032714070829293F01115C01 .= "\n";
+            $_obf_0D090F3326352D250E1F112D1A401618142216405B1122 = '';
             if( file_exists(storage_path('logs/') . $this->slotId . 'Internal.log') ) 
             {
-                $_obf_0D05022C0626351A3C1C5B0D0A2D1A1B0D061C05380332 = file_get_contents(storage_path('logs/') . $this->slotId . 'Internal.log');
+                $_obf_0D090F3326352D250E1F112D1A401618142216405B1122 = file_get_contents(storage_path('logs/') . $this->slotId . 'Internal.log');
             }
-            file_put_contents(storage_path('logs/') . $this->slotId . 'Internal.log', $_obf_0D05022C0626351A3C1C5B0D0A2D1A1B0D061C05380332 . $_obf_0D280A1516183F171D1809285B36091811040F26391C11);
+            file_put_contents(storage_path('logs/') . $this->slotId . 'Internal.log', $_obf_0D090F3326352D250E1F112D1A401618142216405B1122 . $_obf_0D173D2C0F0E1039243839032714070829293F01115C01);
             exit( '{"responseEvent":"error","responseType":"' . $errcode . '","serverResponse":"InternalError"}' );
         }
         public function SetBank($slotState = '', $sum, $slotEvent = '')
@@ -589,44 +588,55 @@ namespace VanguardLTE\Games\BingoAM
             }
             if( $this->GetBank($slotState) + $sum < 0 ) 
             {
-                $this->InternalError('Bank_   ' . $sum . '  CurrentBank_ ' . $this->GetBank($slotState) . ' CurrentState_ ' . $slotState);
+                $this->InternalError('Bank_   ' . $sum);
             }
             $sum = $sum * $this->CurrentDenom;
             $game = $this->game;
-            $_obf_0D16300411093D18353F3F2A1D5C1D3E3D25372E3D0411 = 0;
+            $_obf_0D323B0D0232233E2124360A363D01253E350E3E141722 = 0;
             if( $sum > 0 && $slotEvent == 'bet' ) 
             {
                 $this->toGameBanks = 0;
                 $this->toSlotJackBanks = 0;
                 $this->toSysJackBanks = 0;
                 $this->betProfit = 0;
-                $_obf_0D03242C3B012A362E1A1A28031B25022E0E073B353922 = $this->GetPercent();
-                $_obf_0D111A0318183C030C5C320E1D02182D23063522273322 = 0;
+                $_obf_0D13010B0811332E0B132C3D3835050735343B1D132311 = $this->GetPercent();
+                $_obf_0D091C1B3E353301251C272A22120618372D2B3F291B32 = 10;
                 $count_balance = $this->GetCountBalanceUser();
-                $_obf_0D16380F3724101637270127352E0C1A06122840150932 = $sum / $this->GetPercent() * 100;
-                if( $count_balance < $_obf_0D16380F3724101637270127352E0C1A06122840150932 && $count_balance > 0 ) 
+                $_obf_0D4007282C1E26152E0C32061432401D32032D2D360232 = $sum / $this->GetPercent() * 100;
+                if( $count_balance < $_obf_0D4007282C1E26152E0C32061432401D32032D2D360232 && $count_balance > 0 ) 
                 {
-                    $_obf_0D3B1F2B0C113B290D023E032B1D115B5C150109370B32 = $count_balance;
-                    $_obf_0D1D235B2128121127373D391B112E3B281D023C5B3722 = $_obf_0D16380F3724101637270127352E0C1A06122840150932 - $_obf_0D3B1F2B0C113B290D023E032B1D115B5C150109370B32;
-                    $_obf_0D1A310E2B25282C1A01072A06330C1A173E3437092622 = $_obf_0D3B1F2B0C113B290D023E032B1D115B5C150109370B32 / 100 * $this->GetPercent();
-                    $sum = $_obf_0D1A310E2B25282C1A01072A06330C1A173E3437092622 + $_obf_0D1D235B2128121127373D391B112E3B281D023C5B3722;
-                    $_obf_0D16300411093D18353F3F2A1D5C1D3E3D25372E3D0411 = $_obf_0D3B1F2B0C113B290D023E032B1D115B5C150109370B32 / 100 * $_obf_0D111A0318183C030C5C320E1D02182D23063522273322;
+                    $_obf_0D260D232111221E272723050C121A2A1133112B353511 = $count_balance;
+                    $_obf_0D1F2913360707183C1B330B232D5B193631140E113301 = $_obf_0D4007282C1E26152E0C32061432401D32032D2D360232 - $_obf_0D260D232111221E272723050C121A2A1133112B353511;
+                    $_obf_0D2A0526273612293511363C26193E1C130B2719192611 = $_obf_0D260D232111221E272723050C121A2A1133112B353511 / 100 * $this->GetPercent();
+                    $sum = $_obf_0D2A0526273612293511363C26193E1C130B2719192611 + $_obf_0D1F2913360707183C1B330B232D5B193631140E113301;
+                    $_obf_0D323B0D0232233E2124360A363D01253E350E3E141722 = $_obf_0D260D232111221E272723050C121A2A1133112B353511 / 100 * $_obf_0D091C1B3E353301251C272A22120618372D2B3F291B32;
                 }
                 else if( $count_balance > 0 ) 
                 {
-                    $_obf_0D16300411093D18353F3F2A1D5C1D3E3D25372E3D0411 = $_obf_0D16380F3724101637270127352E0C1A06122840150932 / 100 * $_obf_0D111A0318183C030C5C320E1D02182D23063522273322;
+                    $_obf_0D323B0D0232233E2124360A363D01253E350E3E141722 = $_obf_0D4007282C1E26152E0C32061432401D32032D2D360232 / 100 * $_obf_0D091C1B3E353301251C272A22120618372D2B3F291B32;
+                }
+                for( $i = 0; $i < count($this->jpgs); $i++ ) 
+                {
+                    if( $count_balance < $_obf_0D4007282C1E26152E0C32061432401D32032D2D360232 && $count_balance > 0 ) 
+                    {
+                        $this->toSysJackBanks += ($count_balance / 100 * $this->jpgs[$i]->percent);
+                    }
+                    else if( $count_balance > 0 ) 
+                    {
+                        $this->toSysJackBanks += ($_obf_0D4007282C1E26152E0C32061432401D32032D2D360232 / 100 * $this->jpgs[$i]->percent);
+                    }
                 }
                 $this->toGameBanks = $sum;
-                $this->betProfit = $_obf_0D16380F3724101637270127352E0C1A06122840150932 - $this->toGameBanks - $this->toSlotJackBanks - $this->toSysJackBanks;
+                $this->betProfit = $_obf_0D4007282C1E26152E0C32061432401D32032D2D360232 - $this->toGameBanks - $this->toSlotJackBanks - $this->toSysJackBanks;
             }
             if( $sum > 0 ) 
             {
                 $this->toGameBanks = $sum;
             }
-            if( $_obf_0D16300411093D18353F3F2A1D5C1D3E3D25372E3D0411 > 0 ) 
+            if( $_obf_0D323B0D0232233E2124360A363D01253E350E3E141722 > 0 ) 
             {
-                $sum -= $_obf_0D16300411093D18353F3F2A1D5C1D3E3D25372E3D0411;
-                $game->set_gamebank($_obf_0D16300411093D18353F3F2A1D5C1D3E3D25372E3D0411, 'inc', 'bonus');
+                $sum -= $_obf_0D323B0D0232233E2124360A363D01253E350E3E141722;
+                $game->set_gamebank($_obf_0D323B0D0232233E2124360A363D01253E350E3E141722, 'inc', 'bonus');
             }
             $game->set_gamebank($sum, 'inc', $slotState);
             $game->save();
@@ -689,18 +699,18 @@ namespace VanguardLTE\Games\BingoAM
         }
         public function SaveLogReport($spinSymbols, $bet, $lines, $win, $slotState)
         {
-            $_obf_0D172C04372D1A2A3C2B33260B34083837222A08343211 = $this->slotId . ' ' . $slotState;
+            $_obf_0D09321428053235180C062C0D08240E3E23031A161222 = $this->slotId . ' ' . $slotState;
             if( $slotState == 'freespin' ) 
             {
-                $_obf_0D172C04372D1A2A3C2B33260B34083837222A08343211 = $this->slotId . ' FG';
+                $_obf_0D09321428053235180C062C0D08240E3E23031A161222 = $this->slotId . ' FG';
             }
             else if( $slotState == 'bet' ) 
             {
-                $_obf_0D172C04372D1A2A3C2B33260B34083837222A08343211 = $this->slotId . '';
+                $_obf_0D09321428053235180C062C0D08240E3E23031A161222 = $this->slotId . '';
             }
             else if( $slotState == 'slotGamble' ) 
             {
-                $_obf_0D172C04372D1A2A3C2B33260B34083837222A08343211 = $this->slotId . ' DG';
+                $_obf_0D09321428053235180C062C0D08240E3E23031A161222 = $this->slotId . ' DG';
             }
             $game = $this->game;
             $game->increment('stat_in', $bet * $lines * $this->CurrentDenom);
@@ -730,7 +740,7 @@ namespace VanguardLTE\Games\BingoAM
                 'balance' => $this->Balance * $this->CurrentDenom, 
                 'bet' => $bet * $lines * $this->CurrentDenom, 
                 'win' => $win * $this->CurrentDenom, 
-                'game' => $_obf_0D172C04372D1A2A3C2B33260B34083837222A08343211, 
+                'game' => $_obf_0D09321428053235180C062C0D08240E3E23031A161222, 
                 'percent' => $this->toGameBanks, 
                 'percent_jps' => $this->toSysJackBanks, 
                 'percent_jpg' => $this->toSlotJackBanks, 

@@ -16,6 +16,6 @@ function CheckReels($rc)
     $reels['reel4'] = sha1($rps[3]);
     $reels['reel5'] = sha1($rps[4]);
     $reels['rp'] = $GLOBALS['rgrc'];
-    $_obf_0D3E3F180910322B2E5C0F2E0F31295C3E380809112801 = md5($reels['reel1'] . $reels['reel2'] . $reels['reel3'] . $reels['reel4'] . $reels['reel5'] . $GLOBALS['rgrc'] . $rc);
-    return $_obf_0D3E3F180910322B2E5C0F2E0F31295C3E380809112801;
+    $_obf_0D1B240806322B3424010D301B2D371E1D170B1F2B0332 = md5($reels['reel1'] . $reels['reel2'] . $reels['reel3'] . $reels['reel4'] . $reels['reel5'] . $GLOBALS['rgrc'] . $rc);
+    return $_obf_0D1B240806322B3424010D301B2D371E1D170B1F2B0332;
 }

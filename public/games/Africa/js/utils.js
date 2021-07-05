@@ -35,7 +35,7 @@ mainSlotRes.onreadystatechange = function(ev) {
 
 var postData=JSON.stringify({slotEvent:"update"});
 
-mainSlotRes.open("POST", "/game/Africa/server", true);
+mainSlotRes.open("POST", "/game/Africa/server?sessionId="+sessionStorage.getItem('sessionId'), true);
 mainSlotRes.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 mainSlotRes.send(postData);
 
@@ -266,7 +266,7 @@ if(setObj.responseEvent!=undefined){
 var postData=JSON.stringify(pObj);
 
 
-mainSlotRes.open("POST", "/game/Africa/server", true);
+mainSlotRes.open("POST", "/game/Africa/server?sessionId="+sessionStorage.getItem('sessionId'), true);
 mainSlotRes.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 mainSlotRes.send(postData);
 
@@ -340,19 +340,17 @@ dispatchEvent(new Event(SLOT_EVENT_LINES));
 };
 
 function NumFormat(n){
+
 n=parseFloat(n);
 if(!numFloat){
-n = Number(n).toFixed(2);	
-n=parseFloat(String(n));	
+n = Number(n).toFixed(2);
+n=parseFloat(String(n));
 return n;
+
 }
-
     var a, s = Number(n).toFixed(2);
-
     while (a = s.match(/\d(\d{3}[^\d])/)) s = s.replace(a[1], " " + a[1]);
-
     return s;
-
 }
 
 /*ресйз*/

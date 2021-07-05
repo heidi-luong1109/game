@@ -3,45 +3,61 @@
 
 Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
 	
+    ## Auth verify
+
 	Route::get('login', [
 		'as' => 'frontend.auth.login',
 		'uses' => 'Auth\AuthController@getLogin'
 	]);
+    Route::post('login', [
+        'as' => 'frontend.auth.login.post',
+        'uses' => 'Auth\AuthController@postLogin'
+    ]); 
+    Route::get('logout', [
+        'as' => 'frontend.auth.logout',
+        'uses' => 'Auth\AuthController@getLogout'
+    ]);
 
-	Route::get('launcher/{game}/{token}/{mode}','Auth\AuthController@apiLogin' );
-	
-	
-	Route::post('login', [
-		'as' => 'frontend.auth.login.post',
-		'uses' => 'Auth\AuthController@postLogin'
-	]);	
-	Route::get('logout', [
-		'as' => 'frontend.auth.logout',
-		'uses' => 'Auth\AuthController@getLogout'
-	]);
-	
-	// Allow registration routes only if registration is enabled.
-    /*
+    Route::get('launcher/{game}/{token}/{mode}','Auth\AuthController@apiLogin' );
+
+    ## Allow registration routes only if registration is enabled.
+    
 	if (settings('reg_enabled')) {
-
 		Route::get('register', [
 			'as' => 'frontend.register',
 			'uses' => 'Auth\AuthController@getRegister'
 		]);
-
 		Route::post('register', [
 			'as' => 'frontend.register.post',
 			'uses' => 'Auth\AuthController@postRegister'
 		]);
-
         Route::get('register/confirmation/{token}', [
             'as' => 'frontend.register.confirm-email',
             'uses' => 'Auth\AuthController@confirmEmail'
         ]);
-
 	}
-	*/
-/*
+	
+    ## Deposit
+
+    Route::prefix('deposit')->group(function () { 
+        Route::get('payment', [
+            'as' => 'frontend.deposit.payment',
+            'uses' => 'PaymentController@gigadat'
+        ]);
+    });
+
+    Route::prefix('payment')->group(function () { 
+        Route::match(['get', 'post'], 'gigadat/success', 'PaymentController@gigadatsuccess');
+        Route::match(['get', 'post'], 'gigadat/fail', 'PaymentController@gigadatfail');
+        
+    });
+    
+    Route::match(['get', 'post'], '/bonus', 'BonusController@index');
+    Route::match(['get', 'post'], '/bonus/term', 'BonusController@term');
+
+    Route::match(['get', 'post'], '/promotions', 'PromotionsController@index');
+
+    /*
     if (settings('forgot_password')) {
 
         Route::get('password/remind', [
@@ -61,9 +77,10 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
             'uses' => 'Auth\PasswordController@postReset'
         ]);
     }
-    */
+    
 	
-	
+    ## license config
+
 	Route::get('new-license', [
         'as' => 'frontend.new_license',
         'uses' => 'PagesController@new_license'
@@ -72,21 +89,19 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.new_license.post',
         'uses' => 'PagesController@new_license_post'
     ]);
-	
 	Route::get('license-error', [
         'as' => 'frontend.page.error_license',
         'uses' => 'PagesController@error_license'
     ]);
-
     Route::get('jpstv/{id?}', [
         'as' => 'frontend.jpstv',
         'uses' => 'PagesController@jpstv'
     ]);
-
     Route::get('jpstv.json', [
         'as' => 'frontend.jpstv_json',
         'uses' => 'PagesController@jpstv_json'
     ]);
+    */
 	
 	/**
      * Dashboard
@@ -106,10 +121,21 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
 	/**
      * User Profile
      */
-
-    Route::get('profile', [
-        'as' => 'frontend.profile',
+    Route::get('profile/info', [
+        'as' => 'frontend.profile.info',
         'uses' => 'ProfileController@index'
+    ]);
+    Route::get('profile/history', [
+        'as' => 'frontend.profile.history.payment',
+        'uses' => 'ProfileController@payment_history'
+    ]);
+    Route::get('profile/history/bet', [
+        'as' => 'frontend.profile.history.bet',
+        'uses' => 'ProfileController@bet_history'
+    ]);
+    Route::get('profile/history/bonus', [
+        'as' => 'frontend.profile.history.bonus',
+        'uses' => 'ProfileController@payment_history'
     ]);
     Route::get('profile/activity', [
         'as' => 'frontend.profile.activity',
@@ -229,6 +255,12 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'uses' => 'GamesController@setpage'
     ]);
     
+    // changed by game developer
+    Route::get('game/{game}/{prego}', [
+        'as' => 'frontend.game.go.prego',
+        'uses' => 'GamesController@go'
+    ]);	
+    
 	Route::get('game/{game}', [
         'as' => 'frontend.game.go',
         'uses' => 'GamesController@go'
@@ -241,15 +273,16 @@ Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
         'as' => 'frontend.game_stat',
         'uses' => 'GamesController@game_stat',
     ]);
-	/*
-	Route::prefix('payment')->group(function () { 
-		Route::post('/piastrix/result', [
-			'as' => 'payment.piastrix.result',
-			'uses' => 'PaymentController@piastrix'
-		]);
-	});
-	*/
-	
+    Route::group(['prefix' => 'ajax'], function () {
+        Route::get('/loadmore/game', [
+            'as' => 'frontend.loadmore.game',
+            'uses' => 'GamesController@loadmore',
+        ]);
+        Route::post('/balance/cashout', [
+            'as' => 'frontend.balance.cashout',
+            'uses' => 'ProfileController@cashout',
+        ]);
+    });
 });
 
 /**
@@ -278,19 +311,14 @@ Route::prefix('backend')->group(function () {
 Route::prefix('backend')->middleware(['auth'])->group(function () {
 	Route::namespace('Backend')->group(function () {
 
-
 	Route::get('logout', [
 		'as' => 'backend.auth.logout',
 		'uses' => 'Auth\AuthController@getLogout'
 	]);
 
-
-	
-	
     /**
      * Dashboard
      */
-
 
     Route::get('/search', [
         'as' => 'backend.search',
@@ -301,7 +329,6 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
     Route::get('/', [
         'as' => 'backend.dashboard',
         'uses' => 'DashboardController@index',
-        //
     ]);
 	Route::get('/game_stat', [
         'as' => 'backend.game_stat',
@@ -333,15 +360,42 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
         'middleware' => 'permission:stats.live',
     ]);
 	
-	
 	Route::get('/start_shift', [
         'as' => 'backend.start_shift',
         'uses' => 'DashboardController@start_shift'
     ]);
 	
+    ##Country Manage
+
+    Route::get('/country', [
+        'as' => 'backend.country',
+        'uses' => 'UsersController@country',
+        'middleware' => 'permission:country.manage'
+    ]);
+
+
+    Route::get('/currency', [
+        'as' => 'backend.currency',
+        'uses' => 'UsersController@country',
+        'middleware' => 'permission:currency.manage'
+    ]);
+
+    Route::get('/withdraw', [
+        'as' => 'backend.withdraw.list',
+        'uses' => 'WithDrawController@index',
+        'middleware' => 'permission:withdraw.manage'
+    ]);
+    
+    Route::get('/withdraw/reject/{id}', [
+        'as' => 'backend.reject.edit',
+        'uses' => 'WithDrawController@reject',
+        'middleware' => 'permission:withdraw.manage'
+    ]);
+    
+    
     /**
-     * User Profile
-     */
+    * User Profile
+    **/
 
     Route::get('profile', [
         'as' => 'backend.profile',
@@ -812,40 +866,38 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
 
 
         /**
-     * Return routes
-     */
+         * Return routes
+         */
 
-	Route::get('returns', [
-        'as' => 'backend.returns.list',
-        'uses' => 'ReturnsController@index',
-        'middleware' => 'permission:returns.manage',
-    ]);	
-    Route::get('returns/create', [
-        'as' => 'backend.returns.create',		
-        'uses' => 'ReturnsController@create',
-        'middleware' => 'permission:returns.add',
-    ]);
-    Route::post('returns/create', [
-        'as' => 'backend.returns.store',		
-        'uses' => 'ReturnsController@store',
-        'middleware' => 'permission:returns.add',
-    ]);    
-    Route::get('returns/{return}/edit', [
-        'as' => 'backend.returns.edit',		
-        'uses' => 'ReturnsController@edit',
-    ]);	
-	Route::post('returns/{return}/update', [
-        'as' => 'backend.returns.update',		
-        'uses' => 'ReturnsController@update',
-    ]);	
-	Route::delete('returns/{return}/delete', [
-        'as' => 'backend.returns.delete',		
-        'uses' => 'ReturnsController@delete',
-        'middleware' => 'permission:returns.delete',
-    ]);
+    	Route::get('returns', [
+            'as' => 'backend.returns.list',
+            'uses' => 'ReturnsController@index',
+            'middleware' => 'permission:returns.manage',
+        ]);	
+        Route::get('returns/create', [
+            'as' => 'backend.returns.create',		
+            'uses' => 'ReturnsController@create',
+            'middleware' => 'permission:returns.add',
+        ]);
+        Route::post('returns/create', [
+            'as' => 'backend.returns.store',		
+            'uses' => 'ReturnsController@store',
+            'middleware' => 'permission:returns.add',
+        ]);    
+        Route::get('returns/{return}/edit', [
+            'as' => 'backend.returns.edit',		
+            'uses' => 'ReturnsController@edit',
+        ]);	
+    	Route::post('returns/{return}/update', [
+            'as' => 'backend.returns.update',		
+            'uses' => 'ReturnsController@update',
+        ]);	
+    	Route::delete('returns/{return}/delete', [
+            'as' => 'backend.returns.delete',		
+            'uses' => 'ReturnsController@delete',
+            'middleware' => 'permission:returns.delete',
+        ]);
 	
-	
-
         /**
          * Roles & Permissions
          */
@@ -878,150 +930,147 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             'uses' => 'JPGController@balance',
         ]);
 
+        /**
+        * Roles & Permissions
+        */
 
-
+        Route::get('role', [
+            'as' => 'backend.role.index',
+            'uses' => 'RolesController@index',
+            'middleware' => 'permission:roles.manage'
+        ]);
+        Route::get('role/create', [
+            'as' => 'backend.role.create',
+            'uses' => 'RolesController@create'
+        ]);
+        Route::post('role/store', [
+            'as' => 'backend.role.store',
+            'uses' => 'RolesController@store'
+        ]);
+        Route::get('role/{role}/edit', [
+            'as' => 'backend.role.edit',
+            'uses' => 'RolesController@edit'
+        ]);
+        Route::put('role/{role}/update', [
+            'as' => 'backend.role.update',
+            'uses' => 'RolesController@update'
+        ]);
+        Route::delete('role/{role}/delete', [
+            'as' => 'backend.role.delete',
+            'uses' => 'RolesController@delete'
+        ]);	
+    	
+        Route::post('permission/save', [
+            'as' => 'backend.permission.save',
+            'uses' => 'PermissionsController@saveRolePermissions'
+        ]);
+    	
+    	/**
+         * Permissions
+         */
+    	 
+    	Route::get('permission', [
+            'as' => 'backend.permission.index',
+            'uses' => 'PermissionsController@index',
+            'middleware' => 'permission:permissions.manage'
+        ]);
+        Route::get('permission/create', [
+            'as' => 'backend.permission.create',
+            'uses' => 'PermissionsController@create',
+            'middleware' => 'permission:permissions.add'
+        ]);
+        Route::post('permission/store', [
+            'as' => 'backend.permission.store',
+            'uses' => 'PermissionsController@store',
+            'middleware' => 'permission:permissions.add'
+        ]);
+        Route::get('permission/{permission}/edit', [
+            'as' => 'backend.permission.edit',
+            'uses' => 'PermissionsController@edit'
+        ]);
+        Route::put('permission/{permission}/update', [
+            'as' => 'backend.permission.update',
+            'uses' => 'PermissionsController@update'
+        ]);
+        Route::delete('permission/{permission}/delete', [
+            'as' => 'backend.permission.delete',
+            'uses' => 'PermissionsController@delete'
+        ]);	
+	
 
         /**
-     * Roles & Permissions
-     */
+         * Settings
+         */
 
-    Route::get('role', [
-        'as' => 'backend.role.index',
-        'uses' => 'RolesController@index',
-        'middleware' => 'permission:roles.manage'
-    ]);
-    Route::get('role/create', [
-        'as' => 'backend.role.create',
-        'uses' => 'RolesController@create'
-    ]);
-    Route::post('role/store', [
-        'as' => 'backend.role.store',
-        'uses' => 'RolesController@store'
-    ]);
-    Route::get('role/{role}/edit', [
-        'as' => 'backend.role.edit',
-        'uses' => 'RolesController@edit'
-    ]);
-    Route::put('role/{role}/update', [
-        'as' => 'backend.role.update',
-        'uses' => 'RolesController@update'
-    ]);
-    Route::delete('role/{role}/delete', [
-        'as' => 'backend.role.delete',
-        'uses' => 'RolesController@delete'
-    ]);	
-	
-    Route::post('permission/save', [
-        'as' => 'backend.permission.save',
-        'uses' => 'PermissionsController@saveRolePermissions'
-    ]);
-	
-	/**
-     * Permissions
-     */
-	 
-	Route::get('permission', [
-        'as' => 'backend.permission.index',
-        'uses' => 'PermissionsController@index',
-        'middleware' => 'permission:permissions.manage'
-    ]);
-    Route::get('permission/create', [
-        'as' => 'backend.permission.create',
-        'uses' => 'PermissionsController@create',
-        'middleware' => 'permission:permissions.add'
-    ]);
-    Route::post('permission/store', [
-        'as' => 'backend.permission.store',
-        'uses' => 'PermissionsController@store',
-        'middleware' => 'permission:permissions.add'
-    ]);
-    Route::get('permission/{permission}/edit', [
-        'as' => 'backend.permission.edit',
-        'uses' => 'PermissionsController@edit'
-    ]);
-    Route::put('permission/{permission}/update', [
-        'as' => 'backend.permission.update',
-        'uses' => 'PermissionsController@update'
-    ]);
-    Route::delete('permission/{permission}/delete', [
-        'as' => 'backend.permission.delete',
-        'uses' => 'PermissionsController@delete'
-    ]);	
-	
+        Route::get('settings', [
+            'as' => 'backend.settings.general',
+            'uses' => 'SettingsController@general',
+            'middleware' => 'permission:settings.general',
+        ]);
+        Route::post('settings/general', [
+            'as' => 'backend.settings.general.update',
+            'uses' => 'SettingsController@update',
+            'middleware' => 'permission:settings.general'
+        ]);
+        Route::get('settings/auth', [
+            'as' => 'backend.settings.auth',
+            'uses' => 'SettingsController@auth',
+            'middleware' => 'permission:settings.auth'
+        ]);
+        Route::post('settings/auth', [
+            'as' => 'backend.settings.auth.update',
+            'uses' => 'SettingsController@update',
+            'middleware' => 'permission:settings.auth'
+        ]);
+    	
+    	Route::get('generator', [
+            'as' => 'backend.settings.generator',
+            'uses' => 'SettingsController@generator',
+            'middleware' => 'permission:settings.generator'
+        ]);
+    	
+    	Route::post('generator', [
+            'as' => 'backend.settings.generator.post',
+            'uses' => 'SettingsController@generator',
+            'middleware' => 'permission:settings.generator'
+        ]);
 
-    /**
-     * Settings
-     */
+        Route::put('shops/block', [
+            'as' => 'backend.settings.shop_block',
+            'uses' => 'SettingsController@shop_block',
+            'middleware' => 'permission:shops.block'
+        ]);
 
-    Route::get('settings', [
-        'as' => 'backend.settings.general',
-        'uses' => 'SettingsController@general',
-        'middleware' => 'permission:settings.general',
-    ]);
-    Route::post('settings/general', [
-        'as' => 'backend.settings.general.update',
-        'uses' => 'SettingsController@update',
-        'middleware' => 'permission:settings.general'
-    ]);
-    Route::get('settings/auth', [
-        'as' => 'backend.settings.auth',
-        'uses' => 'SettingsController@auth',
-        'middleware' => 'permission:settings.auth'
-    ]);
-    Route::post('settings/auth', [
-        'as' => 'backend.settings.auth.update',
-        'uses' => 'SettingsController@update',
-        'middleware' => 'permission:settings.auth'
-    ]);
-	
-	Route::get('generator', [
-        'as' => 'backend.settings.generator',
-        'uses' => 'SettingsController@generator',
-        'middleware' => 'permission:settings.generator'
-    ]);
-	
-	Route::post('generator', [
-        'as' => 'backend.settings.generator.post',
-        'uses' => 'SettingsController@generator',
-        'middleware' => 'permission:settings.generator'
-    ]);
+        Route::put('shops/unblock', [
+            'as' => 'backend.settings.shop_unblock',
+            'uses' => 'SettingsController@shop_unblock',
+            'middleware' => 'permission:shops.unblock'
+        ]);
 
-    Route::put('shops/block', [
-        'as' => 'backend.settings.shop_block',
-        'uses' => 'SettingsController@shop_block',
-        'middleware' => 'permission:shops.block'
-    ]);
+        Route::put('settings/sync', [
+            'as' => 'backend.settings.sync',
+            'uses' => 'SettingsController@sync'
+        ]);
+    	
 
-    Route::put('shops/unblock', [
-        'as' => 'backend.settings.shop_unblock',
-        'uses' => 'SettingsController@shop_unblock',
-        'middleware' => 'permission:shops.unblock'
-    ]);
+        /**
+         * Activity Log
+         */
 
-    Route::put('settings/sync', [
-        'as' => 'backend.settings.sync',
-        'uses' => 'SettingsController@sync'
-    ]);
-	
+        Route::get('activity', [
+            'as' => 'backend.activity.index',
+            'uses' => 'ActivityController@index',
+            'middleware' => 'permission:users.activity',
+        ]);
+        Route::get('activity/user/{user}/log', [
+            'as' => 'backend.activity.user',
+            'uses' => 'ActivityController@userActivity'
+        ]);
 
-    /**
-     * Activity Log
-     */
-
-    Route::get('activity', [
-        'as' => 'backend.activity.index',
-        'uses' => 'ActivityController@index',
-        'middleware' => 'permission:users.activity',
-    ]);
-    Route::get('activity/user/{user}/log', [
-        'as' => 'backend.activity.user',
-        'uses' => 'ActivityController@userActivity'
-    ]);
-
-    Route::delete('activity/clear', [
-        'as' => 'backend.activity.clear',
-        'uses' => 'ActivityController@clear',
-    ]);
+        Route::delete('activity/clear', [
+            'as' => 'backend.activity.clear',
+            'uses' => 'ActivityController@clear',
+        ]);
 
 	});
 });

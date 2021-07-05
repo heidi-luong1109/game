@@ -85,9 +85,9 @@ function backspace() {
   function clearForm(e){
 	$( ".loginInput.active" ).val( "" );
 }
-$(function() {
-	$( "#PINform" ).draggable();
-});
+// $(function() {
+// 	$( "#PINform" ).draggable();
+// });
 
 //PIN PAD - END
 
@@ -109,9 +109,9 @@ $('.game__slider').slick({
 
 // GRID - BEGIN
 
-$('.grid').masonry({
-	itemSelector: '.grid-item',
-	columnWidth: 160,
-	gutter: 20
-});
+// $('.grid').masonry({
+// 	itemSelector: '.grid-item',
+// 	columnWidth: 160,
+// 	gutter: 20
+// });
 // GRID - END

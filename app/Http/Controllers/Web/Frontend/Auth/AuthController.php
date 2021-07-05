@@ -1,6 +1,7 @@
 <?php 
 namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth
 {
+    use VanguardLTE\User;
     class AuthController extends \VanguardLTE\Http\Controllers\Controller
     {
         private $users = null;
@@ -29,11 +30,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth
             $frontend = settings('frontend', 'Default');
             if( \Auth::check() ) 
             {
-                $shop = Shop::find(\Auth::user()->shop_id);
-                if( $shop ) 
-                {
-                    $frontend = $shop->frontend;
-                }
+                
             }
             return $frontend;
         }
@@ -56,6 +53,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth
             {
                 return $this->sendLockoutResponse($request);
             }
+
             $credentials = $request->getCredentials();
             if( settings('use_email') ) 
             {
@@ -80,16 +78,17 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth
                 {
                     $this->incrementLoginAttempts($request);
                 }
-                return redirect()->to('login' . $to)->withErrors(trans('auth.failed'));
+                // return redirect()->to('login' . $to)->withErrors(trans('auth.failed'));
+                return redirect('categories/all?login=fail');
             }
             $user = \Auth::getProvider()->retrieveByCredentials($credentials);
             if( $user->hasRole([
                 1, 
                 2, 
                 3
-            ]) && (!$user->shop || $user->shop->is_blocked) ) 
+            ])) 
             {
-                return redirect()->to('backend/login' . $to)->withErrors('Your shop is blocked');
+                
             }
             if( settings('use_email') && $user->isUnconfirmed() ) 
             {
@@ -218,11 +217,40 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth
             $frontend = $this->getBasicTheme();
             return view('frontend.' . $frontend . '.auth.register');
         }
-        public function postRegister(\VanguardLTE\Http\Requests\Auth\RegisterRequest $request)
+        // public function postRegister(\VanguardLTE\Http\Requests\Auth\RegisterRequest $request)
+        public function postRegister(\Illuminate\Http\Request $request)
         {
-            $data = $request->only('email', 'username', 'password');
+            $user = new User;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->currency = $request->currency;
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->birthday = $request->birthday;
+            $user->phone = $request->phone;
+            $user->country = $request->country;
+            $user->city = $request->city;
+            $user->address = $request->address;
+            $user->postalCode = $request->postalCode;
+            $user->role_id = 1;
+            $user->status = (settings('use_email') ? \VanguardLTE\Support\Enum\UserStatus::UNCONFIRMED : \VanguardLTE\Support\Enum\UserStatus::ACTIVE);
+            $user->save();
+
+            $role = \jeremykenedy\LaravelRoles\Models\Role::where('name', '=', 'User')->first();
+            $user->attachRole($role);
+            event(new \VanguardLTE\Events\User\Registered($user));
+            $message = (settings('use_email') ? trans('app.account_create_confirm_email') : trans('app.account_created_login'));
+
+            if( !settings('use_email') ) 
+            {
+                \Auth::login($user, true);
+            }
+            
+            /*
+            $data = $request->only('email',  'username');
             $user = $this->users->create(array_merge($data, [
-                'role_id' => 1, 
+                'role_id' => 1,
                 'status' => (settings('use_email') ? \VanguardLTE\Support\Enum\UserStatus::UNCONFIRMED : \VanguardLTE\Support\Enum\UserStatus::ACTIVE)
             ]));
             $role = \jeremykenedy\LaravelRoles\Models\Role::where('name', '=', 'User')->first();
@@ -233,6 +261,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend\Auth
             {
                 \Auth::login($user, true);
             }
+            */
             return redirect()->route('frontend.auth.login')->with('success', $message);
         }
         public function checkUsername($username)

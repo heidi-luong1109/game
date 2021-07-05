@@ -63,9 +63,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>ver.</b> 8.00
+            <b>ver.</b> 7.1
         </div>
-        <strong><a href="">ITALY SYSTEM </a></strong> - Multi Shop System
+        <strong><a href="https://goldsvet.org/">CANADA 777</a></strong> - Multi Shop System
     </footer>
 
 </div>

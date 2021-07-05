@@ -64,6 +64,7 @@
             </li>
             @endpermission
 
+
             @permission('users.manage')
             <li class="{{ Request::is('backend/user*') ? 'active' : ''  }}">
                 <a href="{{ route('backend.user.list') }}">
@@ -73,20 +74,29 @@
             </li>
             @endpermission
 
-            @permission('users.tree')
-            <li class="{{ Request::is('backend/tree*') ? 'active' : ''  }}">
-                <a href="{{ route('backend.user.tree') }}">
-                    <i class="fa fa-users"></i>
-                    <span>{{ \VanguardLTE\Role::where('id', auth()->user()->role_id - 1)->first()->name }} @lang('app.tree')</span>
+            @permission('country.manage')
+            <li class="{{ Request::is('backend/country*') ? 'active' : ''  }}">
+                <a href="{{ route('backend.country') }}">
+                    <i class="fa fa-globe"></i>
+                    <span>@lang('app.country')</span>
                 </a>
             </li>
             @endpermission
 
-            @permission('shops.manage')
-            <li class="{{ Request::is('backend/shops*') ? 'active' : ''  }}">
-                <a href="{{ route('backend.shop.list') }}">
-                    <i class="fa fa-users"></i>
-                    <span>@lang('app.shops')</span>
+            @permission('currency.manage')
+            <li class="{{ Request::is('backend/currency*') ? 'active' : ''  }}">
+                <a href="{{ route('backend.currency') }}">
+                    <i class="fa fa-exchange"></i>
+                    <span>@lang('app.currency')</span>
+                </a>
+            </li>
+            @endpermission
+
+            @permission('withdraw.manage')
+            <li class="{{ Request::is('backend/withdraw*') ? 'active' : ''  }}">
+                <a href="{{ route('backend.withdraw.list') }}">
+                    <i class="fa fa-gg"></i>
+                    <span>@lang('app.withdraw')</span>
                 </a>
             </li>
             @endpermission
@@ -161,7 +171,6 @@
                 Auth::user()->hasPermission('stats.pay') ||
                 Auth::user()->hasPermission('stats.game') ||
                 Auth::user()->hasPermission('stats.bank') ||
-                Auth::user()->hasPermission('stats.shop') ||
                 Auth::user()->hasPermission('stats.shift')
             )
 
@@ -207,15 +216,6 @@
                         <a  href="{{ route('backend.bank_stat') }}">
                             <i class="fa fa-circle-o"></i>
                             @lang('app.bank_stats')
-                        </a>
-                    </li>
-                    @endpermission
-
-                    @permission('stats.shop')
-                    <li class="{{ Request::is('backend/shop_stat') ? 'active' : ''  }}">
-                        <a href="{{ route('backend.shop_stat') }}">
-                            <i class="fa fa-circle-o"></i>
-                            @lang('app.shop_stats')
                         </a>
                     </li>
                     @endpermission

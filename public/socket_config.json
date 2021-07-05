@@ -2,10 +2,10 @@
 
 "port":8555,
 
-"host":"betsoft",
+"host":"localhost",
 "prefix":"http://",
 
-"host_ws":"betsoft",
+"host_ws":"localhost",
 "prefix_ws":"ws://",
 
 "ssl":false

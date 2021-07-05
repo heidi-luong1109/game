@@ -21,14 +21,91 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
                 return $next($request);
             });
         }
+
+        #################################### Created By Applewood
+
         public function index(\VanguardLTE\Repositories\Role\RoleRepository $rolesRepo)
         {
+            $tab = 'info';
             $user = $this->theUser;
             $edit = true;
             $roles = $rolesRepo->lists();
             $statuses = \VanguardLTE\Support\Enum\UserStatus::lists();
-            return view('frontend.user.profile', compact('user', 'edit', 'roles', 'statuses'));
+            $country = \VanguardLTE\Country::find($user->country);
+
+            if(isset($country)){
+                $country = $country->country;
+            }else{
+                $country = "";
+            }
+            $currencys =  \VanguardLTE\Currency::orderBy('ranking', 'ASC')->get();
+
+            return view('frontend.Default.user.info', compact('user', 'edit', 'roles', 'statuses','tab','country','currencys'));
         }
+
+        public function payment_history(\Illuminate\Http\Request $request)
+        {
+            $tab = "history";
+            $currencys =  \VanguardLTE\Currency::orderBy('ranking', 'ASC')->get();
+            $historys = \VanguardLTE\Transaction::where('user_id', \Auth::user()->id)->orderBy('created_at', 'DESC')
+            ->get();
+            return view('frontend.Default.user.history', compact('historys','tab','currencys'));
+        }
+        public function bet_history(\Illuminate\Http\Request $request)
+        {
+            $tab = "history";
+            $currencys =  \VanguardLTE\Currency::orderBy('ranking', 'ASC')->get();
+            $bet_history = \VanguardLTE\StatGame::where('user_id', \Auth::user()->id)->orderBy('id','DESC')->get();
+            return view('frontend.Default.user.bet_history', compact('bet_history','tab','currencys'));
+        }
+        public function balance(\Illuminate\Http\Request $request)
+        {
+            $tab = "balance";
+
+            /*
+            $pay_count = \VanguardLTE\Payment::where('user_id', $user->id)->count();
+            switch ($pay_count) {
+                case 'value':
+                    # code...
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            */
+            $currencys =  \VanguardLTE\Currency::orderBy('ranking', 'ASC')->get();
+            $balance = \VanguardLTE\Payment::where('user_id', \Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(25);
+            return view('frontend.Default.user.balance', compact('balance','tab','currencys'));
+        }
+        public function cashout(\Illuminate\Http\Request $request)
+        {
+            $user = \Auth::user();
+            $amount = $request->amount;
+            $system = $request->system;
+            $type = $request->type;
+
+            if($type == 'out'){
+                $amount = $amount * -1;
+            }
+
+            /*
+            $exchange_rate = $user->point()->exchange_rate(true);
+            $add = $request->sumpoints * $exchange_rate;
+            $wager = $add * $user->point()->exchange_wager();
+            */
+            
+            \VanguardLTE\Transaction::create([
+                'user_id' => $user->id, 
+                'summ' => $amount, 
+                'type' => $type, 
+                'system' => $system, 
+                'status' => 1
+            ]);
+            return response()->json(['success' => true], 200);
+        }
+        #######################################
+
         public function updateDetails(\VanguardLTE\Http\Requests\User\UpdateProfileDetailsRequest $request)
         {
             $this->users->update($this->theUser->id, $request->except('role_id', 'status'));
@@ -82,14 +159,9 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
         public function exchange(\Illuminate\Http\Request $request)
         {
             $user = \Auth::user();
-            $shop = \VanguardLTE\Shop::find($user->shop_id);
             $exchange_rate = $user->point()->exchange_rate(true);
             $add = $request->sumpoints * $exchange_rate;
             $wager = $add * $user->point()->exchange_wager();
-            if( !$shop ) 
-            {
-                return response()->json(['error' => trans('app.wrong_shop')], 422);
-            }
             if( !$request->sumpoints ) 
             {
                 return response()->json(['error' => trans('app.zero_points')], 422);
@@ -98,12 +170,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
             {
                 return response()->json(['error' => trans('app.available_points', ['points' => $user->points])], 422);
             }
-            if( $shop->balance < $add ) 
-            {
-                return response()->json(['error' => 'Not Money "' . $shop->name . '"'], 422);
-            }
             $open_shift = \VanguardLTE\OpenShift::where([
-                'shop_id' => \Auth::user()->shop_id, 
                 'end_date' => null
             ])->first();
             if( !$open_shift ) 
@@ -114,13 +181,11 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
             $user->increment('balance', $add);
             $user->increment('wager', $wager);
             $user->increment('bonus', $wager);
-            $shop->decrement('balance', $add);
             $open_shift->increment('balance_out', $add);
             \VanguardLTE\Transaction::create([
                 'user_id' => $user->id, 
                 'summ' => abs($add), 
                 'system' => 'Exchange points', 
-                'shop_id' => $user->shop_id
             ]);
             return response()->json(['success' => true], 200);
         }
@@ -142,11 +207,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
             $sessionRepository->invalidateSession($session->id);
             return redirect()->route('frontend.profile.sessions')->withSuccess(trans('app.session_invalidated'));
         }
-        public function balance(\Illuminate\Http\Request $request)
-        {
-            $history = \VanguardLTE\Payment::where('user_id', \Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(25);
-            return view('frontend.user.balance', compact('history'));
-        }
+
         public function balanceAdd(\Illuminate\Http\Request $request)
         {
             $amount = str_replace(',', '.', trim($request->summ));
@@ -159,14 +220,10 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
                     'system' => $request->system
                 ]);
                 $currency = 840;
-                $shop_id = Config::get('payments.piastrix.id');
-                $shop_order_id = $payment->id;
                 $description = base64_encode('Пополнение счета для клиента #' . \Auth::user()->id);
                 $arHash = [
                     $amount, 
                     $currency, 
-                    $shop_id, 
-                    $shop_order_id
                 ];
                 $sign = hash('sha256', implode(':', $arHash));
                 $data = [
@@ -174,8 +231,6 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
                     'action' => 'https://pay.piastrix.com/ru/pay', 
                     'charset' => 'UTF-8', 
                     'fields' => [
-                        'shop_id' => $shop_id, 
-                        'shop_order_id' => $shop_order_id, 
                         'amount' => $amount, 
                         'currency' => $currency, 
                         'description' => $description, 
@@ -198,7 +253,6 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
                     'user_id' => \Auth::user()->id, 
                     'summ' => abs($amount), 
                     'system' => $request->system, 
-                    'shop_id' => \Auth::user()->shop_id, 
                     'status' => 0
                 ]);
                 $trx['amountTotal'] = $amount;
@@ -232,7 +286,6 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
             }
             $pincode = \VanguardLTE\Pincode::where([
                 'code' => $request->pincode, 
-                'shop_id' => \Auth::user()->shop_id
             ])->first();
             if( !$pincode ) 
             {
@@ -254,12 +307,11 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
             $transaction->value = $pincode->code;
             $transaction->type = 'add';
             $transaction->summ = abs($pincode->nominal);
-            $transaction->shop_id = $user->shop_id;
             $transaction->save();
             $user->update([
                 'balance' => $user->balance + $pincode->nominal, 
                 'count_balance' => $user->count_balance + $pincode->nominal, 
-                'count_return' => $user->count_return + \VanguardLTE\Lib\Functions::count_return($pincode->nominal, $user->shop_id), 
+                'count_return' => $user->count_return + \VanguardLTE\Lib\Functions::count_return($pincode->nominal), 
                 'total_in' => $user->total_in + $pincode->nominal
             ]);
             $pincode->delete();
@@ -271,9 +323,8 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
         public function returns(\Illuminate\Http\Request $request)
         {
             $user = \Auth::user();
-            $shop = \VanguardLTE\Shop::find($user->shop_id);
             $sum = floatval($user->count_return);
-            $return = \VanguardLTE\Returns::where('shop_id', $user->shop_id)->first();
+            $return = \VanguardLTE\Returns::first();
             if( $sum ) 
             {
                 if( $return && $return->min_balance < $user->balance ) 
@@ -285,17 +336,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
                         'text' => 'Min Balance "' . $return->min_balance . '"'
                     ], 200);
                 }
-                if( $shop->balance < $sum ) 
-                {
-                    return response()->json([
-                        'fail' => 'fail', 
-                        'value' => 0, 
-                        'balance' => $user->balance, 
-                        'text' => 'Not Money "' . $shop->name . '"'
-                    ], 200);
-                }
                 $open_shift = \VanguardLTE\OpenShift::where([
-                    'shop_id' => \Auth::user()->shop_id, 
                     'end_date' => null
                 ])->first();
                 if( !$open_shift ) 
@@ -314,7 +355,6 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
                     'user_id' => $user->id, 
                     'summ' => abs($sum), 
                     'system' => 'Refund', 
-                    'shop_id' => $user->shop_id
                 ]);
                 $open_shift->increment('balance_out', $sum);
                 return response()->json([
@@ -322,14 +362,12 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
                     'value' => number_format($sum, 2, '.', ''), 
                     'balance' => number_format($user->balance, 2, '.', ''), 
                     'count_return' => number_format($user->count_return, 2, '.', ''), 
-                    'currency' => $shop->currency
                 ], 200);
             }
             return response()->json([
                 'success' => 'success', 
                 'value' => 0, 
                 'balance' => number_format($user->balance, 2, '.', ''), 
-                'currency' => $shop->currency
             ], 200);
         }
         public function jackpots(\Illuminate\Http\Request $request)
@@ -337,8 +375,7 @@ namespace VanguardLTE\Http\Controllers\Web\Frontend
             $jackpots = \VanguardLTE\JPG::select([
                 'id', 
                 'balance', 
-                'shop_id'
-            ])->where('shop_id', auth()->user()->shop_id)->get();
+            ])->get();
             return response()->json($jackpots->toArray());
         }
         public function setlang($lang)
